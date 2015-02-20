@@ -58,7 +58,7 @@ main( int argc, const char * argv[] )
     
     VideoProcess vp(0);
     
-    vp.setup( "canny"    , (void *)"Canny" );
+    vp.setup( "canny"   );
     vp.setup( "houghLine", (void *)"OpenCV.3.0.0" );
 
     vp.print_desc( cout );
