@@ -36,12 +36,6 @@ print_key( int key )
     }
 }
 
-void print_line( Vec4i l )
-{
-    cout << "[" << l[0] << "," << l[1] << "] .. " <<
-    "[" << l[2] << "," << l[3] << "]"     << endl;
-}
-
 // ========================================================== class VideoProcess
 
 void
