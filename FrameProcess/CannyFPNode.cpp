@@ -19,5 +19,10 @@ bool
 CannyFPNode::process_one_frame()
 {
     Canny( *in, out, 50, 200, 3);
+    
+    if ( window ){
+        imshow( window, out );
+    }
+    
     return true;
 }
