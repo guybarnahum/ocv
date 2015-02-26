@@ -14,9 +14,11 @@
 
 FrameProcessNode::FrameProcessNode()
 {
+    // base class does not call set_name and set_desc 
     cname = strdup( "FrameProcess" );
     desc  = strdup( "frame process base class - copies in to out" );
     
+    err   = "";
     window= nullptr;
     
     // nothing to do in base class - input === output
@@ -32,6 +34,17 @@ FrameProcessNode::~FrameProcessNode()
     delete window;
 }
 
+// ..................................................................... get_val
+const char *
+FrameProcessNode::get_val( argv_t *argv, const char *key )
+{
+    if ( argv == nullptr ) return nullptr;
+    
+    auto it = argv->find( key );
+    const char *val = ( it != argv->end() )? it->second : nullptr;
+    return val;
+}
+
 // ....................................................................... setup
 // FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME
 //
@@ -43,12 +56,16 @@ FrameProcessNode::~FrameProcessNode()
 //       context or input class that could be either types..
 //
 // FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME
+
 bool
-FrameProcessNode::setup( void *args )
+FrameProcessNode::setup( argv_t *args )
 {
-    // right now just hack in the optional window
-    const char *window = (const char *)args;
+    if ( args == nullptr ) return false;
+    
+    // child classes may call the parent setup for base class setup options
+    const char *window = get_val( args, "window" );
     set_window( window );
+    
     return true;
 }
 

@@ -13,7 +13,7 @@
 #define ocv_CannyFPNode_hpp
 
 // ===================================================================== include
-#include <iostream>
+#include "ocv.hpp"
 #include "FrameProcessNode.hpp"
 
 #define CANNY_NAME "CannyFPNode"
@@ -25,7 +25,7 @@ class CannyFPNode : public FrameProcessNode {
     
 public:
     
-     CannyFPNode()
+     CannyFPNode():FrameProcessNode()
      {
         set_name( CANNY_NAME );
         set_desc( CANNY_DESC );
@@ -33,6 +33,7 @@ public:
     
     ~CannyFPNode(){}
     
+    // ....................................................... overriden methods
     bool process_one_frame();
 };
 

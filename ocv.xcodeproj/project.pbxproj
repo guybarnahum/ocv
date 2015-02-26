@@ -20,6 +20,17 @@
 		6470A9FF1A956576009B4139 /* VideoProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470A9F41A956576009B4139 /* VideoProcess.cpp */; };
 		6470AA011A956576009B4139 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470A9F71A956576009B4139 /* main.cpp */; };
 		6470AA041A956601009B4139 /* CannyFPNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470AA021A956601009B4139 /* CannyFPNode.cpp */; };
+		64B852D21A98011700A49E62 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64B852D01A98011700A49E62 /* utils.cpp */; };
+		64B8531D1A99505100A49E62 /* FeatureDetectorFPN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64B8531B1A99505100A49E62 /* FeatureDetectorFPN.cpp */; };
+		64B853201A9C312B00A49E62 /* libopencv_features2d.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8531E1A9C312B00A49E62 /* libopencv_features2d.3.0.0.dylib */; };
+		64B853211A9C312C00A49E62 /* libopencv_flann.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8531F1A9C312B00A49E62 /* libopencv_flann.3.0.0.dylib */; };
+		64B853231A9C316800A49E62 /* libopencv_xfeatures2d.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B853221A9C316800A49E62 /* libopencv_xfeatures2d.3.0.0.dylib */; };
+		64B853251A9C318A00A49E62 /* libopencv_xobjdetect.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B853241A9C318A00A49E62 /* libopencv_xobjdetect.3.0.0.dylib */; };
+		64B853281A9C31DA00A49E62 /* libopencv_calib3d.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B853261A9C31DA00A49E62 /* libopencv_calib3d.3.0.0.dylib */; };
+		64B853291A9C31DA00A49E62 /* libopencv_ccalib.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B853271A9C31DA00A49E62 /* libopencv_ccalib.3.0.0.dylib */; };
+		64B8532C1A9C320500A49E62 /* libopencv_objdetect.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8532A1A9C320500A49E62 /* libopencv_objdetect.3.0.0.dylib */; };
+		64B8532D1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8532B1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib */; };
+		64E835261A9FA0D8001C5256 /* FeatureFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64E835241A9FA0D7001C5256 /* FeatureFactory.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -55,6 +66,21 @@
 		6470A9F71A956576009B4139 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		6470AA021A956601009B4139 /* CannyFPNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CannyFPNode.cpp; sourceTree = "<group>"; };
 		6470AA031A956601009B4139 /* CannyFPNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CannyFPNode.hpp; sourceTree = "<group>"; };
+		64B852D01A98011700A49E62 /* utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utils.cpp; sourceTree = "<group>"; };
+		64B852D11A98011700A49E62 /* utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = utils.hpp; sourceTree = "<group>"; };
+		64B8531B1A99505100A49E62 /* FeatureDetectorFPN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FeatureDetectorFPN.cpp; sourceTree = "<group>"; };
+		64B8531C1A99505100A49E62 /* FeatureDetectorFPN.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FeatureDetectorFPN.hpp; sourceTree = "<group>"; };
+		64B8531E1A9C312B00A49E62 /* libopencv_features2d.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_features2d.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_features2d.3.0.0.dylib; sourceTree = "<group>"; };
+		64B8531F1A9C312B00A49E62 /* libopencv_flann.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_flann.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_flann.3.0.0.dylib; sourceTree = "<group>"; };
+		64B853221A9C316800A49E62 /* libopencv_xfeatures2d.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_xfeatures2d.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_xfeatures2d.3.0.0.dylib; sourceTree = "<group>"; };
+		64B853241A9C318A00A49E62 /* libopencv_xobjdetect.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_xobjdetect.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_xobjdetect.3.0.0.dylib; sourceTree = "<group>"; };
+		64B853261A9C31DA00A49E62 /* libopencv_calib3d.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_calib3d.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_calib3d.3.0.0.dylib; sourceTree = "<group>"; };
+		64B853271A9C31DA00A49E62 /* libopencv_ccalib.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_ccalib.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_ccalib.3.0.0.dylib; sourceTree = "<group>"; };
+		64B8532A1A9C320500A49E62 /* libopencv_objdetect.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_objdetect.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_objdetect.3.0.0.dylib; sourceTree = "<group>"; };
+		64B8532B1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_optflow.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_optflow.3.0.0.dylib; sourceTree = "<group>"; };
+		64E835241A9FA0D7001C5256 /* FeatureFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FeatureFactory.cpp; sourceTree = "<group>"; };
+		64E835251A9FA0D8001C5256 /* FeatureFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FeatureFactory.hpp; sourceTree = "<group>"; };
+		64E835271A9FA519001C5256 /* ocv.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ocv.hpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,12 +88,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64B853211A9C312C00A49E62 /* libopencv_flann.3.0.0.dylib in Frameworks */,
 				646498DD1A8EC310000C07E1 /* libopencv_videoio.3.0.0.dylib in Frameworks */,
+				64B853231A9C316800A49E62 /* libopencv_xfeatures2d.3.0.0.dylib in Frameworks */,
+				64B853281A9C31DA00A49E62 /* libopencv_calib3d.3.0.0.dylib in Frameworks */,
 				646498E21A903BB9000C07E1 /* libopencv_imgproc.3.0.0.dylib in Frameworks */,
+				64B853291A9C31DA00A49E62 /* libopencv_ccalib.3.0.0.dylib in Frameworks */,
+				64B853201A9C312B00A49E62 /* libopencv_features2d.3.0.0.dylib in Frameworks */,
+				64B8532C1A9C320500A49E62 /* libopencv_objdetect.3.0.0.dylib in Frameworks */,
 				646498DA1A8EC2CF000C07E1 /* libopencv_video.3.0.0.dylib in Frameworks */,
 				646498D81A8E760B000C07E1 /* libopencv_highgui.3.0.0.dylib in Frameworks */,
 				646498D61A8E75D8000C07E1 /* libopencv_core.3.0.0.dylib in Frameworks */,
+				64B8532D1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib in Frameworks */,
 				646498DE1A8EC310000C07E1 /* libopencv_videostab.3.0.0.dylib in Frameworks */,
+				64B853251A9C318A00A49E62 /* libopencv_xobjdetect.3.0.0.dylib in Frameworks */,
 				646498E11A903BB9000C07E1 /* libopencv_imgcodecs.3.0.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,7 +116,10 @@
 				6470A9F11A956576009B4139 /* ref-only */,
 				6470A9F61A956576009B4139 /* VideoProcess.hpp */,
 				6470A9F41A956576009B4139 /* VideoProcess.cpp */,
+				64E835271A9FA519001C5256 /* ocv.hpp */,
 				6470A9F71A956576009B4139 /* main.cpp */,
+				64B852D01A98011700A49E62 /* utils.cpp */,
+				64B852D11A98011700A49E62 /* utils.hpp */,
 				646498D41A8E757F000C07E1 /* OpenCV Frameworks */,
 				646498CB1A8E748B000C07E1 /* Products */,
 			);
@@ -99,6 +136,14 @@
 		646498D41A8E757F000C07E1 /* OpenCV Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				64B8532A1A9C320500A49E62 /* libopencv_objdetect.3.0.0.dylib */,
+				64B8532B1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib */,
+				64B853261A9C31DA00A49E62 /* libopencv_calib3d.3.0.0.dylib */,
+				64B853271A9C31DA00A49E62 /* libopencv_ccalib.3.0.0.dylib */,
+				64B853241A9C318A00A49E62 /* libopencv_xobjdetect.3.0.0.dylib */,
+				64B853221A9C316800A49E62 /* libopencv_xfeatures2d.3.0.0.dylib */,
+				64B8531E1A9C312B00A49E62 /* libopencv_features2d.3.0.0.dylib */,
+				64B8531F1A9C312B00A49E62 /* libopencv_flann.3.0.0.dylib */,
 				646498DF1A903BB9000C07E1 /* libopencv_imgcodecs.3.0.0.dylib */,
 				646498E01A903BB9000C07E1 /* libopencv_imgproc.3.0.0.dylib */,
 				646498DB1A8EC310000C07E1 /* libopencv_videoio.3.0.0.dylib */,
@@ -113,14 +158,18 @@
 		6470A9E41A956576009B4139 /* FrameProcess */ = {
 			isa = PBXGroup;
 			children = (
-				6470AA021A956601009B4139 /* CannyFPNode.cpp */,
-				6470AA031A956601009B4139 /* CannyFPNode.hpp */,
-				6470A9E51A956576009B4139 /* FrameProcessNode.cpp */,
 				6470A9E61A956576009B4139 /* FrameProcessNode.hpp */,
-				6470A9E71A956576009B4139 /* FrameProcessNodeFactory.cpp */,
+				6470A9E51A956576009B4139 /* FrameProcessNode.cpp */,
 				6470A9E81A956576009B4139 /* FrameProcessNodeFactory.hpp */,
-				6470A9E91A956576009B4139 /* HoughLineFPNode.cpp */,
+				6470A9E71A956576009B4139 /* FrameProcessNodeFactory.cpp */,
+				6470AA031A956601009B4139 /* CannyFPNode.hpp */,
+				6470AA021A956601009B4139 /* CannyFPNode.cpp */,
 				6470A9EA1A956576009B4139 /* HoughLineFPNode.hpp */,
+				6470A9E91A956576009B4139 /* HoughLineFPNode.cpp */,
+				64B8531C1A99505100A49E62 /* FeatureDetectorFPN.hpp */,
+				64B8531B1A99505100A49E62 /* FeatureDetectorFPN.cpp */,
+				64E835251A9FA0D8001C5256 /* FeatureFactory.hpp */,
+				64E835241A9FA0D7001C5256 /* FeatureFactory.cpp */,
 			);
 			path = FrameProcess;
 			sourceTree = "<group>";
@@ -190,11 +239,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6470A9F91A956576009B4139 /* FrameProcessNodeFactory.cpp in Sources */,
+				64B8531D1A99505100A49E62 /* FeatureDetectorFPN.cpp in Sources */,
+				64E835261A9FA0D8001C5256 /* FeatureFactory.cpp in Sources */,
 				6470AA041A956601009B4139 /* CannyFPNode.cpp in Sources */,
 				6470A9FA1A956576009B4139 /* HoughLineFPNode.cpp in Sources */,
 				6470A9F81A956576009B4139 /* FrameProcessNode.cpp in Sources */,
 				6470AA011A956576009B4139 /* main.cpp in Sources */,
 				6470A9FF1A956576009B4139 /* VideoProcess.cpp in Sources */,
+				64B852D21A98011700A49E62 /* utils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,8 +330,9 @@
 		646498D21A8E748B000C07E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "compiler-default";
+				GCC_C_LANGUAGE_STANDARD = c11;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -294,8 +347,9 @@
 		646498D31A8E748B000C07E1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "compiler-default";
+				GCC_C_LANGUAGE_STANDARD = c11;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,

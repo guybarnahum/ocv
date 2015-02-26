@@ -10,7 +10,9 @@
 
 // ==================================================================== includes
 
+#include "ocv.hpp"
 #include "VideoProcess.hpp"
+#include "utils.hpp"
 
 // =============================================================================
 //                                  misc routines
@@ -50,6 +52,7 @@ main( int argc, const char * argv[] )
     int err = ERR_OK;
     
     // ................................... process args
+    cout << "running from " << argv[ 0 ] << endl;
     print_usage();
     
     // .............................. open input stream
@@ -57,10 +60,23 @@ main( int argc, const char * argv[] )
     // right now its default camera
     
     VideoProcess vp(0);
-    
-    vp.setup( "canny"   );
-    vp.setup( "houghLine", (void *)"OpenCV.3.0.0" );
+    argv_t args;
 
+#if 0
+    args = { {"window", "Canny"} , {"window" , "Canny"} };
+    vp.setup( "canny" , &args  );
+    
+    args = { {"window", "HoughLines"} };
+    vp.setup( "houghLine", &args  );
+
+#else
+    args = { { "window" , "OpenCV.3.0.0"   },
+             { "tgt"    , "/Users/guyb/Desktop/tgt.png" },
+        };
+    
+    vp.setup( "sift", &args );
+#endif
+    
     vp.print_desc( cout );
     
     vp.process();

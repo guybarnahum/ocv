@@ -13,7 +13,7 @@
 #define ocv_HoughLineFPNode_hpp
 
 // ===================================================================== include
-#include <iostream>
+#include "ocv.hpp"
 #include "FrameProcessNode.hpp"
 
 #define HOUGHLINE_NAME "HoughLineFPNode"
@@ -27,7 +27,7 @@ public:
     
     vector<Vec4i> lines;
 
-     HoughLineFPNode()
+     HoughLineFPNode():FrameProcessNode()
      {
         set_name( HOUGHLINE_NAME );
         set_desc( HOUGHLINE_DESC );
@@ -35,6 +35,7 @@ public:
     
     ~HoughLineFPNode(){}
     
+    // ....................................................... overriden methods
     bool process_one_frame();
 };
 

@@ -76,14 +76,14 @@ VideoProcess::print_desc( ostream &out_stream )
 
 // ....................................................................... setup
 void
-VideoProcess::setup( const char* cname, void *args )
+VideoProcess::setup( const char* cname, argv_t *args )
 {
     FrameProcessNode *fpn = FrameProcessNodeFactory::make( cname );
     setup( fpn, args );
 }
 
 void
-VideoProcess::setup( FrameProcessNode *fpn, void *args )
+VideoProcess::setup( FrameProcessNode *fpn, argv_t *args )
 {
     // Connect node input into last node output
     // -- unless its the first one connect it into frame stream
@@ -122,7 +122,11 @@ VideoProcess::process()
         while ( it != processors.end  () ){
             
             FrameProcessNode *fp = *it++;
-            if (ok) ok = fp->process_one_frame();
+            
+            ok = fp->process_one_frame();
+            if (!ok){
+                cout << fp->get_name() << " error: " << fp->get_err() << endl;
+            }
         }
         
         done = !ok || process_key();

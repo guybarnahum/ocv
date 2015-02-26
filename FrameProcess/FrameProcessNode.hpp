@@ -12,11 +12,7 @@
 #define ocv_FrameProcessNode_hpp
 
 // ==================================================================== includes
-#include <iostream>
-#include <opencv/cv.hpp>
-
-using namespace cv;
-using namespace std;
+#include "ocv.hpp"
 
 // ====================================================== class FrameProcessNode
 //
@@ -30,7 +26,7 @@ private:
     // ..................................................... node identification
     const char *cname;
     const char *desc;
-
+    
 protected:
     // ................................................................ node i/o
     Mat *base;
@@ -38,6 +34,7 @@ protected:
     Mat  out;
     const char *window;
     bool dbg;
+    string      err;
     
     // FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME
     //
@@ -50,15 +47,15 @@ protected:
     //
     // FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME
 
+    const char *get_val( argv_t *argv, const char *key );
+
 public:
 
     // ................................................................. methods
      FrameProcessNode();
     ~FrameProcessNode();
  
-    virtual bool process_one_frame();
     void print_desc( ostream &out_stream );
-    bool setup( void *args );
     
     // ............................................................... get / set
     Mat *get_in()        { return in;  }
@@ -77,6 +74,13 @@ public:
 
     void        set_window(    const char *window );
     const char* get_window(){ return this->window; }
+
+    const char* get_err(){ return this->err.c_str(); }
+    
+    // ......................................................... virtual methods
+    
+    virtual bool process_one_frame();
+    virtual bool setup( argv_t *argv );
 };
 
 #endif /* defined(ocv_FrameProcessNode_hpp) */

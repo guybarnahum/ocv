@@ -13,7 +13,7 @@
 #include "FrameProcessNodeFactory.hpp"
 #include "HoughLineFPNode.hpp"
 #include "CannyFPNode.hpp"
-
+#include "FeatureDetectorFPN.hpp"
 
 // ========================================================= FrameProcessFactory
 
@@ -23,14 +23,19 @@ FrameProcessNode *FrameProcessNodeFactory::make( const char* cname )
 {
     FrameProcessNode *fp = nullptr;
     
-    if ( 0 == strcmp( cname, "houghLine"   )  ){
+    if ( STR_EQ( cname, "houghLine"   )  ){
         fp = (FrameProcessNode *) new HoughLineFPNode();
     }
-    if ( 0 == strcmp( cname, "canny"   )  ){
+    else
+    if ( STR_EQ( cname, "canny"       )  ){
         fp = (FrameProcessNode *) new CannyFPNode();
     }
     else
-    if ( 0 == strcmp( cname, "nullProcess" )  ){
+    if ( STR_EQ( cname, "sift"       )  ){
+        fp = (FrameProcessNode *) new FeatureDetectorFPNode( "sift" );
+    }
+    else
+    if ( STR_EQ( cname, "nullProcess" )  ){
         fp = new FrameProcessNode();
     }
     

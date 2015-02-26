@@ -12,9 +12,8 @@
 #define ocv_VideoProcess_hpp
 
 // ==================================================================== includes
-#include <iostream>
-#include <opencv/cv.hpp>
-
+#include "ocv.hpp"
+#include "FrameProcessNode.hpp"
 #include "FrameProcessNodeFactory.hpp"
 
 // ======================================================================== enum
@@ -57,8 +56,8 @@ public:
     // ................................................................. methods
     bool is_ready(){ return ready; }
 
-    void setup( const char*     cname, void *args = nullptr );
-    void setup( FrameProcessNode *fpn, void *args = nullptr );
+    void setup( const char*     cname, argv_t *args = nullptr );
+    void setup( FrameProcessNode *fpn, argv_t *args = nullptr );
 
     void print_desc( ostream &out_stream );
 
