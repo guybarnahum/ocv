@@ -62,7 +62,7 @@ main( int argc, const char * argv[] )
     VideoProcess vp(0);
     argv_t args;
 
-#if 0
+#if 1
     args = { {"window", "Canny"} , {"window" , "Canny"} };
     vp.setup( "canny" , &args  );
     
