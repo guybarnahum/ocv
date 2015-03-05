@@ -81,8 +81,12 @@ process_args( int argc, const char * argv[], int &err )
     // NOTICE: obj_path is relative to executible in argv[0]!
     // The build process copies it from data folder to a data subfolder in the
     // product directory..
-    
     args[ "obj_path" ] = "./data/20 USD note.png";
+    // args[ "obj_path" ] = "./data/black diamond.png";
+    // args[ "obj_path" ] = "./data/iittala_owl.jpg";
+    // args[ "obj_path" ] = "./data/flor.jpg";
+    // args[ "obj_path" ] = "./data/space monkey.jpg";
+    
     args[ "dbg"      ] = "" ;
     
     v_argv.push_back( args );
