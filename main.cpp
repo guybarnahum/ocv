@@ -12,36 +12,84 @@
 
 #include "ocv.hpp"
 #include "VideoProcess.hpp"
-#include "utils.hpp"
 
 // =============================================================================
 //                                  misc routines
 // =============================================================================
 
-// ....................................................................... usage
-static void
-print_usage()
+char *path_to_file( char* path )
 {
-    cout <<
-    "\nThis program demonstrates line finding with the Hough transform."
-    << endl;
+    char *file = path;
+    char  ch;
+    
+    // set file as the charachter after the last '/'
+    while( ( ch = *path++ ) != '\0' ){
+        if ( ch == '/'    ) file = path; // notice: path was ++ already
+    }
+    
+    return file;
 }
 
-// ....................................................................... error
-static int
-error( int err )
+// ....................................................................... usage
+static void
+usage( int argc, const char * argv[], int err = ERR_OK )
 {
-    string msg;
+    char *file = path_to_file( (char *)argv[0] );
+    cout << file << " video processing pipeline" << endl;
     
+    // options are reported next
+    
+    // error specific usage
     switch( err ){
-        case ERR_CAPTURE_FAILURE : msg = "Video capture failure"; break;
+        default     :
+        case ERR_OK : break;
     }
+}
+
+// ................................................................ process_args
+
+// LAME HACK! LAME HACK! LAME HACK! LAME HACK! LAME HACK! LAME HACK! LAME HACK!
+//
+// TODO: unimplemented yet! Should process argv into building a VideoProcessing
+// pipeline consisting of FrameProcessNodes and their arguments.
+//
+// LAME HACK! LAME HACK! LAME HACK! LAME HACK! LAME HACK! LAME HACK! LAME HACK!
+
+static vector<argv_t>
+process_args( int argc, const char * argv[], int &err )
+{
+    vector<argv_t> v_argv;
+    argv_t args;
     
-    if ( !msg.empty() ){
-        cout << "Error:" << msg << endl;
-    }
+#if 0
     
-    return err;
+    args[ "fpn"    ] = "canny";
+    args[ "window" ] = "Canny";
+
+    v_argv.push_back( args );
+
+    args[ "fpn"    ] = "houghLine";
+    args[ "window" ] = "HoughLines";
+
+    v_argv.push_back( args );
+
+#else
+    
+    args[ "fpn"      ] = "featureDetect" ;
+    args[ "window"   ] = "OpenCV.3.0.0"  ;
+
+    // NOTICE: obj_path is relative to executible in argv[0]!
+    // The build process copies it from data folder to a data subfolder in the
+    // product directory..
+    
+    args[ "obj_path" ] = "./data/20 USD note.png";
+    args[ "dbg"      ] = "" ;
+    
+    v_argv.push_back( args );
+
+#endif
+    
+    return v_argv;
 }
 
 // ........................................................................ main
@@ -49,38 +97,37 @@ error( int err )
 int
 main( int argc, const char * argv[] )
 {
-    int err = ERR_OK;
+    cout << "running " << argv[0] << endl;
     
     // ................................... process args
-    cout << "running from " << argv[ 0 ] << endl;
-    print_usage();
+    int err = ERR_OK;
+    vector<argv_t> v_argv = process_args( argc, argv, err );
+    
+    if ( err != ERR_OK ){
+         usage( argc, argv, err );
+         return err;
+    }
     
     // .............................. open input stream
     // TODO: decide where to capture from based args
     // right now its default camera
     
     VideoProcess vp(0);
-    argv_t args;
+    
+    if (vp.is_ready()){
+        vp.setup( v_argv );
+    }
+    
+    if ( vp.is_ready() ){
+         vp.print_desc( cout );
+         vp.process();
+    }
+    
+    // all done : emit errors
+    if ( ERR_OK != (err = vp.get_err()) ){
+        cout << vp.get_err_msg() << " (" << err << ")" << endl;
+        usage( argc, argv, err );
+    }
 
-#if 1
-    args = { {"window", "Canny"} , {"window" , "Canny"} };
-    vp.setup( "canny" , &args  );
-    
-    args = { {"window", "HoughLines"} };
-    vp.setup( "houghLine", &args  );
-
-#else
-    args = { { "window" , "OpenCV.3.0.0"   },
-             { "tgt"    , "/Users/guyb/Desktop/tgt.png" },
-        };
-    
-    vp.setup( "sift", &args );
-#endif
-    
-    vp.print_desc( cout );
-    
-    vp.process();
-    
-    // ....................................... all done
-    return error( err );
+    return err;
 }

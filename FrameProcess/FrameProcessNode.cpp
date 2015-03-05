@@ -41,7 +41,7 @@ FrameProcessNode::get_val( argv_t *argv, const char *key )
     if ( argv == nullptr ) return nullptr;
     
     auto it = argv->find( key );
-    const char *val = ( it != argv->end() )? it->second : nullptr;
+    const char  *val = ( it != argv->end() )? it->second : nullptr;
     return val;
 }
 
@@ -63,8 +63,18 @@ FrameProcessNode::setup( argv_t *args )
     if ( args == nullptr ) return false;
     
     // child classes may call the parent setup for base class setup options
-    const char *window = get_val( args, "window" );
-    set_window( window );
+    const char *val = nullptr;
+    
+    // window
+    val = get_val( args, "window" );
+    if ( val != nullptr ) set_window( val );
+    
+    // dbg
+    val = get_val( args, "dbg" );
+    if ( val != nullptr ){
+        // TODO: add support for various dbg levels with `val`
+        dbg = true;
+    }
     
     return true;
 }

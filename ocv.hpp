@@ -18,7 +18,11 @@ using namespace std;
 
 // ====================================================================== macros
 #define STR_EQ(s,t) (0 == strcmp(s,t))
+#define DBG_ASSERT( cond, msg ) if ( !(cond) ) cout << msg << endl;
 
 typedef map<const char *, const char *> argv_t;
+
+
+#define ENABLE_DBG_CODE         (true)
 
 #endif

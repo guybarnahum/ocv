@@ -26,9 +26,9 @@ private:
 
 public:
 
-    static Ptr<FeatureDetector>     makeDetector ( const char * name = nullptr);
-    static Ptr<DescriptorExtractor> makeExtractor( const char * name = nullptr);
-    static Ptr<DescriptorMatcher>   makeMatecher ( const char * name = nullptr);
+    static Ptr<FeatureDetector>     makeDetector ( char * &name );
+    static Ptr<DescriptorExtractor> makeExtractor( char * &name );
+    static Ptr<DescriptorMatcher>   makeMatecher ( char * &name );
 };
 
 #endif /* defined(__ocv__FeatureFactory__) */

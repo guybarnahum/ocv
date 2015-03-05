@@ -28,28 +28,28 @@ private:
     Ptr<DescriptorExtractor> extractor;
     Ptr<DescriptorMatcher>   matcher;
     
+    // settings
     bool             brute_force_matcher;
     bool             draw_features;
-    int              minInliers;
+    int              min_inliers;
+    
+    // object
+    const char      *obj_path;
+    Mat              obj_mat;
+    vector<KeyPoint> obj_keypoints;
+    Mat              obj_descriptors;
+    
+    // scene or frame
+    Mat              scn_mat;
+    vector<KeyPoint> scn_keypoints;
+    Mat              scn_descriptors;
 
-    Mat              gray;
-    vector<KeyPoint> keypoints;
-    Mat              descriptors;
+    // homography
+    vector<Point2f> obj_good_kpts;
+    vector<Point2f> scn_good_kpts;
     
-    // tgt object
-    const char      *tgt;
-    Mat              tgt_mat;
-    vector<KeyPoint> tgt_keypoints;
-    Mat              tgt_descriptors;
-    bool             tgt_bin_descriptors;
-    
-    // Homography
-    vector<Point2f> mpts_1, mpts_2;
-    vector<int>     indexes_1, indexes_2;
-    
-    // location of tgt object in frame
-    vector<unsigned char> outlier_mask;
-    vector<Point2f> rect;
+    // output : location of object in scene
+    vector<Point2f> scn_rect;
     
     // .................................................................. method
  //   bool init( const char *name){ return init( name, nullptr, nullptr ); }
@@ -63,23 +63,20 @@ private:
     bool init_matcher  ( const char *name = nullptr );
     
     bool match();
+    
+    bool is_valid_rect( vector<Point2f> &poly, double min_area = 0 );
     bool find_homography();
     
 public:
     
-    FeatureDetectorFPNode( const char *name ):FrameProcessNode()
+    FeatureDetectorFPNode( char *name ):FrameProcessNode()
     { init( name, nullptr, nullptr ); }
     
     FeatureDetectorFPNode():FrameProcessNode()
     { init( nullptr, nullptr, nullptr ); }
     
     ~FeatureDetectorFPNode()
-    {
-        // algo are static pointers? should not be deleted?!
-        // delete algo;
-        
-        delete tgt;
-    }
+    { delete obj_path; }
     
     // ......................................................... virtual methods
     virtual bool process_one_frame();

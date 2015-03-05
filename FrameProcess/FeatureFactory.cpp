@@ -13,22 +13,24 @@
 #include <opencv2/xfeatures2d.hpp>
 using namespace xfeatures2d;
 
-const char *FeatureFactory::DETECTOR_DEFAULT  = "sift";
-const char *FeatureFactory::EXTRACTOR_DEFAULT = "brief";
+const char *FeatureFactory::DETECTOR_DEFAULT  = "surf";
+const char *FeatureFactory::EXTRACTOR_DEFAULT = "surf";
 const char *FeatureFactory::MACTHER_DEFAULT   = "FlannBased";
+// const char *FeatureFactory::MACTHER_DEFAULT   = "BruteForce";
 
 // ======================================================== class FeatureFactory
 
 // ................................................................ makeDetector
-Ptr<FeatureDetector> FeatureFactory::makeDetector( const char * name)
+Ptr<FeatureDetector> FeatureFactory::makeDetector( char * &name)
 {
     Ptr<FeatureDetector> fd;
     
     // ................................. default
     if ((        name == nullptr )||
-        STR_EQ(  name, "default" ) ) name = FeatureFactory::DETECTOR_DEFAULT;
+        STR_EQ(  name, "default" ) )
+                 name = (char *)FeatureFactory::DETECTOR_DEFAULT;
     
-    // ................................
+    // ................................ make it!
          if STR_EQ( name, "fast" ) fd = FastFeatureDetector::create();
     else if STR_EQ( name, "gftt" ) fd = GFTTDetector::create();
     else if STR_EQ( name, "mser" ) fd = MSER::create();
@@ -39,7 +41,7 @@ Ptr<FeatureDetector> FeatureFactory::makeDetector( const char * name)
     
     // contrib - from xfeatures2d/nonfree.hpp
     else if STR_EQ( name, "sift" ) fd = SIFT::create();
-    else if STR_EQ( name, "surf" ) fd = SURF::create(600.0);
+    else if STR_EQ( name, "surf" ) fd = SURF::create(400);
     
     // contrib - from xfeatures2d.hpp
 //    else if STR_EQ( name, "star" ) fd = StarDetector()::create();
@@ -49,31 +51,35 @@ Ptr<FeatureDetector> FeatureFactory::makeDetector( const char * name)
 }
 
 // ............................................................... makeExtractor
-Ptr<DescriptorExtractor> FeatureFactory::makeExtractor( const char * name)
+Ptr<DescriptorExtractor> FeatureFactory::makeExtractor( char * &name)
 {
     Ptr<DescriptorExtractor> de;
     
     // ................................. default
     if ((        name == nullptr )||
-        STR_EQ(  name, "default" ) ) name = FeatureFactory::EXTRACTOR_DEFAULT;
-    
-    // ................................
-    if STR_EQ( name, "brief") de = BriefDescriptorExtractor::create();
+        STR_EQ(  name, "default" ) )
+        name = (char *)FeatureFactory::EXTRACTOR_DEFAULT;
 
+    // ................................. make it!
+    if STR_EQ( name, "brief") de = BriefDescriptorExtractor::create();
+    else de = (Ptr<DescriptorExtractor>) makeDetector( name );
     return  de;
 }
 
 // ................................................................. makeMatcher
-Ptr<DescriptorMatcher> FeatureFactory::makeMatecher( const char * name)
+Ptr<DescriptorMatcher> FeatureFactory::makeMatecher( char * &name)
 {
     Ptr<DescriptorMatcher> dm;
     
     // ................................. default
     if ((        name == nullptr )||
-        STR_EQ(  name, "default" ) ) name = FeatureFactory::MACTHER_DEFAULT;
+        STR_EQ(  name, "default" ) )
+                 name = (char *)FeatureFactory::MACTHER_DEFAULT;
  
     string type( name );
     
+    // ................................. make it!
+
     dm = DescriptorMatcher::create( type );
     return  dm;
 }

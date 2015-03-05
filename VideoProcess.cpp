@@ -41,8 +41,13 @@ print_key( int key )
 void
 VideoProcess::init()
 {
-    ready = isOpened();
     set_abort_key( KEY_ESCAPE );
+    
+    ready = isOpened();
+ 
+    // are we good to go?
+    if ( ready ) set_err( ERR_OK );
+    else         set_err( ERR_CAPTURE_FAILURE, "Video Capture not ready" );
 }
 
 VideoProcess::~VideoProcess()
@@ -75,14 +80,50 @@ VideoProcess::print_desc( ostream &out_stream )
 }
 
 // ....................................................................... setup
-void
-VideoProcess::setup( const char* cname, argv_t *args )
+
+bool VideoProcess::setup( vector<argv_t> &v_argv )
 {
-    FrameProcessNode *fpn = FrameProcessNodeFactory::make( cname );
-    setup( fpn, args );
+    bool ok = is_ready();
+    
+    for( auto it = v_argv.begin(); ok && it != v_argv.end(); it++ ){
+            
+        // obtain Frame Process Node by name, and set it up with its args
+        argv_t *args = &(*it);
+        auto it_fpn = it->find( "fpn" );
+        const char *fpn = ( it_fpn != it->end() )? it_fpn->second : nullptr;
+        ok = setup( fpn, args );
+    }
+    
+    return ok;
 }
 
-void
+bool
+VideoProcess::setup(argv_t *args)
+{
+    // TODO: add video process args setup here..
+    bool ok = (args != nullptr);
+    
+    
+    // emit errors
+    
+    if ( !ok ){
+        string err_msg = "Error setting args for VideoProcess class";
+        set_err( ERR_INVALID_ARGS, err_msg  );
+        ready = false;
+    }
+
+    return ok;
+}
+
+bool
+VideoProcess::setup( const char* name, argv_t *args )
+{
+    FrameProcessNode *fpn = name? FrameProcessNodeFactory::make(name) : nullptr;
+    bool ok = fpn? setup( fpn, args ) : setup( args );
+    return ok;
+}
+
+bool
 VideoProcess::setup( FrameProcessNode *fpn, argv_t *args )
 {
     // Connect node input into last node output
@@ -98,10 +139,28 @@ VideoProcess::setup( FrameProcessNode *fpn, argv_t *args )
     // setup node with arguments
     // FIXME TODO: args are a hack right now..
     fpn->set_base( &in );
-    fpn->setup( args );
+    
+    bool ok = fpn->setup( args );
     
     // Connect node to existing chain..
-    processors.push_back( fpn );
+    if (ok){
+        processors.push_back( fpn );
+    }
+    else{
+        // signal that we have a problem..
+        string err_msg;
+        
+        err_msg  = "Error in setup of `";
+        err_msg += fpn->get_name();
+        err_msg += "` frame process node\n";
+        err_msg += fpn->get_err();
+        
+        set_err( ERR_SETUP_FRAME_PROCESS_NODE, err_msg );
+        
+        ready = false;
+    }
+    
+    return ok;
 }
 
 // ===================================================================== process

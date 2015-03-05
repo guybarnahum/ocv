@@ -19,23 +19,20 @@
 
 // ........................................................................ make
 // make by class name
-FrameProcessNode *FrameProcessNodeFactory::make( const char* cname )
+FrameProcessNode *FrameProcessNodeFactory::make( const char* name )
 {
     FrameProcessNode *fp = nullptr;
     
-    if ( STR_EQ( cname, "houghLine"   )  ){
+    if ( STR_EQ( name, "houghLine"   )  )
         fp = (FrameProcessNode *) new HoughLineFPNode();
-    }
     else
-    if ( STR_EQ( cname, "canny"       )  ){
+    if ( STR_EQ( name, "canny"       )  )
         fp = (FrameProcessNode *) new CannyFPNode();
-    }
     else
-    if ( STR_EQ( cname, "sift"       )  ){
-        fp = (FrameProcessNode *) new FeatureDetectorFPNode( "sift" );
-    }
+    if ( STR_EQ( name, "featureDetect"       )  )
+        fp = (FrameProcessNode *) new FeatureDetectorFPNode();
     else
-    if ( STR_EQ( cname, "nullProcess" )  ){
+    if ( STR_EQ( name, "nullProcess" )  ){
         fp = new FrameProcessNode();
     }
     

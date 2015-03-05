@@ -20,7 +20,6 @@
 		6470A9FF1A956576009B4139 /* VideoProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470A9F41A956576009B4139 /* VideoProcess.cpp */; };
 		6470AA011A956576009B4139 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470A9F71A956576009B4139 /* main.cpp */; };
 		6470AA041A956601009B4139 /* CannyFPNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470AA021A956601009B4139 /* CannyFPNode.cpp */; };
-		64B852D21A98011700A49E62 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64B852D01A98011700A49E62 /* utils.cpp */; };
 		64B8531D1A99505100A49E62 /* FeatureDetectorFPN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64B8531B1A99505100A49E62 /* FeatureDetectorFPN.cpp */; };
 		64B853201A9C312B00A49E62 /* libopencv_features2d.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8531E1A9C312B00A49E62 /* libopencv_features2d.3.0.0.dylib */; };
 		64B853211A9C312C00A49E62 /* libopencv_flann.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8531F1A9C312B00A49E62 /* libopencv_flann.3.0.0.dylib */; };
@@ -31,17 +30,20 @@
 		64B8532C1A9C320500A49E62 /* libopencv_objdetect.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8532A1A9C320500A49E62 /* libopencv_objdetect.3.0.0.dylib */; };
 		64B8532D1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8532B1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib */; };
 		64E835261A9FA0D8001C5256 /* FeatureFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64E835241A9FA0D7001C5256 /* FeatureFactory.cpp */; };
+		64E835291AA7C23F001C5256 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64E835281AA7C23F001C5256 /* utils.cpp */; };
+		64E8352C1AA80547001C5256 /* 20 USD note.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 64E8352B1AA8049E001C5256 /* 20 USD note.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		646498C81A8E748B000C07E1 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = data;
+			dstSubfolderSpec = 16;
 			files = (
+				64E8352C1AA80547001C5256 /* 20 USD note.png in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -66,8 +68,6 @@
 		6470A9F71A956576009B4139 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		6470AA021A956601009B4139 /* CannyFPNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CannyFPNode.cpp; sourceTree = "<group>"; };
 		6470AA031A956601009B4139 /* CannyFPNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CannyFPNode.hpp; sourceTree = "<group>"; };
-		64B852D01A98011700A49E62 /* utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utils.cpp; sourceTree = "<group>"; };
-		64B852D11A98011700A49E62 /* utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = utils.hpp; sourceTree = "<group>"; };
 		64B8531B1A99505100A49E62 /* FeatureDetectorFPN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FeatureDetectorFPN.cpp; sourceTree = "<group>"; };
 		64B8531C1A99505100A49E62 /* FeatureDetectorFPN.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FeatureDetectorFPN.hpp; sourceTree = "<group>"; };
 		64B8531E1A9C312B00A49E62 /* libopencv_features2d.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_features2d.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_features2d.3.0.0.dylib; sourceTree = "<group>"; };
@@ -81,6 +81,8 @@
 		64E835241A9FA0D7001C5256 /* FeatureFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FeatureFactory.cpp; sourceTree = "<group>"; };
 		64E835251A9FA0D8001C5256 /* FeatureFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FeatureFactory.hpp; sourceTree = "<group>"; };
 		64E835271A9FA519001C5256 /* ocv.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ocv.hpp; sourceTree = SOURCE_ROOT; };
+		64E835281AA7C23F001C5256 /* utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utils.cpp; sourceTree = "<group>"; };
+		64E8352B1AA8049E001C5256 /* 20 USD note.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "20 USD note.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,8 +120,8 @@
 				6470A9F41A956576009B4139 /* VideoProcess.cpp */,
 				64E835271A9FA519001C5256 /* ocv.hpp */,
 				6470A9F71A956576009B4139 /* main.cpp */,
-				64B852D01A98011700A49E62 /* utils.cpp */,
-				64B852D11A98011700A49E62 /* utils.hpp */,
+				64E8352A1AA8049E001C5256 /* data */,
+				64E835281AA7C23F001C5256 /* utils.cpp */,
 				646498D41A8E757F000C07E1 /* OpenCV Frameworks */,
 				646498CB1A8E748B000C07E1 /* Products */,
 			);
@@ -158,6 +160,8 @@
 		6470A9E41A956576009B4139 /* FrameProcess */ = {
 			isa = PBXGroup;
 			children = (
+				64E835251A9FA0D8001C5256 /* FeatureFactory.hpp */,
+				64E835241A9FA0D7001C5256 /* FeatureFactory.cpp */,
 				6470A9E61A956576009B4139 /* FrameProcessNode.hpp */,
 				6470A9E51A956576009B4139 /* FrameProcessNode.cpp */,
 				6470A9E81A956576009B4139 /* FrameProcessNodeFactory.hpp */,
@@ -168,8 +172,6 @@
 				6470A9E91A956576009B4139 /* HoughLineFPNode.cpp */,
 				64B8531C1A99505100A49E62 /* FeatureDetectorFPN.hpp */,
 				64B8531B1A99505100A49E62 /* FeatureDetectorFPN.cpp */,
-				64E835251A9FA0D8001C5256 /* FeatureFactory.hpp */,
-				64E835241A9FA0D7001C5256 /* FeatureFactory.cpp */,
 			);
 			path = FrameProcess;
 			sourceTree = "<group>";
@@ -180,6 +182,14 @@
 				6470A9F21A956576009B4139 /* graphcut.cpp */,
 			);
 			path = "ref-only";
+			sourceTree = "<group>";
+		};
+		64E8352A1AA8049E001C5256 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				64E8352B1AA8049E001C5256 /* 20 USD note.png */,
+			);
+			path = data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,9 +254,9 @@
 				6470AA041A956601009B4139 /* CannyFPNode.cpp in Sources */,
 				6470A9FA1A956576009B4139 /* HoughLineFPNode.cpp in Sources */,
 				6470A9F81A956576009B4139 /* FrameProcessNode.cpp in Sources */,
+				64E835291AA7C23F001C5256 /* utils.cpp in Sources */,
 				6470AA011A956576009B4139 /* main.cpp in Sources */,
 				6470A9FF1A956576009B4139 /* VideoProcess.cpp in Sources */,
-				64B852D21A98011700A49E62 /* utils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

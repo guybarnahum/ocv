@@ -24,8 +24,11 @@ enum{
 };
 
 enum{
-    ERR_OK              =  0,
-    ERR_CAPTURE_FAILURE = -1,
+    ERR_OK = 0,
+    
+    ERR_CAPTURE_FAILURE             = -1,
+    ERR_INVALID_ARGS                = -2,
+    ERR_SETUP_FRAME_PROCESS_NODE    = -3,
 };
 
 // =========================================== class VideoProcess : VideoCapture
@@ -34,14 +37,16 @@ class VideoProcess : public VideoCapture{
   
 public:
     // ................................................................. members
-    bool ready;
+    argv_t  args;
+    bool    ready;
+    int     abort_key;
     
-    int abort_key;
-    
-    Mat  in;
-    
+    Mat     in;
     vector<Vec4i> lines;
     vector<FrameProcessNode *> processors;
+    
+    int     err;
+    string  err_msg;
     
 public:
     
@@ -56,17 +61,31 @@ public:
     // ................................................................. methods
     bool is_ready(){ return ready; }
 
-    void setup( const char*     cname, argv_t *args = nullptr );
-    void setup( FrameProcessNode *fpn, argv_t *args = nullptr );
-
+    bool setup( vector<argv_t> &v_argv ); // setup everything
+    bool setup( argv_t *args = nullptr ); // setup self only
+    
+    // setup a frame process node into pipeline
+    bool setup( const char*       name, argv_t *args = nullptr ); // fpn by name
+    bool setup( FrameProcessNode *fpn , argv_t *args = nullptr ); // fpn
+    
     void print_desc( ostream &out_stream );
-
     bool process();
     virtual bool process_key( int key = -1 );
 
+    // ....................................................... getters / setters
+    
     int  set_abort_key( int key ){ int k=abort_key; abort_key=key; return k; }
     int  get_abort_key(){ return  abort_key; }
 
+    int     get_err    (){ return err    ; }
+    string  get_err_msg(){ return err_msg; }
+    
+    int set_err( int err, string err_msg = string("") )
+    {
+        this->err     = err;
+        this->err_msg = err_msg;
+        return err;
+    }
 };
 
 #endif /* defined(ocv_VideoProcess_hpp) */
