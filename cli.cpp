@@ -21,6 +21,7 @@
 const string cli_parser::keys =
     "{help h usage ? |      | print this message                   }"
     "{@cfg           |      | an xml description of video pipeline }"
+    "{@path          |""    | an optional path argument            }"
     "{xml            |      | xml file to save video pipeline into }"
     "{debug d dbg    |      | run in debug mode                    }";
 
@@ -273,29 +274,29 @@ bool cli_parser::setup_hardcoded()
         v_argv.push_back( args );
     }
     else
-        if ( path == "feature-detect" ){
+    if ( path == "feature-detect" ){
             
-            args[ "fpn"      ] = "featureDetect" ;
-            args[ "window"   ] = "OpenCV.3.0.0"  ;
+        args[ "fpn"      ] = "featureDetect" ;
+        args[ "window"   ] = "OpenCV.3.0.0"  ;
             
-            if ( has( "image" ) ){
-                string obj_path = get<string>( "image" );
-                // TODO: fix memory leak below!
-                args[ "obj_path" ] = strdup( obj_path.c_str() );
-            }
-            // use default?
-            else{
-                // NOTICE: obj_path is relative to executible in argv[0]!
-                // The build process copies it from data folder to a data
-                // subfolder in the product directory..
-                args[ "obj_path" ] = "data/20 USD note.png";
-                // args[ "obj_path" ] = "./data/black diamond.png";
-                // args[ "obj_path" ] = "./data/iittala_owl.jpg";
-                // args[ "obj_path" ] = "./data/flor.jpg";
-                // args[ "obj_path" ] = "./data/space monkey.jpg";
-            }
-            
-            if ( debug ) args[ "dbg" ] = "";
+        if ( has( "image" ) ){
+            string obj_path = get<string>( "image" );
+            // TODO: fix memory leak below!
+            args[ "obj_path" ] = strdup( obj_path.c_str() );
+        }
+        // use default?
+        else{
+        // NOTICE: obj_path is relative to executible in argv[0]!
+        // The build process copies it from data folder to a data
+        // subfolder in the product directory..
+            args[ "obj_path" ] = "data/20 USD note.png";
+        // args[ "obj_path" ] = "./data/black diamond.png";
+        // args[ "obj_path" ] = "./data/iittala_owl.jpg";
+        // args[ "obj_path" ] = "./data/flor.jpg";
+        // args[ "obj_path" ] = "./data/space monkey.jpg";
+        }
+        
+        if ( debug ) args[ "dbg" ] = "";
             v_argv.push_back( args );
         }
         else{

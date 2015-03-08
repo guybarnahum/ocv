@@ -20,6 +20,12 @@
 //                                  misc routines
 // =============================================================================
 
+#include <sys/stat.h>
+
+// ================================================================== file utils
+// TBD: Move into some util file?!
+// Can one be more corny than that?! :).
+// How many times a man has to write those?
 char *path_to_file( char* path )
 {
     char *file = path;
@@ -32,8 +38,6 @@ char *path_to_file( char* path )
     
     return file;
 }
-
-#include <sys/stat.h>
 
 bool file_exists( string path )
 {
@@ -53,18 +57,36 @@ bool full_path( string &path )
         
         string full_path = base_dir[ ix ] + path;
         
-        cout << "looking at " << full_path;
-        
         if ( file_exists( full_path ) ){
             path = full_path;
-            cout << " .. found!" << endl;
             return true;
         }
-        
-        cout << " .. not found!" << endl;
     }
     
     return false;
+}
+
+void print_argv( int argc, const char * argv[] )
+{
+    // argv[0] is especially ugly.. clean it up
+    cout << path_to_file( (char *)argv[ 0 ] );
+    
+    for( int ix = 1 ; ix < argc ; ix++ ){
+
+        // has whitespace? put qoutes around it
+        char ch;
+        bool qoutes = false;
+        const char *p = argv[ ix ];
+        
+        while( ( ch  = *p++ ) != '\0' )
+            if ( ch <= ' '  ){ qoutes = true; break; }
+        
+        // print one arg
+        if ( qoutes ) cout << " \"" << argv[ ix ] << "\"";
+        else          cout << " "   << argv[ ix ];
+    }
+    
+    cout << endl;
 }
 
 // ........................................................................ main
@@ -72,6 +94,8 @@ bool full_path( string &path )
 int
 main( int argc, const char * argv[] )
 {
+    print_argv( argc, argv );
+    
     int err = ERR_OK;
     cli_parser cli( argc, argv );
     
