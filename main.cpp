@@ -11,7 +11,10 @@
 // ==================================================================== includes
 
 #include "ocv.hpp"
+#include "cli.hpp"
+
 #include "VideoProcess.hpp"
+#include <time.h>
 
 // =============================================================================
 //                                  misc routines
@@ -30,70 +33,38 @@ char *path_to_file( char* path )
     return file;
 }
 
-// ....................................................................... usage
-static void
-usage( int argc, const char * argv[], int err = ERR_OK )
+#include <sys/stat.h>
+
+bool file_exists( string path )
 {
-    char *file = path_to_file( (char *)argv[0] );
-    cout << file << " video processing pipeline" << endl;
-    
-    // options are reported next
-    
-    // error specific usage
-    switch( err ){
-        default     :
-        case ERR_OK : break;
-    }
+    struct stat st;
+    return ( 0 == stat( path.c_str(), &st) );
 }
 
-// ................................................................ process_args
-
-// LAME HACK! LAME HACK! LAME HACK! LAME HACK! LAME HACK! LAME HACK! LAME HACK!
-//
-// TODO: unimplemented yet! Should process argv into building a VideoProcessing
-// pipeline consisting of FrameProcessNodes and their arguments.
-//
-// LAME HACK! LAME HACK! LAME HACK! LAME HACK! LAME HACK! LAME HACK! LAME HACK!
-
-static vector<argv_t>
-process_args( int argc, const char * argv[], int &err )
+bool full_path( string &path )
 {
-    vector<argv_t> v_argv;
-    argv_t args;
+    // TODO: expand ~ and .
+    string user_home = getenv( "HOME" );
     
-#if 0
+    // if relative look for it in few places
+    vector<string> base_dir = { "", "./", user_home };
     
-    args[ "fpn"    ] = "canny";
-    args[ "window" ] = "Canny";
-
-    v_argv.push_back( args );
-
-    args[ "fpn"    ] = "houghLine";
-    args[ "window" ] = "HoughLines";
-
-    v_argv.push_back( args );
-
-#else
+    for( size_t ix = 0 ; ix < base_dir.size() ; ix++ ){
+        
+        string full_path = base_dir[ ix ] + path;
+        
+        cout << "looking at " << full_path;
+        
+        if ( file_exists( full_path ) ){
+            path = full_path;
+            cout << " .. found!" << endl;
+            return true;
+        }
+        
+        cout << " .. not found!" << endl;
+    }
     
-    args[ "fpn"      ] = "featureDetect" ;
-    args[ "window"   ] = "OpenCV.3.0.0"  ;
-
-    // NOTICE: obj_path is relative to executible in argv[0]!
-    // The build process copies it from data folder to a data subfolder in the
-    // product directory..
-    args[ "obj_path" ] = "./data/20 USD note.png";
-    // args[ "obj_path" ] = "./data/black diamond.png";
-    // args[ "obj_path" ] = "./data/iittala_owl.jpg";
-    // args[ "obj_path" ] = "./data/flor.jpg";
-    // args[ "obj_path" ] = "./data/space monkey.jpg";
-    
-    args[ "dbg"      ] = "" ;
-    
-    v_argv.push_back( args );
-
-#endif
-    
-    return v_argv;
+    return false;
 }
 
 // ........................................................................ main
@@ -101,16 +72,14 @@ process_args( int argc, const char * argv[], int &err )
 int
 main( int argc, const char * argv[] )
 {
-    cout << "running " << argv[0] << endl;
-    
-    // ................................... process args
     int err = ERR_OK;
-    vector<argv_t> v_argv = process_args( argc, argv, err );
+    cli_parser cli( argc, argv );
     
-    if ( err != ERR_OK ){
-         usage( argc, argv, err );
-         return err;
+    if ( ERR_OK != ( err = cli.get_err() ) ){
+        cout << cli.get_err_msg() << " (" << err << ")" << endl;
     }
+    
+    vector<argv_t> *v_argv = cli.get_v_argv();
     
     // .............................. open input stream
     // TODO: decide where to capture from based args
@@ -128,9 +97,8 @@ main( int argc, const char * argv[] )
     }
     
     // all done : emit errors
-    if ( ERR_OK != (err = vp.get_err()) ){
+    if ( ERR_OK != ( err = vp.get_err() ) ){
         cout << vp.get_err_msg() << " (" << err << ")" << endl;
-        usage( argc, argv, err );
     }
 
     return err;

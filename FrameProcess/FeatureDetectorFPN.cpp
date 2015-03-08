@@ -96,7 +96,6 @@ bool FeatureDetectorFPNode::init( const char *dtct_name  ,
     if ( ok ) ok = init_matcher  ( match_name );
     
     //  args may override these default settings
-    obj_path            = nullptr;
     draw_features       = false;
     min_inliers         = 32;
     
@@ -106,7 +105,6 @@ bool FeatureDetectorFPNode::init( const char *dtct_name  ,
 // ....................................................................... setup
 bool FeatureDetectorFPNode::setup( argv_t *argv )
 {
-    const char *val;
     bool ok = (argv != nullptr );
     if (!ok){
         DBG_ASSERT( false, "no setup argv provided for " << get_name() );
@@ -120,11 +118,12 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
     if (!ok) return false;
     
     // ------------------------------- Required arguments
+    const char *val;
     
     // ...................................... algo option
     // algo may have a valid default so its really
     // semi-required if there is such a thing..
-    
+
     val = get_val( argv, "algo" );
     ok = ( val != nullptr );
     if ( ok ){
@@ -153,7 +152,11 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
     val = get_val( argv, "obj_path" );
     
     ok = ( val != nullptr );
-    obj_path = ok? strdup( val ) : nullptr;
+    obj_path = ok? val : "";
+    
+    if (ok){
+        ok = full_path( obj_path );
+    }
     
     if (ok){
         obj_mat = imread( obj_path, IMREAD_GRAYSCALE );
@@ -211,7 +214,19 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
     return ok;
 }
 
+// =============================================================================
+// PHILOSOPHICAL NOTE:
+// The matcher is THE key step in object detection..
+// The match process creates pairs of keypoints that then are used to create
+// the homography that if found 'locates' the object in the frame
+// 
+// The complexity of this step is key to performance, me thinks.
+//
+// =============================================================================
+/* START DISABLE_CODE */
 #if 0
+
+// ....................................................................... match
 
 bool FeatureDetectorFPNode::match()
 {
@@ -401,13 +416,21 @@ bool FeatureDetectorFPNode::match()
     return ok;
 }
 
-#else
+#endif /* DISABLE_CODE */
+
+// ....................................................................... match
 
 bool FeatureDetectorFPNode::match()
 {
     FlannBasedMatcher     matcher;
     std::vector< DMatch > matches;
-    matcher.match( obj_descriptors, scn_descriptors, matches );
+    try{
+        matcher.match( obj_descriptors, scn_descriptors, matches );
+    }
+    catch(cv::Exception e){
+        DBG_ASSERT(false, e.what() );
+        return false;
+    }
     
     double max_dist = 0; double min_dist = 100;
     
@@ -476,7 +499,6 @@ bool FeatureDetectorFPNode::match()
     return ok;
 }
 
-#endif
 
 bool FeatureDetectorFPNode::is_valid_rect( vector<Point2f> &poly, double min_area  )
 {

@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6426E2241AAB8100007F021E /* 20 USD note.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E21D1AAB80C2007F021E /* 20 USD note.png */; };
+		6426E2251AAB8100007F021E /* black diamond.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E21E1AAB80C2007F021E /* black diamond.png */; };
+		6426E2261AAB8100007F021E /* feature-detect.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E21F1AAB80C2007F021E /* feature-detect.xml */; };
+		6426E2271AAB8100007F021E /* flor.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2201AAB80C2007F021E /* flor.jpg */; };
+		6426E2281AAB8100007F021E /* hough-lines.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2211AAB80C2007F021E /* hough-lines.xml */; };
+		6426E2291AAB8100007F021E /* iittala_owl.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2221AAB80C2007F021E /* iittala_owl.jpg */; };
+		6426E22A1AAB8100007F021E /* space monkey.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2231AAB80C2007F021E /* space monkey.jpg */; };
+		644F534B1AAA98F80035DD91 /* cli.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 644F53491AAA98F80035DD91 /* cli.cpp */; };
 		646498D61A8E75D8000C07E1 /* libopencv_core.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 646498D51A8E75D8000C07E1 /* libopencv_core.3.0.0.dylib */; };
 		646498D81A8E760B000C07E1 /* libopencv_highgui.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 646498D71A8E760B000C07E1 /* libopencv_highgui.3.0.0.dylib */; };
 		646498DA1A8EC2CF000C07E1 /* libopencv_video.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 646498D91A8EC2CF000C07E1 /* libopencv_video.3.0.0.dylib */; };
@@ -20,7 +28,6 @@
 		6470A9FF1A956576009B4139 /* VideoProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470A9F41A956576009B4139 /* VideoProcess.cpp */; };
 		6470AA011A956576009B4139 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470A9F71A956576009B4139 /* main.cpp */; };
 		6470AA041A956601009B4139 /* CannyFPNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470AA021A956601009B4139 /* CannyFPNode.cpp */; };
-		64B5AA771AA8240C0000511A /* data in CopyFiles */ = {isa = PBXBuildFile; fileRef = 64B5AA761AA8240C0000511A /* data */; };
 		64B8531D1A99505100A49E62 /* FeatureDetectorFPN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64B8531B1A99505100A49E62 /* FeatureDetectorFPN.cpp */; };
 		64B853201A9C312B00A49E62 /* libopencv_features2d.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8531E1A9C312B00A49E62 /* libopencv_features2d.3.0.0.dylib */; };
 		64B853211A9C312C00A49E62 /* libopencv_flann.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8531F1A9C312B00A49E62 /* libopencv_flann.3.0.0.dylib */; };
@@ -38,16 +45,32 @@
 		646498C81A8E748B000C07E1 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
-			dstPath = "";
+			dstPath = data;
 			dstSubfolderSpec = 16;
 			files = (
-				64B5AA771AA8240C0000511A /* data in CopyFiles */,
+				6426E2241AAB8100007F021E /* 20 USD note.png in CopyFiles */,
+				6426E2251AAB8100007F021E /* black diamond.png in CopyFiles */,
+				6426E2261AAB8100007F021E /* feature-detect.xml in CopyFiles */,
+				6426E2271AAB8100007F021E /* flor.jpg in CopyFiles */,
+				6426E2281AAB8100007F021E /* hough-lines.xml in CopyFiles */,
+				6426E2291AAB8100007F021E /* iittala_owl.jpg in CopyFiles */,
+				6426E22A1AAB8100007F021E /* space monkey.jpg in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6426E21D1AAB80C2007F021E /* 20 USD note.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "20 USD note.png"; sourceTree = "<group>"; };
+		6426E21E1AAB80C2007F021E /* black diamond.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black diamond.png"; sourceTree = "<group>"; };
+		6426E21F1AAB80C2007F021E /* feature-detect.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "feature-detect.xml"; sourceTree = "<group>"; };
+		6426E2201AAB80C2007F021E /* flor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = flor.jpg; sourceTree = "<group>"; };
+		6426E2211AAB80C2007F021E /* hough-lines.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "hough-lines.xml"; sourceTree = "<group>"; };
+		6426E2221AAB80C2007F021E /* iittala_owl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iittala_owl.jpg; sourceTree = "<group>"; };
+		6426E2231AAB80C2007F021E /* space monkey.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "space monkey.jpg"; sourceTree = "<group>"; };
+		6426E22B1AABE601007F021E /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		644F53491AAA98F80035DD91 /* cli.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cli.cpp; sourceTree = "<group>"; };
+		644F534A1AAA98F80035DD91 /* cli.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cli.hpp; sourceTree = "<group>"; };
 		646498CA1A8E748B000C07E1 /* ocv */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ocv; sourceTree = BUILT_PRODUCTS_DIR; };
 		646498D51A8E75D8000C07E1 /* libopencv_core.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_core.3.0.0.dylib; sourceTree = "<group>"; };
 		646498D71A8E760B000C07E1 /* libopencv_highgui.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_highgui.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_highgui.3.0.0.dylib; sourceTree = "<group>"; };
@@ -71,7 +94,6 @@
 		64B5AA721AA816A70000511A /* iittala_owl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iittala_owl.jpg; sourceTree = "<group>"; };
 		64B5AA741AA823A80000511A /* space monkey.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "space monkey.jpg"; sourceTree = "<group>"; };
 		64B5AA751AA823A80000511A /* flor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = flor.jpg; sourceTree = "<group>"; };
-		64B5AA761AA8240C0000511A /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
 		64B8531B1A99505100A49E62 /* FeatureDetectorFPN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FeatureDetectorFPN.cpp; sourceTree = "<group>"; };
 		64B8531C1A99505100A49E62 /* FeatureDetectorFPN.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FeatureDetectorFPN.hpp; sourceTree = "<group>"; };
 		64B8531E1A9C312B00A49E62 /* libopencv_features2d.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_features2d.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_features2d.3.0.0.dylib; sourceTree = "<group>"; };
@@ -116,15 +138,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6426E21C1AAB80C2007F021E /* data */ = {
+			isa = PBXGroup;
+			children = (
+				6426E2211AAB80C2007F021E /* hough-lines.xml */,
+				6426E21F1AAB80C2007F021E /* feature-detect.xml */,
+				6426E21D1AAB80C2007F021E /* 20 USD note.png */,
+				6426E21E1AAB80C2007F021E /* black diamond.png */,
+				6426E2201AAB80C2007F021E /* flor.jpg */,
+				6426E2221AAB80C2007F021E /* iittala_owl.jpg */,
+				6426E2231AAB80C2007F021E /* space monkey.jpg */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
 		646498C11A8E748B000C07E1 = {
 			isa = PBXGroup;
 			children = (
-				64B5AA761AA8240C0000511A /* data */,
+				6426E21C1AAB80C2007F021E /* data */,
 				6470A9E41A956576009B4139 /* FrameProcess */,
 				6470A9F11A956576009B4139 /* ref-only */,
 				6470A9F61A956576009B4139 /* VideoProcess.hpp */,
 				6470A9F41A956576009B4139 /* VideoProcess.cpp */,
 				64E835271A9FA519001C5256 /* ocv.hpp */,
+				644F53491AAA98F80035DD91 /* cli.cpp */,
+				644F534A1AAA98F80035DD91 /* cli.hpp */,
+				6426E22B1AABE601007F021E /* README */,
 				6470A9F71A956576009B4139 /* main.cpp */,
 				64E8352A1AA8049E001C5256 /* data */,
 				64E835281AA7C23F001C5256 /* utils.cpp */,
@@ -266,6 +305,7 @@
 				6470A9F81A956576009B4139 /* FrameProcessNode.cpp in Sources */,
 				64E835291AA7C23F001C5256 /* utils.cpp in Sources */,
 				6470AA011A956576009B4139 /* main.cpp in Sources */,
+				644F534B1AAA98F80035DD91 /* cli.cpp in Sources */,
 				6470A9FF1A956576009B4139 /* VideoProcess.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

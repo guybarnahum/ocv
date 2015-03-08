@@ -35,19 +35,47 @@ FrameProcessNode::~FrameProcessNode()
 }
 
 // ..................................................................... get_val
+
+// BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG
+//
+// For some reason, don't ask me why, the map::find routine does not find keys
+// ( std::map<const char*, const char *> or argv_t ).
+//
+// auto it = argv->find( key );
+// if ( it != argv->end() ) return it->second;
+//
+// argv->find( key ) returns an iterator pointing to argv->end()! for keys
+// that exists in the map!! WTF?! Please teach me c++ and let me know what
+// is going in here..
+//
+// Right now a simple loop over the keys finds values for keys.. as a workaround
+//
+// BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG
+
 const char *
 FrameProcessNode::get_val( argv_t *argv, const char *key )
 {
-    if ( argv == nullptr ) return nullptr;
+    if ( argv ){
+        for( auto it = argv->begin(); it != argv->end(); it++ ){
+            if ( 0 == strcmp( key, it->first ) ){
+                return it->second;
+            }
+        }
+    }
     
-    auto it = argv->find( key );
-    const char  *val = ( it != argv->end() )? it->second : nullptr;
-    return val;
+#if 0
+    if ( argv ){
+        auto it = argv->find( key );
+        if ( it != argv->end() ) return it->second;
+    }
+#endif
+    
+    return nullptr;
 }
 
 // ....................................................................... setup
-// FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME
 //
+// Consider to:
 // TODO: define a better connector for frame processing nodes
 // TODO: add argv, argc
 // TODO: add multi in and out Mats
@@ -55,7 +83,7 @@ FrameProcessNode::get_val( argv_t *argv, const char *key )
 // TODO: combine all inputs: argv, argc, geometry and Mats into
 //       context or input class that could be either types..
 //
-// FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME
+// .............................................................................
 
 bool
 FrameProcessNode::setup( argv_t *args )

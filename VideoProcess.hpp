@@ -23,14 +23,6 @@ enum{
     KEY_SPACE  = 32,
 };
 
-enum{
-    ERR_OK = 0,
-    
-    ERR_CAPTURE_FAILURE             = -1,
-    ERR_INVALID_ARGS                = -2,
-    ERR_SETUP_FRAME_PROCESS_NODE    = -3,
-};
-
 // =========================================== class VideoProcess : VideoCapture
 
 class VideoProcess : public VideoCapture{
@@ -54,14 +46,15 @@ public:
     
      VideoProcess( const String& filename ):VideoCapture( filename ){ init();}
      VideoProcess( int           device   ):VideoCapture( device   ){ init();}
-    ~VideoProcess();
+    ~VideoProcess(){};
     
     void init();
     
     // ................................................................. methods
     bool is_ready(){ return ready; }
-
-    bool setup( vector<argv_t> &v_argv ); // setup everything
+    size_t processors_num(){ return processors.size(); }
+    
+    bool setup( vector<argv_t> *v_argv ); // setup everything
     bool setup( argv_t *args = nullptr ); // setup self only
     
     // setup a frame process node into pipeline

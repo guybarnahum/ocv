@@ -1,0 +1,57 @@
+
+ocv: Open CV Video Processing Pipeline
+
+[Description pending]
+
+========================================================================== USAGE
+
+Usage : ocv <cfg> [optional-path][-xml][debug][help]
+
+<cfg>
+   One of the following:
+   - Hardcoded values that setup a built-in configuration, these include
+     'hough-lines', 'feature-detect'
+   - A path to an xml file that describes the frame processing nodes in the
+     pipeline
+
+[optional-path]
+   Some configuration accept a path as an argument, for instance,
+   the 'feature-detect' frame processing unit accepts an image as an
+   object to identify in the frame
+
+[-xml]
+   Save the video pipeline configuration into an xml file for future
+   invocations as a <cfg> path
+
+"{help h usage ? |      | print this message                   }"
+"{@cfg           |      | an xml description of video pipeline }"
+"{xml            |      | xml file to save video pipeline into }"
+"{debug d dbg    |      | run in debug mode                    }";
+
+Data directory holds Video Pipeline configuration files and images.
+
+========================================================================== BUILD
+
+You need opencv 3.0.0 libs and headers installed in /usr/local/libs,
+/usr/local/includes your build machine. These include the contrib modules that
+are needed for feature detect frame processing (SURF, SIFT, etc)
+
+For more information about installing open cv use google or various tutotials
+online.
+
+Useful links:
+http://blogs.wcode.org/2014/10/howto-install-build-and-use-opencv-macosx-10-10/
+
+Sources are available at http://opencv.org/downloads.html
+
+XCODE 6.1 project binds the libs from /usr/local
+
+No other build configs have been tested.
+
+====================================================================== TODO/BUGS
+
+*/ Write proper README
+
+*/ For some reason, don't ask me why, the find routine does not find keys
+( std::map<const char*, const char *> or argv_t ).
+Right now a simple loop over the keys finds values for keys..

@@ -50,11 +50,6 @@ VideoProcess::init()
     else         set_err( ERR_CAPTURE_FAILURE, "Video Capture not ready" );
 }
 
-VideoProcess::~VideoProcess()
-{
-    
-}
-
 // .................................................................. print_desc
 void
 VideoProcess::print_desc( ostream &out_stream )
@@ -81,31 +76,48 @@ VideoProcess::print_desc( ostream &out_stream )
 
 // ....................................................................... setup
 
-bool VideoProcess::setup( vector<argv_t> &v_argv )
+bool VideoProcess::setup( vector<argv_t> *v_argv )
 {
     bool ok = is_ready();
     
-    for( auto it = v_argv.begin(); ok && it != v_argv.end(); it++ ){
+    if ( ok ){
+        for( int ix = 0; ix < v_argv->size(); ix++ ){
+            argv_t *args  = &(*v_argv)[ ix ];
+            const char *fpn = nullptr;
             
-        // obtain Frame Process Node by name, and set it up with its args
-        argv_t *args = &(*it);
-        auto it_fpn = it->find( "fpn" );
-        const char *fpn = ( it_fpn != it->end() )? it_fpn->second : nullptr;
-        ok = setup( fpn, args );
+            // look for fpn field..
+            for( auto it  = args->begin(); it != args->end()  ;it++ ){
+                if ( 0 == strcmp( it->first, "fpn" ) ){
+                    fpn = it->second;
+                    break;
+                }
+            }
+            
+            // setup args or break on failure
+            if ( !(ok = setup( fpn, args )) ){
+                // errors are set in the setup method..
+                break;
+            }
+        }
+    }
+    
+    // sanity check : do we have processors?!
+    if (ok){
+        ok    = ( processors_num() > 0 );
+        ready = ok;
+        if (!ok) set_err( ERR_NOT_READY, "No processors in pipeline!" );
     }
     
     return ok;
 }
 
 bool
-VideoProcess::setup(argv_t *args)
+VideoProcess::setup( argv_t *args )
 {
     // TODO: add video process args setup here..
     bool ok = (args != nullptr);
     
-    
     // emit errors
-    
     if ( !ok ){
         string err_msg = "Error setting args for VideoProcess class";
         set_err( ERR_INVALID_ARGS, err_msg  );
@@ -118,7 +130,7 @@ VideoProcess::setup(argv_t *args)
 bool
 VideoProcess::setup( const char* name, argv_t *args )
 {
-    FrameProcessNode *fpn = name? FrameProcessNodeFactory::make(name) : nullptr;
+    FrameProcessNode *fpn = name? FrameProcessNodeFactory::make( name ) : nullptr;
     bool ok = fpn? setup( fpn, args ) : setup( args );
     return ok;
 }

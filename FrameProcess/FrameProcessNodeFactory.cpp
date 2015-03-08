@@ -22,7 +22,7 @@
 FrameProcessNode *FrameProcessNodeFactory::make( const char* name )
 {
     FrameProcessNode *fp = nullptr;
-    
+
     if ( STR_EQ( name, "houghLine"   )  )
         fp = (FrameProcessNode *) new HoughLineFPNode();
     else

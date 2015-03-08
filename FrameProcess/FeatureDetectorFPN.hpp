@@ -34,7 +34,7 @@ private:
     int              min_inliers;
     
     // object
-    const char      *obj_path;
+    string           obj_path;
     Mat              obj_mat;
     vector<KeyPoint> obj_keypoints;
     Mat              obj_descriptors;
@@ -75,8 +75,7 @@ public:
     FeatureDetectorFPNode():FrameProcessNode()
     { init( nullptr, nullptr, nullptr ); }
     
-    ~FeatureDetectorFPNode()
-    { delete obj_path; }
+    ~FeatureDetectorFPNode(){}
     
     // ......................................................... virtual methods
     virtual bool process_one_frame();

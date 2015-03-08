@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<opencv_storage>
+<xml_v_argv>"1.0"</xml_v_argv>
+<v_argv>
+  <_>
+    <obj_path>"data/20 USD note.png"</obj_path>
+    <window>OpenCV.3.0.0</window>
+    <dbg>""</dbg>
+    <fpn>featureDetect</fpn>
+  </_>
+</v_argv>
+</opencv_storage>
