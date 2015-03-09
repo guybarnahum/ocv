@@ -155,7 +155,7 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
     obj_path = ok? val : "";
     
     if (ok){
-        ok = full_path( obj_path );
+        ok = file_to_path( obj_path );
     }
     
     if (ok){

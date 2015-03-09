@@ -9,11 +9,13 @@
 // =============================================================================
 
 // ==================================================================== includes
-
-#include "ocv.hpp"
+#include "ocvstd.hpp"
 #include "cli.hpp"
 
 // ===================================================================== statics
+
+const string cli_parser::ver_key = "xml_v_argv";
+const string cli_parser::ver_val = "1.0";
 
 // Simple usage, provide a config file that holds the setup of the
 // v_argv setup information. Or invoke hardcoded v_argv by name
@@ -53,9 +55,9 @@ int cli_parser::set_incopatible_err( string path )
     err_msg  = "Incompatible file format `";
     err_msg += path;
     err_msg += "` - expected ";
-    err_msg += XML_V_ARGV_COMP_NAME;
+    err_msg += cli_parser::ver_key;
     err_msg += " ver ";
-    err_msg += XML_V_ARGV_COMP_VERSION;
+    err_msg += cli_parser::ver_val;
     
     return set_err( ERR_INCOMPATIBLE, err_msg );
 }
@@ -144,8 +146,8 @@ bool cli_parser::import_from_file( string path )
     
     if ( ok ){
         string version;
-        fs[ XML_V_ARGV_COMP_NAME ] >> version;
-        ok = ( version == XML_V_ARGV_COMP_VERSION);
+        fs[ cli_parser::ver_key ] >> version;
+        ok = ( version == cli_parser::ver_val );
     }
     
     if (!ok ) set_incopatible_err( path );
@@ -225,7 +227,7 @@ bool cli_parser::export_to_file( string path )
     
     if ( ok ){
         
-        fs << XML_V_ARGV_COMP_NAME << XML_V_ARGV_COMP_VERSION;
+        fs << cli_parser::ver_key << cli_parser::ver_val;
         
         // save vector args
         fs << "v_argv" << "[";

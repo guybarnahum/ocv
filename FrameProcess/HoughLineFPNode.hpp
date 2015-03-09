@@ -8,12 +8,12 @@
 //
 // =============================================================================
 
-
 #ifndef ocv_HoughLineFPNode_hpp
 #define ocv_HoughLineFPNode_hpp
 
 // ===================================================================== include
-#include "ocv.hpp"
+
+#include "ocvstd.hpp"
 #include "FrameProcessNode.hpp"
 
 #define HOUGHLINE_NAME "HoughLineFPNode"

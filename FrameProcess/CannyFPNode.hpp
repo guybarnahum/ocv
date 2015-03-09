@@ -13,7 +13,7 @@
 #define ocv_CannyFPNode_hpp
 
 // ===================================================================== include
-#include "ocv.hpp"
+#include "ocvstd.hpp"
 #include "FrameProcessNode.hpp"
 
 #define CANNY_NAME "CannyFPNode"

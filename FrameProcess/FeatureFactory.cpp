@@ -7,7 +7,9 @@
 //  Copyright (c) 2015 DarwinLabs. All rights reserved.
 //
 // =============================================================================
-#include "ocv.hpp"
+
+// ==================================================================== includes
+#include "ocvstd.hpp"
 #include "FeatureFactory.hpp"
 
 #include <opencv2/xfeatures2d.hpp>

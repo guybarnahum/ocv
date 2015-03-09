@@ -12,7 +12,7 @@
 #ifndef ocv__FeatureDetectorFPN_hpp
 #define ocv__FeatureDetectorFPN_hpp
 
-#include "ocv.hpp"
+#include "ocvstd.hpp"
 #include "FrameProcessNode.hpp"
 
 // ================================================= class FeatureDetectorFPNode

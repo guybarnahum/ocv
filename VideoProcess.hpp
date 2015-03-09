@@ -12,16 +12,10 @@
 #define ocv_VideoProcess_hpp
 
 // ==================================================================== includes
-#include "ocv.hpp"
+
+#include "ocvstd.hpp"
 #include "FrameProcessNode.hpp"
 #include "FrameProcessNodeFactory.hpp"
-
-// ======================================================================== enum
-
-enum{
-    KEY_ESCAPE = 27,
-    KEY_SPACE  = 32,
-};
 
 // =========================================== class VideoProcess : VideoCapture
 

@@ -11,15 +11,18 @@
 #ifndef ocv_cli_hpp
 #define ocv_cli_hpp
 
-#include <stdio.h>
+// ==================================================================== includes
 
-#define XML_V_ARGV_COMP_NAME    "xml_v_argv"
-#define XML_V_ARGV_COMP_VERSION "1.0"
+#include "ocvstd.hpp"
+
+// ================================================================== cli_parser
 
 class cli_parser : public CommandLineParser {
 
 private:
     
+    static const string ver_key;
+    static const string ver_val;
     static const string keys;
     
     vector<argv_t>  v_argv;

@@ -1,3 +1,4 @@
+// =============================================================================
 //
 //  FeatureFactory.h
 //  ocv
@@ -6,10 +7,12 @@
 //  Copyright (c) 2015 DarwinLabs. All rights reserved.
 //
 // =============================================================================
+
 #ifndef ocv_FeatureFactory_hpp
 #define ocv_FeatureFactory_hpp
 
-#include "ocv.hpp"
+// ==================================================================== includes
+#include "ocvstd.hpp"
 
 #include <opencv/cv.hpp>
 #include <opencv2/features2d.hpp>

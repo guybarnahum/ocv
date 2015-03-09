@@ -1,6 +1,6 @@
 // =============================================================================
 //
-//  ocv.hpp
+//  ocvstd.hpp
 //  ocv
 //
 //  Created by Guy Bar-Nahum on 2/26/15.
@@ -8,8 +8,10 @@
 //
 // =============================================================================
 
-#ifndef ocv_ocv_hpp
-#define ocv_ocv_hpp
+#ifndef ocv_ocvstd_hpp
+#define ocv_ocvstd_hpp
+
+// ==================================================================== includes
 
 #include <iostream>
 #include <opencv/cv.hpp>
@@ -18,17 +20,23 @@
 using namespace cv;
 using namespace std;
 
-// =================================================================== utilities
+#include "utils.hpp"
 
-bool full_path( string &path );
+// ======================================================================= enums
 
-// ====================================================================== macros
-#define STR_EQ(s,t) (0 == strcmp(s,t))
-#define DBG_ASSERT( cond, msg ) if ( !(cond) ) cout << msg << endl;
+enum{
+    KEY_ESCAPE = 27,
+    KEY_SPACE  = 32,
+};
+
+// ======================================================================= types
 
 typedef map<const char *, const char *> argv_t;
 
+// ====================================================================== macros
 
+#define STR_EQ(s,t)             (0 == strcmp(s,t))
+#define DBG_ASSERT( cond, msg ) if ( !(cond) ) cout << msg << endl;
 #define ENABLE_DBG_CODE         (true)
 
 // LAMO  LAMO  LAMO  LAMO  LAMO  LAMO  LAMO  LAMO  LAMO  LAMO  LAMO  LAMO  LAMO

@@ -12,7 +12,7 @@
 #define ocv_FrameProcessNodeFactory_hpp
 
 // ==================================================================== includes
-#include "ocv.hpp"
+#include "ocvstd.hpp"
 #include "FrameProcessNode.hpp"
 
 // =================================================== class FrameProcessFactory
