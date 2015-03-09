@@ -16,7 +16,9 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/features2d/features2d.hpp>
-#include <opencv2/nonfree/features2d.hpp>
+//#include <opencv2/nonfree/features2d.hpp>
+#include <opencv2/features2d.hpp>
+#include <opencv2/xfeatures2d.hpp>
 #include <opencv2/calib3d/calib3d.hpp> // for homography
 
 // From this project (see src folder)
@@ -66,7 +68,7 @@ int main(int argc, char * argv[])
 		// cv::FeatureDetector * detector = new cv::GFTTDetector();
 		// cv::FeatureDetector * detector = new cv::MSER();
 		// cv::FeatureDetector * detector = new cv::ORB();
-		cv::FeatureDetector * detector = new cv::SIFT();
+		cv::FeatureDetector * detector = new cv::xfeatures2d::SIFT();
 		// cv::FeatureDetector * detector = new cv::StarFeatureDetector();
 		// cv::FeatureDetector * detector = new cv::SURF(600.0);
 		// cv::FeatureDetector * detector = new cv::BRISK();
@@ -81,7 +83,7 @@ int main(int argc, char * argv[])
 		// The extractor can be any of (see OpenCV features2d.hpp):
 		// cv::DescriptorExtractor * extractor = new cv::BriefDescriptorExtractor();
 		// cv::DescriptorExtractor * extractor = new cv::ORB();
-		cv::DescriptorExtractor * extractor = new cv::SIFT();
+		cv::DescriptorExtractor * extractor = new cv::xfeatures2d::SIFT();
 		// cv::DescriptorExtractor * extractor = new cv::SURF(600.0);
 		// cv::DescriptorExtractor * extractor = new cv::BRISK();
 		// cv::DescriptorExtractor * extractor = new cv::FREAK();

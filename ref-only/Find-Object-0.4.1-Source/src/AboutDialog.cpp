@@ -11,7 +11,7 @@ AboutDialog::AboutDialog(QWidget * parent) :
 {
 	ui_ = new Ui_aboutDialog();
 	ui_->setupUi(this);
-	ui_->label_version->setText(PROJECT_VERSION);
+	ui_->label_version->setText("0.0.0.1" /*PROJECT_VERSION*/);
 	ui_->label_version_opencv->setText(CV_VERSION);
 }
 

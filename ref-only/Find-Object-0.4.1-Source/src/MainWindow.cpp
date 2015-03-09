@@ -802,11 +802,11 @@ void MainWindow::update(const cv::Mat & image)
 		cv::Mat img;
 		if(imageGrayScale)
 		{
-			img = cv::Mat(imageGrayScale);
+			img = cv::cvarrToMat(imageGrayScale);
 		}
 		else
 		{
-			img =  cv::Mat(&iplImage);
+			img = cv::cvarrToMat(&iplImage);
 		}
 
 		// EXTRACT KEYPOINTS
@@ -882,7 +882,7 @@ void MainWindow::update(const cv::Mat & image)
 			// PROCESS RESULTS
 			if(this->isVisible())
 			{
-				ui_->imageView_source->setData(keypoints, cv::Mat(), &iplImage, Settings::currentDetectorType(), Settings::currentDescriptorType());
+				ui_->imageView_source->setData(keypoints, cv::Mat(), cv::cvarrToMat(&iplImage), Settings::currentDetectorType(), Settings::currentDescriptorType());
 			}
 
 			QVector<QMultiMap<int, int> > matches(objects_.size()); // Map< ObjectDescriptorIndex, SceneDescriptorIndex >
@@ -1097,7 +1097,7 @@ void MainWindow::update(const cv::Mat & image)
 		}
 		else if(this->isVisible())
 		{
-			ui_->imageView_source->setData(keypoints, cv::Mat(), &iplImage, Settings::currentDetectorType(), Settings::currentDescriptorType());
+			ui_->imageView_source->setData(keypoints, cv::Mat(), cv::cvarrToMat(&iplImage), Settings::currentDetectorType(), Settings::currentDescriptorType());
 		}
 
 		if(this->isVisible())

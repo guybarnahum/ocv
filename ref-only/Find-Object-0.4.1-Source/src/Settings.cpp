@@ -8,7 +8,8 @@
 #include <QtCore/QStringList>
 #include <QtCore/QDir>
 #include <stdio.h>
-#include <opencv2/nonfree/features2d.hpp>
+#include <opencv2/features2d.hpp>
+#include <opencv2/xfeatures2d.hpp>
 
 #define VERBOSE 0
 

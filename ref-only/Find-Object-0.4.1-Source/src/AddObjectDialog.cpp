@@ -337,7 +337,7 @@ void AddObjectDialog::update(const cv::Mat & image)
 
 		// Extract keypoints
 		cv::FeatureDetector * detector = Settings::createFeaturesDetector();
-		cv::vector<cv::KeyPoint> keypoints;
+		std::vector<cv::KeyPoint> keypoints;
 		detector->detect(cvImage_, keypoints);
 		delete detector;
 
