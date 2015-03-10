@@ -24,7 +24,7 @@ HoughLineFPNode::process_one_frame()
         
         base->copyTo( out );
 
-        if ( dbg ) cout << lines.size() << " found" << endl;
+        LOG( LEVEL_DEV ) << lines.size() << " found" ;
         
         for( size_t ix = 0; ix < lines.size(); ix++ ){
             
@@ -33,13 +33,11 @@ HoughLineFPNode::process_one_frame()
             line( out,   Point( l[0], l[1] ), Point( l[2], l[3] ),
                                      Scalar(0,0,255), 3, LINE_AA);
             
-            if ( dbg ){
-                cout << "("   << l[0] << "," << l[1] <<
-                        ")-(" << l[3] << "," << l[4] << ")" << endl;
-            }
+            LOG( LEVEL_DEV ) << "("   << l[0] << "," << l[1] <<
+                                ")-(" << l[3] << "," << l[4] << ")" ;
         }
         
-        imshow( window, out );
+        window_show( window, out );
     }
 
     return true;

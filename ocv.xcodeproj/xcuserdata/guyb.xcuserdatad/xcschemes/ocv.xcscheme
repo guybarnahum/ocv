@@ -67,11 +67,11 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-xml"
+            argument = "--xml"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-debug"
+            argument = "--debug"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

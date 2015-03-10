@@ -20,16 +20,17 @@
 
 int
 main( int argc, const char * argv[] )
-{
+{    
     LOG(LEVEL_INFO) << "Hello World!";
 
     print_argv( argc, argv );
     
-    int err = ERR_OK;
+    err_t err = OK;
     cli_parser cli( argc, argv );
     
-    if ( ERR_OK != ( err = cli.get_err() ) ){
-        cout << cli.get_err_msg() << " (" << err << ")" << endl;
+    if ( OK != ( err = last_err() ) ){
+        print_err();
+        // NOTICE: print errs but reset them and try to continue..
     }
     
     vector<argv_t> *v_argv = cli.get_v_argv();
@@ -45,14 +46,14 @@ main( int argc, const char * argv[] )
     }
     
     if ( vp.is_ready() ){
-         vp.print_desc( cout );
+         vp.print_desc();
          vp.process();
     }
     
     // all done : emit errors
-    if ( ERR_OK != ( err = vp.get_err() ) ){
-        cout << vp.get_err_msg() << " (" << err << ")" << endl;
+    if ( OK != ( err = last_err() ) ){
+        print_err();
     }
 
-    return err;
+    return (int)err;
 }

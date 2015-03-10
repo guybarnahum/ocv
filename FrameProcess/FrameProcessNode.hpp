@@ -56,7 +56,12 @@ public:
      FrameProcessNode();
     ~FrameProcessNode();
  
-    void print_desc( ostream &out_stream );
+    // print desc prints if no out_str is provided. Otherwise it replaces "\n"
+    // with provided delimiter into the out_str.
+    void print_desc( string *out_str = nullptr, string del = " ");
+    
+    // ocv wrappers
+    void window_show(const char *win, Mat mat);
     
     // ............................................................... get / set
     Mat *get_in()        { return in;  }

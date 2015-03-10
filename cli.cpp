@@ -24,7 +24,7 @@ const string cli_parser::keys =
     "{help h usage ? |      | print this message                   }"
     "{@cfg           |      | an xml description of video pipeline }"
     "{@path          |""    | an optional path argument            }"
-    "{xml            |      | xml file to save video pipeline into }"
+    "{x xml          |      | xml file to save video pipeline into }"
     "{debug d dbg    |      | run in debug mode                    }";
 
 
@@ -32,24 +32,17 @@ const string cli_parser::keys =
 
 // ======================================================================== errs
 
-int cli_parser::set_err( int err, string err_msg )
-{
-    this->err     = err;
-    this->err_msg = err_msg;
-    return err;
-}
-
-int cli_parser::set_file_io_err( string path )
+OcvError::err_t cli_parser::set_file_io_err( string path )
 {
     string err_msg;
     err_msg  = "Could not open file `" ;
     err_msg += path;
     err_msg += "` for write";
     
-    return set_err( ERR_FILE_IO, err_msg );
+    return set_err( FILE_IO, err_msg );
 }
 
-int cli_parser::set_incopatible_err( string path )
+OcvError::err_t cli_parser::set_incopatible_err( string path )
 {
     string err_msg;
     err_msg  = "Incompatible file format `";
@@ -59,7 +52,7 @@ int cli_parser::set_incopatible_err( string path )
     err_msg += " ver ";
     err_msg += cli_parser::ver_val;
     
-    return set_err( ERR_INCOMPATIBLE, err_msg );
+    return set_err( INCOMPATIBLE, err_msg );
 }
 
 // ........................................................................ init
@@ -68,8 +61,6 @@ bool cli_parser::init()
 {
     bool ok = check();
     debug = has( "debug" );
-    
-    set_err( ERR_OK, "" );
     
     // handle usage
     if ( has( "help" ) ){
@@ -100,10 +91,11 @@ bool cli_parser::init()
     }
     
     if (!ok){
+        
         printErrors();
         printMessage();
         
-        set_err(ERR_INVALID_ARGS, "invalid args" );
+        set_err( INVALID_ARGS );
     }
     
     return ok;
@@ -113,17 +105,24 @@ bool cli_parser::init()
 bool cli_parser::print_v_argv()
 {
     bool ok = true;
+    string v_argv_str = "";
     
     for( int ix = 0; ix < v_argv.size(); ix++ ){
         argv_t *args = &v_argv[ ix ];
         
-        cout << endl << endl;
+        v_argv_str += "\n\n";
         
         for( auto it  = args->begin();
                   it != args->end()  ;it++ ){
-            cout << it->first << ":" << it->second << endl;
+            
+            v_argv_str += it->first ;
+            v_argv_str += ":"       ;
+            v_argv_str += it->second;
+            v_argv_str += "\n";
         }
     }
+    
+    LOG( LEVEL_INFO ) << v_argv_str;
     
     return ok;
 }
@@ -135,38 +134,39 @@ bool cli_parser::import_from_file( string path )
     try{
         fs.open( path, FileStorage::READ );
     }
-    catch( cv::Exception& e )
+    catch( Exception& e )
     {
-        set_err( ERR_FILE_STORAGE, e.what() );
+        set_err( OCV_FILE_STORAGE, e.what() );
     }
     
+    // can we read the file?
     bool ok = fs.isOpened();
-    
-    if (!ok ) set_file_io_err( path );
-    
+    if (!ok ){
+        set_file_io_err( path );
+    }
+
+    // is it compatible?
     if ( ok ){
         string version;
         fs[ cli_parser::ver_key ] >> version;
         ok = ( version == cli_parser::ver_val );
+        if (!ok ) set_incopatible_err( path );
     }
     
-    if (!ok ) set_incopatible_err( path );
-    
-    argv_t args;
-    
     if ( ok ){
-        
-        if ( debug ) cout << "build from " << path << endl;
+        argv_t args;
+    
+        LOG( LEVEL_DEBUG ) << "build from " << path ;
         
         FileNode fn = fs[ "v_argv" ];
         
-        if ( debug ) cout << "<v_argv>" << endl;
+        LOG( LEVEL_DEBUG ) << "<v_argv>" ;
         
         // iterate through a sequence using FileNodeIterator
         for( auto it  = fn.begin(); it != fn.end  (); it++ ){
             
             // construct one arg
-            if ( debug ) cout << "\t<->" << endl;
+            LOG( LEVEL_DEBUG ) << "\t<->" ;
             args.clear();
 
             // build an arg into v_argv
@@ -185,21 +185,17 @@ bool cli_parser::import_from_file( string path )
                     
                     args[ key ] = val;
                     
-                    if ( debug ){
-                        cout << "\t\t<" << key << ">"
-                        << val
-                        << "</" << key << ">"
-                        << endl;
-                    }
+                    LOG( LEVEL_DEBUG )
+                        << "\t\t<"<< key << ">" << val << "</" << key << ">";
                 }
             }
             
-            if ( debug ) cout << "\t</->" << endl;
+            LOG( LEVEL_DEBUG ) << "\t</->" ;
             
             v_argv.push_back( args );
         }
         
-        if ( debug ) cout << "</v_argv>" << endl;
+        LOG( LEVEL_DEBUG ) << "</v_argv>" ;
     }
     
     fs.release();
@@ -211,15 +207,15 @@ bool cli_parser::import_from_file( string path )
 
 bool cli_parser::export_to_file( string path )
 {
-    if ( debug ) cout << "generating config as `" << path << "`" << endl;
+    LOG( LEVEL_DEBUG ) << "generating config as `" << path << "`" ;
     
     FileStorage fs;
     try{
         fs.open( path, FileStorage::WRITE );
     }
-    catch( cv::Exception& e )
+    catch( Exception& e )
     {
-        set_err( ERR_FILE_STORAGE, e.what() );
+        set_err( OCV_FILE_STORAGE, e.what() );
     }
     
     bool ok = fs.isOpened();

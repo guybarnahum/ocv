@@ -14,6 +14,8 @@
 // ==================================================================== includes
 
 #include "ocvstd.hpp"
+#include "utils.hpp"
+
 #include "FrameProcessNode.hpp"
 #include "FrameProcessNodeFactory.hpp"
 
@@ -31,8 +33,9 @@ public:
     vector<Vec4i> lines;
     vector<FrameProcessNode *> processors;
     
-    int     err;
-    string  err_msg;
+    // .................................................................... errs
+    err_t ErrorSetupFrameProcessNode;
+    err_t ErrorCaptureFailure;
     
 public:
     
@@ -55,7 +58,7 @@ public:
     bool setup( const char*       name, argv_t *args = nullptr ); // fpn by name
     bool setup( FrameProcessNode *fpn , argv_t *args = nullptr ); // fpn
     
-    void print_desc( ostream &out_stream );
+    void print_desc();
     bool process();
     virtual bool process_key( int key = -1 );
 
@@ -63,16 +66,6 @@ public:
     
     int  set_abort_key( int key ){ int k=abort_key; abort_key=key; return k; }
     int  get_abort_key(){ return  abort_key; }
-
-    int     get_err    (){ return err    ; }
-    string  get_err_msg(){ return err_msg; }
-    
-    int set_err( int err, string err_msg = string("") )
-    {
-        this->err     = err;
-        this->err_msg = err_msg;
-        return err;
-    }
 };
 
 #endif /* defined(ocv_VideoProcess_hpp) */

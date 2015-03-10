@@ -34,6 +34,21 @@ FrameProcessNode::~FrameProcessNode()
     delete window;
 }
 
+// ................................................................ ocv wrappers
+
+void FrameProcessNode::window_show(const char *win, Mat mat)
+{
+    if ( win && ( mat.cols > 0 ) && ( mat.rows > 0 )){
+     
+        try{
+            imshow( win, mat );
+        }
+        catch( Exception e ){
+            LOG( LEVEL_ERROR ) << e.what();
+        }
+    }
+}
+
 // ..................................................................... get_val
 
 // BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG
@@ -139,24 +154,37 @@ FrameProcessNode::set_desc(    const char *desc  )
 bool
 FrameProcessNode::process_one_frame()
 {
-    if ( window ){
-        imshow( window, out );
-    }
-    
+    window_show( window, out );
     return true;
 }
 
 // .................................................................. print_desc
+// print desc prints if no out_str is provided. Otherwise it replaces "\n"
+// with provided delimiter into the out_str.
 void
-FrameProcessNode::print_desc( ostream &out_stream )
+FrameProcessNode::print_desc( string *out_str, string del )
 {
-    string desc;
-
-    desc += ">> ";
-    desc += get_name() ;
-    desc += " class: " ;
-    desc += get_desc();
-    desc += "\n";
-
-    out_stream << desc;
+    string str = get_name();
+    
+    if ( out_str != nullptr ){
+        *out_str += str;
+        *out_str += del;
+    }
+    else{
+        LOG( LEVEL_INFO ) << str;
+    }
+    
+    str = get_desc();
+    std::stringstream ss( str );
+    
+    char line[ 256 ];
+    
+    while ( ss.getline( line, 256 ) ) {
+        if ( out_str != nullptr ){
+            *out_str += line; *out_str += del;
+        }
+        else{
+            LOG( LEVEL_INFO ) << line;
+        }
+    }
 }

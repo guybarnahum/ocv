@@ -15,6 +15,11 @@
 
 #include "ocvstd.hpp"
 
+// ======================================================================== keys
+
+bool is_printable( int key );
+void to_key( int key, string &s_key );
+
 // ================================================================== file utils
 bool  file_exists ( string  path );
 bool  file_to_path( string &path );
@@ -36,23 +41,42 @@ void print_argv( int argc, const char * argv[] );
 typedef chrono::high_resolution_clock       HighResClock;
 typedef chrono::time_point<HighResClock>    TimePoint;
 
-inline TimePoint now_time()
+inline long long now_ms()
+{
+    const long long ms = clock();
+    return ms;
+}
+
+inline TimePoint now_nano()
 {
     return HighResClock::now();
 }
 
 // Primitive duration, there has to be a better way..
-inline HighResClock::duration duration_time()
+inline HighResClock::duration duration_nano()
 {
     static TimePoint base_time;
     static bool is_first = true;
     
     if ( is_first ){
-        base_time = now_time();
+        base_time = now_nano();
         is_first = false;
     }
     
-    return now_time() - base_time ;
+    return now_nano() - base_time ;
+}
+
+inline long long duration_ms()
+{
+    static long long base_ms;
+    static bool is_first = true;
+    
+    if ( is_first ){
+        base_ms = now_ms();
+        is_first = false;
+    }
+    
+    return now_ms() - base_ms ;
 }
 
 // =================================================================== log utils
@@ -108,11 +132,13 @@ private:
 template <typename T>
 Log<T>::Log(){}
 
+#include <iomanip> // for setfill / setw below
+
 template <typename T>
 ostringstream& Log<T>::get( TLogLevel level )
 {
-    os << "- " << duration_time();
-    
+    os << setfill('0');
+    os << setw(8) << duration_ms();
     os << " "  << to_string( level ) << ": ";
     os << string( (level > LEVEL_DEBUG)? (level - LEVEL_DEBUG) : 0, '\t' );
     return os;
@@ -135,12 +161,9 @@ TLogLevel& Log<T>::reporting_level()
 template <typename T>
 string Log<T>::to_string( TLogLevel level )
 {
-    static const char* const buffer[] = { "ERROR"   ,
-                                          "WARNING" ,
-                                          "INFO"    ,
-                                          "DEBUG"   ,
-                                          "DEV"     ,
-                                        };
+    static const char* const buffer[] = {
+        "ERROR" , "WARN", "INFO", "DEBUG","DEV",
+    };
     
     if ( level > LEVEL_MAX ) level = LEVEL_MAX;
     return buffer[ level ];
@@ -149,15 +172,15 @@ string Log<T>::to_string( TLogLevel level )
 template <typename T>
 TLogLevel Log<T>::from_string(const string& level)
 {
-    if (level == "DEV"      ) return LEVEL_DEV;
-    if (level == "DEBUG"    ) return LEVEL_DEBUG;
-    if (level == "INFO"     ) return LEVEL_INFO;
-    if (level == "WARNING"  ) return LEVEL_WARNING;
-    if (level == "ERROR"    ) return LEVEL_ERROR;
+    if (level == "DEV"   ) return LEVEL_DEV;
+    if (level == "DEBUG" ) return LEVEL_DEBUG;
+    if (level == "INFO"  ) return LEVEL_INFO;
+    if (level == "WARN"  ) return LEVEL_WARNING;
+    if (level == "ERROR" ) return LEVEL_ERROR;
     
-    Log<T>().get(LEVEL_WARNING) << "Unknown logging level '"
-                                << level
-                                << "'. Using INFO level as default.";
+    Log<T>().get( LEVEL_WARNING ) << "Unknown logging level '"
+                                  << level
+                                  << "'. Using INFO level as default.";
     return LEVEL_INFO;
 }
 
@@ -193,5 +216,29 @@ class LOG : public Log<output_to_file> {};
 if (level > LOG_MAX_LEVEL) ;\
 else if ( level > LOG::reporting_level() || !output_to_file::stream() ) ; \
 else LOG().get( level )
+
+// ==================================================================== OcvError
+
+namespace OcvError{
+
+typedef size_t err_t;
+    
+// built in errs
+extern err_t OK;
+extern err_t UNKNOWN;
+extern err_t INVALID_ARGS;
+extern err_t FILE_IO;
+extern err_t INCOMPATIBLE;
+extern err_t NOT_READY;
+extern err_t OCV_FILE_STORAGE;
+
+bool  init_err();
+err_t make_err( string err_msg, size_t err_code = 0 );
+err_t last_err();
+err_t set_err( err_t err, string desc = "" );
+void  print_err( bool reset_errs = true );
+}
+
+using namespace OcvError;
 
 #endif

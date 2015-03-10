@@ -28,10 +28,12 @@ private:
     vector<argv_t>  v_argv;
     string          path;
     
-    int             err;
-    string          err_msg;
     bool            debug;
-    
+
+    // .................................................................... errs
+    OcvError::err_t     set_file_io_err( string path );
+    OcvError::err_t     set_incopatible_err( string version );
+
 public:
     
     // ............................................................. constructor
@@ -52,13 +54,6 @@ public:
     vector<argv_t> *get_v_argv(){ return &v_argv; }
     bool print_v_argv();
     
-    // .................................................................... errs
-    int     set_err( int err, string err_msg );
-    int     get_err    (){ return err    ; }
-    string  get_err_msg(){ return err_msg; }
-    
-    int     set_file_io_err( string path );
-    int     set_incopatible_err( string version );
 };
 
 #endif /* defined(ocv_cli_hpp) */

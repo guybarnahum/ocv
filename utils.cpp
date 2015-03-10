@@ -13,6 +13,32 @@
 #include "utils.hpp"
 #include <sys/stat.h>
 
+// ................................................................ is_printable
+bool
+is_printable( int key )
+{
+    return ( key > 32 ) && ( key < 127 );
+}
+
+// ....................................................... pre_process_one_frame
+void
+to_key( int key, string &s_key )
+{
+    
+    switch( key ){
+        case KEY_ESCAPE : s_key = "<escape>"; break;
+        case KEY_SPACE  : s_key = "<space>" ; break;
+        default         :
+            if ( is_printable( key )){
+                s_key = "'"; s_key += (char)key; s_key += "'";
+            }
+            else{
+                s_key  = "<"; s_key += key; s_key += ">";
+            }
+            break;
+    }
+}
+
 // ================================================================== file utils
 // Can one be more corny than that?! :).
 // How many times a man has to write those?
@@ -65,8 +91,10 @@ char *path_to_file( char* path )
 
 void print_argv( int argc, const char * argv[] )
 {
+    string cli_str;
+    
     // argv[0] is especially ugly.. clean it up
-    cout << path_to_file( (char *)argv[ 0 ] );
+    cli_str = path_to_file( (char *)argv[ 0 ] );
     
     for( int ix = 1 ; ix < argc ; ix++ ){
         
@@ -79,9 +107,105 @@ void print_argv( int argc, const char * argv[] )
             if ( ch <= ' '  ){ qoutes = true; break; }
         
         // print one arg
-        if ( qoutes ) cout << " \"" << argv[ ix ] << "\"";
-        else          cout << " "   << argv[ ix ];
+        if ( qoutes ) cli_str += " \"";
+                      cli_str += argv[ ix ];
+        if ( qoutes ) cli_str += "\"";
     }
     
-    cout << endl;
+    LOG( LEVEL_INFO ) << cli_str;
+}
+
+// ==================================================================== ocvError
+namespace OcvError
+{
+
+static vector<string>  err_codes;
+static vector<string>  err_msg;
+static err_t           err_last;
+
+// built in errors
+err_t OK;
+err_t UNKNOWN;
+err_t INVALID_ARGS;
+err_t FILE_IO;
+err_t INCOMPATIBLE;
+err_t NOT_READY;
+err_t OCV_FILE_STORAGE;
+    
+// force the following code to be executed first!
+static bool init_ok = init_err();
+    
+bool  init_err()
+{
+    err_codes.clear();
+    err_msg.clear();
+    
+    // setup common errors
+    OK               = make_err( "OK" );
+    UNKNOWN          = make_err( "Unknown" );
+    INVALID_ARGS     = make_err( "Inavlid args" );
+    FILE_IO          = make_err( "File io" );
+    INCOMPATIBLE     = make_err( "Incompatible" );
+    NOT_READY        = make_err( "Not ready" );
+    OCV_FILE_STORAGE = make_err( "OCV FileStorage" );
+    
+    err_last = OK;
+    return true;
+}
+
+err_t make_err( string err_msg, size_t err_code )
+{
+    size_t code = err_codes.size();
+    
+    // Can't change item 0
+    if ( err_code && ( code > err_code ) ){
+        code = err_code ;
+        err_codes[ code ] = err_msg;
+    }
+    else{
+        err_codes.push_back( err_msg );
+    }
+    
+   return (err_t)(code);
+}
+
+err_t last_err()
+{
+    return err_last;
+}
+
+err_t set_err( err_t err, string desc )
+{
+    size_t err_ix = (size_t)err;
+    
+    if ( err_ix < err_codes.size() ){
+        desc += " (" + err_codes[ err_ix ] + ")";
+    }
+    else{
+        
+        desc += " (Unknown Error:";
+        desc += err_ix;
+        desc += ")";
+    }
+    
+    string *msg = new string( desc );
+    err_msg.push_back( *msg );
+    
+    err_last = err;
+    
+    return err;
+}
+
+void print_err( bool reset_errs )
+{
+    for( size_t ix = 0 ; ix < err_msg.size(); ix++ ){
+        LOG( LEVEL_ERROR ) <<  err_msg[ ix ] ;
+    }
+    
+    if ( reset_errs ){
+        err_msg.clear();
+        err_last = OK;
+    }
+}
+    
 }

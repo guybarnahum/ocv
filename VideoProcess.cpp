@@ -13,65 +13,52 @@
 
 #include "VideoProcess.hpp"
 
-// ................................................................ is_printable
-bool
-is_printable( int key )
-{
-    return ( key > 32 ) && ( key < 127 );
-}
-
-// ....................................................... pre_process_one_frame
-void
-print_key( int key )
-{
-    switch( key ){
-        case KEY_ESCAPE : cout << "<escape>"; break;
-        case KEY_SPACE  : cout << "<space>" ; break;
-        default         :
-            if ( is_printable( key ))
-                cout << "'" << (char)key << "'";
-            else
-                cout << "<" << key << ">" ;
-            break;
-    }
-}
+// ...................................................................... errors
 
 // ========================================================== class VideoProcess
+
 
 void
 VideoProcess::init()
 {
+    // make errs into OcvError
+    ErrorCaptureFailure         = make_err( "Video Process: capture failure" );
+    ErrorSetupFrameProcessNode  = make_err( "Video Process: setup Frame-Process-Node failure" );
+
     set_abort_key( KEY_ESCAPE );
     
     ready = isOpened();
  
     // are we good to go?
-    if ( ready ) set_err( ERR_OK );
-    else         set_err( ERR_CAPTURE_FAILURE, "Video Capture not ready" );
+    if ( !ready ) set_err( ErrorCaptureFailure );
 }
 
 // .................................................................. print_desc
 void
-VideoProcess::print_desc( ostream &out_stream )
+VideoProcess::print_desc()
 {
     string desc;
     desc += "Video Process contains the following steps (";
     desc += to_string( processors.size() );
-    desc += " )\n";
+    desc += "):";
     
-    out_stream << desc;
+    LOG( LEVEL_INFO ) << desc;
     
-    for ( auto it  = processors.begin() ;
-         it != processors.end()   ; it++ ){
+    for ( size_t ix = 0 ; ix < processors.size(); ix++ ){
         
-        FrameProcessNode *fp = *it;
+        FrameProcessNode *fp = processors[ ix ];
         
-        assert( fp );
+        if ( fp ){
+            desc = "";
+            fp->print_desc( &desc );
+            
+        }
+        else{
+            desc = " invalid fp! ";
+        }
         
-        fp->print_desc( out_stream );
+        LOG( LEVEL_INFO ) << "(" << ix << ")" << desc;
     }
-    
-    out_stream << endl;
 }
 
 // ....................................................................... setup
@@ -105,7 +92,8 @@ bool VideoProcess::setup( vector<argv_t> *v_argv )
     if (ok){
         ok    = ( processors_num() > 0 );
         ready = ok;
-        if (!ok) set_err( ERR_NOT_READY, "No processors in pipeline!" );
+        if (!ok) set_err( ErrorSetupFrameProcessNode   ,
+                          "No processors in pipeline!" );
     }
     
     return ok;
@@ -120,7 +108,7 @@ VideoProcess::setup( argv_t *args )
     // emit errors
     if ( !ok ){
         string err_msg = "Error setting args for VideoProcess class";
-        set_err( ERR_INVALID_ARGS, err_msg  );
+        set_err( INVALID_ARGS, err_msg  );
         ready = false;
     }
 
@@ -167,7 +155,7 @@ VideoProcess::setup( FrameProcessNode *fpn, argv_t *args )
         err_msg += "` frame process node\n";
         err_msg += fpn->get_err();
         
-        set_err( ERR_SETUP_FRAME_PROCESS_NODE, err_msg );
+        set_err( ErrorSetupFrameProcessNode, err_msg );
         
         ready = false;
     }
@@ -189,14 +177,16 @@ VideoProcess::process()
         *this >> in;
         
         // invoke all frame processor nodes in chain
-        auto    it  = processors.begin() ;
-        while ( it != processors.end  () ){
-            
-            FrameProcessNode *fp = *it++;
-            
+        
+        for( auto it = processors.begin(); it != processors.end(); it++ ){
+            FrameProcessNode *fp = *it;
             ok = fp->process_one_frame();
+
             if (!ok){
-                cout << fp->get_name() << " error: " << fp->get_err() << endl;
+                LOG( LEVEL_ERROR )  << fp->get_name()
+                                    << " error: "
+                                    << fp->get_err() ;
+                break;
             }
         }
         
@@ -215,8 +205,9 @@ VideoProcess::process_key( int key )
     }
     
     if ( key > 0 ){
-        
-        cout <<  " key " ; print_key( key ) ; cout << " pressed.." << endl;
+        string s_key; to_key( key, s_key );
+
+        LOG( LEVEL_INFO ) <<  "key " << s_key << " pressed..";
         if( key == abort_key ) return true;
     }
     

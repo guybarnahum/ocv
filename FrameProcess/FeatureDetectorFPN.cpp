@@ -24,20 +24,16 @@ bool FeatureDetectorFPNode::init_detector( const char *requested_name )
     if ( ok ){
         // .............................. set name / desc
         string str;
-        str  = "FeatureDetectorFPNode(";
-        str += (name? name : "");
-        str += ")";
+        str  = "<FPN:FeatureDetector>";
         set_name( str.c_str() );
         
-        str  = "`";
-        str += (name? name : "");
-        str += "` algorithm feature detector";
+        str  = "<detector:'"; str += (name? name : ""); str += "'>\n";
         set_desc( str.c_str() );
     }
     else{
-        err  = "Invalid Feature Detector (";
+        err  = "<invalid detector:'";
         err += (name? name : "?");;
-        err += ")";
+        err += "'>";
     }
     
     return ok;
@@ -46,22 +42,16 @@ bool FeatureDetectorFPNode::init_detector( const char *requested_name )
 bool FeatureDetectorFPNode::init_extractor( const char *requested_name )
 {
     char *name = (char *)requested_name;
-    extractor = FeatureFactory::makeExtractor( name );
-    bool ok   = !extractor.empty();
+    extractor  = FeatureFactory::makeExtractor( name );
+    bool ok    = !extractor.empty();
     
     if ( ok ){
         string desc( get_desc() );
-        
-        desc += " extractor `";
-        desc += name? name : "default";
-        desc += "`";
-        
+        desc += "<extractor:'"; desc += name? name : "default"; desc += "'>\n";
         set_desc( desc.c_str() );
     }
     else{
-        err  = "Invalid Feature Extractor (";
-        err += name;
-        err += ")";
+        err  = "<invalid extractor:'"; err += name; err += "'>";
     }
 
     return ok;
@@ -75,12 +65,11 @@ bool FeatureDetectorFPNode::init_matcher  ( const char *requested_name  )
     
     if ( ok ){
         string desc( get_desc() );
-        
-        desc += " matcher type `";
-        desc += name? name : "default";
-        desc += "`";
-        
+        desc += "<matcher:'"; desc += name? name : "default"; desc += "'>\n";
         set_desc( desc.c_str() );
+    }
+    else{
+        err  = "<invalid matcher:'"; err += name; err += "'>";
     }
     
     return ok;
@@ -137,12 +126,10 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
     if (!ok){
         
         if (val != nullptr){
-            err = "Invalid `algo` option (" ;
-            err += val;
-            err += ")";
+            err = "<invalid `algo`:'" ; err += val; err += "'>";
         }
         else{
-            err = "Missing required option `algo`";
+            err = "<missing required option `algo`>";
         }
         
         return false;
@@ -159,8 +146,14 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
     }
     
     if (ok){
-        obj_mat = imread( obj_path, IMREAD_GRAYSCALE );
-        ok = !obj_mat.empty();
+        try{
+            obj_mat = imread( obj_path, IMREAD_GRAYSCALE );
+            ok = !obj_mat.empty();
+        }
+        catch( Exception e ){
+            err = e.what();
+            ok  = false;
+        }
     }
     
     if (ok){
@@ -168,25 +161,23 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
         extractor->compute( obj_mat, obj_keypoints , obj_descriptors);
     }
     
-    if ( ok && ENABLE_DBG_CODE && dbg ){
+    if ( ok && dbg ){
         
         drawKeypoints( obj_mat, obj_keypoints, obj_mat      ,
                        DrawMatchesFlags::DRAW_OVER_OUTIMG    |
                        DrawMatchesFlags::DRAW_RICH_KEYPOINTS );
 
-        imshow( "object", obj_mat);
+        window_show( "object", obj_mat);
     }
 
     // we better have a valid tgt object
     if (!ok){
         
         if (val != nullptr){
-            err = "Invalid `obj_path` option (" ;
-            err += val;
-            err += ")";
+            err = "<invalid `obj_path`:'" ; err += val; err += "'>";
         }
         else{
-            err = "Missing required option `obj_path`";
+            err = "<missing required option `obj_path`>";
         }
         
         return false;
@@ -199,9 +190,7 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
          ok = init_matcher( val );
     }
     if (!ok){
-        err  = "invalid matcher option (";
-        err += val;
-        err += ")";
+        err  = "<invalid matcher option:'"; err += val; err += "'>";
         return false;
     }
     
@@ -352,7 +341,7 @@ bool FeatureDetectorFPNode::match()
     }
     // not ok
     else{
-        err = "Could not make flann::Index";
+        err = "<could not make flann::Index>";
     }
 
     return ok;
@@ -408,7 +397,7 @@ bool FeatureDetectorFPNode::match()
                     CV_RGB(255, 0, 0),
                     matches_mask     , DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
 #endif
-        imshow( "matched", drawImg );
+        window_show( "matched", drawImg );
     }
     // else
     //    drawMatches( tgt_mat, tgt_keypoints, out, keypoints, matches, drawImg );
@@ -450,7 +439,7 @@ bool FeatureDetectorFPNode::match()
         if( matches[ix].distance < 3 * min_dist )
             good_matches.push_back( matches[ix]);
 
-    if ( ENABLE_DBG_CODE && dbg ){
+    if ( dbg ){
         
         // draw good matches
         Mat draw_mat;
@@ -463,7 +452,7 @@ bool FeatureDetectorFPNode::match()
                      DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS |
                      DrawMatchesFlags::DRAW_RICH_KEYPOINTS    );
 
-        imshow( "matched", draw_mat );
+        window_show( "matched", draw_mat );
     }
     
     // filter "good" matches back to keypoints
@@ -612,14 +601,14 @@ bool FeatureDetectorFPNode::process_one_frame()
             
             DBG_ASSERT( scn_rect.size() == 4, "found but rect is invalid!" );
             
-            //-- Draw lines between the corners (the mapped object in the scene )
+            //-- Draw lines between the corners (the mapped object in the scene)
             line( out, scn_rect[0] , scn_rect[1] , Scalar( 0, 255, 0), 4 );
             line( out, scn_rect[1] , scn_rect[2] , Scalar( 0, 255, 0), 4 );
             line( out, scn_rect[2] , scn_rect[3] , Scalar( 0, 255, 0), 4 );
             line( out, scn_rect[3] , scn_rect[0] , Scalar( 0, 255, 0), 4 );
         }
         
-        imshow( window, out );
+        window_show( window, out );
     }
     
     DBG_ASSERT( ok, err );
