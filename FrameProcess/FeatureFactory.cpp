@@ -18,7 +18,7 @@ using namespace xfeatures2d;
 const char *FeatureFactory::DETECTOR_DEFAULT  = "surf";
 const char *FeatureFactory::EXTRACTOR_DEFAULT = "surf";
 const char *FeatureFactory::MACTHER_DEFAULT   = "FlannBased";
-// const char *FeatureFactory::MACTHER_DEFAULT   = "BruteForce";
+const char *FeatureFactory::TRACKER_DEFAULT   = "MIL";
 
 // ======================================================== class FeatureFactory
 
@@ -63,6 +63,7 @@ Ptr<DescriptorExtractor> FeatureFactory::makeExtractor( char * &name)
         name = (char *)FeatureFactory::EXTRACTOR_DEFAULT;
 
     // ................................. make it!
+    
     if STR_EQ( name, "brief") de = BriefDescriptorExtractor::create();
     else de = (Ptr<DescriptorExtractor>) makeDetector( name );
     return  de;
@@ -77,11 +78,25 @@ Ptr<DescriptorMatcher> FeatureFactory::makeMatecher( char * &name)
     if ((        name == nullptr )||
         STR_EQ(  name, "default" ) )
                  name = (char *)FeatureFactory::MACTHER_DEFAULT;
- 
-    string type( name );
-    
+     
     // ................................. make it!
 
-    dm = DescriptorMatcher::create( type );
+    dm = DescriptorMatcher::create( name );
     return  dm;
+}
+
+// ................................................................. makeTracker
+Ptr<Tracker> FeatureFactory::makeTracker( char *&name)
+{
+    Ptr<Tracker> tr = Tracker::create( name );
+    
+    // ................................. default
+    if ((        name == nullptr )||
+        STR_EQ(  name, "default" ) )
+        name = (char *)FeatureFactory::TRACKER_DEFAULT;
+    
+    // ................................. make it!
+    tr = Tracker::create( name );
+    
+    return tr;
 }

@@ -14,6 +14,8 @@
 		6426E2281AAB8100007F021E /* hough-lines.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2211AAB80C2007F021E /* hough-lines.xml */; };
 		6426E2291AAB8100007F021E /* iittala_owl.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2221AAB80C2007F021E /* iittala_owl.jpg */; };
 		6426E22A1AAB8100007F021E /* space monkey.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2231AAB80C2007F021E /* space monkey.jpg */; };
+		6426E2301AAFAF34007F021E /* libopencv_tracking.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6426E22F1AAFAF34007F021E /* libopencv_tracking.3.0.0.dylib */; };
+		6426E2321AB131BA007F021E /* libopencv_ml.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6426E2311AB131BA007F021E /* libopencv_ml.3.0.0.dylib */; };
 		644F534B1AAA98F80035DD91 /* cli.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 644F53491AAA98F80035DD91 /* cli.cpp */; };
 		646498D61A8E75D8000C07E1 /* libopencv_core.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 646498D51A8E75D8000C07E1 /* libopencv_core.3.0.0.dylib */; };
 		646498D81A8E760B000C07E1 /* libopencv_highgui.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 646498D71A8E760B000C07E1 /* libopencv_highgui.3.0.0.dylib */; };
@@ -72,6 +74,8 @@
 		6426E22C1AAD4CDD007F021E /* utils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = utils.hpp; sourceTree = "<group>"; };
 		6426E22D1AAD60E3007F021E /* ratio_io */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ratio_io; sourceTree = "<group>"; };
 		6426E22E1AAD60E3007F021E /* chrono_io */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chrono_io; sourceTree = "<group>"; };
+		6426E22F1AAFAF34007F021E /* libopencv_tracking.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_tracking.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_tracking.3.0.0.dylib; sourceTree = "<group>"; };
+		6426E2311AB131BA007F021E /* libopencv_ml.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_ml.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_ml.3.0.0.dylib; sourceTree = "<group>"; };
 		644F53491AAA98F80035DD91 /* cli.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cli.cpp; sourceTree = "<group>"; };
 		644F534A1AAA98F80035DD91 /* cli.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cli.hpp; sourceTree = "<group>"; };
 		646498CA1A8E748B000C07E1 /* ocv */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ocv; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,10 +125,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				64B853211A9C312C00A49E62 /* libopencv_flann.3.0.0.dylib in Frameworks */,
+				6426E2301AAFAF34007F021E /* libopencv_tracking.3.0.0.dylib in Frameworks */,
 				646498DD1A8EC310000C07E1 /* libopencv_videoio.3.0.0.dylib in Frameworks */,
 				64B853231A9C316800A49E62 /* libopencv_xfeatures2d.3.0.0.dylib in Frameworks */,
 				64B853281A9C31DA00A49E62 /* libopencv_calib3d.3.0.0.dylib in Frameworks */,
 				646498E21A903BB9000C07E1 /* libopencv_imgproc.3.0.0.dylib in Frameworks */,
+				6426E2321AB131BA007F021E /* libopencv_ml.3.0.0.dylib in Frameworks */,
 				64B853291A9C31DA00A49E62 /* libopencv_ccalib.3.0.0.dylib in Frameworks */,
 				64B853201A9C312B00A49E62 /* libopencv_features2d.3.0.0.dylib in Frameworks */,
 				64B8532C1A9C320500A49E62 /* libopencv_objdetect.3.0.0.dylib in Frameworks */,
@@ -190,6 +196,8 @@
 			isa = PBXGroup;
 			children = (
 				64B8532A1A9C320500A49E62 /* libopencv_objdetect.3.0.0.dylib */,
+				6426E2311AB131BA007F021E /* libopencv_ml.3.0.0.dylib */,
+				6426E22F1AAFAF34007F021E /* libopencv_tracking.3.0.0.dylib */,
 				64B8532B1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib */,
 				64B853261A9C31DA00A49E62 /* libopencv_calib3d.3.0.0.dylib */,
 				64B853271A9C31DA00A49E62 /* libopencv_ccalib.3.0.0.dylib */,

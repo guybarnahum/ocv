@@ -9,8 +9,8 @@
 // =============================================================================
 
 #include <sstream>
-#include "FeatureDetectorFPN.hpp"
 #include "FeatureFactory.hpp"
+#include "FeatureDetectorFPN.hpp"
 
 // ........................................................................ init
 
@@ -75,18 +75,46 @@ bool FeatureDetectorFPNode::init_matcher  ( const char *requested_name  )
     return ok;
 }
 
+bool FeatureDetectorFPNode::init_tracker( const char *requested_name  )
+{
+    char *name = (char *)requested_name;
+    tracker = FeatureFactory::makeTracker( name );
+    bool ok = !tracker.empty();
+    
+    if ( ok ){
+        string desc( get_desc() );
+        desc += "<tracker:'"; desc += name? name : "default"; desc += "'>\n";
+        set_desc( desc.c_str() );
+    }
+    else{
+        err  = "<invalid tracker:'"; err += name; err += "'>";
+    }
+    
+    return ok;
+}
+
 
 bool FeatureDetectorFPNode::init( const char *dtct_name  ,
                                   const char *xtrct_name ,
-                                  const char *match_name )
+                                  const char *match_name ,
+                                  const char *trckr_name )
 {
     bool      ok = init_detector ( dtct_name  );
     if ( ok ) ok = init_extractor( xtrct_name );
     if ( ok ) ok = init_matcher  ( match_name );
     
+    // TODO: tracking is not working yet, set to true for debugging
+    do_track = false;
+    if ( do_track && ok )
+              ok = init_tracker  ( trckr_name );
+    
     //  args may override these default settings
-    draw_features       = false;
-    min_inliers         = 32;
+    min_inliers = FeatureDetectorFPNode::MIN_INLINERS_DEFAULT;
+    scale       = FeatureDetectorFPNode::SCALE_FACTOR;
+    
+    // state of rect -- none, detect, then track, repeat as needed
+    last_state = NONE;
+    state      = NONE;
     
     return ok;
 }
@@ -102,6 +130,7 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
     
     // call the parent setup for base class setup options
     // do this first so we have `dbg` option set, etc
+    
     ok = FrameProcessNode::setup( argv );
     DBG_ASSERT( ok, "invalid argv provided for " << get_name() );
     if (!ok) return false;
@@ -112,19 +141,14 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
     // ...................................... algo option
     // algo may have a valid default so its really
     // semi-required if there is such a thing..
-
-    val = get_val( argv, "algo" );
-    ok = ( val != nullptr );
-    if ( ok ){
-         ok = init_detector( val );
-    }
+    ok = ( nullptr != ( val = get_val( argv, "algo" ) ) );
+    if ( ok ) ok = init_detector( val );
     
     // we better have a valid algo feature detector
     // regardless of how we got it from the option or default..
     ok = !detector.empty();
     
     if (!ok){
-        
         if (val != nullptr){
             err = "<invalid `algo`:'" ; err += val; err += "'>";
         }
@@ -135,15 +159,12 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
         return false;
     }
     
-    // ....................................... tgt option
-    val = get_val( argv, "obj_path" );
+    // ......................................... obj_path
     
-    ok = ( val != nullptr );
+    ok = ( nullptr != ( val = get_val( argv, "obj_path" ) ) );
     obj_path = ok? val : "";
     
-    if (ok){
-        ok = file_to_path( obj_path );
-    }
+    if (ok) ok = file_to_path( obj_path );
     
     if (ok){
         try{
@@ -172,7 +193,6 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
 
     // we better have a valid tgt object
     if (!ok){
-        
         if (val != nullptr){
             err = "<invalid `obj_path`:'" ; err += val; err += "'>";
         }
@@ -182,24 +202,35 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
         
         return false;
     }
+    
     // ------------------------------ Optional arguments
     
-    // ..................................... match option
+    // .................................... match option
     val = get_val( argv, "matcher" );
     if (val != nullptr){
-         ok = init_matcher( val );
+        ok = init_matcher( val );
     }
+    
     if (!ok){
         err  = "<invalid matcher option:'"; err += val; err += "'>";
         return false;
     }
     
-    // ............................ draw_features option
-    val = get_val( argv, "draw_features" );
+    // ........................................... scale
+    val = get_val( argv, "scale" );
     if (val != nullptr){
-        draw_features = !STR_EQ(val, "false");
+        try{
+            scale = stod( val );
+        }
+        catch( const invalid_argument &ia) {
+            err   = "<invalid scale argument:'"; err += ia.what(); err+= "'>";
+            scale = FeatureDetectorFPNode::SCALE_FACTOR;
+        }
     }
-
+    
+    // ...................................... min_inliers
+    // TODO: add support for min_inliers
+    
     return ok;
 }
 
@@ -567,30 +598,134 @@ bool FeatureDetectorFPNode::find_homography()
     
     // do we have a new valid found rect?
     if ( ok ){
-        scn_rect = scn_corners;
+        scn_poly = scn_corners;
     }
     
     return ok;
 }
 
-bool FeatureDetectorFPNode::process_one_frame()
+// ...................................................................... detect
+bool FeatureDetectorFPNode::detect()
 {
-    bool ok = !detector.empty() && !obj_mat.empty() ;
+    cvtColor(*in, scn_mat, COLOR_BGR2GRAY);
+
+    // new scene - reset old scn context
+    scn_poly.clear();
+    
+    scn_rect.height = in->cols;
+    scn_rect.width  = in->rows;
+    scn_rect.x      = 0;
+    scn_rect.y      = 0;
+    
+    scn_keypoints.clear();
+        
+    detector->detect  ( scn_mat, scn_keypoints );
+    extractor->compute( scn_mat, scn_keypoints , scn_descriptors );
+    
+    bool found = match() && find_homography();
+    
+    if ( found ){
+        
+        // build scn_rect from scn_poly
+        int top     = scn_poly[ 0 ].y;
+        int left    = scn_poly[ 0 ].x;
+        int bottom  = top;
+        int right   = left;
+        
+        if ( scn_poly[ 1 ].x > right ) right  = scn_poly[ 1 ].x;
+        if ( scn_poly[ 1 ].y > bottom) bottom = scn_poly[ 1 ].y;
+        if ( scn_poly[ 1 ].x < left  ) left   = scn_poly[ 1 ].x;
+        if ( scn_poly[ 1 ].y < top   ) top    = scn_poly[ 1 ].y;
+
+        if ( scn_poly[ 2 ].x > right ) right  = scn_poly[ 2 ].x;
+        if ( scn_poly[ 2 ].y > bottom) bottom = scn_poly[ 2 ].y;
+        if ( scn_poly[ 2 ].x < left  ) left   = scn_poly[ 2 ].x;
+        if ( scn_poly[ 2 ].y < top   ) top    = scn_poly[ 2 ].y;
+
+        if ( scn_poly[ 3 ].x > right ) right  = scn_poly[ 3 ].x;
+        if ( scn_poly[ 3 ].y > bottom) bottom = scn_poly[ 3 ].y;
+        if ( scn_poly[ 3 ].x < left  ) left   = scn_poly[ 3 ].x;
+        if ( scn_poly[ 3 ].y < top   ) top    = scn_poly[ 3 ].y;
+
+        scn_rect.x     = left;
+        scn_rect.y     = top;
+        scn_rect.width = right - left;
+        scn_rect.height= bottom - top;
+        
+        set_state( DETECTED );
+    }
+    else{
+        set_state( NONE );
+    }
+    
+    
+    return found;
+}
+
+// ....................................................................... track
+bool FeatureDetectorFPNode::track()
+{
+    // do we have a rect?
     bool found = false;
     
-    // new scene - reset old scn context
-    scn_keypoints.clear();
-    scn_rect.clear();
-
-    if ( ok ){
-        cvtColor(*in, scn_mat, COLOR_BGR2GRAY);
-        detector->detect  ( scn_mat, scn_keypoints );
-        extractor->compute( scn_mat, scn_keypoints , scn_descriptors );
-        found = match();
+    if ( do_track ){
+        try{
+            switch ( state ){
+                default         :
+                case NONE       :
+                    LOG( LEVEL_WARNING ) << "Invalid state (" << state << ")";
+                    found = false; break;
+                case DETECTED   : found = tracker->init  ( *in, scn_rect ); break;
+                case TRACKING   : found = tracker->update( *in, scn_rect ); break;
+            }
+        }
+        catch(Exception e ){
+            err = e.what();
+            found = false;
+        }
     }
     
     if ( found ){
-         found = find_homography();
+        scn_poly[ 0 ].x = scn_rect.x;
+        scn_poly[ 0 ].y = scn_rect.y;
+        scn_poly[ 1 ].x = scn_rect.x + scn_rect.width;
+        scn_poly[ 1 ].y = scn_rect.y;
+        scn_poly[ 2 ].x = scn_rect.x + scn_rect.width;
+        scn_poly[ 2 ].y = scn_rect.y + scn_rect.height;
+        scn_poly[ 3 ].x = scn_rect.x ;
+        scn_poly[ 3 ].y = scn_rect.y + scn_rect.height;
+
+        set_state( TRACKING );
+    }
+    else{
+        set_state( NONE );
+    }
+    
+    return  found;
+}
+
+bool FeatureDetectorFPNode::process_one_frame()
+{
+    // Sanity checks
+    if ( detector.empty ()||
+         extractor.empty()||
+         matcher.empty  ()||
+         obj_mat.empty  () ){
+        // don't call again!
+        return false;
+    }
+    
+ //   if ( state_changed() ){
+ //       LOG( LEVEL_INFO ) << to_string( state );
+ //   }
+    
+    bool found = false;
+    switch( state ){
+        case DETECTED   :
+        case TRACKING   : if ( true == (found = track()) ) break;
+                          // if not found try to detect..
+        default         :
+        case NONE       : found = detect(); break;
     }
     
     if ( window ){
@@ -599,19 +734,18 @@ bool FeatureDetectorFPNode::process_one_frame()
         
         if ( found ){
             
-            DBG_ASSERT( scn_rect.size() == 4, "found but rect is invalid!" );
+            DBG_ASSERT( state != NONE, "state mismatch! should not be NONE!");
+            DBG_ASSERT( scn_poly.size() == 4, "found but rect is invalid!" );
             
             //-- Draw lines between the corners (the mapped object in the scene)
-            line( out, scn_rect[0] , scn_rect[1] , Scalar( 0, 255, 0), 4 );
-            line( out, scn_rect[1] , scn_rect[2] , Scalar( 0, 255, 0), 4 );
-            line( out, scn_rect[2] , scn_rect[3] , Scalar( 0, 255, 0), 4 );
-            line( out, scn_rect[3] , scn_rect[0] , Scalar( 0, 255, 0), 4 );
+            line( out, scn_poly[0] , scn_poly[1] , Scalar( 0, 255, 0), 4 );
+            line( out, scn_poly[1] , scn_poly[2] , Scalar( 0, 255, 0), 4 );
+            line( out, scn_poly[2] , scn_poly[3] , Scalar( 0, 255, 0), 4 );
+            line( out, scn_poly[3] , scn_poly[0] , Scalar( 0, 255, 0), 4 );
         }
         
         window_show( window, out );
     }
     
-    DBG_ASSERT( ok, err );
-    
-    return ok;
+    return true;
 }

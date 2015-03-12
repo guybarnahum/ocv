@@ -16,6 +16,8 @@
 
 #include <opencv/cv.hpp>
 #include <opencv2/features2d.hpp>
+#include <opencv2/xfeatures2d.hpp>
+#include <opencv2/tracking.hpp>
 
 // ============================================= class FeatureDetectorFPNFactory
 // The detector can be any of (see OpenCV features2d.hpp):
@@ -26,12 +28,14 @@ private:
     static const char *DETECTOR_DEFAULT  ;
     static const char *EXTRACTOR_DEFAULT ;
     static const char *MACTHER_DEFAULT   ;
-
+    static const char *TRACKER_DEFAULT   ;
+    
 public:
 
     static Ptr<FeatureDetector>     makeDetector ( char * &name );
     static Ptr<DescriptorExtractor> makeExtractor( char * &name );
     static Ptr<DescriptorMatcher>   makeMatecher ( char * &name );
+    static Ptr<Tracker>             makeTracker  ( char * &name );
 };
 
 #endif /* defined(__ocv__FeatureFactory__) */
