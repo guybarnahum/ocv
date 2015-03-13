@@ -14,6 +14,7 @@
 #include "HoughLineFPNode.hpp"
 #include "CannyFPNode.hpp"
 #include "FeatureDetectorFPN.hpp"
+#include "ObjectDetectorFPN.hpp"
 
 // ========================================================= FrameProcessFactory
 
@@ -31,6 +32,9 @@ FrameProcessNode *FrameProcessNodeFactory::make( const char* name )
     else
     if ( STR_EQ( name, "featureDetect"       )  )
         fp = (FrameProcessNode *) new FeatureDetectorFPNode();
+    else
+    if ( STR_EQ( name, "objectDetect"       )  )
+        fp = (FrameProcessNode *) new ObjectDetectorFPNode();
     else
     if ( STR_EQ( name, "nullProcess" )  ){
         fp = new FrameProcessNode();

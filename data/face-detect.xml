@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<opencv_storage>
+    <xml_v_argv>"1.0"</xml_v_argv>
+    <v_argv>
+        <_>
+            <obj_path>"data/lbpcascades/lbpcascade_frontalface.xml"</obj_path>
+            <window>Faces</window>
+            <dbg>""</dbg>
+            <fpn>objectDetect</fpn>
+        </_>
+    </v_argv>
+</opencv_storage>

@@ -59,12 +59,12 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "data/feature-detect.xml"
+            argument = "data/face-detect.xml"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "&quot;data/5 USD note.png&quot;"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--xml"

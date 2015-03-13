@@ -21,7 +21,7 @@
 int
 main( int argc, const char * argv[] )
 {    
-    LOG(LEVEL_INFO) << "Hello World!";
+    LOG(LEVEL_INFO) << "Running relative to " << argv[0];
 
     print_argv( argc, argv );
     

@@ -16,6 +16,9 @@
 		6426E22A1AAB8100007F021E /* space monkey.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2231AAB80C2007F021E /* space monkey.jpg */; };
 		6426E2301AAFAF34007F021E /* libopencv_tracking.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6426E22F1AAFAF34007F021E /* libopencv_tracking.3.0.0.dylib */; };
 		6426E2321AB131BA007F021E /* libopencv_ml.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6426E2311AB131BA007F021E /* libopencv_ml.3.0.0.dylib */; };
+		6426E2351AB246FB007F021E /* ObjectDetectorFPN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6426E2331AB246FB007F021E /* ObjectDetectorFPN.cpp */; };
+		6426E2401AB25A9F007F021E /* face-detect.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2361AB255EA007F021E /* face-detect.xml */; };
+		6426E2411AB25AA9007F021E /* lbpcascade_frontalface.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E23E1AB2587F007F021E /* lbpcascade_frontalface.xml */; };
 		644F534B1AAA98F80035DD91 /* cli.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 644F53491AAA98F80035DD91 /* cli.cpp */; };
 		646498D61A8E75D8000C07E1 /* libopencv_core.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 646498D51A8E75D8000C07E1 /* libopencv_core.3.0.0.dylib */; };
 		646498D81A8E760B000C07E1 /* libopencv_highgui.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 646498D71A8E760B000C07E1 /* libopencv_highgui.3.0.0.dylib */; };
@@ -50,6 +53,8 @@
 			dstPath = data;
 			dstSubfolderSpec = 16;
 			files = (
+				6426E2411AB25AA9007F021E /* lbpcascade_frontalface.xml in CopyFiles */,
+				6426E2401AB25A9F007F021E /* face-detect.xml in CopyFiles */,
 				6426E2241AAB8100007F021E /* 20 USD note.png in CopyFiles */,
 				6426E2251AAB8100007F021E /* black diamond.png in CopyFiles */,
 				6426E2261AAB8100007F021E /* feature-detect.xml in CopyFiles */,
@@ -76,6 +81,12 @@
 		6426E22E1AAD60E3007F021E /* chrono_io */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chrono_io; sourceTree = "<group>"; };
 		6426E22F1AAFAF34007F021E /* libopencv_tracking.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_tracking.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_tracking.3.0.0.dylib; sourceTree = "<group>"; };
 		6426E2311AB131BA007F021E /* libopencv_ml.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_ml.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_ml.3.0.0.dylib; sourceTree = "<group>"; };
+		6426E2331AB246FB007F021E /* ObjectDetectorFPN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectDetectorFPN.cpp; sourceTree = "<group>"; };
+		6426E2341AB246FB007F021E /* ObjectDetectorFPN.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ObjectDetectorFPN.hpp; sourceTree = "<group>"; };
+		6426E2361AB255EA007F021E /* face-detect.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "face-detect.xml"; sourceTree = "<group>"; };
+		6426E23D1AB2587F007F021E /* lbpcascade_profileface.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = lbpcascade_profileface.xml; sourceTree = "<group>"; };
+		6426E23E1AB2587F007F021E /* lbpcascade_frontalface.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = lbpcascade_frontalface.xml; sourceTree = "<group>"; };
+		6426E23F1AB2587F007F021E /* lbpcascade_frontalcatface.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = lbpcascade_frontalcatface.xml; sourceTree = "<group>"; };
 		644F53491AAA98F80035DD91 /* cli.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cli.cpp; sourceTree = "<group>"; };
 		644F534A1AAA98F80035DD91 /* cli.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cli.hpp; sourceTree = "<group>"; };
 		646498CA1A8E748B000C07E1 /* ocv */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ocv; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,8 +161,10 @@
 		6426E21C1AAB80C2007F021E /* data */ = {
 			isa = PBXGroup;
 			children = (
+				6426E2371AB256A3007F021E /* lbpcascades */,
 				6426E2211AAB80C2007F021E /* hough-lines.xml */,
 				6426E21F1AAB80C2007F021E /* feature-detect.xml */,
+				6426E2361AB255EA007F021E /* face-detect.xml */,
 				6426E21D1AAB80C2007F021E /* 20 USD note.png */,
 				6426E21E1AAB80C2007F021E /* black diamond.png */,
 				6426E2201AAB80C2007F021E /* flor.jpg */,
@@ -159,6 +172,16 @@
 				6426E2231AAB80C2007F021E /* space monkey.jpg */,
 			);
 			path = data;
+			sourceTree = "<group>";
+		};
+		6426E2371AB256A3007F021E /* lbpcascades */ = {
+			isa = PBXGroup;
+			children = (
+				6426E23D1AB2587F007F021E /* lbpcascade_profileface.xml */,
+				6426E23E1AB2587F007F021E /* lbpcascade_frontalface.xml */,
+				6426E23F1AB2587F007F021E /* lbpcascade_frontalcatface.xml */,
+			);
+			path = lbpcascades;
 			sourceTree = "<group>";
 		};
 		646498C11A8E748B000C07E1 = {
@@ -231,6 +254,8 @@
 				6470A9E91A956576009B4139 /* HoughLineFPNode.cpp */,
 				64B8531C1A99505100A49E62 /* FeatureDetectorFPN.hpp */,
 				64B8531B1A99505100A49E62 /* FeatureDetectorFPN.cpp */,
+				6426E2341AB246FB007F021E /* ObjectDetectorFPN.hpp */,
+				6426E2331AB246FB007F021E /* ObjectDetectorFPN.cpp */,
 			);
 			path = FrameProcess;
 			sourceTree = "<group>";
@@ -320,6 +345,7 @@
 				64E835291AA7C23F001C5256 /* utils.cpp in Sources */,
 				6470AA011A956576009B4139 /* main.cpp in Sources */,
 				644F534B1AAA98F80035DD91 /* cli.cpp in Sources */,
+				6426E2351AB246FB007F021E /* ObjectDetectorFPN.cpp in Sources */,
 				6470A9FF1A956576009B4139 /* VideoProcess.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

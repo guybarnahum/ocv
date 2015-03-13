@@ -107,7 +107,8 @@ void print_argv( int argc, const char * argv[] )
             if ( ch <= ' '  ){ qoutes = true; break; }
         
         // print one arg
-        if ( qoutes ) cli_str += " \"";
+                      cli_str += " ";
+        if ( qoutes ) cli_str += "\"";
                       cli_str += argv[ ix ];
         if ( qoutes ) cli_str += "\"";
     }

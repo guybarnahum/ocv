@@ -122,5 +122,4 @@ public:
     virtual bool setup( argv_t *argv );
 };
 
-
 #endif /* defined(ocv__FeatureDetectorFPN_hpp) */

@@ -217,6 +217,8 @@ if (level > LOG_MAX_LEVEL) ;\
 else if ( level > LOG::reporting_level() || !output_to_file::stream() ) ; \
 else LOG().get( level )
 
+#define FAIL  LOG( LEVEL_ERROR )
+
 // ==================================================================== OcvError
 
 namespace OcvError{

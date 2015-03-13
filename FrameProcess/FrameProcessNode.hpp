@@ -72,9 +72,11 @@ public:
     
     Mat *get_out(){ return &out;}
     
+    void        set_name( string str ){ set_name( str.c_str() ) ; }
     void        set_name(      const char *cname );
     const char* get_name(){   return this->cname; }
-    
+
+    void        set_desc( string str ){ set_desc( str.c_str() ); }
     void        set_desc(      const char *desc  );
     const char* get_desc(){   return this->desc; }
 

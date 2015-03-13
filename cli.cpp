@@ -35,9 +35,9 @@ const string cli_parser::keys =
 OcvError::err_t cli_parser::set_file_io_err( string path )
 {
     string err_msg;
-    err_msg  = "Could not open file `" ;
+    err_msg  = "Could not open file '" ;
     err_msg += path;
-    err_msg += "` for write";
+    err_msg += "'";
     
     return set_err( FILE_IO, err_msg );
 }
@@ -130,6 +130,8 @@ bool cli_parser::print_v_argv()
 // ............................................................ import_from_file
 bool cli_parser::import_from_file( string path )
 {
+    file_to_path( path );
+    
     FileStorage fs;
     try{
         fs.open( path, FileStorage::READ );
