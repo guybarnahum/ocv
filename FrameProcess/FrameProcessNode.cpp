@@ -17,8 +17,6 @@ FrameProcessNode::FrameProcessNode()
     // base class does not call set_name and set_desc 
     cname = strdup( "FrameProcess" );
     desc  = strdup( "frame process base class - copies in to out" );
-    
-    err   = "";
     window= nullptr;
     
     // nothing to do in base class - input === output
@@ -141,7 +139,6 @@ FrameProcessNode::set_name( const char *cname )
     delete this->cname;
     this->cname = cname? strdup(cname) : nullptr;
 }
-
 
 void
 FrameProcessNode::set_desc(    const char *desc  )

@@ -35,8 +35,7 @@ protected:
     Mat  out;
     const char *window;
     bool dbg;
-    string      err;
-    
+
     // FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME
     //
     // TODO: define a better connector for frame processing nodes
@@ -82,8 +81,6 @@ public:
 
     void        set_window(    const char *window );
     const char* get_window(){ return this->window; }
-
-    const char* get_err(){ return this->err.c_str(); }
     
     // ......................................................... virtual methods
     

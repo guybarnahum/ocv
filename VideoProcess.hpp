@@ -33,6 +33,12 @@ public:
     vector<Vec4i> lines;
     vector<FrameProcessNode *> processors;
     
+    // NOTE: some drivers do not support setting up the
+    // video capture resolution
+    
+    int     capture_width;
+    int     capture_height;
+    
     // .................................................................... errs
     err_t ErrorSetupFrameProcessNode;
     err_t ErrorCaptureFailure;

@@ -31,9 +31,8 @@ bool FeatureDetectorFPNode::init_detector( const char *requested_name )
         set_desc( str.c_str() );
     }
     else{
-        err  = "<invalid detector:'";
-        err += (name? name : "?");;
-        err += "'>";
+        string msg = "<invalid detector:'"; msg+=(name? name:"?"); msg += "'>";
+        set_err( INVALID_ARGS, msg.c_str() );
     }
     
     return ok;
@@ -51,7 +50,8 @@ bool FeatureDetectorFPNode::init_extractor( const char *requested_name )
         set_desc( desc.c_str() );
     }
     else{
-        err  = "<invalid extractor:'"; err += name; err += "'>";
+        string msg = "<invalid extractor:'"; msg += name; msg += "'>";
+        set_err( INVALID_ARGS, msg.c_str() );
     }
 
     return ok;
@@ -69,7 +69,8 @@ bool FeatureDetectorFPNode::init_matcher  ( const char *requested_name  )
         set_desc( desc.c_str() );
     }
     else{
-        err  = "<invalid matcher:'"; err += name; err += "'>";
+        string msg = "<invalid matcher:'"; msg += name; msg += "'>";
+        set_err(INVALID_ARGS, msg.c_str());
     }
     
     return ok;
@@ -87,7 +88,8 @@ bool FeatureDetectorFPNode::init_tracker( const char *requested_name  )
         set_desc( desc.c_str() );
     }
     else{
-        err  = "<invalid tracker:'"; err += name; err += "'>";
+        string msg = "<invalid tracker:'"; msg += name; msg += "'>";
+        set_err(INVALID_ARGS, msg.c_str());
     }
     
     return ok;
@@ -149,13 +151,15 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
     ok = !detector.empty();
     
     if (!ok){
-        if (val != nullptr){
-            err = "<invalid `algo`:'" ; err += val; err += "'>";
+        string msg;
+        if ( val != nullptr ){
+            msg = "<invalid `algo`:'" ; msg += val; msg += "'>";
         }
         else{
-            err = "<missing required option `algo`>";
+            msg = "<missing required option `algo`>";
         }
         
+        set_err( INVALID_ARGS, msg.c_str() );
         return false;
     }
     
@@ -172,7 +176,7 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
             ok = !obj_mat.empty();
         }
         catch( Exception e ){
-            err = e.what();
+            set_err( INVALID_ARGS, e.what() );
             ok  = false;
         }
     }
@@ -193,13 +197,15 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
 
     // we better have a valid tgt object
     if (!ok){
+        string msg;
         if (val != nullptr){
-            err = "<invalid `obj_path`:'" ; err += val; err += "'>";
+            msg  = "<invalid `obj_path`:'" ; msg += val; msg += "'>";
         }
         else{
-            err = "<missing required option `obj_path`>";
+            msg = "<missing required option `obj_path`>";
         }
         
+        set_err(INVALID_ARGS, msg.c_str());
         return false;
     }
     
@@ -212,19 +218,27 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
     }
     
     if (!ok){
-        err  = "<invalid matcher option:'"; err += val; err += "'>";
+        string msg = "<invalid matcher option:'"; msg += val; msg += "'>";
+        set_err(INVALID_ARGS, msg.c_str());
         return false;
     }
     
     // ........................................... scale
     val = get_val( argv, "scale" );
     if (val != nullptr){
+        
+        double last_scale = scale;
+        
         try{
             scale = stod( val );
         }
         catch( const invalid_argument &ia) {
-            err   = "<invalid scale argument:'"; err += ia.what(); err+= "'>";
-            scale = FeatureDetectorFPNode::SCALE_FACTOR;
+            
+            string msg = "<invalid argument:'"; msg += ia.what(); msg += "'>";
+            set_err( INVALID_ARGS, msg.c_str());
+            
+            // restore scale value
+            scale = last_scale;
         }
     }
     
@@ -463,16 +477,16 @@ bool FeatureDetectorFPNode::match()
         if( dist > max_dist ) max_dist = dist;
     }
         
-    //-- Draw only "good" matches (i.e. whose distance is less than 3*min_dist )
+    // keep only "good" matches (i.e. whose distance is less than 3*min_dist )
     std::vector< DMatch > good_matches;
     
     for( int ix = 0; ix < obj_descriptors.rows; ix++ )
         if( matches[ix].distance < 3 * min_dist )
             good_matches.push_back( matches[ix]);
 
+    // draw good matches
     if ( dbg ){
         
-        // draw good matches
         Mat draw_mat;
         base->copyTo( out );
         
@@ -486,7 +500,8 @@ bool FeatureDetectorFPNode::match()
         window_show( "matched", draw_mat );
     }
     
-    // filter "good" matches back to keypoints
+    // use "good" matches to define homography keypoints
+    
     size_t obj_kpts_num = obj_keypoints.size();
     size_t scn_kpts_num = scn_keypoints.size();
     
@@ -680,7 +695,7 @@ bool FeatureDetectorFPNode::track()
             }
         }
         catch(Exception e ){
-            err = e.what();
+            set_err( OCV_EXCEPTION , e.what());
             found = false;
         }
     }

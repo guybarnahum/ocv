@@ -25,6 +25,12 @@ VideoProcess::init()
     ErrorCaptureFailure         = make_err( "Video Process: capture failure" );
     ErrorSetupFrameProcessNode  = make_err( "Video Process: setup Frame-Process-Node failure" );
 
+    capture_width  = get( CAP_PROP_FRAME_WIDTH  );
+    capture_height = get( CAP_PROP_FRAME_HEIGHT );
+
+    LOG( LEVEL_INFO ) << "Video process " << capture_width << "x"
+                                          << capture_height;
+    
     set_abort_key( KEY_ESCAPE );
     
     ready = isOpened();
@@ -57,7 +63,7 @@ VideoProcess::print_desc()
             desc = " invalid fp! ";
         }
         
-        LOG( LEVEL_INFO ) << "(" << ix << ")" << desc;
+        LOG( LEVEL_INFO ) << "(" << ix << ") " << desc;
     }
 }
 
@@ -105,6 +111,8 @@ VideoProcess::setup( argv_t *args )
     // TODO: add video process args setup here..
     bool ok = (args != nullptr);
     
+    // setup capture dimentions..
+
     // emit errors
     if ( !ok ){
         string err_msg = "Error setting args for VideoProcess class";
@@ -153,10 +161,8 @@ VideoProcess::setup( FrameProcessNode *fpn, argv_t *args )
         err_msg  = "Error in setup of `";
         err_msg += fpn->get_name();
         err_msg += "` frame process node\n";
-        err_msg += fpn->get_err();
         
         set_err( ErrorSetupFrameProcessNode, err_msg );
-        
         ready = false;
     }
     
@@ -169,10 +175,10 @@ VideoProcess::setup( FrameProcessNode *fpn, argv_t *args )
 bool
 VideoProcess::process()
 {
-    bool done = false;
-    bool ok   = true;
+    bool not_done = true;
+    bool ok       = true;
     
-    while ( !done ) {
+    while ( not_done ) {
         
         *this >> in;
         
@@ -180,17 +186,10 @@ VideoProcess::process()
         
         for( auto it = processors.begin(); it != processors.end(); it++ ){
             FrameProcessNode *fp = *it;
-            ok = fp->process_one_frame();
-
-            if (!ok){
-                LOG( LEVEL_ERROR )  << fp->get_name()
-                                    << " error: "
-                                    << fp->get_err() ;
-                break;
-            }
+            if ( !( ok = fp->process_one_frame() ) ) break;
         }
         
-        done = !ok || process_key();
+        not_done = ok && process_key();
     }
     
     return ok;
@@ -208,8 +207,8 @@ VideoProcess::process_key( int key )
         string s_key; to_key( key, s_key );
 
         LOG( LEVEL_INFO ) <<  "key " << s_key << " pressed..";
-        if( key == abort_key ) return true;
+        if( key == abort_key ) return false;
     }
     
-    return false;
+    return true;
 }

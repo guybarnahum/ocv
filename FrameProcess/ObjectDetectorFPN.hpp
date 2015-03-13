@@ -77,7 +77,6 @@ public:
     {
         set_name( OBJECT_DETECTOR_NAME );
         set_desc( OBJECT_DETECTOR_DESC );
-        err = "";
         
         return true;
     }

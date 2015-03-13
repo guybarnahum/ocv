@@ -132,6 +132,7 @@ err_t FILE_IO;
 err_t INCOMPATIBLE;
 err_t NOT_READY;
 err_t OCV_FILE_STORAGE;
+err_t OCV_EXCEPTION;
     
 // force the following code to be executed first!
 static bool init_ok = init_err();
@@ -143,12 +144,13 @@ bool  init_err()
     
     // setup common errors
     OK               = make_err( "OK" );
-    UNKNOWN          = make_err( "Unknown" );
-    INVALID_ARGS     = make_err( "Inavlid args" );
-    FILE_IO          = make_err( "File io" );
-    INCOMPATIBLE     = make_err( "Incompatible" );
-    NOT_READY        = make_err( "Not ready" );
+    UNKNOWN          = make_err( "Unknown"         );
+    INVALID_ARGS     = make_err( "Inavlid args"    );
+    FILE_IO          = make_err( "File io"         );
+    INCOMPATIBLE     = make_err( "Incompatible"    );
+    NOT_READY        = make_err( "Not ready"       );
     OCV_FILE_STORAGE = make_err( "OCV FileStorage" );
+    OCV_EXCEPTION    = make_err( "OCV Exception"   );
     
     err_last = OK;
     return true;
@@ -204,6 +206,7 @@ void print_err( bool reset_errs )
     }
     
     if ( reset_errs ){
+        // TODO: I always forget if clear also deletes the pointers..
         err_msg.clear();
         err_last = OK;
     }

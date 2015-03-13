@@ -32,7 +32,8 @@ bool ObjectDetectorFPNode::setup( argv_t *argv )
     
     // ------------------------------- Required arguments
     const char *val;
-        
+    string msg = "";
+
     // ................................... obj_path option
     ok = ( nullptr != ( val = get_val( argv, "obj_path" ) ) );
 
@@ -42,7 +43,6 @@ bool ObjectDetectorFPNode::setup( argv_t *argv )
     }
     
     if ( ok ){
-
         cascade    = makePtr<CascadeClassifier>( obj_path );
         i_detector = makePtr<CascadeDetectorAdapter>( cascade );
         ok = !cascade.empty();
@@ -61,20 +61,24 @@ bool ObjectDetectorFPNode::setup( argv_t *argv )
     }
     
     if (!ok){
-        err += "could not construct detector from '";
-        err += obj_path;
-        err += "'";
+        msg += "could not construct detector from '";
+        msg += obj_path;
+        msg += "'";
     }
     
     // train the classifier
     if ( ok ){
          ok = detector->run();
+    
+        if (!ok){
+            msg += "failed to train detector with '";
+            msg += obj_path;
+            msg += "'";
+        }
     }
     
     if (!ok){
-        err += "failed to train detector with '";
-        err += obj_path;
-        err += "'";
+        set_err( INVALID_ARGS, msg.c_str() );
     }
     
     return ok;

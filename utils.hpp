@@ -233,6 +233,7 @@ extern err_t FILE_IO;
 extern err_t INCOMPATIBLE;
 extern err_t NOT_READY;
 extern err_t OCV_FILE_STORAGE;
+extern err_t OCV_EXCEPTION;
 
 bool  init_err();
 err_t make_err( string err_msg, size_t err_code = 0 );
