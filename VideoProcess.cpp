@@ -105,14 +105,67 @@ bool VideoProcess::setup( vector<argv_t> *v_argv )
     return ok;
 }
 
+// TODO: break even further to increase reuse..
+bool
+VideoProcess::setup( const char *key, const char *val )
+{
+    bool ok = false;
+    
+    if ( STR_EQ( key, "width" ) ){
+        int    tmp   = capture_width;
+        string sval = val;
+        try{
+            ok = true;
+            capture_width = stoi(val);
+        }
+        catch( exception const & e ){
+            capture_width = tmp;
+            ok = false;
+        }
+        if (ok){
+            set( CAP_PROP_FRAME_WIDTH, capture_width );
+            LOG( LEVEL_INFO ) << "Video Process set Width : " << capture_width;
+        }
+    }
+    else if ( STR_EQ( key, "height" ) ){
+        int    tmp  = capture_height;
+        string sval = val;
+        try{
+            ok = true;
+            capture_height = stoi(val);
+        }
+        catch( exception const & e ){
+            capture_height = tmp;
+            ok = false;
+        }
+        if (ok){
+            set( CAP_PROP_FRAME_HEIGHT, capture_height );
+            LOG( LEVEL_INFO ) << "Video Process set Height : " << capture_height;
+        }
+    }
+    
+    if (!ok){
+        string msg = "("; msg += key; msg += ","; msg += val; msg += ")";
+        set_err( INVALID_ARGS, msg.c_str() );
+    }
+    
+    return ok;
+}
+
 bool
 VideoProcess::setup( argv_t *args )
 {
     // TODO: add video process args setup here..
     bool ok = (args != nullptr);
     
-    // setup capture dimentions..
-
+    for( auto it = args->begin(); it != args->end() ; it++ ){
+        ok = setup( it->first, it->second );
+        if (!ok){
+            LOG( LEVEL_WARNING ) << "unknown arg <"
+                                 << it->first << "," << it->second;
+        }
+    }
+    
     // emit errors
     if ( !ok ){
         string err_msg = "Error setting args for VideoProcess class";

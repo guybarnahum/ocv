@@ -29,7 +29,6 @@ char *path_to_file( char*   path );
 
 void print_argv( int argc, const char * argv[] );
 
-
 // ======================================================== high resultion timer
 // TODO: FIXME: Do stuff in ms not nano sec: what is stupid about this, is
 // that it gives nano second values but takes miliseconds to call the routine
@@ -231,6 +230,7 @@ extern err_t UNKNOWN;
 extern err_t INVALID_ARGS;
 extern err_t FILE_IO;
 extern err_t INCOMPATIBLE;
+extern err_t XML_ERR;
 extern err_t NOT_READY;
 extern err_t OCV_FILE_STORAGE;
 extern err_t OCV_EXCEPTION;

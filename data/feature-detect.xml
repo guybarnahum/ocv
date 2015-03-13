@@ -5,7 +5,7 @@
   <_>
     <obj_path>"data/20 USD note.png"</obj_path>
     <window>OpenCV.3.0.0</window>
-    <dbg>""</dbg>
+    <dbg>true</dbg>
     <fpn>featureDetect</fpn>
   </_>
 </v_argv>

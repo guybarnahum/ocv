@@ -130,6 +130,7 @@ err_t UNKNOWN;
 err_t INVALID_ARGS;
 err_t FILE_IO;
 err_t INCOMPATIBLE;
+err_t XML_ERR;
 err_t NOT_READY;
 err_t OCV_FILE_STORAGE;
 err_t OCV_EXCEPTION;
@@ -148,6 +149,7 @@ bool  init_err()
     INVALID_ARGS     = make_err( "Inavlid args"    );
     FILE_IO          = make_err( "File io"         );
     INCOMPATIBLE     = make_err( "Incompatible"    );
+    XML_ERR          = make_err( "XML error"       );
     NOT_READY        = make_err( "Not ready"       );
     OCV_FILE_STORAGE = make_err( "OCV FileStorage" );
     OCV_EXCEPTION    = make_err( "OCV Exception"   );

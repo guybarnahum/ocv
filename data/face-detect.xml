@@ -3,9 +3,13 @@
     <xml_v_argv>"1.0"</xml_v_argv>
     <v_argv>
         <_>
+            <width>640</width>
+            <height>480</height>
+        </_>
+        <_>
             <obj_path>"data/lbpcascades/lbpcascade_frontalface.xml"</obj_path>
             <window>Faces</window>
-            <dbg>""</dbg>
+            <dbg>true</dbg>
             <fpn>objectDetect</fpn>
         </_>
     </v_argv>

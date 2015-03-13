@@ -32,7 +32,7 @@ const string cli_parser::keys =
 
 // ======================================================================== errs
 
-OcvError::err_t cli_parser::set_file_io_err( string path )
+err_t cli_parser::set_file_io_err( string path )
 {
     string err_msg;
     err_msg  = "Could not open file '" ;
@@ -42,7 +42,7 @@ OcvError::err_t cli_parser::set_file_io_err( string path )
     return set_err( FILE_IO, err_msg );
 }
 
-OcvError::err_t cli_parser::set_incopatible_err( string path )
+err_t cli_parser::set_incopatible_err( string path )
 {
     string err_msg;
     err_msg  = "Incompatible file format `";
@@ -55,6 +55,11 @@ OcvError::err_t cli_parser::set_incopatible_err( string path )
     return set_err( INCOMPATIBLE, err_msg );
 }
 
+err_t cli_parser::set_filenode_err( FileNode *fn, string msg )
+{
+    UNUSED(fn);
+    return set_err( XML_ERR, msg );
+}
 // ........................................................................ init
 
 bool cli_parser::init()
@@ -127,6 +132,37 @@ bool cli_parser::print_v_argv()
     return ok;
 }
 
+// .............................................................. import_one_arg
+bool cli_parser::import_one_arg( FileNode &fn, string &key, string &val )
+{
+    key = fn.isNamed()? fn.name() : "";
+    
+    // valid key?
+    bool ok = !key.empty();
+    if (!ok){
+        set_filenode_err( &fn, "argument key has to be set" );
+    }
+    
+    if ( ok ){
+        // convert by type to val string
+        switch( fn.type() ){
+                
+            // supported types
+            case FileNode::NONE : val = ""; break;
+            case FileNode::INT  : val = to_string((int   )(fn)); break;
+            case FileNode::FLOAT: val = to_string((double)(fn)); break;
+            case FileNode::STR  : val = (string)fn; break;
+
+            // unsupported types
+            default : ok   = false;
+                      set_filenode_err( &fn, "invalid value type" );
+                      break;
+        }
+    }
+    
+    return ok;
+}
+
 // ............................................................ import_from_file
 bool cli_parser::import_from_file( string path )
 {
@@ -157,7 +193,9 @@ bool cli_parser::import_from_file( string path )
     
     if ( ok ){
         argv_t args;
-    
+        string skey; const char *key;
+        string sval; const char *val;
+        
         LOG( LEVEL_DEBUG ) << "build from " << path ;
         
         FileNode fn = fs[ "v_argv" ];
@@ -179,16 +217,17 @@ bool cli_parser::import_from_file( string path )
                 for( auto it_keyval  = (*it_arg).begin();
                           it_keyval != (*it_arg).end  (); it_keyval++ ){
                     
-                    String name ((*it_keyval).name());
-                    String str  ( *it_keyval );
+                    FileNode fn = *it_keyval;
+                    ok = import_one_arg( fn, skey, sval );
                     
-                    const char *key = strdup( name.c_str() );
-                    const char *val = strdup( str.c_str () );
+                    if ( ok ){
+                        key = strdup( skey.c_str() );
+                        val = strdup( sval.c_str() );
+                        args[ key ] = val;
                     
-                    args[ key ] = val;
-                    
-                    LOG( LEVEL_DEBUG )
+                        LOG( LEVEL_DEBUG )
                         << "\t\t<"<< key << ">" << val << "</" << key << ">";
+                    }
                 }
             }
             

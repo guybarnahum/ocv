@@ -37,5 +37,6 @@ typedef map<const char *, const char *> argv_t;
 
 #define STR_EQ(s,t)          ( 0 == strcmp(s,t) )
 #define DBG_ASSERT(cond,msg) if (!( cond )){ LOG( LEVEL_WARNING ) << msg; }
+#define UNUSED(v)            (void)(v)
 
 #endif

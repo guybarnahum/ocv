@@ -31,8 +31,10 @@ private:
     bool            debug;
 
     // .................................................................... errs
-    OcvError::err_t     set_file_io_err( string path );
-    OcvError::err_t     set_incopatible_err( string version );
+    
+    err_t set_file_io_err    ( string   path );
+    err_t set_incopatible_err( string   version );
+    err_t set_filenode_err   ( FileNode *fn, string msg );
 
 public:
     
@@ -51,6 +53,8 @@ public:
     bool import_from_file( string path );
     bool export_to_file  ( string path );
     
+    bool import_one_arg( FileNode &fn, string &key, string &val );
+
     vector<argv_t> *get_v_argv(){ return &v_argv; }
     bool print_v_argv();
     

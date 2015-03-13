@@ -59,7 +59,8 @@ public:
     
     bool setup( vector<argv_t> *v_argv ); // setup everything
     bool setup( argv_t *args = nullptr ); // setup self only
-    
+    bool setup( const char *key, const char *val ); 
+
     // setup a frame process node into pipeline
     bool setup( const char*       name, argv_t *args = nullptr ); // fpn by name
     bool setup( FrameProcessNode *fpn , argv_t *args = nullptr ); // fpn
