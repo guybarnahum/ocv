@@ -42,6 +42,8 @@ Ptr<FeatureDetector> FeatureFactory::makeDetector( char * &name)
     else if STR_EQ( name, "brisk") fd = BRISK::create();
     
     // contrib - from xfeatures2d/nonfree.hpp
+    // these are not free for commercial use! Use ORB (FAST modified) for an
+    // open alternative
     else if STR_EQ( name, "sift" ) fd = SIFT::create();
     else if STR_EQ( name, "surf" ) fd = SURF::create(400);
     

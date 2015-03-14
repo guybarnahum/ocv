@@ -82,6 +82,19 @@ public:
     void        set_window(    const char *window );
     const char* get_window(){ return this->window; }
     
+    // .................................................. image processing utils
+    
+    bool gray( const Mat &mat, Mat &gray )
+    {
+        bool ok = true;
+        switch( mat.channels() ){
+            case 3 : cvtColor( mat, gray, CV_BGR2GRAY ); break;
+            case 4 : cvtColor( mat, gray, CV_BGRA2GRAY); break;
+            case 1 : gray = mat; break;
+            default: ok = false; break;
+        }
+        return ok;
+    }
     // ......................................................... virtual methods
     
     virtual bool process_one_frame();

@@ -18,7 +18,6 @@
 
 // ================================================= class FeatureDetectorFPNode
 
-
 class FeatureDetectorFPNode : public FrameProcessNode {
     
 private:
@@ -28,35 +27,43 @@ private:
     
     // ................................................................. members
     
+    // ......................... ocv algorithms
+    
     Ptr<FeatureDetector>     detector;
     Ptr<DescriptorExtractor> extractor;
     Ptr<DescriptorMatcher>   matcher;
     Ptr<Tracker>             tracker;
     
-    // settings
-    int              min_inliers; // when to reject match results
-    double           scale;       // scale down video frame
-    bool             do_track;    // TODO: Remove once tracking is working
+    // ............................... settings
+    int              min_inliers;
+    bool             enable_tracking;   // TODO: Remove once tracking is working
     
-    // object
+    // ................................. object
+    // obj values are calculated once
     string           obj_path;
+    Size             obj_size;
+    vector<Point2f>  obj_corners;
+
     Mat              obj_mat;
     vector<KeyPoint> obj_keypoints;
     Mat              obj_descriptors;
     
-    // scene or frame
+    // scene values are calculated per frame
     Mat              scn_mat;
     vector<KeyPoint> scn_keypoints;
     Mat              scn_descriptors;
-
+    
     // homography
     vector<Point2f> obj_good_kpts;
     vector<Point2f> scn_good_kpts;
     
+    Mat             H_rough;
+    Mat             H_refined;
+    
     // output : location of object in scene
-    // detector result
-    vector<Point2f> scn_poly;
+    vector<Point2f> pts_2d;
 
+    // .................................................................
     // tracking result
     typedef enum{
             NONE,
@@ -64,30 +71,11 @@ private:
             TRACKING,
     }state_e;
     
-    const char * to_string( state_e st)
-    {
-        const char *str;
-        
-        switch( st ){
-            default         : str = "UNKNOWN" ; break;
-            case NONE       : str = "NONE"    ; break;
-            case DETECTED   : str = "DETECTED"; break;
-            case TRACKING   : str = "TRACKING"; break;
-        }
-        
-        return str;
-    }
-    
-    state_e last_state;
     state_e state;
-    
-    void set_state( state_e st ){ last_state = state; state = st; }
-    bool state_changed(){ return last_state != state; }
     
     Rect2d  scn_rect;
     
-    // .................................................................. method
- //   bool init( const char *name){ return init( name, nullptr, nullptr ); }
+    // ................................................................. methods
     
     bool init( const char *dtct_name  = nullptr ,
                const char *xtrct_name = nullptr ,
@@ -98,16 +86,38 @@ private:
     bool init_extractor( const char *name = nullptr );
     bool init_matcher  ( const char *name = nullptr );
     bool init_tracker  ( const char *name = nullptr );
-    
-    bool is_valid_rect( vector<Point2f> &poly, double min_area = 0 );
-    bool find_homography();
+
+    bool matcher_train();
 
     // match .. detect .. track ..
     bool match();
+    bool knnmatch();
     bool detect();
     bool track();
+
+    bool is_valid_rect( vector<Point2f> &poly, double min_area = 0 );
+    bool good_keypoints( vector<DMatch> &matches );
+    bool find_homography();
+
+    // ............................ state
+    
+    void set_state( state_e st ){ state = st; }
+    const char * to_string( state_e st)
+    {
+        const char *str;
+        switch( st ){
+            default         : str = "UNKNOWN" ; break;
+            case NONE       : str = "NONE"    ; break;
+            case DETECTED   : str = "DETECTED"; break;
+            case TRACKING   : str = "TRACKING"; break;
+        }
+        
+        return str;
+    }
     
 public:
+    
+    // ................................................ constractor / destractor
     
     FeatureDetectorFPNode( char *name ):FrameProcessNode()
     { init( name, nullptr, nullptr ); }

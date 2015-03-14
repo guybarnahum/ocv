@@ -60,6 +60,10 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "data/face-detect.xml"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "data/feature-detect.xml"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
