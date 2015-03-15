@@ -16,26 +16,28 @@
 #include "ocvstd.hpp"
 #include "FrameProcessNode.hpp"
 
-#define HOUGHLINE_NAME "HoughLineFPNode"
-#define HOUGHLINE_DESC "Identify lines with HoughLines algorithm"
+#define HOUGHLINE_NAME "HoughFPNode"
+#define HOUGHLINE_DESC "Identify lines and circles with Hough algorithm"
 
 // ======================================================= class HoughLineFPNode
 
-class HoughLineFPNode : public FrameProcessNode {
+class HoughFPNode : public FrameProcessNode {
+    
+private:
+    
+    bool do_lines;
+    Mat  gray_mat;
     
 public:
     
     vector<Vec4i> lines;
-
-     HoughLineFPNode():FrameProcessNode()
-     {
-        set_name( HOUGHLINE_NAME );
-        set_desc( HOUGHLINE_DESC );
-     }
+    vector<Vec3f> circles;
     
-    ~HoughLineFPNode(){}
+     HoughFPNode();
+    ~HoughFPNode(){}
     
     // ....................................................... overriden methods
+    bool process_key( int key );
     bool process_one_frame();
 };
 

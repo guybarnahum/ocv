@@ -238,7 +238,13 @@ VideoProcess::process()
         // invoke all frame processor nodes in chain
         
         for( auto it = processors.begin(); it != processors.end(); it++ ){
+            
             FrameProcessNode *fp = *it;
+            
+            // process pressed keys
+            fp->process_key( get_key() );
+            
+            // process frame
             if ( !( ok = fp->process_one_frame() ) ) break;
         }
         
@@ -253,7 +259,7 @@ bool
 VideoProcess::process_key( int key )
 {
     if ( key < 0 ){
-        key = waitKey(1);
+         key = pressed_key = waitKey(1);
     }
     
     if ( key > 0 ){

@@ -8,9 +8,10 @@
         <dbg>true</dbg>
       </_>
       <_>
-        <fpn>houghLine</fpn>
-        <window>HoughLines</window>
+        <fpn>hough</fpn>
+        <window>Hough</window>
         <dbg>true</dbg>
+        <method>lines</method>
       </_>
     </v_argv>
 </opencv_storage>

@@ -17,6 +17,7 @@
 #include <time.h>
 
 // ........................................................................ main
+//  LOG::reporting_level() = LEVEL_DEBUG;
 
 int
 main( int argc, const char * argv[] )

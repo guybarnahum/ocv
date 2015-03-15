@@ -11,7 +11,7 @@
 // ==================================================================== includes
 
 #include "FrameProcessNodeFactory.hpp"
-#include "HoughLineFPNode.hpp"
+#include "HoughFPNode.hpp"
 #include "CannyFPNode.hpp"
 #include "FeatureDetectorFPN.hpp"
 #include "ObjectDetectorFPN.hpp"
@@ -20,12 +20,13 @@
 
 // ........................................................................ make
 // make by class name
+
 FrameProcessNode *FrameProcessNodeFactory::make( const char* name )
 {
     FrameProcessNode *fp = nullptr;
 
-    if ( STR_EQ( name, "houghLine"   )  )
-        fp = (FrameProcessNode *) new HoughLineFPNode();
+    if ( STR_EQ( name, "hough"   )  )
+        fp = (FrameProcessNode *) new HoughFPNode();
     else
     if ( STR_EQ( name, "canny"       )  )
         fp = (FrameProcessNode *) new CannyFPNode();

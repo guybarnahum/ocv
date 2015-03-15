@@ -106,16 +106,17 @@ bool FeatureDetectorFPNode::init( const char *dtct_name  ,
     if ( ok ) ok = init_matcher  ( match_name );
     
     // TODO: tracking is not working yet, set to true for debugging
-    enable_tracking = false;
+         enable_tracking = false;
     if ( enable_tracking && ok )
               ok = init_tracker  ( trckr_name );
     
     //  args may override these default settings
     min_inliers = FeatureDetectorFPNode::MIN_INLINERS_DEFAULT;
+    do_knn_match        = false;
+    do_refine_homography= false;
     
     // state of rect -- none, detect, then track, repeat as needed
-    state        = NONE;
-    do_knn_match = false;
+    state               = NONE ;
     
     // prepare object location
     pts.push_back( Point( 0, 0 ));
@@ -246,13 +247,27 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
     
     if ( ok ) ok = get_val_bool( argv, "knn_match", do_knn_match );
     if (!ok){
-        string msg = "<knn_match expects boolean value>";
+        string msg = "<'knn_match' expects boolean value>";
         set_err(INVALID_ARGS, msg );
         return false;
     }
     else{
         LOG( LEVEL_INFO ) << "Using "
                           << ( do_knn_match? "knn_match" : "normal match");
+    }
+    
+    // ............................... refine homography?
+    
+    if ( ok ) ok = get_val_bool( argv, "refine", do_refine_homography );
+    if (!ok){
+        string msg = "<'refine' expects boolean value>";
+        set_err(INVALID_ARGS, msg );
+        return false;
+    }
+    else{
+        LOG( LEVEL_INFO ) << "Using "
+        << ( do_refine_homography? "refined" : "rough")
+        << " homography";
     }
     
     // ...................................... min_inliers

@@ -37,6 +37,7 @@ private:
     int              min_inliers;
     bool             enable_tracking;   // TODO: Remove once tracking is working
     bool             do_knn_match;
+    bool             do_refine_homography;
     
     // ................................. object
     // obj values are calculated once

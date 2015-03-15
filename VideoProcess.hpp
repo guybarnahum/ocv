@@ -28,6 +28,7 @@ public:
     argv_t  args;
     bool    ready;
     int     abort_key;
+    int     pressed_key;
     
     Mat     in;
     vector<Vec4i> lines;
@@ -70,7 +71,8 @@ public:
     void print_desc();
     bool process();
     virtual bool process_key( int key = -1 );
-
+    int get_key(){ return pressed_key; }
+    
     // ....................................................... getters / setters
     
     int  set_abort_key( int key ){ int k=abort_key; abort_key=key; return k; }

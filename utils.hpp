@@ -153,7 +153,7 @@ Log<T>::~Log()
 template <typename T>
 TLogLevel& Log<T>::reporting_level()
 {
-    static TLogLevel reporting_level = LEVEL_DEV;
+    static TLogLevel reporting_level = LEVEL_INFO;
     return reporting_level;
 }
 

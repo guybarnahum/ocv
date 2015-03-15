@@ -220,6 +220,13 @@ bool FrameProcessNode::process_one_frame()
     return true;
 }
 
+// ................................................................. process_key
+bool FrameProcessNode::process_key( int key )
+{
+    UNUSED( key );
+    return true;
+}
+
 // .................................................................. print_desc
 // print desc prints if no out_str is provided. Otherwise it replaces "\n"
 // with provided delimiter into the out_str.

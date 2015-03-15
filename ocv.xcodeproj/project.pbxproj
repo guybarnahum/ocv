@@ -11,7 +11,7 @@
 		6426E2251AAB8100007F021E /* black diamond.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E21E1AAB80C2007F021E /* black diamond.png */; };
 		6426E2261AAB8100007F021E /* feature-detect.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E21F1AAB80C2007F021E /* feature-detect.xml */; };
 		6426E2271AAB8100007F021E /* flor.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2201AAB80C2007F021E /* flor.jpg */; };
-		6426E2281AAB8100007F021E /* hough-lines.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2211AAB80C2007F021E /* hough-lines.xml */; };
+		6426E2281AAB8100007F021E /* hough.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2211AAB80C2007F021E /* hough.xml */; };
 		6426E2291AAB8100007F021E /* iittala_owl.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2221AAB80C2007F021E /* iittala_owl.jpg */; };
 		6426E22A1AAB8100007F021E /* space monkey.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2231AAB80C2007F021E /* space monkey.jpg */; };
 		6426E2301AAFAF34007F021E /* libopencv_tracking.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6426E22F1AAFAF34007F021E /* libopencv_tracking.3.0.0.dylib */; };
@@ -29,7 +29,7 @@
 		646498E21A903BB9000C07E1 /* libopencv_imgproc.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 646498E01A903BB9000C07E1 /* libopencv_imgproc.3.0.0.dylib */; };
 		6470A9F81A956576009B4139 /* FrameProcessNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470A9E51A956576009B4139 /* FrameProcessNode.cpp */; };
 		6470A9F91A956576009B4139 /* FrameProcessNodeFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470A9E71A956576009B4139 /* FrameProcessNodeFactory.cpp */; };
-		6470A9FA1A956576009B4139 /* HoughLineFPNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470A9E91A956576009B4139 /* HoughLineFPNode.cpp */; };
+		6470A9FA1A956576009B4139 /* HoughFPNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470A9E91A956576009B4139 /* HoughFPNode.cpp */; };
 		6470A9FF1A956576009B4139 /* VideoProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470A9F41A956576009B4139 /* VideoProcess.cpp */; };
 		6470AA011A956576009B4139 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470A9F71A956576009B4139 /* main.cpp */; };
 		6470AA041A956601009B4139 /* CannyFPNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470AA021A956601009B4139 /* CannyFPNode.cpp */; };
@@ -42,6 +42,7 @@
 		64B853291A9C31DA00A49E62 /* libopencv_ccalib.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B853271A9C31DA00A49E62 /* libopencv_ccalib.3.0.0.dylib */; };
 		64B8532C1A9C320500A49E62 /* libopencv_objdetect.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8532A1A9C320500A49E62 /* libopencv_objdetect.3.0.0.dylib */; };
 		64B8532D1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8532B1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib */; };
+		64D514CD1AB5418F00518E18 /* Calibrate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64D514CB1AB5418F00518E18 /* Calibrate.cpp */; };
 		64E835261A9FA0D8001C5256 /* FeatureFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64E835241A9FA0D7001C5256 /* FeatureFactory.cpp */; };
 		64E835291AA7C23F001C5256 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64E835281AA7C23F001C5256 /* utils.cpp */; };
 /* End PBXBuildFile section */
@@ -59,7 +60,7 @@
 				6426E2251AAB8100007F021E /* black diamond.png in CopyFiles */,
 				6426E2261AAB8100007F021E /* feature-detect.xml in CopyFiles */,
 				6426E2271AAB8100007F021E /* flor.jpg in CopyFiles */,
-				6426E2281AAB8100007F021E /* hough-lines.xml in CopyFiles */,
+				6426E2281AAB8100007F021E /* hough.xml in CopyFiles */,
 				6426E2291AAB8100007F021E /* iittala_owl.jpg in CopyFiles */,
 				6426E22A1AAB8100007F021E /* space monkey.jpg in CopyFiles */,
 			);
@@ -72,7 +73,7 @@
 		6426E21E1AAB80C2007F021E /* black diamond.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black diamond.png"; sourceTree = "<group>"; };
 		6426E21F1AAB80C2007F021E /* feature-detect.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "feature-detect.xml"; sourceTree = "<group>"; };
 		6426E2201AAB80C2007F021E /* flor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = flor.jpg; sourceTree = "<group>"; };
-		6426E2211AAB80C2007F021E /* hough-lines.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "hough-lines.xml"; sourceTree = "<group>"; };
+		6426E2211AAB80C2007F021E /* hough.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = hough.xml; sourceTree = "<group>"; };
 		6426E2221AAB80C2007F021E /* iittala_owl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iittala_owl.jpg; sourceTree = "<group>"; };
 		6426E2231AAB80C2007F021E /* space monkey.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "space monkey.jpg"; sourceTree = "<group>"; };
 		6426E22B1AABE601007F021E /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -101,9 +102,8 @@
 		6470A9E61A956576009B4139 /* FrameProcessNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FrameProcessNode.hpp; sourceTree = "<group>"; };
 		6470A9E71A956576009B4139 /* FrameProcessNodeFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameProcessNodeFactory.cpp; sourceTree = "<group>"; };
 		6470A9E81A956576009B4139 /* FrameProcessNodeFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FrameProcessNodeFactory.hpp; sourceTree = "<group>"; };
-		6470A9E91A956576009B4139 /* HoughLineFPNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HoughLineFPNode.cpp; sourceTree = "<group>"; };
-		6470A9EA1A956576009B4139 /* HoughLineFPNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HoughLineFPNode.hpp; sourceTree = "<group>"; };
-		6470A9F21A956576009B4139 /* graphcut.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = graphcut.cpp; sourceTree = "<group>"; };
+		6470A9E91A956576009B4139 /* HoughFPNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HoughFPNode.cpp; sourceTree = "<group>"; };
+		6470A9EA1A956576009B4139 /* HoughFPNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HoughFPNode.hpp; sourceTree = "<group>"; };
 		6470A9F41A956576009B4139 /* VideoProcess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoProcess.cpp; sourceTree = "<group>"; };
 		6470A9F61A956576009B4139 /* VideoProcess.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VideoProcess.hpp; sourceTree = "<group>"; };
 		6470A9F71A956576009B4139 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -122,6 +122,8 @@
 		64B853271A9C31DA00A49E62 /* libopencv_ccalib.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_ccalib.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_ccalib.3.0.0.dylib; sourceTree = "<group>"; };
 		64B8532A1A9C320500A49E62 /* libopencv_objdetect.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_objdetect.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_objdetect.3.0.0.dylib; sourceTree = "<group>"; };
 		64B8532B1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_optflow.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_optflow.3.0.0.dylib; sourceTree = "<group>"; };
+		64D514CB1AB5418F00518E18 /* Calibrate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Calibrate.cpp; sourceTree = "<group>"; };
+		64D514CC1AB5418F00518E18 /* Calibrate.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Calibrate.hpp; sourceTree = "<group>"; };
 		64E835241A9FA0D7001C5256 /* FeatureFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FeatureFactory.cpp; sourceTree = "<group>"; };
 		64E835251A9FA0D8001C5256 /* FeatureFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FeatureFactory.hpp; sourceTree = "<group>"; };
 		64E835271A9FA519001C5256 /* ocvstd.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ocvstd.hpp; sourceTree = SOURCE_ROOT; };
@@ -162,7 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				6426E2371AB256A3007F021E /* lbpcascades */,
-				6426E2211AAB80C2007F021E /* hough-lines.xml */,
+				6426E2211AAB80C2007F021E /* hough.xml */,
 				6426E21F1AAB80C2007F021E /* feature-detect.xml */,
 				6426E2361AB255EA007F021E /* face-detect.xml */,
 				6426E21D1AAB80C2007F021E /* 20 USD note.png */,
@@ -189,9 +191,10 @@
 			children = (
 				6426E21C1AAB80C2007F021E /* data */,
 				6470A9E41A956576009B4139 /* FrameProcess */,
-				6470A9F11A956576009B4139 /* ref-only */,
 				6470A9F61A956576009B4139 /* VideoProcess.hpp */,
 				6470A9F41A956576009B4139 /* VideoProcess.cpp */,
+				64D514CC1AB5418F00518E18 /* Calibrate.hpp */,
+				64D514CB1AB5418F00518E18 /* Calibrate.cpp */,
 				64E835271A9FA519001C5256 /* ocvstd.hpp */,
 				6426E22D1AAD60E3007F021E /* ratio_io */,
 				6426E22E1AAD60E3007F021E /* chrono_io */,
@@ -250,22 +253,14 @@
 				6470A9E71A956576009B4139 /* FrameProcessNodeFactory.cpp */,
 				6470AA031A956601009B4139 /* CannyFPNode.hpp */,
 				6470AA021A956601009B4139 /* CannyFPNode.cpp */,
-				6470A9EA1A956576009B4139 /* HoughLineFPNode.hpp */,
-				6470A9E91A956576009B4139 /* HoughLineFPNode.cpp */,
+				6470A9EA1A956576009B4139 /* HoughFPNode.hpp */,
+				6470A9E91A956576009B4139 /* HoughFPNode.cpp */,
 				64B8531C1A99505100A49E62 /* FeatureDetectorFPN.hpp */,
 				64B8531B1A99505100A49E62 /* FeatureDetectorFPN.cpp */,
 				6426E2341AB246FB007F021E /* ObjectDetectorFPN.hpp */,
 				6426E2331AB246FB007F021E /* ObjectDetectorFPN.cpp */,
 			);
 			path = FrameProcess;
-			sourceTree = "<group>";
-		};
-		6470A9F11A956576009B4139 /* ref-only */ = {
-			isa = PBXGroup;
-			children = (
-				6470A9F21A956576009B4139 /* graphcut.cpp */,
-			);
-			path = "ref-only";
 			sourceTree = "<group>";
 		};
 		64E8352A1AA8049E001C5256 /* data */ = {
@@ -340,9 +335,10 @@
 				64B8531D1A99505100A49E62 /* FeatureDetectorFPN.cpp in Sources */,
 				64E835261A9FA0D8001C5256 /* FeatureFactory.cpp in Sources */,
 				6470AA041A956601009B4139 /* CannyFPNode.cpp in Sources */,
-				6470A9FA1A956576009B4139 /* HoughLineFPNode.cpp in Sources */,
+				6470A9FA1A956576009B4139 /* HoughFPNode.cpp in Sources */,
 				6470A9F81A956576009B4139 /* FrameProcessNode.cpp in Sources */,
 				64E835291AA7C23F001C5256 /* utils.cpp in Sources */,
+				64D514CD1AB5418F00518E18 /* Calibrate.cpp in Sources */,
 				6470AA011A956576009B4139 /* main.cpp in Sources */,
 				644F534B1AAA98F80035DD91 /* cli.cpp in Sources */,
 				6426E2351AB246FB007F021E /* ObjectDetectorFPN.cpp in Sources */,

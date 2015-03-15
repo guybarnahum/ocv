@@ -107,6 +107,7 @@ public:
             bool select_focus(){ return select_focus( found_objects, focus ); }
     
     virtual bool process_one_frame();
+    virtual bool process_key( int key );
     virtual bool setup( argv_t *argv );
 };
 
