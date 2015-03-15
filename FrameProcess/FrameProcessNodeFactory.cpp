@@ -16,6 +16,7 @@
 #include "FeatureDetectorFPN.hpp"
 #include "ObjectDetectorFPN.hpp"
 #include "CcalibFPN.hpp"
+#include "FindContour.hpp"
 
 // ========================================================= FrameProcessFactory
 
@@ -42,6 +43,9 @@ FrameProcessNode *FrameProcessNodeFactory::make( const char* name )
     else
     if ( STR_EQ( name, "ccalib" ) )
         fp = (FrameProcessNode *) new CcalibFPNode();
+    if ( STR_EQ( name, "contour"   )  )
+        fp = (FrameProcessNode *) new FindContour();
+    else
     if ( STR_EQ( name, "nullProcess" )  ){
         fp = new FrameProcessNode();
     }
