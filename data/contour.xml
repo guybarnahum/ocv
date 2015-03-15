@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<opencv_storage>
+    <xml_v_argv>"1.0"</xml_v_argv>
+    <v_argv>
+        <_>
+            <fpn>canny</fpn>
+            <window>Canny</window>
+            <dbg>true</dbg>
+        </_>
+        <_>
+            <fpn>contour</fpn>
+            <window>Contours</window>
+            <dbg>true</dbg>
+            <method>lines</method>
+        </_>
+    </v_argv>
+</opencv_storage>

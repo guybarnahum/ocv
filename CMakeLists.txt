@@ -33,6 +33,8 @@ set(SOURCE_FILES
     FrameProcess/FrameProcessNodeFactory.hpp
     FrameProcess/HoughFPNode.cpp
     FrameProcess/HoughFPNode.hpp
+    FrameProcess/FindContour.hpp
+    FrameProcess/FindContour.cpp
     FrameProcess/ObjectDetectorFPN.cpp
     FrameProcess/ObjectDetectorFPN.hpp
     main.cpp
