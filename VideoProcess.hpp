@@ -27,7 +27,7 @@ public:
     // ................................................................. members
     argv_t  args;
     bool    ready;
-    int     abort_key;
+    string  abort_keys;
     int     pressed_key;
     
     Mat     in;
@@ -75,8 +75,8 @@ public:
     
     // ....................................................... getters / setters
     
-    int  set_abort_key( int key ){ int k=abort_key; abort_key=key; return k; }
-    int  get_abort_key(){ return  abort_key; }
+    void    set_abort_key( char ch ){ abort_keys += ch; }
+    string  get_abort_key(){ return  abort_keys; }
 };
 
 #endif /* defined(ocv_VideoProcess_hpp) */

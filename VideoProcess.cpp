@@ -30,8 +30,9 @@ VideoProcess::init()
 
     LOG( LEVEL_INFO ) << "Video process " << capture_width << "x"
                                           << capture_height;
-    
     set_abort_key( KEY_ESCAPE );
+    set_abort_key( 'q' );
+    set_abort_key( 'Q' );
     
     ready = isOpened();
     
@@ -124,7 +125,8 @@ VideoProcess::setup( const char *key, const char *val )
         }
         if (ok){
             set( CAP_PROP_FRAME_WIDTH, capture_width );
-            LOG( LEVEL_INFO ) << "Video Process set Width : " << capture_width;
+            LOG( LEVEL_INFO ) << "Video Process set Width : "
+                              << capture_width;
         }
     }
     else if ( STR_EQ( key, "height" ) ){
@@ -140,7 +142,8 @@ VideoProcess::setup( const char *key, const char *val )
         }
         if (ok){
             set( CAP_PROP_FRAME_HEIGHT, capture_height );
-            LOG( LEVEL_INFO ) << "Video Process set Height : " << capture_height;
+            LOG( LEVEL_INFO ) << "Video Process set Height : "
+                              << capture_height;
         }
     }
     
@@ -151,6 +154,8 @@ VideoProcess::setup( const char *key, const char *val )
     
     return ok;
 }
+
+// ....................................................................... setup
 
 bool
 VideoProcess::setup( argv_t *args )
@@ -179,8 +184,8 @@ VideoProcess::setup( argv_t *args )
 bool
 VideoProcess::setup( const char* name, argv_t *args )
 {
-    FrameProcessNode *fpn = name? FrameProcessNodeFactory::make( name ) : nullptr;
-    bool ok = fpn? setup( fpn, args ) : setup( args );
+    FrameProcessNode *fpn = FrameProcessNodeFactory::make( name );
+    bool   ok = fpn? setup( fpn, args ) : setup( args );
     return ok;
 }
 
@@ -263,10 +268,11 @@ VideoProcess::process_key( int key )
     }
     
     if ( key > 0 ){
+        char ch = (char)( key & 0xFF);
         string s_key; to_key( key, s_key );
 
         LOG( LEVEL_INFO ) <<  "key " << s_key << " pressed..";
-        if( key == abort_key ) return false;
+        if( abort_keys.find( ch ) != string::npos ) return false;
     }
     
     return true;

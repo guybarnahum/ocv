@@ -36,7 +36,7 @@ typedef map<const char *, const char *> argv_t;
 // ====================================================================== macros
 
 #define STR_EQ(s,t)          ( 0 == strcmp(s,t) )
-#define DBG_ASSERT(cond,msg) if (!( cond )){ LOG( LEVEL_WARNING ) << msg; }
+#define OCV_ASSERT           CV_Assert
 #define UNUSED(v)            (void)(v)
 
 #endif

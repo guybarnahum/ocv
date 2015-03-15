@@ -64,11 +64,15 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "data/hough.xml"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "data/feature-detect.xml"
             isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "data/camera_cal.xml"
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "&quot;data/5 USD note.png&quot;"

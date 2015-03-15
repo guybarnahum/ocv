@@ -8,7 +8,7 @@
     </_>
     <_>
         <obj_path>"data/20 USD note.png"</obj_path>
-        <window>OpenCV.3.0.0</window>
+        <window>"20 USD detect"</window>
         <fpn>featureDetect</fpn>
         <dbg>true</dbg>
         <knn_match>true</knn_match>

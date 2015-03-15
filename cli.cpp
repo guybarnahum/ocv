@@ -57,7 +57,12 @@ err_t cli_parser::set_incopatible_err( string path )
 
 err_t cli_parser::set_filenode_err( FileNode *fn, string msg )
 {
-    UNUSED(fn);
+    uchar buff[ 256 ];
+    fn->readRaw("", buff, sizeof(buff) );
+    msg += "line '";
+    msg += (const char *)buff;
+    msg += "'";
+    
     return set_err( XML_ERR, msg );
 }
 // ........................................................................ init

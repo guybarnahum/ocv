@@ -18,8 +18,8 @@
 
 HoughFPNode::HoughFPNode():FrameProcessNode()
 {
-    set_name( HOUGHLINE_NAME );
-    set_desc( HOUGHLINE_DESC );
+    set_name( HOUGH_NAME );
+    set_desc( HOUGH_DESC );
     
     do_lines = true;
 }

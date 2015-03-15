@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<opencv_storage>
+    <xml_v_argv>"1.0"</xml_v_argv>
+    <v_argv>
+        <_>
+            <width>640</width>
+            <height>480</height>
+        </_>
+        <_>
+            <fpn>ccalib</fpn>
+            <board_size>7</board_size>
+            <square_size>2</square_size>
+            <dbg>true</dbg>
+            <out>"./cam_calib.xml"</out>
+            <window>"Chess Board Camera Calibration"</window>
+        </_>
+    </v_argv>
+</opencv_storage>

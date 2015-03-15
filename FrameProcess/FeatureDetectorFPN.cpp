@@ -133,7 +133,9 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
 {
     bool ok = (argv != nullptr );
     if (!ok){
-        DBG_ASSERT( false, "no setup argv provided for " << get_name() );
+        string msg = "no setup argv provided for ";
+        msg += get_name();
+        set_err( INVALID_ARGS, msg );
         return false;
     }
     
@@ -141,7 +143,6 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
     // do this first so we have `dbg` option set, etc
     
     ok = FrameProcessNode::setup( argv );
-    DBG_ASSERT( ok, "invalid argv provided for " << get_name() );
     if (!ok) return false;
     
     // ------------------------------- Required arguments
@@ -401,7 +402,7 @@ bool FeatureDetectorFPNode::match()
         matcher->match( scn_descriptors, matches );
     }
     catch(cv::Exception e){
-        DBG_ASSERT(false, e.what() );
+        LOG( LEVEL_ERROR ) << e.what();
         return false;
     }
     
@@ -514,11 +515,8 @@ bool FeatureDetectorFPNode::matched_keypoints()
         size_t scn_ix = matches[ ix ].queryIdx;
     
         // be carefull with indexs
-        DBG_ASSERT( scn_ix < scn_kpts_num,
-                   "invalid scn_ix(" << scn_ix << ") max:" << scn_kpts_num );
-        
-        DBG_ASSERT( obj_ix < obj_kpts_num,
-                   "invalid obj_ix(" << obj_ix << ") max:" << obj_kpts_num );
+        OCV_ASSERT( scn_ix < scn_kpts_num );
+        OCV_ASSERT( obj_ix < obj_kpts_num );
         
         bool valid_pt = (obj_ix < obj_kpts_num) && ( scn_ix < scn_kpts_num );
     

@@ -9,13 +9,45 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FrameProcess/FeatureDetectorFPN.cpp"
-            timestampString = "448084459.202427"
+            filePath = "FrameProcess/CcalibFPN.cpp"
+            timestampString = "448155072.159273"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "546"
-            endingLineNumber = "546"
-            landmarkName = "FeatureDetectorFPNode::find_homography()"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "CcalibFPNode::detect_chessboard( Mat &amp;in, bool use )"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FrameProcess/CcalibFPN.cpp"
+            timestampString = "448155146.731673"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "CcalibFPNode::detect_chessboard( Mat &amp;in, bool use )"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FrameProcess/CcalibFPN.cpp"
+            timestampString = "448155300.161141"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "CcalibFPNode::detect_chessboard( Mat &amp;in, bool use )"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
