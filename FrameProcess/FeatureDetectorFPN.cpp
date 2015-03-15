@@ -114,7 +114,8 @@ bool FeatureDetectorFPNode::init( const char *dtct_name  ,
     min_inliers = FeatureDetectorFPNode::MIN_INLINERS_DEFAULT;
     
     // state of rect -- none, detect, then track, repeat as needed
-    state      = NONE;
+    state        = NONE;
+    do_knn_match = false;
     
     // prepare object location
     pts_2d.push_back( Point2f( 0, 0 ));
@@ -163,7 +164,7 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
             msg = "<missing required option `algo`>";
         }
         
-        set_err( INVALID_ARGS, msg.c_str() );
+        set_err( INVALID_ARGS, msg );
         return false;
     }
     
@@ -219,7 +220,7 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
             msg = "<missing required option `obj_path`>";
         }
         
-        set_err(INVALID_ARGS, msg.c_str());
+        set_err(INVALID_ARGS, msg );
         return false;
     }
     
@@ -233,12 +234,33 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
     
     if (!ok){
         string msg = "<invalid matcher option:'"; msg += val; msg += "'>";
-        set_err(INVALID_ARGS, msg.c_str());
+        set_err(INVALID_ARGS, msg );
         return false;
     }
     
+    // .................................. do knn matcher?
+    
+    if ( ok ) ok = get_val_bool( argv, "knn_match", do_knn_match );
+    if (!ok){
+        string msg = "<knn_match expects boolean value>";
+        set_err(INVALID_ARGS, msg );
+        return false;
+    }
+    else{
+        LOG( LEVEL_INFO ) << "Using "
+                          << ( do_knn_match? "knn_match" : "normal match");
+    }
+    
     // ...................................... min_inliers
-    // TODO: add support for min_inliers
+    if ( ok ) ok = get_val_int( argv, "inliers"  , min_inliers  );
+    if (!ok){
+        string msg = "<inliers expects int value>";
+        set_err(INVALID_ARGS, msg );
+        return false;
+    }
+    else{
+        LOG( LEVEL_INFO ) << "Inliers:" << min_inliers;
+    }
     
     return ok;
 }
@@ -276,18 +298,22 @@ bool FeatureDetectorFPNode::matcher_train()
     return true;
 }
 
-bool FeatureDetectorFPNode::knnmatch()
+// ................................................................... knn_match
+bool FeatureDetectorFPNode::knn_match()
 {
-    // matches
     vector<vector<DMatch>> knn_matches;
-    vector<DMatch>         good_matches;
     
-    // To avoid NaN's when best match has zero distance we will use inversed ratio.
+    // To avoid NaN's when best match has 0 distance we will use inversed ratio
+    // we assume that while best match can be zero, while better match is
+    // allways non zero!
     const float min_ratio = 1.f / 1.5f;
         
     // KNN match will return 2 nearest matches for each query descriptor
     matcher->knnMatch( scn_descriptors, knn_matches, 2);
-        
+ 
+    // pick the best matches from knn_matches
+    matches.clear();
+
     for (size_t ix=0; ix< knn_matches.size(); ix++){
         
         const cv::DMatch& best_match   = knn_matches[ix][0];
@@ -298,7 +324,7 @@ bool FeatureDetectorFPNode::knnmatch()
         // Pass only matches where distance ratio between
         // nearest matches is greater than 1.5 (distinct criteria)
         if ( ratio < min_ratio){
-            good_matches.push_back( best_match);
+            matches.push_back( best_match);
         }
     }
 
@@ -309,28 +335,28 @@ bool FeatureDetectorFPNode::knnmatch()
         base->copyTo( out );
         
         try{
-            drawMatches( obj_mat, obj_keypoints, out, scn_keypoints, good_matches,
-                         draw_mat,
+            drawMatches( out, scn_keypoints, obj_mat, obj_keypoints,
+                        matches, draw_mat,
                         Scalar::all(-1), Scalar::all(-1),
                         vector<char>() ,
+                        DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS |
                         DrawMatchesFlags::DRAW_RICH_KEYPOINTS    );
             
             window_show( "matched", draw_mat );
         }
         catch( Exception e ){
-        //    LOG( LEVEL_WARNING ) << e.what();
+            LOG( LEVEL_WARNING ) << e.what();
         }
     }
 
-    // transcode matches into keypoints for homography
-    bool   ok = good_keypoints( good_matches );
+    bool   ok = matches.size() > min_inliers;
     return ok;
 }
 // ....................................................................... match
 
 bool FeatureDetectorFPNode::match()
 {
-    vector<DMatch> matches;
+    matches.clear();
     
     try{
         matcher->match( scn_descriptors, matches );
@@ -358,6 +384,8 @@ bool FeatureDetectorFPNode::match()
         if( matches[ ix ].distance < 3 * min_dist )
             good_matches.push_back( matches[ix]);
     
+    matches.swap(good_matches);
+    
     // draw matches?
     if ( dbg ){
         
@@ -365,22 +393,21 @@ bool FeatureDetectorFPNode::match()
         base->copyTo( out );
         try{
             
-            drawMatches( obj_mat, obj_keypoints, out, scn_keypoints, good_matches,
-                        draw_mat,
-                        Scalar::all(-1), Scalar::all(-1),
-                        vector<char>() ,
-                        DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS |
-                        DrawMatchesFlags::DRAW_RICH_KEYPOINTS    );
+            drawMatches( out, scn_keypoints, obj_mat, obj_keypoints,
+                         matches, draw_mat,
+                         Scalar::all(-1), Scalar::all(-1),
+                         vector<char>() ,
+                         DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS |
+                         DrawMatchesFlags::DRAW_RICH_KEYPOINTS    );
             
             window_show( "matched", draw_mat );
         }
         catch( Exception e ){
-            // LOG( LEVEL_WARNING ) << e.what();
+            LOG( LEVEL_WARNING ) << e.what();
         }
     }
-    
-    // transcode matches into keypoints for homography
-    bool   ok = good_keypoints( good_matches );
+
+    bool   ok = matches.size() > min_inliers;
     return ok;
 }
 
@@ -421,7 +448,9 @@ bool FeatureDetectorFPNode::is_valid_rect( vector<Point2f> &poly,
     return ok;
 }
 
-bool FeatureDetectorFPNode::good_keypoints( vector<DMatch> &matches )
+// .......................................................... matched_keypoints
+
+bool FeatureDetectorFPNode::matched_keypoints()
 {
     // use matches to define homography keypoints
     
@@ -460,7 +489,8 @@ bool FeatureDetectorFPNode::good_keypoints( vector<DMatch> &matches )
 
 bool FeatureDetectorFPNode::find_homography()
 {
-    bool ok = scn_good_kpts.size() > min_inliers;
+    // transcode matches into keypoints for homography
+    bool ok =  matched_keypoints();
     
     if ( ok ){
 
@@ -506,7 +536,7 @@ bool FeatureDetectorFPNode::detect()
     detector->detect  ( scn_mat, scn_keypoints );
     extractor->compute( scn_mat, scn_keypoints , scn_descriptors );
     
-    bool found = knnmatch() && find_homography();
+    bool found = ( do_knn_match? knn_match() : match() ) && find_homography();
     
     if ( found ){
         
@@ -547,6 +577,7 @@ bool FeatureDetectorFPNode::detect()
 }
 
 // ....................................................................... track
+
 bool FeatureDetectorFPNode::track()
 {
     // do we have a rect?
@@ -588,6 +619,8 @@ bool FeatureDetectorFPNode::track()
     return  found;
 }
 
+// ........................................................... process_one_frame
+
 bool FeatureDetectorFPNode::process_one_frame()
 {
     // Sanity checks
@@ -595,6 +628,8 @@ bool FeatureDetectorFPNode::process_one_frame()
          extractor.empty()||
          matcher.empty  ()||
          obj_mat.empty  () ){
+        
+        LOG( LEVEL_ERROR ) << "internal error, setup failed!";
         // don't call again!
         return false;
     }

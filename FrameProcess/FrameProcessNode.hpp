@@ -48,6 +48,8 @@ protected:
     // FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME
 
     const char *get_val( argv_t *argv, const char *key );
+    bool get_val_bool  ( argv_t *argv, const char *key, bool &var);
+    bool get_val_int   ( argv_t *argv, const char *key, int  &var);
 
 public:
 

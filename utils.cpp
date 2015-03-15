@@ -209,6 +209,7 @@ void print_err( bool reset_errs )
     
     if ( reset_errs ){
         // TODO: I always forget if clear also deletes the pointers..
+        // It should right?
         err_msg.clear();
         err_last = OK;
     }

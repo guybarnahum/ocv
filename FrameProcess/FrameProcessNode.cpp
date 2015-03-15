@@ -86,6 +86,55 @@ FrameProcessNode::get_val( argv_t *argv, const char *key )
     return nullptr;
 }
 
+// ................................................................ get_val_bool
+
+bool FrameProcessNode::get_val_bool( argv_t *argv, const char *key, bool &var)
+{
+    bool ok = true;
+    const char *val = get_val( argv, key );
+
+    // key not found? we are ok!
+    if ( val == nullptr ) return ok;
+    
+    // key found? examine it:
+    // values are only true or false or empty, anything else is invalid!
+    bool b = true;
+    
+         if STR_EQ( val, "false" ) b = false;
+    else if STR_EQ( val, ""      ) b = true;
+    else if STR_EQ( val, "true"  ) b = true;
+    else ok = false;
+    
+    if (ok) var = b;
+    return ok;
+}
+
+// ................................................................. get_val_int
+
+bool FrameProcessNode::get_val_int( argv_t *argv, const char *key, int  &var)
+{
+    bool ok = true;
+    const char *val = get_val( argv, key );
+    
+    // key not found? we are ok!
+    if ( val == nullptr ) return ok;
+    
+    // key found? examine it: only numbers are accepted!
+    int i;
+    string str( val );
+    
+    try{
+        i = stoi(str);
+    }
+    catch( exception const & e ){
+        ok = false;
+    }
+
+    if ( ok ) var = i;
+    
+    return ok;
+}
+
 // ....................................................................... setup
 //
 // Consider to:
@@ -111,13 +160,12 @@ FrameProcessNode::setup( argv_t *args )
     if ( val != nullptr ) set_window( val );
     
     // dbg
-    val = get_val( args, "dbg" );
-    if ( val != nullptr ){
-        // TODO: add support for various dbg levels with `val`
-        dbg = true;
+    bool  ok = get_val_bool( args, "dbg", dbg );
+    if ( !ok ){
+        set_err( INVALID_ARGS, "dbg option should be boolean");
     }
     
-    return true;
+    return ok;
 }
 
 // ..................................................................... setters

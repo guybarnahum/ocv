@@ -55,5 +55,5 @@ main( int argc, const char * argv[] )
         print_err();
     }
 
-    return (int)err;
+    return (int)(err);
 }

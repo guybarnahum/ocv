@@ -37,6 +37,7 @@ private:
     // ............................... settings
     int              min_inliers;
     bool             enable_tracking;   // TODO: Remove once tracking is working
+    bool             do_knn_match;
     
     // ................................. object
     // obj values are calculated once
@@ -54,11 +55,12 @@ private:
     Mat              scn_descriptors;
     
     // homography
+    vector<DMatch> matches;
+
     vector<Point2f> obj_good_kpts;
     vector<Point2f> scn_good_kpts;
     
     Mat             H_rough;
-    Mat             H_refined;
     
     // output : location of object in scene
     vector<Point2f> pts_2d;
@@ -72,7 +74,6 @@ private:
     }state_e;
     
     state_e state;
-    
     Rect2d  scn_rect;
     
     // ................................................................. methods
@@ -91,14 +92,14 @@ private:
 
     // match .. detect .. track ..
     bool match();
-    bool knnmatch();
+    bool knn_match();
     bool detect();
     bool track();
 
-    bool is_valid_rect( vector<Point2f> &poly, double min_area = 0 );
-    bool good_keypoints( vector<DMatch> &matches );
+    bool matched_keypoints();
     bool find_homography();
-
+    bool is_valid_rect( vector<Point2f> &poly, double min_area = 0 );
+    
     // ............................ state
     
     void set_state( state_e st ){ state = st; }
