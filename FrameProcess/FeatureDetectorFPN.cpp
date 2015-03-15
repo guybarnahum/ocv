@@ -127,6 +127,7 @@ bool FeatureDetectorFPNode::init( const char *dtct_name  ,
 }
 
 // ....................................................................... setup
+
 bool FeatureDetectorFPNode::setup( argv_t *argv )
 {
     bool ok = (argv != nullptr );
@@ -198,16 +199,18 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
         detector->detect  ( obj_mat, obj_keypoints );
         extractor->compute( obj_mat, obj_keypoints , obj_descriptors);
         matcher_train();
-        LOG( LEVEL_INFO ) << "trained matcher with " << obj_keypoints.size() << " keypoints";
+        
+        LOG( LEVEL_INFO ) << "trained matcher with " <<
+                                obj_keypoints.size() << " keypoints";
     }
     
     if ( ok && dbg ){
         
-        drawKeypoints( obj_mat, obj_keypoints, obj_mat      ,
+        drawKeypoints( obj_mat, obj_keypoints, obj_mat       ,
                        DrawMatchesFlags::DRAW_OVER_OUTIMG    |
                        DrawMatchesFlags::DRAW_RICH_KEYPOINTS );
 
-        window_show( "object", obj_mat);
+        window_show( obj_path.c_str(), obj_mat);
     }
 
     // we better have a valid tgt object
@@ -227,6 +230,7 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
     // ------------------------------ Optional arguments
     
     // .................................... match option
+    
     val = get_val( argv, "matcher" );
     if (val != nullptr){
         ok = init_matcher( val );
@@ -252,6 +256,7 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
     }
     
     // ...................................... min_inliers
+    
     if ( ok ) ok = get_val_int( argv, "inliers"  , min_inliers  );
     if (!ok){
         string msg = "<inliers expects int value>";
@@ -275,9 +280,11 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
 // The complexity of this step is key to performance, me thinks.
 //
 // =============================================================================
+
 // ............................................................... matcher_train
-// basically pre-cache the obj_descriptors for fast compare with scenes
+// pre-cache the obj_descriptors for fast compare with scenes
 // notice that it is possible to train for multiple objects (unimplemented)
+//
 
 bool FeatureDetectorFPNode::matcher_train()
 {
@@ -299,6 +306,23 @@ bool FeatureDetectorFPNode::matcher_train()
 }
 
 // ................................................................... knn_match
+//
+// knn match strategy
+//
+// For matching, we use the k nearest neighbour search.
+// A kk search basically computes the 'distance' between a query descriptor
+// and all of the training descriptors, and returns the k pairs with lowest
+// distance.
+//
+// We use k=2, and get 2 pairs of matches for each query descriptor.
+//
+// What is important is how we decide which of all these matches are
+// 'good matches' after all. One strategy is to trust only matches where if
+// the distance(match1,query) < 0.8 * distance(match2,query), then match1 is
+// a good match otherwise discard both match1 and match2 as false matches.
+//
+// .............................................................................
+
 bool FeatureDetectorFPNode::knn_match()
 {
     vector<vector<DMatch>> knn_matches;
@@ -377,12 +401,14 @@ bool FeatureDetectorFPNode::match()
         if( dist > max_dist ) max_dist = dist;
     }
     
-    // keep only "good" matches (i.e. whose distance is less than 3*min_dist )
+    // keep only "good" matches (i.e. whose distance is less than 3 * min_dist )
     std::vector< DMatch > good_matches;
     
-    for( int ix = 0; ix < obj_descriptors.rows; ix++ )
-        if( matches[ ix ].distance < 3 * min_dist )
+    for( int ix = 0; ix < obj_descriptors.rows; ix++ ){
+        if( matches[ ix ].distance < 3 * min_dist ){
             good_matches.push_back( matches[ix]);
+        }
+    }
     
     matches.swap(good_matches);
     
@@ -448,7 +474,12 @@ bool FeatureDetectorFPNode::is_valid_rect( vector<Point2f> &poly,
     return ok;
 }
 
-// .......................................................... matched_keypoints
+// ........................................................... matched_keypoints
+//
+// Translate matches into source and target point vectors, we shall attempt
+// to find a homography that maps the source into the target points..
+//
+// .............................................................................
 
 bool FeatureDetectorFPNode::matched_keypoints()
 {
@@ -486,6 +517,8 @@ bool FeatureDetectorFPNode::matched_keypoints()
     bool ok = scn_good_kpts.size() > min_inliers;
     return ok;
 }
+
+// ............................................................. find_homography
 
 bool FeatureDetectorFPNode::find_homography()
 {
