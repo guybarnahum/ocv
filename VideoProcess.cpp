@@ -34,7 +34,7 @@ VideoProcess::init()
     set_abort_key( KEY_ESCAPE );
     
     ready = isOpened();
- 
+    
     // are we good to go?
     if ( !ready ) set_err( ErrorCaptureFailure );
 }

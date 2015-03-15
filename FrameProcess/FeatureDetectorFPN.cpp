@@ -118,10 +118,10 @@ bool FeatureDetectorFPNode::init( const char *dtct_name  ,
     do_knn_match = false;
     
     // prepare object location
-    pts_2d.push_back( Point2f( 0, 0 ));
-    pts_2d.push_back( Point2f( 0, 0 ));
-    pts_2d.push_back( Point2f( 0, 0 ));
-    pts_2d.push_back( Point2f( 0, 0 ));
+    pts.push_back( Point( 0, 0 ));
+    pts.push_back( Point( 0, 0 ));
+    pts.push_back( Point( 0, 0 ));
+    pts.push_back( Point( 0, 0 ));
     
     return ok;
 }
@@ -439,8 +439,8 @@ bool FeatureDetectorFPNode::match()
 
 // ............................................................... is_valid_rect
 
-bool FeatureDetectorFPNode::is_valid_rect( vector<Point2f> &poly,
-                                           double min_area      )
+bool FeatureDetectorFPNode::is_valid_rect( vector<Point> &poly,
+                                           double min_area    )
 {
     // should be a rectangle
     bool ok = ( poly.size() == 4 );
@@ -547,9 +547,14 @@ bool FeatureDetectorFPNode::find_homography()
     }
     
     if ( ok ){
-        perspectiveTransform( obj_corners, pts_2d, H_rough);
+        vector<Point2f> pts_2f(4);
+        perspectiveTransform( obj_corners, pts_2f, H_rough);
+        
+        pts[0] = pts_2f[0]; pts[1] = pts_2f[1];
+        pts[2] = pts_2f[2]; pts[3] = pts_2f[3];
+        
         double min_area = (double)(scn_mat.cols * scn_mat.rows)/ 100.0;
-        ok = is_valid_rect( pts_2d, min_area );
+        ok = is_valid_rect( pts, min_area );
     }
     
     return ok;
@@ -572,39 +577,12 @@ bool FeatureDetectorFPNode::detect()
     bool found = ( do_knn_match? knn_match() : match() ) && find_homography();
     
     if ( found ){
-        
-        // build scn_rect from scn_poly
-        int top     = pts_2d[ 0 ].y;
-        int left    = pts_2d[ 0 ].x;
-        int bottom  = top;
-        int right   = left;
-        
-        if ( pts_2d[ 1 ].x > right ) right  = pts_2d[ 1 ].x;
-        if ( pts_2d[ 1 ].y > bottom) bottom = pts_2d[ 1 ].y;
-        if ( pts_2d[ 1 ].x < left  ) left   = pts_2d[ 1 ].x;
-        if ( pts_2d[ 1 ].y < top   ) top    = pts_2d[ 1 ].y;
-
-        if ( pts_2d[ 2 ].x > right ) right  = pts_2d[ 2 ].x;
-        if ( pts_2d[ 2 ].y > bottom) bottom = pts_2d[ 2 ].y;
-        if ( pts_2d[ 2 ].x < left  ) left   = pts_2d[ 2 ].x;
-        if ( pts_2d[ 2 ].y < top   ) top    = pts_2d[ 2 ].y;
-
-        if ( pts_2d[ 3 ].x > right ) right  = pts_2d[ 3 ].x;
-        if ( pts_2d[ 3 ].y > bottom) bottom = pts_2d[ 3 ].y;
-        if ( pts_2d[ 3 ].x < left  ) left   = pts_2d[ 3 ].x;
-        if ( pts_2d[ 3 ].y < top   ) top    = pts_2d[ 3 ].y;
-
-        scn_rect.x     = left;
-        scn_rect.y     = top;
-        scn_rect.width = right - left;
-        scn_rect.height= bottom - top;
-        
-        set_state( DETECTED );
+         focus = boundingRect(pts);
+         set_state( DETECTED );
     }
     else{
-        set_state( NONE );
+         set_state( NONE );
     }
-    
     
     return found;
 }
@@ -614,7 +592,8 @@ bool FeatureDetectorFPNode::detect()
 bool FeatureDetectorFPNode::track()
 {
     // do we have a rect?
-    bool found = false;
+    bool   found  = false;
+    Rect2d focus_d= focus;
     
     if ( enable_tracking ){
         try{
@@ -623,8 +602,8 @@ bool FeatureDetectorFPNode::track()
                 case NONE       :
                     LOG( LEVEL_WARNING ) << "Invalid state (" << state << ")";
                     found = false; break;
-                case DETECTED   : found = tracker->init  ( *in, scn_rect ); break;
-                case TRACKING   : found = tracker->update( *in, scn_rect ); break;
+                case DETECTED   : found = tracker->init  (*in, focus_d); break;
+                case TRACKING   : found = tracker->update(*in, focus_d); break;
             }
         }
         catch(Exception e ){
@@ -634,19 +613,11 @@ bool FeatureDetectorFPNode::track()
     }
     
     if ( found ){
-        pts_2d[ 0 ].x = scn_rect.x;
-        pts_2d[ 0 ].y = scn_rect.y;
-        pts_2d[ 1 ].x = scn_rect.x + scn_rect.width;
-        pts_2d[ 1 ].y = scn_rect.y;
-        pts_2d[ 2 ].x = scn_rect.x + scn_rect.width;
-        pts_2d[ 2 ].y = scn_rect.y + scn_rect.height;
-        pts_2d[ 3 ].x = scn_rect.x ;
-        pts_2d[ 3 ].y = scn_rect.y + scn_rect.height;
-
-        set_state( TRACKING );
+         focus = focus_d;
+         set_state( TRACKING );
     }
     else{
-        set_state( NONE );
+         set_state( NONE );
     }
     
     return  found;
@@ -683,14 +654,10 @@ bool FeatureDetectorFPNode::process_one_frame()
         
         if ( found ){
             
-            DBG_ASSERT( state != NONE, "state mismatch! should not be NONE!");
-            DBG_ASSERT( pts_2d.size() == 4, "found but rect is invalid!" );
-            
-            //-- Draw lines between the corners (the mapped object in the scene)
-            line( out, pts_2d[0] , pts_2d[1] , Scalar( 0, 255, 0), 1 );
-            line( out, pts_2d[1] , pts_2d[2] , Scalar( 0, 255, 0), 1 );
-            line( out, pts_2d[2] , pts_2d[3] , Scalar( 0, 255, 0), 1 );
-            line( out, pts_2d[3] , pts_2d[0] , Scalar( 0, 255, 0), 1 );
+            if (pts.size())
+                
+                polylines( out, pts, true, Scalar(   0, 255,   0), 1 );
+            rectangle( out, focus ,       Scalar( 255, 255, 255), 1 );
         }
         
         window_show( window, out );

@@ -2,13 +2,17 @@
 <opencv_storage>
 <xml_v_argv>"1.0"</xml_v_argv>
 <v_argv>
-  <_>
-    <obj_path>"data/20 USD note.png"</obj_path>
-    <window>OpenCV.3.0.0</window>
-    <fpn>featureDetect</fpn>
-    <dbg>true</dbg>
-    <knn_match>true</knn_match>
-    <inliers>12</inliers>
-  </_>
+    <_>
+        <width>640</width>
+        <height>480</height>
+    </_>
+    <_>
+        <obj_path>"data/20 USD note.png"</obj_path>
+        <window>OpenCV.3.0.0</window>
+        <fpn>featureDetect</fpn>
+        <dbg>true</dbg>
+        <knn_match>true</knn_match>
+        <inliers>12</inliers>
+    </_>
 </v_argv>
 </opencv_storage>

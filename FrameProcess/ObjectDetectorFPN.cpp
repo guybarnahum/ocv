@@ -96,14 +96,19 @@ bool ObjectDetectorFPNode::process_one_frame()
         
     cvtColor(*in, gray, COLOR_RGB2GRAY);
     detector->process( gray );
-    detector->getObjects( FoundObjects );
-        
+    detector->getObjects( found_objects );
+    
     if ( window ){
         
         base->copyTo( out );
         
-        for (size_t ix = 0; ix < FoundObjects.size(); ix++ ){
-            rectangle( out, FoundObjects[ ix ], Scalar(0,255,0));
+        bool ok = found_objects.size() && select_focus();
+        if ( ok ){
+            for (size_t ix = 0; ix < found_objects.size(); ix++ ){
+                Scalar color = ( found_objects[ ix ] == focus )?
+                                Scalar(255,255,255) :  Scalar(0,255,0);
+                rectangle( out, found_objects[ ix ], color );
+            }
         }
         
         window_show( window, out );

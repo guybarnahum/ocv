@@ -29,6 +29,11 @@ private:
     const char *desc;
     
 protected:
+    // ................................................................. results
+    
+    vector<Rect> found_objects;
+    Rect         focus;
+    
     // ................................................................ node i/o
     Mat *base;
     Mat *in;
@@ -98,6 +103,8 @@ public:
         return ok;
     }
     // ......................................................... virtual methods
+    virtual bool select_focus( const vector<Rect> &rects, Rect &focus);
+            bool select_focus(){ return select_focus( found_objects, focus ); }
     
     virtual bool process_one_frame();
     virtual bool setup( argv_t *argv );

@@ -23,7 +23,6 @@ class FeatureDetectorFPNode : public FrameProcessNode {
 private:
     // ................................................................... const
     const int    MIN_INLINERS_DEFAULT = 8;
-    const double SCALE_FACTOR         = 1.0;
     
     // ................................................................. members
     
@@ -63,7 +62,7 @@ private:
     Mat             H_rough;
     
     // output : location of object in scene
-    vector<Point2f> pts_2d;
+    vector<Point> pts;
 
     // .................................................................
     // tracking result
@@ -98,7 +97,7 @@ private:
 
     bool matched_keypoints();
     bool find_homography();
-    bool is_valid_rect( vector<Point2f> &poly, double min_area = 0 );
+    bool is_valid_rect( vector<Point> &poly, double min_area = 0 );
     
     // ............................ state
     

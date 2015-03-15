@@ -63,7 +63,6 @@ private:
     // output : location of object in scene
     // detector result
     Mat gray;
-    vector<Rect> FoundObjects;
     
 public:
     

@@ -31,6 +31,8 @@ public:
     
     Mat     in;
     vector<Vec4i> lines;
+    Rect          focus;
+    
     vector<FrameProcessNode *> processors;
     
     // NOTE: some drivers do not support setting up the

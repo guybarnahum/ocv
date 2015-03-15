@@ -65,8 +65,7 @@ void FrameProcessNode::window_show(const char *win, Mat mat)
 //
 // BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG BUG
 
-const char *
-FrameProcessNode::get_val( argv_t *argv, const char *key )
+const char *FrameProcessNode::get_val( argv_t *argv, const char *key )
 {
     if ( argv ){
         for( auto it = argv->begin(); it != argv->end(); it++ ){
@@ -147,8 +146,7 @@ bool FrameProcessNode::get_val_int( argv_t *argv, const char *key, int  &var)
 //
 // .............................................................................
 
-bool
-FrameProcessNode::setup( argv_t *args )
+bool FrameProcessNode::setup( argv_t *args )
 {
     if ( args == nullptr ) return false;
     
@@ -169,8 +167,8 @@ FrameProcessNode::setup( argv_t *args )
 }
 
 // ..................................................................... setters
-void
-FrameProcessNode::set_window( const char *window)
+
+void FrameProcessNode::set_window( const char *window)
 {
     delete this->window;
     this->window = nullptr;
@@ -181,23 +179,42 @@ FrameProcessNode::set_window( const char *window)
     }
 }
 
-void
-FrameProcessNode::set_name( const char *cname )
+void FrameProcessNode::set_name( const char *cname )
 {
     delete this->cname;
     this->cname = cname? strdup(cname) : nullptr;
 }
 
-void
-FrameProcessNode::set_desc(    const char *desc  )
+void FrameProcessNode::set_desc(    const char *desc  )
 {
     delete this->desc;
     this->desc  = desc? strdup(desc) : nullptr;
 }
 
+// ................................................................ select_focus
+
+bool FrameProcessNode::select_focus( const vector<Rect> &rects, Rect &focus)
+{
+    bool ok = rects.size() > 0;
+    
+    if ( ok ){
+        Rect max = rects[ 0 ];
+        
+        for( size_t ix = 1; ix < rects.size(); ix++ ){
+            if ((         max.width *         max.height )<
+                ( rects[ ix ].width * rects[ ix ].height ) ){
+                max = rects[ ix ];
+            }
+        }
+        
+        focus = max;
+    }
+    
+    return ok;
+}
+
 // ........................................................... process_one_frame
-bool
-FrameProcessNode::process_one_frame()
+bool FrameProcessNode::process_one_frame()
 {
     window_show( window, out );
     return true;
@@ -206,8 +223,7 @@ FrameProcessNode::process_one_frame()
 // .................................................................. print_desc
 // print desc prints if no out_str is provided. Otherwise it replaces "\n"
 // with provided delimiter into the out_str.
-void
-FrameProcessNode::print_desc( string *out_str, string del )
+void FrameProcessNode::print_desc( string *out_str, string del )
 {
     string str = get_name();
     
