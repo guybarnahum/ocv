@@ -105,6 +105,15 @@ bool FrameProcessNode::get_val_bool( argv_t *argv, const char *key, bool &var)
     else ok = false;
     
     if (ok) var = b;
+    else{
+        string  msg = "<";
+                msg += key;
+                msg += " expects bool value (invalid val:'";
+                msg += val;
+                msg += "')>";
+        
+        set_err(INVALID_ARGS, msg );
+    }
     return ok;
 }
 
@@ -130,7 +139,17 @@ bool FrameProcessNode::get_val_int( argv_t *argv, const char *key, int  &var)
     }
 
     if ( ok ) var = i;
-    
+    else{
+        
+        string msg = "<";
+               msg+= key;
+               msg += " expects int value (invalid val:'";
+               msg += val;
+               msg += "')>";
+        
+        set_err(INVALID_ARGS, msg );
+    }
+
     return ok;
 }
 
@@ -146,22 +165,25 @@ bool FrameProcessNode::get_val_int( argv_t *argv, const char *key, int  &var)
 //
 // .............................................................................
 
-bool FrameProcessNode::setup( argv_t *args )
+bool FrameProcessNode::setup( argv_t *argv )
 {
-    if ( args == nullptr ) return false;
+    bool ok = (argv != nullptr );
+    if (!ok){
+        string msg = "no setup argv provided for ";
+        msg += get_name();
+        set_err( INVALID_ARGS, msg );
+        return false;
+    }
     
     // child classes may call the parent setup for base class setup options
     const char *val = nullptr;
     
     // window
-    val = get_val( args, "window" );
+         val  = get_val( argv, "window" );
     if ( val != nullptr ) set_window( val );
     
     // dbg
-    bool  ok = get_val_bool( args, "dbg", dbg );
-    if ( !ok ){
-        set_err( INVALID_ARGS, "dbg option should be boolean");
-    }
+    ok = get_val_bool( argv, "dbg", dbg );
     
     return ok;
 }
@@ -244,7 +266,6 @@ void FrameProcessNode::print_desc( string *out_str, string del )
     
     str = get_desc();
     std::stringstream ss( str );
-    
     char line[ 256 ];
     
     while ( ss.getline( line, 256 ) ) {

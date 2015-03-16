@@ -10,6 +10,9 @@
 // .................................................................... includes
 #include "FindContour.hpp"
 
+#define FIND_CONTOUR_NAME "ContourDetector"
+#define FIND_CONTOUR_DESC "Contour detector based tracker"
+
 // ................................................................. constructor
 
 FindContour::FindContour():FrameProcessNode()
@@ -23,8 +26,8 @@ FindContour::FindContour():FrameProcessNode()
 
 bool FindContour::process_one_frame()
 {
-    int thresh = 100;
-    int max_thresh = 255;
+//    int thresh = 100;
+//    int max_thresh = 255;
 
     /// Convert image to gray and blur it
 //    cvtColor( *in, gray_mat, CV_BGR2GRAY );

@@ -5,6 +5,8 @@
       <_>
         <fpn>canny</fpn>
         <window>Canny</window>
+        <low>50</low>
+        <high>150</high>
         <dbg>true</dbg>
       </_>
       <_>

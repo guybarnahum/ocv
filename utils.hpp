@@ -19,7 +19,8 @@
 
 bool is_printable( int key );
 void to_key( int key, string &s_key );
-
+inline bool is_odd_num( int num ){ return (( num & 1 ) == 1 ); }
+    
 // ================================================================== file utils
 bool  file_exists ( string  path );
 bool  file_to_path( string &path );

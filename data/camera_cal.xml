@@ -8,7 +8,6 @@
         </_>
         <_>
             <fpn>ccalib</fpn>
-            <board_size>7</board_size>
             <square_size>2</square_size>
             <dbg>true</dbg>
             <out>"./cam_calib.xml"</out>

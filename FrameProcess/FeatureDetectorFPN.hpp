@@ -88,6 +88,7 @@ private:
     bool init_matcher  ( const char *name = nullptr );
     bool init_tracker  ( const char *name = nullptr );
 
+    bool setup( string path ); // object path
     bool matcher_train();
 
     // match .. detect .. track ..

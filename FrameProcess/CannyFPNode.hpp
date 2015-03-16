@@ -16,24 +16,24 @@
 #include "ocvstd.hpp"
 #include "FrameProcessNode.hpp"
 
-#define CANNY_NAME "CannyFPNode"
-#define CANNY_DESC "Detect edges with canny filter"
 
 // =========================================================== class CannyFPNode
 
 class CannyFPNode : public FrameProcessNode {
     
+private:
+    
+    int low;
+    int high;
+    int ker;
+    
 public:
     
-     CannyFPNode():FrameProcessNode()
-     {
-        set_name( CANNY_NAME );
-        set_desc( CANNY_DESC );
-     }
-    
+     CannyFPNode();
     ~CannyFPNode(){}
     
     // ....................................................... overriden methods
+    bool setup( argv_t *argv );
     bool process_one_frame();
 };
 

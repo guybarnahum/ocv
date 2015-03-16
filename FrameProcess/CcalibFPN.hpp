@@ -50,7 +50,7 @@ private:
     Mat           dist_coeffs;
     
     
-    bool   detect_chessboard( Mat &in, bool use );
+    bool   detect_chessboard( Mat &in );
     bool   calc_boardCornerPositions( vector<Point3f>& corners );
     double calc_reprojectionErrors( const vector<vector<Point3f> >& obj_points);
     

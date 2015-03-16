@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FrameProcess/CcalibFPN.cpp"
-            timestampString = "448155072.159273"
+            timestampString = "448226469.880268"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
-            landmarkName = "CcalibFPNode::detect_chessboard( Mat &amp;in, bool use )"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "CcalibFPNode::detect_chessboard( Mat &amp;in )"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FrameProcess/CcalibFPN.cpp"
-            timestampString = "448155146.731673"
+            timestampString = "448226469.880268"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
-            landmarkName = "CcalibFPNode::detect_chessboard( Mat &amp;in, bool use )"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "CcalibFPNode::detect_chessboard( Mat &amp;in )"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,12 +42,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FrameProcess/CcalibFPN.cpp"
-            timestampString = "448155300.161141"
+            timestampString = "448226469.880268"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
-            landmarkName = "CcalibFPNode::detect_chessboard( Mat &amp;in, bool use )"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "CcalibFPNode::detect_chessboard( Mat &amp;in )"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FrameProcess/FeatureDetectorFPN.cpp"
+            timestampString = "448222216.15431"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
+            landmarkName = "FeatureDetectorFPNode::setup( argv_t *argv )"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

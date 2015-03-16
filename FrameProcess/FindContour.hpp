@@ -17,9 +17,6 @@
 
 // ================================================== class  FindContour
 
-#define FIND_CONTOUR_NAME "ContourDetector"
-#define FIND_CONTOUR_DESC "Contour detector based tracker"
-
 class FindContour : public FrameProcessNode {
 
 private:

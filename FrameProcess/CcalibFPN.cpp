@@ -28,70 +28,42 @@ CcalibFPNode::CcalibFPNode():FrameProcessNode()
             CALIB_ZERO_TANGENT_DIST     |
             CALIB_FIX_ASPECT_RATIO      ;
     
-    board_size  = Size( 8, 8);
+    board_size  = Size( 10, 7);
     square_size = 1;
     
     cam_mat     = Mat::eye  (3, 3, CV_64F);
     dist_coeffs = Mat::zeros(8, 1, CV_64F);
     
     xml = "./ccalib.xml";
+    use_frame = true;
 }
 
 // ....................................................................... setup
 
 bool CcalibFPNode::setup( argv_t *argv )
 {
-    bool ok = (argv != nullptr );
-    if (!ok){
-        string msg = "no setup argv provided for ";
-        msg += get_name();
-        set_err( INVALID_ARGS, msg );
-        return false;
-    }
-    
     // call the parent setup for base class setup options
     // do this first so we have `dbg` option set, etc
-    
-    ok = FrameProcessNode::setup( argv );
+    bool ok = FrameProcessNode::setup( argv );
     if (!ok) return false;
     
     // .......................................... xml out
     const char *val = get_val( argv, "out" );
-    if (val != nullptr){
-        xml = strdup( val );
-    }
-    
+    if (val != nullptr) xml = strdup( val );
     LOG( LEVEL_INFO ) << "xml out : " << xml;
     
     // ....................................... board size
     int num = 0;
+    ok = get_val_int( argv, "board_size", num  ) && num;
+    if ( ok ) board_size = Size( num, num );
     
-    if ( ok ) ok = get_val_int( argv, "board_size", num  );
-    if (!ok){
-        string msg = "<board_size expects int value>";
-        set_err(INVALID_ARGS, msg );
-        return false;
-    }
-    else{
-        board_size = Size( num, num );
-    }
-
     LOG( LEVEL_INFO ) << "board_size: " << board_size.width << "x"
                                         << board_size.height ;
     
     // ...................................... square size
     num = 0;
-    
-    if ( ok ) ok = get_val_int( argv, "square_size", num  );
-    if (!ok){
-        string msg = "<square_size expects int value>";
-        set_err(INVALID_ARGS, msg );
-        return false;
-    }
-    else{
-        square_size = num;
-    }
-
+    ok = get_val_int( argv, "square_size", num  ) && num;
+    if ( ok ) square_size = num;
     LOG( LEVEL_INFO ) << "square_size: " << square_size << " units";
 
     return ok;
@@ -105,10 +77,10 @@ CcalibFPNode::process_key(int key )
     switch( key ){
         // space bar attempts to grab chessboard, use_frame is reset by
         // process_frame, so this is done once..
-        case KEY_SPACE : detect_chessboard( *in, use_frame = true );break;
+        case KEY_SPACE : use_frame = true; break;
 
         case 'c' : calc(); break;
-        case 's' : calc_and_save(); break;
+        case 's' : save( xml ); break;
     }
     
     return true;
@@ -123,7 +95,7 @@ CcalibFPNode::process_one_frame()
     }
     
     // also draws on out if detected
-    detect_chessboard( out, use_frame = false );
+    detect_chessboard( out );
     
     if ( window ){
         window_show( window, out );
@@ -134,7 +106,7 @@ CcalibFPNode::process_one_frame()
 
 // ........................................................... detect_chessboard
 
-bool CcalibFPNode::detect_chessboard( Mat &in, bool use )
+bool CcalibFPNode::detect_chessboard( Mat &in )
 {
     vector<Point2f> points;
     
@@ -149,38 +121,28 @@ bool CcalibFPNode::detect_chessboard( Mat &in, bool use )
         cornerSubPix( gray_mat, points, Size(11,11), Size(-1,-1),
                      TermCriteria( CV_TERMCRIT_EPS+CV_TERMCRIT_ITER, 30, 0.1 ));
         
-        if ( use ) cal_points.push_back( points );
+        if ( use_frame ) cal_points.push_back( points );
         
         frame_size = in.size();
         drawChessboardCorners( in, board_size, Mat(points), ok );
-        
-        LOG( LEVEL_INFO ) << "Chess Board found" << (use? ", use!" : "!" );
     }
     
-    if ( use ){
-        string msg = ok? "ok" : "failed";
+    if ( ok && use_frame ){
         
-        LOG( LEVEL_INFO ) << "capture frame "<< msg <<
+        LOG( LEVEL_INFO ) << "capture frame ok!" <<
                             " (has " << cal_points.size() << " out of "
                                      << min_capture_frames << " )";
-       
+        use_frame = false;
     }
     
     return ok;
 }
 
-// ............................................................... calc_and_save
-bool CcalibFPNode::calc_and_save()
-{
-    bool ok = calc();
-    if ( ok ) ok = save( xml );
-    return ok;
-}
 // ........................................................................ calc
 
 bool CcalibFPNode::calc()
 {
-    bool ok = ( cal_points.size() > min_capture_frames );
+    bool ok = ( cal_points.size() >= min_capture_frames );
     
     if (!ok){
         LOG( LEVEL_INFO ) << "calc needs at least " << min_capture_frames <<
@@ -229,7 +191,7 @@ bool CcalibFPNode::calc_boardCornerPositions( vector<Point3f>& corners )
 double CcalibFPNode::calc_reprojectionErrors(
                             const vector<vector<Point3f> >& obj_points )
 {
-    vector<Point2f> imagePoints2;
+    vector<Point2f> pts_2f;
     
     size_t totalPoints = 0;
     double totalErr = 0, err;
@@ -238,10 +200,20 @@ double CcalibFPNode::calc_reprojectionErrors(
     for( size_t ix = 0; ix < obj_points.size(); ix++ )
     {
         projectPoints( Mat(obj_points[ix]),
-                      rvecs[ix], tvecs[ix], cam_mat,
-                      dist_coeffs, imagePoints2);
+                      rvecs[ix],
+                      tvecs[ix],
+                      cam_mat,
+                      dist_coeffs,
+                      pts_2f);
         
-        err = norm( Mat(obj_points[ix]), Mat( imagePoints2 ), CV_L2);
+        vector<Point3f> pts_3f( pts_2f.size() );
+        for( size_t jx = 0 ; jx < pts_2f.size(); jx++ ){
+            pts_3f[ ix ].x = pts_2f[ ix ].x;
+            pts_3f[ ix ].y = pts_2f[ ix ].y;
+            pts_3f[ ix ].z = 0.;
+        }
+        
+        err = norm( obj_points[ix] , pts_3f, CV_L2);
         
         size_t n = obj_points[ix].size();
         reprojErrs[ix] = (float) sqrt( err * err / n );

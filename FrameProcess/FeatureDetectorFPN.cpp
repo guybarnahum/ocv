@@ -127,56 +127,11 @@ bool FeatureDetectorFPNode::init( const char *dtct_name  ,
     return ok;
 }
 
-// ....................................................................... setup
+// .............................................................. setup obj_path
 
-bool FeatureDetectorFPNode::setup( argv_t *argv )
+bool FeatureDetectorFPNode::setup( string path )
 {
-    bool ok = (argv != nullptr );
-    if (!ok){
-        string msg = "no setup argv provided for ";
-        msg += get_name();
-        set_err( INVALID_ARGS, msg );
-        return false;
-    }
-    
-    // call the parent setup for base class setup options
-    // do this first so we have `dbg` option set, etc
-    
-    ok = FrameProcessNode::setup( argv );
-    if (!ok) return false;
-    
-    // ------------------------------- Required arguments
-    const char *val;
-    
-    // ...................................... algo option
-    // algo may have a valid default so its really
-    // semi-required if there is such a thing..
-    ok = ( nullptr != ( val = get_val( argv, "algo" ) ) );
-    if ( ok ) ok = init_detector( val );
-    
-    // we better have a valid algo feature detector
-    // regardless of how we got it from the option or default..
-    ok = !detector.empty();
-    
-    if (!ok){
-        string msg;
-        if ( val != nullptr ){
-            msg = "<invalid `algo`:'" ; msg += val; msg += "'>";
-        }
-        else{
-            msg = "<missing required option `algo`>";
-        }
-        
-        set_err( INVALID_ARGS, msg );
-        return false;
-    }
-    
-    // ......................................... obj_path
-    
-    ok = ( nullptr != ( val = get_val( argv, "obj_path" ) ) );
-    obj_path = ok? val : "";
-    
-    if (ok) ok = file_to_path( obj_path );
+    bool ok = file_to_path( path );
     
     if (ok){
         try{
@@ -190,7 +145,7 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
     }
     
     if (ok){
-
+        
         obj_corners.push_back( Point2f( 0           , 0            ));
         obj_corners.push_back( Point2f( obj_mat.cols, 0            ));
         obj_corners.push_back( Point2f( obj_mat.cols, obj_mat.rows ));
@@ -203,85 +158,91 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
         matcher_train();
         
         LOG( LEVEL_INFO ) << "trained matcher with " <<
-                                obj_keypoints.size() << " keypoints";
+        obj_keypoints.size() << " keypoints";
     }
     
     if ( ok && dbg ){
         
         drawKeypoints( obj_mat, obj_keypoints, obj_mat       ,
-                       DrawMatchesFlags::DRAW_OVER_OUTIMG    |
-                       DrawMatchesFlags::DRAW_RICH_KEYPOINTS );
-
+                      DrawMatchesFlags::DRAW_OVER_OUTIMG    |
+                      DrawMatchesFlags::DRAW_RICH_KEYPOINTS );
+        
         window_show( obj_path.c_str(), obj_mat);
     }
+    
+    return ok;
+}
 
+bool FeatureDetectorFPNode::setup( argv_t *argv )
+{
+    // call the parent setup for base class setup options
+    // do this first so we have `dbg` option set, etc
+    bool ok = FrameProcessNode::setup( argv );
+    if (!ok) return false;
+    
+    // ............................... obj_path (Required)
+    
+    obj_path = get_val( argv, "obj_path" );
+    ok = setup( obj_path );
+    
     // we better have a valid tgt object
     if (!ok){
         string msg;
-        if (val != nullptr){
-            msg  = "<invalid `obj_path`:'" ; msg += val; msg += "'>";
+        if ( obj_path != nullptr){
+            msg  = "<invalid `obj_path`:'" ; msg += obj_path; msg += "'>";
         }
-        else{
+        else
             msg = "<missing required option `obj_path`>";
-        }
-        
+            
         set_err(INVALID_ARGS, msg );
         return false;
     }
     
-    // ------------------------------ Optional arguments
+    // ...................................... algo option
+    // if supplied it better be valid! Otherwise we are good with default
+    const char *val;
+    ok = ( nullptr != ( val = get_val( argv, "algo" ) ) );
+    if ( ok ){
+         ok = init_detector( val );
+         if (!ok){
+            string msg = "<invalid `algo`:'" ; msg += val; msg += "'>";
+            set_err( INVALID_ARGS, msg );
+            return false;
+         }
+    }
     
     // .................................... match option
-    
-    val = get_val( argv, "matcher" );
-    if (val != nullptr){
-        ok = init_matcher( val );
+    // if supplied it better be valid! Otherwise we are good with default
+    ok = ( nullptr != (val = get_val( argv, "matcher" ) ) );
+    if ( ok ){
+         ok = init_matcher( val );
+        if (!ok){
+            string msg = "<invalid matcher option:'"; msg += val; msg += "'>";
+            set_err(INVALID_ARGS, msg );
+            return false;
+        }
     }
     
-    if (!ok){
-        string msg = "<invalid matcher option:'"; msg += val; msg += "'>";
-        set_err(INVALID_ARGS, msg );
-        return false;
-    }
+    // NOTICE : Optional settings ahead - reset ok state
+    //          and start preserving errors with && ok
+    ok = true;
     
     // .................................. do knn matcher?
-    
-    if ( ok ) ok = get_val_bool( argv, "knn_match", do_knn_match );
-    if (!ok){
-        string msg = "<'knn_match' expects boolean value>";
-        set_err(INVALID_ARGS, msg );
-        return false;
-    }
-    else{
-        LOG( LEVEL_INFO ) << "Using "
-                          << ( do_knn_match? "knn_match" : "normal match");
-    }
+
+    ok = get_val_bool( argv, "knn_match", do_knn_match ) && ok;
+    LOG( LEVEL_INFO ) << "Using "
+                      << ( do_knn_match? "knn_match" : "normal match");
     
     // ............................... refine homography?
     
-    if ( ok ) ok = get_val_bool( argv, "refine", do_refine_homography );
-    if (!ok){
-        string msg = "<'refine' expects boolean value>";
-        set_err(INVALID_ARGS, msg );
-        return false;
-    }
-    else{
-        LOG( LEVEL_INFO ) << "Using "
-        << ( do_refine_homography? "refined" : "rough")
-        << " homography";
-    }
+    ok = get_val_bool( argv, "refine", do_refine_homography ) && ok;
+    LOG( LEVEL_INFO ) << "Using " << ( do_refine_homography? "refined":"rough")
+                                  << " homography";
     
     // ...................................... min_inliers
     
-    if ( ok ) ok = get_val_int( argv, "inliers"  , min_inliers  );
-    if (!ok){
-        string msg = "<inliers expects int value>";
-        set_err(INVALID_ARGS, msg );
-        return false;
-    }
-    else{
-        LOG( LEVEL_INFO ) << "Inliers:" << min_inliers;
-    }
+    ok = get_val_int( argv, "inliers"   , min_inliers ) && ok;
+    LOG( LEVEL_INFO ) <<    "Inliers:" << min_inliers ;
     
     return ok;
 }
