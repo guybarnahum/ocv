@@ -263,8 +263,14 @@ VideoProcess::process()
 bool
 VideoProcess::process_key( int key )
 {
+    // Pass a valid key value to simulate a key press,
+    // otherwise the default val is -1 that is a flag for sampling one
+    // from the user.. waitKey returns -1 is no key was pressed
+    // 30 ms is a magic number recommended to give highgui time to
+    // process window events like imshow, etc.
+    
     if ( key < 0 ){
-         key = pressed_key = waitKey(1);
+         key = pressed_key = waitKey( 30 );
     }
     
     if ( key > 0 ){
