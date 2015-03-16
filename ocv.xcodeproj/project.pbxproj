@@ -44,6 +44,7 @@
 		64B8532D1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8532B1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib */; };
 		64D514D01AB6078000518E18 /* CcalibFPN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64D514CE1AB6078000518E18 /* CcalibFPN.cpp */; };
 		64D514D21AB615F800518E18 /* camera_cal.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 64D514D11AB6156000518E18 /* camera_cal.xml */; };
+		64D514D51AB654AB00518E18 /* FindContour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64D514D31AB654AB00518E18 /* FindContour.cpp */; };
 		64E835261A9FA0D8001C5256 /* FeatureFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64E835241A9FA0D7001C5256 /* FeatureFactory.cpp */; };
 		64E835291AA7C23F001C5256 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64E835281AA7C23F001C5256 /* utils.cpp */; };
 /* End PBXBuildFile section */
@@ -127,6 +128,8 @@
 		64D514CE1AB6078000518E18 /* CcalibFPN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CcalibFPN.cpp; sourceTree = "<group>"; };
 		64D514CF1AB6078000518E18 /* CcalibFPN.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CcalibFPN.hpp; sourceTree = "<group>"; };
 		64D514D11AB6156000518E18 /* camera_cal.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = camera_cal.xml; sourceTree = "<group>"; };
+		64D514D31AB654AB00518E18 /* FindContour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FindContour.cpp; sourceTree = "<group>"; };
+		64D514D41AB654AB00518E18 /* FindContour.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FindContour.hpp; sourceTree = "<group>"; };
 		64E835241A9FA0D7001C5256 /* FeatureFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FeatureFactory.cpp; sourceTree = "<group>"; };
 		64E835251A9FA0D8001C5256 /* FeatureFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FeatureFactory.hpp; sourceTree = "<group>"; };
 		64E835271A9FA519001C5256 /* ocvstd.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ocvstd.hpp; sourceTree = SOURCE_ROOT; };
@@ -259,6 +262,8 @@
 				6470A9E91A956576009B4139 /* HoughFPNode.cpp */,
 				64D514CF1AB6078000518E18 /* CcalibFPN.hpp */,
 				64D514CE1AB6078000518E18 /* CcalibFPN.cpp */,
+				64D514D41AB654AB00518E18 /* FindContour.hpp */,
+				64D514D31AB654AB00518E18 /* FindContour.cpp */,
 				64B8531C1A99505100A49E62 /* FeatureDetectorFPN.hpp */,
 				64B8531B1A99505100A49E62 /* FeatureDetectorFPN.cpp */,
 				6426E2341AB246FB007F021E /* ObjectDetectorFPN.hpp */,
@@ -346,6 +351,7 @@
 				6470AA011A956576009B4139 /* main.cpp in Sources */,
 				644F534B1AAA98F80035DD91 /* cli.cpp in Sources */,
 				6426E2351AB246FB007F021E /* ObjectDetectorFPN.cpp in Sources */,
+				64D514D51AB654AB00518E18 /* FindContour.cpp in Sources */,
 				6470A9FF1A956576009B4139 /* VideoProcess.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
