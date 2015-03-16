@@ -79,12 +79,7 @@ bool cli_parser::init()
     }
     
     if (ok){
-        ok = setup_hardcoded();
-        
-        // not found cfg hardcoded pipeline -- try to treat cfg as a xml file
-        if (!ok){
-            ok = import_from_file( get<string>( 0 ) );
-        }
+        ok = import_from_file( get<string>( 0 ) );
     }
     
     // if we are valid respect request to save v_argv into an xml file
@@ -288,65 +283,5 @@ bool cli_parser::export_to_file( string path )
     
     fs.release();
     
-    return ok;
-}
-
-// ............................................................. setup_hardcoded
-
-bool cli_parser::setup_hardcoded()
-{
-    path  = get<string>(0);
-    debug = has( "debug" );
-    argv_t args;
-    
-    // assume that cfg is a valid hardcoded option
-    bool ok = true;
-    
-    // assume that cfg is hardcoded video pipeline
-    if ( path == "hough-lines" ){
-        
-        args[ "fpn"    ] = "canny";
-        args[ "window" ] = "Canny";
-        
-        if ( debug ) args[ "dbg" ] = "";
-        v_argv.push_back( args );
-        
-        args[ "fpn"    ] = "houghLine";
-        args[ "window" ] = "HoughLines";
-        
-        if ( debug ) args[ "dbg" ] = "";
-        v_argv.push_back( args );
-    }
-    else
-    if ( path == "feature-detect" ){
-            
-        args[ "fpn"      ] = "featureDetect" ;
-        args[ "window"   ] = "OpenCV.3.0.0"  ;
-            
-        if ( has( "image" ) ){
-            string obj_path = get<string>( "image" );
-            // TODO: fix memory leak below!
-            args[ "obj_path" ] = strdup( obj_path.c_str() );
-        }
-        // use default?
-        else{
-        // NOTICE: obj_path is relative to executible in argv[0]!
-        // The build process copies it from data folder to a data
-        // subfolder in the product directory..
-            args[ "obj_path" ] = "data/20 USD note.png";
-        // args[ "obj_path" ] = "./data/black diamond.png";
-        // args[ "obj_path" ] = "./data/iittala_owl.jpg";
-        // args[ "obj_path" ] = "./data/flor.jpg";
-        // args[ "obj_path" ] = "./data/space monkey.jpg";
-        }
-        
-        if ( debug ) args[ "dbg" ] = "";
-            v_argv.push_back( args );
-        }
-        else{
-            ok = false;
-        }
-    
-    // ok means that harcode setup is a success
     return ok;
 }

@@ -44,7 +44,6 @@ public:
     
     bool init();
     bool setup_from_file();
-    bool setup_hardcoded();
 
     // .............................................................. destructor
     // TODO: FIXME: mem leak free v_argv!
