@@ -11,7 +11,10 @@
             <square_size>2</square_size>
             <dbg>true</dbg>
             <out>"./cam_calib.xml"</out>
-            <window>"Chess Board Camera Calibration"</window>
+            <window>"Chess Board Camera Calibration (10x7)"</window>
+            <pattern_comment>
+                "Use 10x7.pdf, do not override pattern!"
+            </pattern_comment>
         </_>
     </v_argv>
 </opencv_storage>

@@ -130,6 +130,8 @@
 		64D514D11AB6156000518E18 /* camera_cal.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = camera_cal.xml; sourceTree = "<group>"; };
 		64D514D31AB654AB00518E18 /* FindContour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FindContour.cpp; sourceTree = "<group>"; };
 		64D514D41AB654AB00518E18 /* FindContour.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FindContour.hpp; sourceTree = "<group>"; };
+		64D514D61AB7670400518E18 /* contour.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = contour.xml; sourceTree = "<group>"; };
+		64D514D71AB7671600518E18 /* 10x7.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = 10x7.pdf; sourceTree = "<group>"; };
 		64E835241A9FA0D7001C5256 /* FeatureFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FeatureFactory.cpp; sourceTree = "<group>"; };
 		64E835251A9FA0D8001C5256 /* FeatureFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FeatureFactory.hpp; sourceTree = "<group>"; };
 		64E835271A9FA519001C5256 /* ocvstd.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ocvstd.hpp; sourceTree = SOURCE_ROOT; };
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				6426E2371AB256A3007F021E /* lbpcascades */,
+				64D514D61AB7670400518E18 /* contour.xml */,
 				6426E2211AAB80C2007F021E /* hough.xml */,
 				6426E21F1AAB80C2007F021E /* feature-detect.xml */,
 				64D514D11AB6156000518E18 /* camera_cal.xml */,
@@ -179,6 +182,7 @@
 				6426E2201AAB80C2007F021E /* flor.jpg */,
 				6426E2221AAB80C2007F021E /* iittala_owl.jpg */,
 				6426E2231AAB80C2007F021E /* space monkey.jpg */,
+				64D514D71AB7671600518E18 /* 10x7.pdf */,
 			);
 			path = data;
 			sourceTree = "<group>";
