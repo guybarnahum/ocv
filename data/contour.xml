@@ -6,6 +6,8 @@
             <fpn>canny</fpn>
             <window>Canny</window>
             <dbg>true</dbg>
+            <low>50</low>
+            <high>150</high>
         </_>
         <_>
             <fpn>contour</fpn>
