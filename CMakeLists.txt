@@ -37,6 +37,15 @@ set(SOURCE_FILES
     FrameProcess/FindContour.cpp
     FrameProcess/ObjectDetectorFPN.cpp
     FrameProcess/ObjectDetectorFPN.hpp
+    FrameProcess/CcalibFPN.cpp
+    FrameProcess/CcalibFPN.hpp
+    FrameProcess/CascadeDetectorFPN.cpp
+    FrameProcess/CascadeDetectorFPN.hpp
+    FrameProcess/OpticalFlowFPN.cpp
+    FrameProcess/OpticalFlowFPN.hpp
+    ocvstd.hpp
+    Calibrate.hpp
+    Calibrate.cpp
     main.cpp
     utils.cpp
     VideoProcess.cpp
