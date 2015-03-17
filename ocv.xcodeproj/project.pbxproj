@@ -9,14 +9,14 @@
 /* Begin PBXBuildFile section */
 		6426E2241AAB8100007F021E /* 20 USD note.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E21D1AAB80C2007F021E /* 20 USD note.png */; };
 		6426E2251AAB8100007F021E /* black diamond.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E21E1AAB80C2007F021E /* black diamond.png */; };
-		6426E2261AAB8100007F021E /* feature-detect.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E21F1AAB80C2007F021E /* feature-detect.xml */; };
+		6426E2261AAB8100007F021E /* object-detect.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E21F1AAB80C2007F021E /* object-detect.xml */; };
 		6426E2271AAB8100007F021E /* flor.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2201AAB80C2007F021E /* flor.jpg */; };
 		6426E2281AAB8100007F021E /* hough.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2211AAB80C2007F021E /* hough.xml */; };
 		6426E2291AAB8100007F021E /* iittala_owl.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2221AAB80C2007F021E /* iittala_owl.jpg */; };
 		6426E22A1AAB8100007F021E /* space monkey.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2231AAB80C2007F021E /* space monkey.jpg */; };
 		6426E2301AAFAF34007F021E /* libopencv_tracking.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6426E22F1AAFAF34007F021E /* libopencv_tracking.3.0.0.dylib */; };
 		6426E2321AB131BA007F021E /* libopencv_ml.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6426E2311AB131BA007F021E /* libopencv_ml.3.0.0.dylib */; };
-		6426E2351AB246FB007F021E /* ObjectDetectorFPN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6426E2331AB246FB007F021E /* ObjectDetectorFPN.cpp */; };
+		6426E2351AB246FB007F021E /* CascadeDetectorFPN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6426E2331AB246FB007F021E /* CascadeDetectorFPN.cpp */; };
 		6426E2401AB25A9F007F021E /* face-detect.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2361AB255EA007F021E /* face-detect.xml */; };
 		6426E2411AB25AA9007F021E /* lbpcascade_frontalface.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E23E1AB2587F007F021E /* lbpcascade_frontalface.xml */; };
 		644F534B1AAA98F80035DD91 /* cli.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 644F53491AAA98F80035DD91 /* cli.cpp */; };
@@ -43,8 +43,12 @@
 		64B8532C1A9C320500A49E62 /* libopencv_objdetect.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8532A1A9C320500A49E62 /* libopencv_objdetect.3.0.0.dylib */; };
 		64B8532D1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8532B1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib */; };
 		64D514D01AB6078000518E18 /* CcalibFPN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64D514CE1AB6078000518E18 /* CcalibFPN.cpp */; };
-		64D514D21AB615F800518E18 /* camera_cal.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 64D514D11AB6156000518E18 /* camera_cal.xml */; };
+		64D514D21AB615F800518E18 /* calibrate-camera.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 64D514D11AB6156000518E18 /* calibrate-camera.xml */; };
 		64D514D51AB654AB00518E18 /* FindContour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64D514D31AB654AB00518E18 /* FindContour.cpp */; };
+		64D514DA1AB783FE00518E18 /* OpticalFlowFPN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64D514D81AB783FE00518E18 /* OpticalFlowFPN.cpp */; };
+		64D514DC1AB7894600518E18 /* optical-flow.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 64D514DB1AB7868500518E18 /* optical-flow.xml */; };
+		64D514DD1AB7894F00518E18 /* contour.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 64D514D61AB7670400518E18 /* contour.xml */; };
+		64D514E01AB7AE0400518E18 /* ObjectDetectorFPN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64D514DE1AB7AE0400518E18 /* ObjectDetectorFPN.cpp */; };
 		64E835261A9FA0D8001C5256 /* FeatureFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64E835241A9FA0D7001C5256 /* FeatureFactory.cpp */; };
 		64E835291AA7C23F001C5256 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64E835281AA7C23F001C5256 /* utils.cpp */; };
 /* End PBXBuildFile section */
@@ -56,12 +60,14 @@
 			dstPath = data;
 			dstSubfolderSpec = 16;
 			files = (
-				64D514D21AB615F800518E18 /* camera_cal.xml in CopyFiles */,
+				64D514DD1AB7894F00518E18 /* contour.xml in CopyFiles */,
+				64D514DC1AB7894600518E18 /* optical-flow.xml in CopyFiles */,
+				64D514D21AB615F800518E18 /* calibrate-camera.xml in CopyFiles */,
 				6426E2411AB25AA9007F021E /* lbpcascade_frontalface.xml in CopyFiles */,
 				6426E2401AB25A9F007F021E /* face-detect.xml in CopyFiles */,
 				6426E2241AAB8100007F021E /* 20 USD note.png in CopyFiles */,
 				6426E2251AAB8100007F021E /* black diamond.png in CopyFiles */,
-				6426E2261AAB8100007F021E /* feature-detect.xml in CopyFiles */,
+				6426E2261AAB8100007F021E /* object-detect.xml in CopyFiles */,
 				6426E2271AAB8100007F021E /* flor.jpg in CopyFiles */,
 				6426E2281AAB8100007F021E /* hough.xml in CopyFiles */,
 				6426E2291AAB8100007F021E /* iittala_owl.jpg in CopyFiles */,
@@ -74,7 +80,7 @@
 /* Begin PBXFileReference section */
 		6426E21D1AAB80C2007F021E /* 20 USD note.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "20 USD note.png"; sourceTree = "<group>"; };
 		6426E21E1AAB80C2007F021E /* black diamond.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black diamond.png"; sourceTree = "<group>"; };
-		6426E21F1AAB80C2007F021E /* feature-detect.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "feature-detect.xml"; sourceTree = "<group>"; };
+		6426E21F1AAB80C2007F021E /* object-detect.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "object-detect.xml"; sourceTree = "<group>"; };
 		6426E2201AAB80C2007F021E /* flor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = flor.jpg; sourceTree = "<group>"; };
 		6426E2211AAB80C2007F021E /* hough.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = hough.xml; sourceTree = "<group>"; };
 		6426E2221AAB80C2007F021E /* iittala_owl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iittala_owl.jpg; sourceTree = "<group>"; };
@@ -85,8 +91,8 @@
 		6426E22E1AAD60E3007F021E /* chrono_io */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chrono_io; sourceTree = "<group>"; };
 		6426E22F1AAFAF34007F021E /* libopencv_tracking.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_tracking.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_tracking.3.0.0.dylib; sourceTree = "<group>"; };
 		6426E2311AB131BA007F021E /* libopencv_ml.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_ml.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_ml.3.0.0.dylib; sourceTree = "<group>"; };
-		6426E2331AB246FB007F021E /* ObjectDetectorFPN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectDetectorFPN.cpp; sourceTree = "<group>"; };
-		6426E2341AB246FB007F021E /* ObjectDetectorFPN.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ObjectDetectorFPN.hpp; sourceTree = "<group>"; };
+		6426E2331AB246FB007F021E /* CascadeDetectorFPN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CascadeDetectorFPN.cpp; sourceTree = "<group>"; };
+		6426E2341AB246FB007F021E /* CascadeDetectorFPN.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CascadeDetectorFPN.hpp; sourceTree = "<group>"; };
 		6426E2361AB255EA007F021E /* face-detect.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "face-detect.xml"; sourceTree = "<group>"; };
 		6426E23D1AB2587F007F021E /* lbpcascade_profileface.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = lbpcascade_profileface.xml; sourceTree = "<group>"; };
 		6426E23E1AB2587F007F021E /* lbpcascade_frontalface.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = lbpcascade_frontalface.xml; sourceTree = "<group>"; };
@@ -127,11 +133,16 @@
 		64B8532B1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_optflow.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_optflow.3.0.0.dylib; sourceTree = "<group>"; };
 		64D514CE1AB6078000518E18 /* CcalibFPN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CcalibFPN.cpp; sourceTree = "<group>"; };
 		64D514CF1AB6078000518E18 /* CcalibFPN.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CcalibFPN.hpp; sourceTree = "<group>"; };
-		64D514D11AB6156000518E18 /* camera_cal.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = camera_cal.xml; sourceTree = "<group>"; };
+		64D514D11AB6156000518E18 /* calibrate-camera.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "calibrate-camera.xml"; sourceTree = "<group>"; };
 		64D514D31AB654AB00518E18 /* FindContour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FindContour.cpp; sourceTree = "<group>"; };
 		64D514D41AB654AB00518E18 /* FindContour.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FindContour.hpp; sourceTree = "<group>"; };
 		64D514D61AB7670400518E18 /* contour.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = contour.xml; sourceTree = "<group>"; };
 		64D514D71AB7671600518E18 /* 10x7.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = 10x7.pdf; sourceTree = "<group>"; };
+		64D514D81AB783FE00518E18 /* OpticalFlowFPN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpticalFlowFPN.cpp; sourceTree = "<group>"; };
+		64D514D91AB783FE00518E18 /* OpticalFlowFPN.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpticalFlowFPN.hpp; sourceTree = "<group>"; };
+		64D514DB1AB7868500518E18 /* optical-flow.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "optical-flow.xml"; sourceTree = "<group>"; };
+		64D514DE1AB7AE0400518E18 /* ObjectDetectorFPN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectDetectorFPN.cpp; sourceTree = "<group>"; };
+		64D514DF1AB7AE0400518E18 /* ObjectDetectorFPN.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ObjectDetectorFPN.hpp; sourceTree = "<group>"; };
 		64E835241A9FA0D7001C5256 /* FeatureFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FeatureFactory.cpp; sourceTree = "<group>"; };
 		64E835251A9FA0D8001C5256 /* FeatureFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FeatureFactory.hpp; sourceTree = "<group>"; };
 		64E835271A9FA519001C5256 /* ocvstd.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ocvstd.hpp; sourceTree = SOURCE_ROOT; };
@@ -174,8 +185,9 @@
 				6426E2371AB256A3007F021E /* lbpcascades */,
 				64D514D61AB7670400518E18 /* contour.xml */,
 				6426E2211AAB80C2007F021E /* hough.xml */,
-				6426E21F1AAB80C2007F021E /* feature-detect.xml */,
-				64D514D11AB6156000518E18 /* camera_cal.xml */,
+				64D514DB1AB7868500518E18 /* optical-flow.xml */,
+				6426E21F1AAB80C2007F021E /* object-detect.xml */,
+				64D514D11AB6156000518E18 /* calibrate-camera.xml */,
 				6426E2361AB255EA007F021E /* face-detect.xml */,
 				6426E21D1AAB80C2007F021E /* 20 USD note.png */,
 				6426E21E1AAB80C2007F021E /* black diamond.png */,
@@ -266,12 +278,16 @@
 				6470A9E91A956576009B4139 /* HoughFPNode.cpp */,
 				64D514CF1AB6078000518E18 /* CcalibFPN.hpp */,
 				64D514CE1AB6078000518E18 /* CcalibFPN.cpp */,
-				64D514D41AB654AB00518E18 /* FindContour.hpp */,
-				64D514D31AB654AB00518E18 /* FindContour.cpp */,
 				64B8531C1A99505100A49E62 /* FeatureDetectorFPN.hpp */,
 				64B8531B1A99505100A49E62 /* FeatureDetectorFPN.cpp */,
-				6426E2341AB246FB007F021E /* ObjectDetectorFPN.hpp */,
-				6426E2331AB246FB007F021E /* ObjectDetectorFPN.cpp */,
+				64D514DF1AB7AE0400518E18 /* ObjectDetectorFPN.hpp */,
+				64D514DE1AB7AE0400518E18 /* ObjectDetectorFPN.cpp */,
+				64D514D91AB783FE00518E18 /* OpticalFlowFPN.hpp */,
+				64D514D81AB783FE00518E18 /* OpticalFlowFPN.cpp */,
+				64D514D41AB654AB00518E18 /* FindContour.hpp */,
+				64D514D31AB654AB00518E18 /* FindContour.cpp */,
+				6426E2341AB246FB007F021E /* CascadeDetectorFPN.hpp */,
+				6426E2331AB246FB007F021E /* CascadeDetectorFPN.cpp */,
 			);
 			path = FrameProcess;
 			sourceTree = "<group>";
@@ -349,13 +365,15 @@
 				64D514D01AB6078000518E18 /* CcalibFPN.cpp in Sources */,
 				64E835261A9FA0D8001C5256 /* FeatureFactory.cpp in Sources */,
 				6470AA041A956601009B4139 /* CannyFPNode.cpp in Sources */,
+				64D514DA1AB783FE00518E18 /* OpticalFlowFPN.cpp in Sources */,
 				6470A9FA1A956576009B4139 /* HoughFPNode.cpp in Sources */,
 				6470A9F81A956576009B4139 /* FrameProcessNode.cpp in Sources */,
 				64E835291AA7C23F001C5256 /* utils.cpp in Sources */,
 				6470AA011A956576009B4139 /* main.cpp in Sources */,
 				644F534B1AAA98F80035DD91 /* cli.cpp in Sources */,
-				6426E2351AB246FB007F021E /* ObjectDetectorFPN.cpp in Sources */,
+				6426E2351AB246FB007F021E /* CascadeDetectorFPN.cpp in Sources */,
 				64D514D51AB654AB00518E18 /* FindContour.cpp in Sources */,
+				64D514E01AB7AE0400518E18 /* ObjectDetectorFPN.cpp in Sources */,
 				6470A9FF1A956576009B4139 /* VideoProcess.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

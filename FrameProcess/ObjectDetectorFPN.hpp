@@ -3,7 +3,7 @@
 //  ObjectDetectorFPN.hpp
 //  ocv
 //
-//  Created by Guy Bar-Nahum on 3/12/15.
+//  Created by Guy Bar-Nahum on 3/16/15.
 //  Copyright (c) 2015 DarwinLabs. All rights reserved.
 //
 // =============================================================================
@@ -11,83 +11,63 @@
 #ifndef ocv_ObjectDetectorFPN_hpp
 #define ocv_ObjectDetectorFPN_hpp
 
+// ==================================================================== includes
+
 #include "ocvstd.hpp"
-#include "FrameProcessNode.hpp"
-#include <opencv2/objdetect.hpp>
-#include <opencv2/xobjdetect.hpp>
-
-// ================================================ class CascadeDetectorAdapter
-
-class CascadeDetectorAdapter: public DetectionBasedTracker::IDetector
-{
-public:
-    CascadeDetectorAdapter(cv::Ptr<cv::CascadeClassifier> detector):
-    IDetector(),
-    Detector(detector)
-    {
-        CV_Assert(detector);
-    }
-    
-    void detect(const cv::Mat &Image, std::vector<cv::Rect> &objects)
-    {
-        Detector->detectMultiScale(Image, objects, scaleFactor, minNeighbours, 0, minObjSize, maxObjSize);
-    }
-    
-    virtual ~CascadeDetectorAdapter(){}
-    
-private:
-    CascadeDetectorAdapter();
-    cv::Ptr<cv::CascadeClassifier> Detector;
-};
-
+#include "FeatureDetectorFPN.hpp"
 
 // ================================================== class ObjectDetectorFPNode
 
-#define OBJECT_DETECTOR_NAME "ObjectDetector"
-#define OBJECT_DETECTOR_DESC "Cascade classifier detector based tracker"
-
-class ObjectDetectorFPNode : public FrameProcessNode {
- 
+class ObjectDetectorFPNode : public FeatureDetectorFPNode {
+    
 private:
     
-    // cascade format xml file
-    string obj_path;
+    typedef enum{
+        NONE,
+        DETECTED,
+        TRACKING,
+    }state_e;
+
+    // obj values are calculated once
+    string           obj_path;
+    Size             obj_size;
+    vector<Point2f>  obj_src;
     
-    // detector
-    Ptr<cv::CascadeClassifier> cascade;
-    Ptr<DetectionBasedTracker::IDetector> i_detector;
-    Ptr<DetectionBasedTracker::IDetector> i_tracker ;
-    DetectionBasedTracker::Parameters     params;
-    DetectionBasedTracker                *detector;
+    // output : location object in scene
+    vector<Point>    obj_dst;
+
+    bool setup( string path );
+    bool matcher_train();
+
+    state_e state;
     
-    // output : location of object in scene
-    // detector result
-    Mat gray;
+    void set_state( state_e st ){ state = st; }
+    const char * to_string( state_e st)
+    {
+        const char *str;
+        switch( st ){
+            default         : str = "UNKNOWN" ; break;
+            case NONE       : str = "NONE"    ; break;
+            case DETECTED   : str = "DETECTED"; break;
+            case TRACKING   : str = "TRACKING"; break;
+        }
+        
+        return str;
+    }
     
 public:
     
-    ObjectDetectorFPNode( char *name ):FrameProcessNode()
-    { init(); }
+     ObjectDetectorFPNode();
+    ~ObjectDetectorFPNode(){};
     
-    ObjectDetectorFPNode():FrameProcessNode()
-    { init(); }
-    
-    bool init()
-    {
-        set_name( OBJECT_DETECTOR_NAME );
-        set_desc( OBJECT_DETECTOR_DESC );
-        
-        return true;
-    }
-    
-    ~ObjectDetectorFPNode(){
-        delete detector;
-    }
-    
-    // ......................................................... virtual methods
-    virtual bool process_one_frame();
-    virtual bool setup( argv_t *argv );
+    bool obj_transform();
+    bool track();
+    bool is_valid_rect( vector<Point> &poly, double min_area = 0 );
 
+    // ....................................................... overriden methods
+
+    bool setup( argv_t *argv );
+    bool process_one_frame();
 };
 
-#endif /* defined(__ocv__ObjectDetectorFPN__) */
+#endif /* defined(ocv_ObjectDetectorFPN_hpp) */

@@ -13,7 +13,7 @@
             <out>"./cam_calib.xml"</out>
             <window>"Chess Board Camera Calibration (10x7)"</window>
             <pattern_comment>
-                "Use 10x7.pdf, do not override pattern!"
+                "Use 10x7.pdf as marker, do not change board size!"
             </pattern_comment>
         </_>
     </v_argv>

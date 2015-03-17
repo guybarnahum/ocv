@@ -11,7 +11,6 @@
             <fpn>contour</fpn>
             <window>Contours</window>
             <dbg>true</dbg>
-            <method>lines</method>
         </_>
     </v_argv>
 </opencv_storage>

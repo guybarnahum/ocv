@@ -7,9 +7,8 @@
             <height>480</height>
         </_>
         <_>
-            <fpn>cascadeDetect</fpn>
-            <obj_path>"data/lbpcascades/lbpcascade_frontalface.xml"</obj_path>
-            <window>Faces</window>
+            <fpn>opticalFlow</fpn>
+            <window>"Optical Flow"</window>
             <dbg>true</dbg>
         </_>
     </v_argv>

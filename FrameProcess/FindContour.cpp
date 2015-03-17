@@ -46,7 +46,7 @@ bool FindContour::process_one_frame()
 
         /// Draw contours
         for (int i = 0; i < contours.size(); i++) {
-            drawContours(out, contours, i, Scalar(0,255,0), 2, 8, hierarchy, 0, Point());
+            drawContours(out, contours, i, OCV_GREEN, 2, 8, hierarchy, 0, Point());
         }
 
         /// Show in a window

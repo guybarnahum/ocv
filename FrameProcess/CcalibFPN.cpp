@@ -28,6 +28,16 @@ CcalibFPNode::CcalibFPNode():FrameProcessNode()
             CALIB_ZERO_TANGENT_DIST     |
             CALIB_FIX_ASPECT_RATIO      ;
     
+    //
+    // NOTICE:
+    //
+    // OCV findChessboardCorners is super tricky to workwith and
+    // somewhat high-level. Google it and you'll see. Only very special
+    // board config acturally are found. One is the famous 10x7.pdf
+    // See it in data/10x7.pdf
+    //
+    // This is why board size is not an argument!
+    //
     board_size  = Size( 10, 7);
     square_size = 1;
     

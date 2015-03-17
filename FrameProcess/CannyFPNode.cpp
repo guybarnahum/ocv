@@ -63,12 +63,16 @@ bool CannyFPNode::setup( argv_t *argv )
     string msg = ( high < low * 3 )? "(not recommended!)" : "";
     LOG( LEVEL_INFO ) << "high threshold: " << high << msg;
     
-    // .................................... low threshold
+    // ................................... sobel kernel
     if (ok) ok = get_val_int( argv, "kernel", ker  );
     if (ok){
-        ok = is_odd_num( ker );
+        ok = is_odd_num( ker ) && (ker > 1);
         if (!ok){
-            set_err( INVALID_ARGS, "kernel has to be an odd number!" );
+            string  msg  = "kernel has to be an odd number";
+                    msg += "that is greater than one!";
+                    msg += " (Just use 3)";
+            
+            set_err( INVALID_ARGS, msg );
         }
     }
     LOG( LEVEL_INFO ) << "kernel: " << ker ;

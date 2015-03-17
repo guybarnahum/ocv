@@ -13,10 +13,11 @@
 #include "FrameProcessNodeFactory.hpp"
 #include "HoughFPNode.hpp"
 #include "CannyFPNode.hpp"
-#include "FeatureDetectorFPN.hpp"
-#include "ObjectDetectorFPN.hpp"
+#include "CascadeDetectorFPN.hpp"
 #include "CcalibFPN.hpp"
 #include "FindContour.hpp"
+#include "ObjectDetectorFPN.hpp"
+#include "OpticalFlowFPN.hpp"
 
 // ========================================================= FrameProcessFactory
 
@@ -35,16 +36,20 @@ FrameProcessNode *FrameProcessNodeFactory::make( const char* name )
     if ( STR_EQ( name, "canny"  ) )
         fp = (FrameProcessNode *) new CannyFPNode();
     else
-    if ( STR_EQ( name, "featureDetect" ) )
-        fp = (FrameProcessNode *) new FeatureDetectorFPNode();
+    if ( STR_EQ( name, "cascadeDetect" ) )
+        fp = (FrameProcessNode *) new CascadeDetectorFPNode();
+    else
+    if ( STR_EQ( name, "ccalib" ) )
+        fp = (FrameProcessNode *) new CcalibFPNode();
+    else
+    if ( STR_EQ( name, "contour"   )  )
+        fp = (FrameProcessNode *) new FindContour();
     else
     if ( STR_EQ( name, "objectDetect" ) )
         fp = (FrameProcessNode *) new ObjectDetectorFPNode();
     else
-    if ( STR_EQ( name, "ccalib" ) )
-        fp = (FrameProcessNode *) new CcalibFPNode();
-    if ( STR_EQ( name, "contour"   )  )
-        fp = (FrameProcessNode *) new FindContour();
+    if ( STR_EQ( name, "opticalFlow"   )  )
+        fp = (FrameProcessNode *) new OpticalFlowFPNode();
     else
     if ( STR_EQ( name, "nullProcess" )  ){
         fp = new FrameProcessNode();

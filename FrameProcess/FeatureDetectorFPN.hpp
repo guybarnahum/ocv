@@ -20,7 +20,7 @@
 
 class FeatureDetectorFPNode : public FrameProcessNode {
     
-private:
+protected:
     // ................................................................... const
     const int    MIN_INLINERS_DEFAULT = 8;
     
@@ -33,49 +33,33 @@ private:
     Ptr<DescriptorMatcher>   matcher;
     Ptr<Tracker>             tracker;
     
-    // ............................... settings
+    // settings
     int              min_inliers;
     bool             enable_tracking;   // TODO: Remove once tracking is working
     bool             do_knn_match;
     bool             do_refine_homography;
+    const char*      dbg_window;
     
-    // ................................. object
-    // obj values are calculated once
-    string           obj_path;
-    Size             obj_size;
-    vector<Point2f>  obj_corners;
-
-    Mat              obj_mat;
-    vector<KeyPoint> obj_keypoints;
-    Mat              obj_descriptors;
+    Mat              src_mat;
+    vector<KeyPoint> src_keypoints;
+    Mat              src_descriptors;
     
     // scene values are calculated per frame
-    Mat              scn_mat;
-    vector<KeyPoint> scn_keypoints;
-    Mat              scn_descriptors;
+    Mat              dst_mat;
+    vector<KeyPoint> dst_keypoints;
+    Mat              dst_descriptors;
     
     // homography
-    vector<DMatch> matches;
+    bool            is_trained;
+    vector<DMatch>  matches;
 
-    vector<Point2f> obj_good_kpts;
-    vector<Point2f> scn_good_kpts;
-    
+    vector<Point2f> src_good_kpts;
+    vector<Point2f> dst_good_kpts;
+    Mat             matches_mat;
+
     Mat             H_rough;
-    
-    // output : location of object in scene
-    vector<Point> pts;
-
-    // .................................................................
-    // tracking result
-    typedef enum{
-            NONE,
-            DETECTED,
-            TRACKING,
-    }state_e;
-    
-    state_e state;
-    Rect2d  scn_rect;
-    
+    Mat             H;
+        
     // ................................................................. methods
     
     bool init( const char *dtct_name  = nullptr ,
@@ -88,9 +72,6 @@ private:
     bool init_matcher  ( const char *name = nullptr );
     bool init_tracker  ( const char *name = nullptr );
 
-    bool setup( string path ); // object path
-    bool matcher_train();
-
     // match .. detect .. track ..
     bool match();
     bool knn_match();
@@ -99,24 +80,7 @@ private:
 
     bool matched_keypoints();
     bool find_homography();
-    bool is_valid_rect( vector<Point> &poly, double min_area = 0 );
-    
-    // ............................ state
-    
-    void set_state( state_e st ){ state = st; }
-    const char * to_string( state_e st)
-    {
-        const char *str;
-        switch( st ){
-            default         : str = "UNKNOWN" ; break;
-            case NONE       : str = "NONE"    ; break;
-            case DETECTED   : str = "DETECTED"; break;
-            case TRACKING   : str = "TRACKING"; break;
-        }
         
-        return str;
-    }
-    
 public:
     
     // ................................................ constractor / destractor

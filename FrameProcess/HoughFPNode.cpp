@@ -64,7 +64,7 @@ HoughFPNode::process_one_frame()
                 Vec4i l = lines[ ix ];
             
                 line( out,   Point( l[0], l[1] ), Point( l[2], l[3] ),
-                                         Scalar(0,0,255), 3, LINE_AA);
+                                         OCV_RED, 3, LINE_AA);
             
                 LOG( LEVEL_DEV ) << "("   << l[0] << "," << l[1] <<
                                     ")-(" << l[3] << "," << l[4] << ")" ;
@@ -78,7 +78,7 @@ HoughFPNode::process_one_frame()
                 int   radius = cvRound(circles[ix][2]);
                 
                 // draw the circle outline
-                circle( out, center, radius, Scalar(0,255,0), 3, 8, 0 );
+                circle( out, center, radius, OCV_GREEN, 3, 8, 0 );
             }
         }
         

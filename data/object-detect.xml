@@ -7,9 +7,9 @@
         <height>480</height>
     </_>
     <_>
+        <fpn>objectDetect</fpn>
         <obj_path>"data/20 USD note.png"</obj_path>
         <window>"20 USD detect"</window>
-        <fpn>featureDetect</fpn>
         <dbg>true</dbg>
         <knn_match>true</knn_match>
         <inliers>12</inliers>

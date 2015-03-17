@@ -11,7 +11,7 @@
 #ifndef ocv_CcalibFPN_hpp
 #define ocv_CcalibFPN_hpp
 
-// ===================================================================== include
+// ==================================================================== includes
 
 #include "ocvstd.hpp"
 #include "FrameProcessNode.hpp"
@@ -23,22 +23,33 @@ class CcalibFPNode : public FrameProcessNode {
     
 private:
     
-    // settings
-    Size    board_size;          // number of sqaures by width and height
-    float   square_size;         // The size of a square in your defined unit (point, millimeter,etc).
+    // Settings
+    
+    // NOTICE:
+    //
+    // OCV findChessboardCorners is super tricky to workwith and
+    // somewhat high-level. Google it and you'll see. Only very special
+    // board config acturally are found. One is the famous 10x7.pdf
+    // See it in data/10x7.pdf
+    //
+    // This is why board size is not an argument!
+
+    Size    board_size;         // number of sqaures by width and height
+    float   square_size;        // The size of a square in units
+                                // (point, millimeter,etc).
     int     flags;
     
-    // samples
+    // detected samples
     vector< vector<Point2f> > cal_points;
+
+    // state
+    bool use_frame;
+    int  min_capture_frames;
 
     // output
     string  xml;                 // calibration file
     Size    frame_size;          // frame size
     float   aspect_ratio;        // The aspect ratio
-    
-    // state
-    bool   use_frame;
-    int    min_capture_frames;
     
     vector<Mat> rvecs;
     vector<Mat> tvecs;
@@ -49,12 +60,11 @@ private:
     Mat           cam_mat;
     Mat           dist_coeffs;
     
-    
     bool   detect_chessboard( Mat &in );
     bool   calc_boardCornerPositions( vector<Point3f>& corners );
     double calc_reprojectionErrors( const vector<vector<Point3f> >& obj_points);
     
-    bool calc_and_save();
+    // actions
     bool calc();
     bool save( string xml );
 

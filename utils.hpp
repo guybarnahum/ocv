@@ -245,4 +245,17 @@ void  print_err( bool reset_errs = true );
 
 using namespace OcvError;
 
+// ==================================================================== OcvColor
+
+namespace OcvColor{
+
+#define OCV_BLUE    Scalar(255,0,0)
+#define OCV_GREEN   Scalar(0,255,0)
+#define OCV_RED     Scalar(0,0,255)
+#define OCV_WHITE   Scalar(255,255,255)
+    
+}
+
+using namespace OcvColor;
+
 #endif

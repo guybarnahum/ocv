@@ -63,16 +63,20 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "data/optical-flow.xml"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "data/hough.xml"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "data/feature-detect.xml"
-            isEnabled = "NO">
+            argument = "data/object-detect.xml"
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "data/camera_cal.xml"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "&quot;data/5 USD note.png&quot;"
