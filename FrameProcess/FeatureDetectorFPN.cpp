@@ -23,16 +23,15 @@ bool FeatureDetectorFPNode::init_detector( const char *requested_name )
     
     if ( ok ){
         // .............................. set name / desc
-        string str;
-        str  = "<FPN:FeatureDetector>";
-        set_name( str.c_str() );
-        
+        string str = "FeatureDetector:"; str += name;
+        set_name( str );
+
         str  = "<detector:'"; str += (name? name : ""); str += "'>\n";
-        set_desc( str.c_str() );
+        set_desc( str );
     }
     else{
         string msg = "<invalid detector:'"; msg+=(name? name:"?"); msg += "'>";
-        set_err( INVALID_ARGS, msg.c_str() );
+        set_err( INVALID_ARGS, msg );
     }
     
     return ok;
@@ -65,7 +64,7 @@ bool FeatureDetectorFPNode::init_matcher  ( const char *requested_name  )
     
     if ( ok ){
         string desc( get_desc() );
-        desc += "<matcher:'"; desc += name? name : "default"; desc += "'>\n";
+        desc += "<matcher:'"; desc += name? name : "default"; desc += "'>";
         set_desc( desc.c_str() );
     }
     else{
@@ -101,6 +100,13 @@ bool FeatureDetectorFPNode::init( const char *dtct_name  ,
                                   const char *match_name ,
                                   const char *trckr_name )
 {
+    // init context structs
+    src = &ctx1;
+    dst = &ctx2;
+    
+    invalidate( src );
+    invalidate( dst );
+
     bool      ok = init_detector ( dtct_name  );
     if ( ok ) ok = init_extractor( xtrct_name );
     if ( ok ) ok = init_matcher  ( match_name );
@@ -194,6 +200,34 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
 //
 // =============================================================================
 
+// ............................................................... matcher_train
+// pre-cache the obj_descriptors for fast compare with scenes
+// notice that it is possible to train for multiple objects (unimplemented)
+//
+
+bool FeatureDetectorFPNode::matcher_train( Mat desc, bool clear_old )
+{
+    // API of cv::DescriptorMatcher is somewhat tricky
+    //  clear old train data or retain?
+    if ( clear_old ) matcher->clear();
+    
+    // Then we add vector of descriptors (each descriptors matrix describe
+    // one object). This allows us to perform search across multiple objects:
+    vector<Mat> obj_dsc(1);
+    obj_dsc[0] = src->descriptors.clone();
+    matcher->add( obj_dsc );
+    
+    // We have train data, now train
+    matcher->train();
+    is_trained = true;
+    
+    LOG( LEVEL_INFO ) << "trained matcher with " << src->keypoints.size()
+                                                 << " keypoints";
+    
+    // TODO: No way to fail? This is crazy!
+    return is_trained;
+}
+
 // ................................................................... knn_match
 //
 // knn match strategy
@@ -220,14 +254,24 @@ bool FeatureDetectorFPNode::knn_match()
     // we assume that while best match can be zero, while better match is
     // allways non zero!
     const float min_ratio = 1.f / 1.5f;
-        
+    
+    // mark src and dst order in the match, this is needed for operations
+    // that preserve the match order when using matches
+    
     // KNN match will return 2 nearest matches for each query descriptor
     try{
         if ( is_trained ){ // matcher is already primed with src_descriptors
-            matcher->knnMatch( dst_descriptors, knn_matches, 2);
+            src->query = true;
+            dst->query = false;
+            
+            matcher->knnMatch( dst->descriptors, knn_matches, 2);
         }
         else{
-            matcher->knnMatch( src_descriptors, dst_descriptors, knn_matches,2);
+            src->query = false;
+            dst->query = true;
+            
+            matcher->knnMatch( src->descriptors,
+                               dst->descriptors, knn_matches,2);
         }
     }
     catch( Exception e ){
@@ -261,12 +305,23 @@ bool FeatureDetectorFPNode::match()
 {
     matches.clear();
     
+    // mark src and dst order in the match, this is needed for operations
+    // that preserve the match order when using matches
+    src->query = false;
+    dst->query = true;
+
     try{
         if ( is_trained ){ // matcher is already primed with src_descriptors
-            matcher->match( dst_descriptors, matches );
+            src->query = true;
+            dst->query = false;
+
+            matcher->match( dst->descriptors, matches );
         }
         else{
-            matcher->match( src_descriptors, dst_descriptors, matches );
+            src->query = false;
+            dst->query = true;
+            
+            matcher->match( src->descriptors, dst->descriptors, matches );
         }
     }
     catch( Exception e ){
@@ -277,7 +332,7 @@ bool FeatureDetectorFPNode::match()
     double max_dist = 0; double min_dist = 100;
     
     //-- Quick calculation of max and min distances between keypoints
-    for( int ix = 0; ix < src_descriptors.rows; ix++ ){
+    for( int ix = 0; ix < src->descriptors.rows; ix++ ){
         
         double dist = matches[ix].distance;
         
@@ -288,7 +343,7 @@ bool FeatureDetectorFPNode::match()
     // keep only "good" matches (i.e. whose distance is less than 3 * min_dist )
     std::vector< DMatch > good_matches;
     
-    for( int ix = 0; ix < src_descriptors.rows; ix++ ){
+    for( int ix = 0; ix < src->descriptors.rows; ix++ ){
         if( matches[ ix ].distance < 3 * min_dist ){
             good_matches.push_back( matches[ix]);
         }
@@ -311,19 +366,36 @@ bool FeatureDetectorFPNode::matched_keypoints()
 {
     // use matches to define homography keypoints
     
-    size_t src_kpts_num = src_keypoints.size();
-    size_t dst_kpts_num = dst_keypoints.size();
+    size_t src_kpts_num = src->keypoints.size();
+    size_t dst_kpts_num = dst->keypoints.size();
 
-    src_good_kpts.clear();
-    dst_good_kpts.clear();
+    src->good_kpts.clear();
+    dst->good_kpts.clear();
 
+    size_t src_ix = 0;
+    size_t dst_ix = 0;
+
+    // good_keypoints from the matches
+    
     for( int ix = 0 ; ix < matches.size(); ix++ ){
     
-        // get keypoints from the good matches
-    
-        size_t src_ix = matches[ ix ].trainIdx;
-        size_t dst_ix = matches[ ix ].queryIdx;
-    
+        // respect the query flag that was set during match - not the names..
+        
+        // NOTICE: due to OCV bug, the order of the Idx swapped!
+        // It works this way, but not the right way!
+        
+        if ( src->query ){
+            src_ix = matches[ ix ].trainIdx;
+            dst_ix = matches[ ix ].queryIdx;
+        }
+        else
+        if ( dst->query ){
+            src_ix = matches[ ix ].queryIdx;
+            dst_ix = matches[ ix ].trainIdx;
+        }
+        
+        OCV_ASSERT( (dst->query && !src->query)||(!dst->query && src->query) );
+        
         // be carefull with indexs
         OCV_ASSERT( src_ix < src_kpts_num );
         OCV_ASSERT( dst_ix < dst_kpts_num );
@@ -332,12 +404,12 @@ bool FeatureDetectorFPNode::matched_keypoints()
     
         if (valid_pt){
             // indexes are valid..
-            src_good_kpts.push_back( src_keypoints[ src_ix ].pt );
-            dst_good_kpts.push_back( dst_keypoints[ dst_ix ].pt );
+            src->good_kpts.push_back( src->keypoints[ src_ix ].pt );
+            dst->good_kpts.push_back( dst->keypoints[ dst_ix ].pt );
         }
     }
     
-    bool ok = dst_good_kpts.size() > min_inliers;
+    bool ok = dst->good_kpts.size() > min_inliers;
     return ok;
 }
 
@@ -351,8 +423,8 @@ bool FeatureDetectorFPNode::find_homography()
     if ( ok ){
 
         // Find homography matrix and get inliers mask
-        vector<char> inliers_mask( src_good_kpts.size() );
-        H = H_rough = findHomography ( src_good_kpts, dst_good_kpts,
+        vector<char> inliers_mask( src->good_kpts.size() );
+        H = H_rough = findHomography ( src->good_kpts, dst->good_kpts,
                                        FM_RANSAC, 3.0, inliers_mask );
 
         ok = !H.empty();
@@ -372,25 +444,44 @@ bool FeatureDetectorFPNode::find_homography()
     return ok;
 }
 
-// ...................................................................... detect
-bool FeatureDetectorFPNode::detect()
-{    
-    // If not trained prepare the src keypoints and descriptors
-    if ( !is_trained ){
-        src_keypoints.clear();
-        detector->detect  ( src_mat, src_keypoints );
-        extractor->compute( src_mat, src_keypoints ,src_descriptors );
+// .................................................................. invalidate
+
+bool FeatureDetectorFPNode::invalidate( FeatureDetector_ctx *ctx )
+{
+    bool ok = ( ctx != nullptr );
+    if ( ok )   ctx->ready = false;
+    return ok;
+}
+
+// ..................................................................... prepare
+
+bool FeatureDetectorFPNode::prepare( FeatureDetector_ctx *ctx, bool force )
+{
+    bool ok = ( ctx != nullptr );
+    
+    if ( ok && ( force || (!ctx->ready) ) ){
+        ctx->keypoints.clear();
+        detector->detect( ctx->mat, ctx->keypoints );
+        extractor->compute( ctx->mat, ctx->keypoints ,ctx->descriptors );
+        ctx->ready = true;
     }
     
-    dst_keypoints.clear();
-    detector->detect  ( dst_mat, dst_keypoints );
-    extractor->compute( dst_mat, dst_keypoints , dst_descriptors );
+    return ok;
+}
+
+// ...................................................................... detect
+
+bool FeatureDetectorFPNode::detect()
+{    
+    prepare( src );
+    prepare( dst );
     
-    bool   found = ( do_knn_match? knn_match() : match() ) && find_homography();
+    bool   found = do_knn_match? knn_match() : match();
     return found;
 }
 
 // ........................................................... process_one_frame
+
 bool FeatureDetectorFPNode::process_one_frame()
 {
     // Sanity checks
@@ -407,13 +498,12 @@ bool FeatureDetectorFPNode::process_one_frame()
         base->copyTo( out );
         
         try{
-            drawMatches( out, dst_keypoints, src_mat, src_keypoints,
+            drawMatches( out, dst->keypoints, src->mat, src->keypoints,
                         matches, matches_mat,
                         Scalar::all(-1), Scalar::all(-1),
                         vector<char>() ,
                         DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS |
                         DrawMatchesFlags::DRAW_RICH_KEYPOINTS    );
-            
         }
         catch( Exception e ){
             LOG( LEVEL_WARNING ) << e.what();

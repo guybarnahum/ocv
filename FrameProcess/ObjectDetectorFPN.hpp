@@ -34,11 +34,10 @@ private:
     vector<Point2f>  obj_src;
     
     // output : location object in scene
-    vector<Point>    obj_dst;
+    vector<Point2f>  obj_dst;
+    vector<Point2i>  obj_dst2i;
 
     bool setup( string path );
-    bool matcher_train();
-
     state_e state;
     
     void set_state( state_e st ){ state = st; }
@@ -60,9 +59,8 @@ public:
      ObjectDetectorFPNode();
     ~ObjectDetectorFPNode(){};
     
-    bool obj_transform();
-    bool track();
-    bool is_valid_rect( vector<Point> &poly, double min_area = 0 );
+    bool track_obj ();
+    bool detect_obj();
 
     // ....................................................... overriden methods
 

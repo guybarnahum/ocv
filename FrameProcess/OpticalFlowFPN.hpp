@@ -21,10 +21,7 @@
 class OpticalFlowFPNode : public FeatureDetectorFPNode {
 
 private:
-    
-    vector<Point2f> *curr_keypoints;
-    vector<Point2f> *last_keypoints;
-    
+
 public:
     
      OpticalFlowFPNode();

@@ -22,6 +22,7 @@ void to_key( int key, string &s_key );
 inline bool is_odd_num( int num ){ return (( num & 1 ) == 1 ); }
     
 // ================================================================== file utils
+
 bool  file_exists ( string  path );
 bool  file_to_path( string &path );
 char *path_to_file( char*   path );
@@ -79,7 +80,9 @@ inline long long duration_ms()
     return now_ms() - base_ms ;
 }
 
-// =================================================================== log utils
+// =============================================================================
+//                                                                     log utils
+// =============================================================================
 //
 // Taken from : http://www.drdobbs.com/cpp/logging-in-c/201804215
 //
@@ -89,6 +92,7 @@ inline long long duration_ms()
 // LOG::reporting_level() = LOG_DEBUG;
 // output_to_file::stream() = fopen( "mylogfile.txt", "w" );;
 //
+// =============================================================================
 
 #include <sstream>
 #include <string>
@@ -223,24 +227,24 @@ else LOG().get( level )
 
 namespace OcvError{
 
-typedef size_t err_t;
-    
-// built in errs
-extern err_t OK;
-extern err_t UNKNOWN;
-extern err_t INVALID_ARGS;
-extern err_t FILE_IO;
-extern err_t INCOMPATIBLE;
-extern err_t XML_ERR;
-extern err_t NOT_READY;
-extern err_t OCV_FILE_STORAGE;
-extern err_t OCV_EXCEPTION;
+    typedef size_t err_t;
+        
+    // built in errs
+    extern err_t OK;
+    extern err_t UNKNOWN;
+    extern err_t INVALID_ARGS;
+    extern err_t FILE_IO;
+    extern err_t INCOMPATIBLE;
+    extern err_t XML_ERR;
+    extern err_t NOT_READY;
+    extern err_t OCV_FILE_STORAGE;
+    extern err_t OCV_EXCEPTION;
 
-bool  init_err();
-err_t make_err( string err_msg, size_t err_code = 0 );
-err_t last_err();
-err_t set_err( err_t err, string desc = "" );
-void  print_err( bool reset_errs = true );
+    bool  init_err();
+    err_t make_err( string err_msg, size_t err_code = 0 );
+    err_t last_err();
+    err_t set_err( err_t err, string desc = "" );
+    void  print_err( bool reset_errs = true );
 }
 
 using namespace OcvError;
@@ -257,5 +261,32 @@ namespace OcvColor{
 }
 
 using namespace OcvColor;
+
+// ====================================================== geometry / conversions
+
+bool gray( const Mat &mat, Mat &gray );
+bool round_points_2f( vector<Point2f> &points_v );
+double poly_area( const vector<Point2f> &poly );
+double mat_area( const Mat &m );
+
+// ======================================================================== draw
+
+void drawArrows(Mat& draw_mat,
+                const vector<Point2f>& fromPts,
+                const vector<Point2f>& toPts,
+                const Scalar& color = OCV_WHITE,
+                const int line_thickness = 1,
+                const double size = 5.      ,
+                const double threshold = 3. );
+
+void drawArrows(Mat& draw_mat,
+                const vector<Point2f>& fromPts,
+                const vector<Point2f>& toPts  ,
+                const vector<uchar>&   use    ,
+                const vector<float>&   verror ,
+                const Scalar& color = OCV_WHITE,
+                const int line_thickness = 1,
+                const double size = 5.      ,
+                const double threshold = 3. );
 
 #endif

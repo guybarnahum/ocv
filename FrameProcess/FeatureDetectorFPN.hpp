@@ -17,6 +17,17 @@
 #include "FrameProcessNode.hpp"
 
 // ================================================= class FeatureDetectorFPNode
+typedef struct {
+    
+    bool             ready;
+    bool             query; // is it the query in the match operation?
+    
+    Mat              mat;
+    vector<KeyPoint> keypoints;
+    Mat              descriptors;
+    vector<Point2f>  good_kpts;
+
+} FeatureDetector_ctx;
 
 class FeatureDetectorFPNode : public FrameProcessNode {
     
@@ -26,8 +37,7 @@ protected:
     
     // ................................................................. members
     
-    // ......................... ocv algorithms
-    
+    // ocv algos
     Ptr<FeatureDetector>     detector;
     Ptr<DescriptorExtractor> extractor;
     Ptr<DescriptorMatcher>   matcher;
@@ -40,21 +50,18 @@ protected:
     bool             do_refine_homography;
     const char*      dbg_window;
     
-    Mat              src_mat;
-    vector<KeyPoint> src_keypoints;
-    Mat              src_descriptors;
+    // context
+    FeatureDetector_ctx ctx1;
+    FeatureDetector_ctx ctx2;
     
-    // scene values are calculated per frame
-    Mat              dst_mat;
-    vector<KeyPoint> dst_keypoints;
-    Mat              dst_descriptors;
+    FeatureDetector_ctx *src;
+    FeatureDetector_ctx *dst;
+    
+    void swap_src_dst(){ FeatureDetector_ctx *tmp = src; src = dst; dst = tmp;}
     
     // homography
     bool            is_trained;
     vector<DMatch>  matches;
-
-    vector<Point2f> src_good_kpts;
-    vector<Point2f> dst_good_kpts;
     Mat             matches_mat;
 
     Mat             H_rough;
@@ -72,15 +79,19 @@ protected:
     bool init_matcher  ( const char *name = nullptr );
     bool init_tracker  ( const char *name = nullptr );
 
-    // match .. detect .. track ..
+    // train.. match .. detect .. track ..
+    bool prepare   ( FeatureDetector_ctx *ctx, bool force = false );
+    bool invalidate( FeatureDetector_ctx *ctx );
+
+    bool matcher_train( Mat desc, bool clear_old = true );
     bool match();
     bool knn_match();
     bool detect();
     bool track();
+    bool find_homography();
 
     bool matched_keypoints();
-    bool find_homography();
-        
+    
 public:
     
     // ................................................ constractor / destractor

@@ -20,10 +20,15 @@
 ObjectDetectorFPNode::ObjectDetectorFPNode():FeatureDetectorFPNode()
 {
     // prepare object location
-    obj_dst.push_back( Point( 0, 0 ));
-    obj_dst.push_back( Point( 0, 0 ));
-    obj_dst.push_back( Point( 0, 0 ));
-    obj_dst.push_back( Point( 0, 0 ));
+    obj_dst.push_back  ( Point2f( 0, 0 ) );
+    obj_dst.push_back  ( Point2f( 0, 0 ) );
+    obj_dst.push_back  ( Point2f( 0, 0 ) );
+    obj_dst.push_back  ( Point2f( 0, 0 ) );
+    
+    obj_dst2i.push_back( Point2i( 0, 0 ) );
+    obj_dst2i.push_back( Point2i( 0, 0 ) );
+    obj_dst2i.push_back( Point2i( 0, 0 ) );
+    obj_dst2i.push_back( Point2i( 0, 0 ) );
     
     // state of obj_dst -- none, detect, track, repeat as needed
     state = NONE ;
@@ -31,16 +36,14 @@ ObjectDetectorFPNode::ObjectDetectorFPNode():FeatureDetectorFPNode()
 
 // ....................................................................... setup
 
-// .............................................................. setup obj_path
-
 bool ObjectDetectorFPNode::setup( string path )
 {
     bool ok = file_to_path( path );
     
     if (ok){
         try{
-            src_mat = imread( obj_path, IMREAD_GRAYSCALE );
-            ok = !src_mat.empty();
+            src->mat = imread( obj_path, IMREAD_GRAYSCALE );
+            ok = !src->mat.empty();
         }
         catch( Exception e ){
             set_err( INVALID_ARGS, e.what() );
@@ -50,56 +53,26 @@ bool ObjectDetectorFPNode::setup( string path )
     
     if (ok){
         
-        obj_src.push_back( Point2f( 0           , 0            ));
-        obj_src.push_back( Point2f( src_mat.cols, 0            ));
-        obj_src.push_back( Point2f( src_mat.cols, src_mat.rows ));
-        obj_src.push_back( Point2f( 0           , src_mat.rows ));
+        obj_src.push_back( Point2f( 0            , 0            ));
+        obj_src.push_back( Point2f( src->mat.cols, 0            ));
+        obj_src.push_back( Point2f( src->mat.cols, src->mat.rows ));
+        obj_src.push_back( Point2f( 0            , src->mat.rows ));
         
-        src_keypoints.clear();
-        
-        detector->detect  ( src_mat, src_keypoints );
-        extractor->compute( src_mat, src_keypoints , src_descriptors);
-        matcher_train();
-        is_trained = true;
-        
-        LOG( LEVEL_INFO ) << "trained matcher with " <<
-                            src_keypoints.size() << " keypoints";
+        invalidate( src );
+        prepare( src );
+        matcher_train( src->descriptors );
     }
     
     if ( ok && dbg ){
         
-        drawKeypoints( src_mat, src_keypoints, src_mat       ,
+        drawKeypoints( src->mat, src->keypoints, src->mat      ,
                       DrawMatchesFlags::DRAW_OVER_OUTIMG    |
                       DrawMatchesFlags::DRAW_RICH_KEYPOINTS );
         
-        window_show( obj_path.c_str(), src_mat);
+        window_show( window, src->mat);
     }
     
     return ok;
-}
-
-// ............................................................... matcher_train
-// pre-cache the obj_descriptors for fast compare with scenes
-// notice that it is possible to train for multiple objects (unimplemented)
-//
-
-bool ObjectDetectorFPNode::matcher_train()
-{
-    // API of cv::DescriptorMatcher is somewhat tricky
-    // First we clear old train data:
-    matcher->clear();
-    
-    // Then we add vector of descriptors (each descriptors matrix describe
-    // one object). This allows us to perform search across multiple objects:
-    std::vector<cv::Mat> obj_dsc(1);
-    obj_dsc[0] = src_descriptors.clone();
-    matcher->add( obj_dsc );
-    
-    // We have train data, now train
-    matcher->train();
-    
-    // TODO: No way to fail? This is crazy!
-    return true;
 }
 
 // ....................................................................... setup
@@ -144,74 +117,37 @@ bool ObjectDetectorFPNode::setup( argv_t *argv )
     return ok;
 }
 
-// ............................................................... obj_transform
-// With homography calculate object location in scene
-
-bool ObjectDetectorFPNode::obj_transform()
+// .................................................................. detect_obj
+bool ObjectDetectorFPNode::detect_obj()
 {
-    bool ok = !H.empty();
-    
-    vector<Point2f> pts_2f( 4 );
-    try{
-        perspectiveTransform( obj_src, pts_2f, H );
-    }
-    catch( Exception e ){
-        ok = false;
-    }
-    
+    bool ok = detect();
+    if ( ok ) ok = find_homography();
     if ( ok ){
-        obj_dst[0] = pts_2f[0];
-        obj_dst[1] = pts_2f[1];
-        obj_dst[2] = pts_2f[2];
-        obj_dst[3] = pts_2f[3];
-    
-        double min_area = (double)( dst_mat.cols * dst_mat.rows)/ 100.0;
-        ok = is_valid_rect ( obj_dst, min_area );
-    }
-    
-    return ok;
-}
-
-// ............................................................... is_valid_rect
-
-bool ObjectDetectorFPNode::is_valid_rect( vector<Point> &poly,
-                                          double min_area    )
-{
-    // should be a rectangle
-    bool ok = ( poly.size() == 4 );
-    
-    // huristic 1: area should be at least 1% of the scene
-    if ( ok && (min_area != 0) ){
-        
-        double area = 0;
-        for (size_t ix = 0; ix < poly.size(); ix++){
-            
-            size_t next_ix =  (ix+1)%poly.size();
-            
-            double dX = poly[ next_ix ].x - poly[ ix ].x;
-            double dY = poly[ next_ix ].y + poly[ ix ].y;
-            
-            area += dX * dY;  // This is the integration step.
+        try{
+            perspectiveTransform( obj_src, obj_dst, H );
         }
-        
-        area = abs( area / 2 );
-        ok   = area > min_area;
+        catch( Exception e ){
+            ok = false;
+        }
     }
     
-    // huristic 2: angles should be not too small or too large
     if ( ok ){
-        // test angle 0-1-2
-        // test angle 1-2-3
-        // test angle 2-3-0
-        // test angle 3-0-1
+        double min_area = mat_area ( dst->mat ) / 100.0;
+        double area     = poly_area( obj_dst  );
+        ok = area > min_area;
+    }
+    
+    if ( ok ){
+        round_points_2f( obj_dst );
+        focus = boundingRect( obj_dst );
     }
     
     return ok;
 }
 
-// ....................................................................... track
+// ................................................................... track_obj
 
-bool ObjectDetectorFPNode::track()
+bool ObjectDetectorFPNode::track_obj()
 {
     // do we have a rect?
     bool   ok  = false;
@@ -247,26 +183,20 @@ bool ObjectDetectorFPNode::process_one_frame()
 {
     bool ok = false;
     
-    // src_mat already is prepared..
-    // prepare dst_mst from current frame
-    gray(*in, dst_mat);
+    // src->mat already is prepared..
+    // prepare dst.mst from current frame
+
+    gray(*in, dst->mat);
+    invalidate( dst );
     
     switch( state ){
             
         case DETECTED:
-        case TRACKING:  ok = track();
-                        if ( ok ) break;
+        case TRACKING:  if ( (ok = track_obj()) == true ) break;
                          // else try to detect..
         default      :
-        case NONE    :  set_state( NONE );
-                        ok = detect();
-                        if ( ok )
-                             ok = obj_transform();
-            
-                        if ( ok ){
-                            focus = boundingRect( obj_dst );
-                            set_state( DETECTED );
-                        }
+        case NONE    :  if ( (ok = detect_obj()) == true ) set_state( DETECTED );
+                        else                               set_state( NONE );
                         break;
     }
     
@@ -275,13 +205,27 @@ bool ObjectDetectorFPNode::process_one_frame()
         base->copyTo( out );
         
         if ( ok && obj_dst.size()){
-            polylines( out, obj_dst, true, OCV_GREEN, 1 );
-            rectangle( out, focus  ,       OCV_WHITE, 1 );
+            
+            obj_dst2i[ 0 ].x = obj_dst[ 0 ].x;
+            obj_dst2i[ 0 ].y = obj_dst[ 0 ].y;
+ 
+            obj_dst2i[ 1 ].x = obj_dst[ 1 ].x;
+            obj_dst2i[ 1 ].y = obj_dst[ 1 ].y;
+
+            obj_dst2i[ 2 ].x = obj_dst[ 2 ].x;
+            obj_dst2i[ 2 ].y = obj_dst[ 2 ].y;
+
+            obj_dst2i[ 3 ].x = obj_dst[ 3 ].x;
+            obj_dst2i[ 3 ].y = obj_dst[ 3 ].y;
+
+            polylines( out, obj_dst2i, true, OCV_GREEN, 1 );
+            rectangle( out, focus    ,       OCV_WHITE, 1 );
         }
         
         window_show( window, out );
     }
     
     // once we do all the detection and tracking, process base class..
+    // right now it sets dbg information
     return  FeatureDetectorFPNode::process_one_frame();
 }

@@ -40,7 +40,7 @@ protected:
     Mat  out;
     const char *window;
     bool dbg;
-
+    
     // FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME
     //
     // TODO: define a better connector for frame processing nodes
@@ -89,20 +89,8 @@ public:
     void        set_window(    const char *window );
     const char* get_window(){ return this->window; }
     
-    // .................................................. image processing utils
-    
-    bool gray( const Mat &mat, Mat &gray )
-    {
-        bool ok = true;
-        switch( mat.channels() ){
-            case 3 : cvtColor( mat, gray, CV_BGR2GRAY ); break;
-            case 4 : cvtColor( mat, gray, CV_BGRA2GRAY); break;
-            case 1 : gray = mat; break;
-            default: ok = false; break;
-        }
-        return ok;
-    }
     // ......................................................... virtual methods
+    
     virtual bool select_focus( const vector<Rect> &rects, Rect &focus);
             bool select_focus(){ return select_focus( found_objects, focus ); }
     
