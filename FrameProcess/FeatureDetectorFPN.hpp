@@ -42,7 +42,7 @@ protected:
     Ptr<DescriptorExtractor> extractor;
     Ptr<DescriptorMatcher>   matcher;
     Ptr<Tracker>             tracker;
-    
+
     // settings
     int              min_inliers;
     bool             enable_tracking;   // TODO: Remove once tracking is working
@@ -85,23 +85,21 @@ protected:
 
     bool matcher_train( Mat desc, bool clear_old = true );
     bool match();
-    bool knn_match();
+    bool match_knn();
+    bool match_k11();
+    bool detect_features();
     bool detect();
     bool track();
-    bool find_homography();
-
+    bool homography();
     bool matched_keypoints();
-    
+    bool draw_matches( Mat &mat );
+
 public:
     
     // ................................................ constractor / destractor
     
-    FeatureDetectorFPNode( char *name ):FrameProcessNode()
-    { init( name, nullptr, nullptr ); }
-    
-    FeatureDetectorFPNode():FrameProcessNode()
-    { init( nullptr, nullptr, nullptr ); }
-    
+     FeatureDetectorFPNode( char *name );
+     FeatureDetectorFPNode();
     ~FeatureDetectorFPNode(){}
     
     // ......................................................... virtual methods

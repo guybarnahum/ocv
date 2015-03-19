@@ -50,7 +50,6 @@ private:
             case DETECTED   : str = "DETECTED"; break;
             case TRACKING   : str = "TRACKING"; break;
         }
-        
         return str;
     }
     

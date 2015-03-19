@@ -121,7 +121,7 @@ bool ObjectDetectorFPNode::setup( argv_t *argv )
 bool ObjectDetectorFPNode::detect_obj()
 {
     bool ok = detect();
-    if ( ok ) ok = find_homography();
+    if ( ok ) ok = homography();
     if ( ok ){
         try{
             perspectiveTransform( obj_src, obj_dst, H );
@@ -138,7 +138,7 @@ bool ObjectDetectorFPNode::detect_obj()
     }
     
     if ( ok ){
-        round_points_2f( obj_dst );
+        convert_round_points_2f( obj_dst );
         focus = boundingRect( obj_dst );
     }
     

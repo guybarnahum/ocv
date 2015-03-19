@@ -286,15 +286,21 @@ double mat_area( const Mat &m ){ return (double)( m.rows * m.cols ); }
 
 // ............................................................. round_points_2f
 
-bool round_points_2f( vector<Point2f> &points_v )
+void convert_round_points_2f( vector<Point2f> &points_v )
 {
-    bool ok = true;
     for( size_t ix = 0 ; ix < points_v.size(); ix++ ){
         points_v[ ix ].x = (int)cvRound( points_v[ ix ].x );
         points_v[ ix ].y = (int)cvRound( points_v[ ix ].y );
     }
-    
-    return ok;
+}
+
+void convert_keypoints_to_point2f( vector<KeyPoint> &kp, vector<Point2f> &p2f )
+{
+    p2f.clear();
+    for( size_t ix = 0; ix < kp.size(); ix++ ){
+        const Point2f  p =  Point2f( kp[ ix ].pt.x, kp[ ix ].pt.y );
+        p2f.push_back( p );
+    }
 }
 
 // =============================================================================
@@ -313,7 +319,7 @@ void drawArrows(Mat& draw_mat,
         
         Point p = fromPts[ ix ];
         Point q = toPts  [ ix ];
-            
+        
         double angle      = atan2( (double) p.y - q.y, (double) p.x - q.x );
         double hypotenuse = sqrt ( (double)(p.y - q.y)*(p.y - q.y) +
                                    (double)(p.x - q.x)*(p.x - q.x) );
@@ -354,20 +360,30 @@ void drawArrows(Mat& draw_mat,
                 const double           size   ,
                 const double        threshold )
 {
-    double minVal,maxVal;
-    minMaxIdx( verror, &minVal, &maxVal, 0, 0, use);
+    // if we have v_error normalize it wiht min_err / max_err
+    double min_err = 0., max_err = 1.;
+    bool has_err = verror.size();
+    bool has_use = use.size();
+    Scalar line_color = color;
+    
+    if ( has_err ){
+        minMaxIdx( verror, &min_err, &max_err, 0, 0, use );
+    }
     
     for (size_t ix = 0; ix < fromPts.size(); ix++)
     {
-        if ( !use[ix] ) continue;
+        if ( has_use && !use[ ix ] ) continue;
+        
+        if ( has_err ){
+            double alpha = 1.0;
+            alpha = intrpmnmx( verror[ ix ], min_err, max_err );
+            alpha = 1.0 - alpha;
+        
+            line_color = Scalar( alpha * color[0] ,
+                                 alpha * color[1] ,
+                                 alpha * color[2] );
+        }
 
-        double alpha = intrpmnmx( verror[ ix ], minVal, maxVal );
-        alpha        = 1.0 - alpha;
-        
-        Scalar line_color( alpha * color[0] ,
-                           alpha * color[1] ,
-                           alpha * color[2] );
-        
         Point p = fromPts[ ix ];
         Point q = toPts  [ ix ];
         

@@ -265,9 +265,11 @@ using namespace OcvColor;
 // ====================================================== geometry / conversions
 
 bool gray( const Mat &mat, Mat &gray );
-bool round_points_2f( vector<Point2f> &points_v );
 double poly_area( const vector<Point2f> &poly );
 double mat_area( const Mat &m );
+
+void convert_keypoints_to_point2f( vector<KeyPoint> &kp , vector<Point2f> &p2f);
+void convert_round_points_2f( vector<Point2f> &points_v );
 
 // ======================================================================== draw
 

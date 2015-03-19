@@ -9,7 +9,8 @@
         <_>
             <fpn>opticalFlow</fpn>
             <window>"Optical Flow"</window>
-            <knn_match>false</knn_match>
+            <knn_match>true</knn_match>
+            <do_rich_features>true</do_rich_features>
             <dbg>true</dbg>
         </_>
     </v_argv>

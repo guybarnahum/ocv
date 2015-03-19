@@ -22,13 +22,22 @@ class OpticalFlowFPNode : public FeatureDetectorFPNode {
 
 private:
 
+    bool do_rich_features;
+
+    vector<uchar> v_status;
+    vector<float> v_error;
+    
+    bool detect_rich_features();
+    bool detect_optical_flow();
+    
 public:
     
      OpticalFlowFPNode();
     ~OpticalFlowFPNode();
     
+
     // ....................................................... overriden methods
-    
+
     bool setup( argv_t *argv );
     bool process_one_frame();
 };

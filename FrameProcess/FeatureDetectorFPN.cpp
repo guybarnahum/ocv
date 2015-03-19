@@ -12,6 +12,22 @@
 #include "FeatureFactory.hpp"
 #include "FeatureDetectorFPN.hpp"
 
+FeatureDetectorFPNode::FeatureDetectorFPNode( char *name ):FrameProcessNode()
+{
+    bool ok = init( name, nullptr, nullptr );
+    if (!ok){
+        print_err();
+    }
+}
+
+FeatureDetectorFPNode::FeatureDetectorFPNode():FrameProcessNode()
+{
+    bool ok = init( nullptr, nullptr, nullptr );
+    if (!ok){
+        print_err();
+    }
+}
+
 // ........................................................................ init
 
 bool FeatureDetectorFPNode::init_detector( const char *requested_name )
@@ -140,7 +156,7 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
     
     if ( dbg ) dbg_window = "FeatureDetectorFPNode";
     
-    // ...................................... algo option
+    // algo option
     // if supplied it better be valid! Otherwise we are good with default
     const char *val;
     ok = ( nullptr != ( val = get_val( argv, "algo" ) ) );
@@ -153,7 +169,7 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
          }
     }
     
-    // .................................... match option
+    // match option
     // if supplied it better be valid! Otherwise we are good with default
     ok = ( nullptr != (val = get_val( argv, "matcher" ) ) );
     if ( ok ){
@@ -169,19 +185,19 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
     //          and start preserving errors with && ok
     ok = true;
     
-    // .................................. do knn matcher?
+    //  do knn matcher?
 
     ok = get_val_bool( argv, "knn_match", do_knn_match ) && ok;
     LOG( LEVEL_INFO ) << "Using "
                       << ( do_knn_match? "knn_match" : "normal match");
     
-    // ............................... refine homography?
+    // refine homography?
     
     ok = get_val_bool( argv, "refine", do_refine_homography ) && ok;
     LOG( LEVEL_INFO ) << "Using " << ( do_refine_homography? "refined":"rough")
                                   << " homography";
     
-    // ...................................... min_inliers
+    // min_inliers
     
     ok = get_val_int( argv, "inliers"   , min_inliers ) && ok;
     LOG( LEVEL_INFO ) <<    "Inliers:" << min_inliers ;
@@ -228,99 +244,31 @@ bool FeatureDetectorFPNode::matcher_train( Mat desc, bool clear_old )
     return is_trained;
 }
 
-// ................................................................... knn_match
-//
-// knn match strategy
-//
-// For matching, we use the k nearest neighbour search.
-// A kk search basically computes the 'distance' between a query descriptor
-// and all of the training descriptors, and returns the k pairs with lowest
-// distance.
-//
-// We use k=2, and get 2 pairs of matches for each query descriptor.
-//
-// What is important is how we decide which of all these matches are
-// 'good matches' after all. One strategy is to trust only matches where if
-// the distance(match1,query) < 0.8 * distance(match2,query), then match1 is
-// a good match otherwise discard both match1 and match2 as false matches.
-//
-// .............................................................................
-
-bool FeatureDetectorFPNode::knn_match()
-{
-    vector<vector<DMatch>> knn_matches;
-    
-    // To avoid NaN's when best match has 0 distance we will use inversed ratio
-    // we assume that while best match can be zero, while better match is
-    // allways non zero!
-    const float min_ratio = 1.f / 1.5f;
-    
-    // mark src and dst order in the match, this is needed for operations
-    // that preserve the match order when using matches
-    
-    // KNN match will return 2 nearest matches for each query descriptor
-    try{
-        if ( is_trained ){ // matcher is already primed with src_descriptors
-            src->query = true;
-            dst->query = false;
-            
-            matcher->knnMatch( dst->descriptors, knn_matches, 2);
-        }
-        else{
-            src->query = false;
-            dst->query = true;
-            
-            matcher->knnMatch( src->descriptors,
-                               dst->descriptors, knn_matches,2);
-        }
-    }
-    catch( Exception e ){
-        LOG( LEVEL_ERROR ) << e.what();
-        return false;
-    }
-    
-    // pick the best matches from knn_matches
-    matches.clear();
-
-    for (size_t ix=0; ix< knn_matches.size(); ix++){
-        
-        const cv::DMatch& best_match   = knn_matches[ix][0];
-        const cv::DMatch& better_match = knn_matches[ix][1];
-            
-        float ratio = best_match.distance / better_match.distance;
-            
-        // Pass only matches where distance ratio between
-        // nearest matches is greater than 1.5 (distinct criteria)
-        if ( ratio < min_ratio){
-            matches.push_back( best_match);
-        }
-    }
-
-    bool   ok = matches.size() > min_inliers;
-    return ok;
-}
 // ....................................................................... match
 
 bool FeatureDetectorFPNode::match()
 {
+    bool   ok = do_knn_match? match_knn() : match_k11();
+    return ok;
+}
+
+//
+// produce one candidate per keypoint..
+//
+bool FeatureDetectorFPNode::match_k11()
+{
     matches.clear();
     
     // mark src and dst order in the match, this is needed for operations
     // that preserve the match order when using matches
-    src->query = false;
-    dst->query = true;
 
     try{
         if ( is_trained ){ // matcher is already primed with src_descriptors
-            src->query = true;
-            dst->query = false;
-
+            src->query = true; dst->query = false;
             matcher->match( dst->descriptors, matches );
         }
         else{
-            src->query = false;
-            dst->query = true;
-            
+            src->query = false; dst->query = true;
             matcher->match( src->descriptors, dst->descriptors, matches );
         }
     }
@@ -350,6 +298,74 @@ bool FeatureDetectorFPNode::match()
     }
     
     matches.swap(good_matches);
+    
+    bool   ok = matches.size() > min_inliers;
+    return ok;
+}
+
+// ................................................................... knn_match
+//
+// knn match strategy
+//
+// For matching, we use the k nearest neighbour search.
+// A kk search basically computes the 'distance' between a query descriptor
+// and all of the training descriptors, and returns the k pairs with lowest
+// distance.
+//
+// We use k=2, and get 2 pairs of matches for each query descriptor.
+//
+// What is important is how we decide which of all these matches are
+// 'good matches' after all. One strategy is to trust only matches where if
+// the distance(match1,query) < 0.8 * distance(match2,query), then match1 is
+// a good match otherwise discard both match1 and match2 as false matches.
+//
+// .............................................................................
+
+bool FeatureDetectorFPNode::match_knn()
+{
+    vector<vector<DMatch>> knn_matches;
+    
+    // To avoid NaN's when best match has 0 distance we will use inversed ratio
+    // we assume that while best match can be zero, while better match is
+    // allways non zero!
+    const float min_ratio = 1.f / 1.5f;
+    
+    // mark src and dst order in the match, this is needed for operations
+    // that preserve the match order when using matches
+    
+    // KNN match will return 2 nearest matches for each query descriptor
+    try{
+        if ( is_trained ){ // matcher is already primed with src_descriptors
+            src->query = true; dst->query = false;
+            matcher->knnMatch( dst->descriptors, knn_matches, 2);
+        }
+        else{
+            src->query = false; dst->query = true;
+            matcher->knnMatch( src->descriptors,
+                              dst->descriptors, knn_matches,2);
+        }
+    }
+    catch( Exception e ){
+        LOG( LEVEL_ERROR ) << e.what();
+        return false;
+    }
+    
+    // pick the best matches from knn_matches
+    matches.clear();
+    
+    for (size_t ix=0; ix< knn_matches.size(); ix++){
+        
+        const cv::DMatch& best_match   = knn_matches[ix][0];
+        const cv::DMatch& better_match = knn_matches[ix][1];
+        
+        float ratio = best_match.distance / better_match.distance;
+        
+        // Pass only matches where distance ratio between
+        // nearest matches is greater than 1.5 (distinct criteria)
+        if ( ratio < min_ratio){
+            matches.push_back( best_match);
+        }
+    }
     
     bool   ok = matches.size() > min_inliers;
     return ok;
@@ -397,25 +413,30 @@ bool FeatureDetectorFPNode::matched_keypoints()
         OCV_ASSERT( (dst->query && !src->query)||(!dst->query && src->query) );
         
         // be carefull with indexs
-        OCV_ASSERT( src_ix < src_kpts_num );
-        OCV_ASSERT( dst_ix < dst_kpts_num );
-        
-        bool valid_pt = (src_ix < src_kpts_num) && ( dst_ix < dst_kpts_num );
-    
-        if (valid_pt){
-            // indexes are valid..
-            src->good_kpts.push_back( src->keypoints[ src_ix ].pt );
-            dst->good_kpts.push_back( dst->keypoints[ dst_ix ].pt );
+        if ( src_ix >= src_kpts_num ){
+            LOG( LEVEL_WARNING ) << "src_ix(" << src_ix       << ")" <<
+                         " >= src_kpts_num (" << src_kpts_num << ")";
+            continue;
         }
+        
+        if ( dst_ix >= dst_kpts_num ){
+            LOG( LEVEL_WARNING ) << "dst_ix(" << dst_ix       << ")" <<
+                            " >= dst_kpts_num (" << dst_kpts_num << ")";
+            continue;
+        }
+        
+        // indexes are valid..
+        src->good_kpts.push_back( src->keypoints[ src_ix ].pt );
+        dst->good_kpts.push_back( dst->keypoints[ dst_ix ].pt );
     }
     
     bool ok = dst->good_kpts.size() > min_inliers;
     return ok;
 }
 
-// ............................................................. find_homography
+// .................................................................. homography
 
-bool FeatureDetectorFPNode::find_homography()
+bool FeatureDetectorFPNode::homography()
 {
     // transcode matches into keypoints for homography
     bool ok =  matched_keypoints();
@@ -471,15 +492,29 @@ bool FeatureDetectorFPNode::prepare( FeatureDetector_ctx *ctx, bool force )
 
 // ...................................................................... detect
 
-bool FeatureDetectorFPNode::detect()
-{    
-    prepare( src );
-    prepare( dst );
+bool FeatureDetectorFPNode::detect_features()
+{
+    bool ok_src = prepare( src ) ;
+    bool ok_dst = prepare( dst ) && (src->keypoints.size() > 0 );
     
-    bool   found = do_knn_match? knn_match() : match();
-    return found;
+    bool ok     = is_trained? ( ok_src || ok_dst ):
+                              ( ok_src && ok_dst );
+    
+    if ( ok ){
+         ok = ( src->keypoints.size() > min_inliers ) &&
+              ( dst->keypoints.size() > min_inliers ) ;
+    }
+    
+    return ok;
 }
 
+bool FeatureDetectorFPNode::detect()
+{
+    bool ok = detect_features();
+    if ( ok ) ok = match();
+    
+    return ok;
+}
 // ........................................................... process_one_frame
 
 bool FeatureDetectorFPNode::process_one_frame()
@@ -494,24 +529,45 @@ bool FeatureDetectorFPNode::process_one_frame()
     }
     
     if ( dbg_window ){
-        
-        base->copyTo( out );
-        
-        try{
-            drawMatches( out, dst->keypoints, src->mat, src->keypoints,
-                        matches, matches_mat,
-                        Scalar::all(-1), Scalar::all(-1),
-                        vector<char>() ,
-                        DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS |
-                        DrawMatchesFlags::DRAW_RICH_KEYPOINTS    );
+             ok = draw_matches( matches_mat );
+        if ( ok ){
+            window_show( dbg_window, matches_mat );
         }
-        catch( Exception e ){
-            LOG( LEVEL_WARNING ) << e.what();
-            ok = false;
-        }
-        
-        if ( ok ) window_show( dbg_window, matches_mat );
     }
     
+    return true;
+}
+
+// ................................................................ draw_matches
+
+bool FeatureDetectorFPNode::draw_matches( Mat &mat )
+{
+    // do we have matches to draw?
+    bool ok = dst->keypoints.size() && src->keypoints.size();
+    if (!ok) return false;
+    
+    // make sure we use src and dst in the right order..
+    FeatureDetector_ctx *from = src;
+    FeatureDetector_ctx *to   = dst;
+    
+    if ( src->query ){
+        from = dst;
+        to   = src;
+    }
+    
+    try{
+        ::drawMatches( from->mat, from->keypoints,
+                       to->mat  , to->keypoints,
+                       matches, mat,
+                       Scalar::all(-1), Scalar::all(-1),
+                       vector<char>(),
+                       DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS |
+                       DrawMatchesFlags::DRAW_RICH_KEYPOINTS    );
+    }
+    catch( Exception e ){
+        // LOG( LEVEL_WARNING ) << e.what();
+        ok = false;
+    }
+
     return ok;
 }
