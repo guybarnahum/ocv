@@ -18,7 +18,8 @@
 
 // ................................................................. constructor
 
-OpticalFlowFPNode::OpticalFlowFPNode():FeatureDetectorFPNode( (char *)OPTICALFLOW_DETECTOR )
+OpticalFlowFPNode::OpticalFlowFPNode()
+                 : FeatureDetectorFPNode( (char *)OPTICALFLOW_DETECTOR )
 {
     // setup name / desc
     string str  = OPTICALFLOW_NAME;
@@ -33,11 +34,35 @@ OpticalFlowFPNode::OpticalFlowFPNode():FeatureDetectorFPNode( (char *)OPTICALFLO
     str += FeatureDetectorFPNode::get_desc();
     set_desc( str );
 
-    do_rich_features = false;
+    method = METHOD_DEFAULT;
 }
 
-OpticalFlowFPNode::~OpticalFlowFPNode()
+OpticalFlowFPNode::~OpticalFlowFPNode(){ }
+
+// ................................................................. from_string
+
+OpticalFlowFPNode::method_e OpticalFlowFPNode::from_string( const char *val )
 {
+    if ( val == nullptr ) return METHOD_NONE;
+    string str( val );
+    
+    if ( str == "rich-features" ) return METHOD_RICH_FEATURES;
+    if ( str == "optical-flow"  ) return METHOD_OPTICAL_FLOW;
+    
+    LOG( LEVEL_ERROR ) << "invalid method name (" << val << ")";
+    
+    return METHOD_NONE;
+}
+
+const char *OpticalFlowFPNode::to_string( OpticalFlowFPNode::method_e m )
+{
+    switch( m ){
+        case METHOD_NONE            : return "none";
+        case METHOD_OPTICAL_FLOW    : return "optical-flow";
+        case METHOD_RICH_FEATURES   : return "rich-features";
+    }
+    
+    return "unknown";
 }
 
 // ....................................................................... setup
@@ -51,13 +76,12 @@ bool OpticalFlowFPNode::setup( argv_t *argv )
     
     // NOTICE : Optional settings ahead - reset ok state
     //          and start preserving errors with && ok
-
-    ok = true;
     
     // do_rich_features option
-    ok = get_val_bool( argv, "do_rich_features", do_rich_features ) && ok ;
-    LOG( LEVEL_INFO ) << "Using "
-                      << ( do_rich_features? "rich features" : "optical flow");
+    const char *val = get_val( argv, "method" );
+    method = from_string( val );
+    
+    LOG( LEVEL_INFO ) << "Using " << to_string( method ) ;
     
     return ok;
 }
@@ -92,21 +116,79 @@ bool OpticalFlowFPNode::detect_optical_flow()
     
     // overwrite dst with new frame
     gray( *in, dst->mat );
+    dst->ready = true;
     
-    // look for keypoints in src, the last frame..
+    // look for keypoints from src, the last frame..
     // if first frame src is not ready!
-    // TODO: maybe we should inherit these from dst?
-    invalidate(src);
-    bool ok =  prepare(src) && ( src->keypoints.size() != 0 );
+    
+    bool    ok = src->ready;
+    int     max_keypoints       = 500 - (int)src->good_kpts.size();
+    int     enough_keypoints    = 120;
+    int     min_keypoints       = 12;
+    double  quality_level       = 0.01;
+    double  min_dist            = 10.;
+
+    // do we have enough keypoints to track?
+    bool need_points =  ( src->good_kpts.size() < enough_keypoints ) &&
+                        ( max_keypoints > 0 );
+    
+    if ( ok && need_points ){
+        vector<Point2f> pnts_2f;
+        
+        goodFeaturesToTrack( src->mat       ,
+                             pnts_2f        ,
+                             max_keypoints  ,
+                             quality_level  ,
+                             min_dist       );
+        
+        src->good_kpts.insert(src->good_kpts.end(), pnts_2f.begin(), pnts_2f.end());
+        ok =  src->good_kpts.size() > min_keypoints;
+    
+        LOG( LEVEL_INFO ) << src->good_kpts.size() << " features..";
+    }
     
     // calc flow from last frame in `src` and the new frame in `dst`..
     
     if ( ok ){
-        convert_keypoints_to_point2f( src->keypoints, src->good_kpts );
+        dst->good_kpts.clear();
+        v_status.clear();
+        v_error.clear();
         
-        calcOpticalFlowPyrLK( src->mat      , dst->mat      ,
-                              src->good_kpts, dst->good_kpts,
-                              v_status      , v_error       );
+        switch( method ){
+                
+            case METHOD_OPTICAL_FLOW_PYR_LK :
+                    calcOpticalFlowPyrLK( src->mat      , dst->mat      ,
+                                          src->good_kpts, dst->good_kpts,
+                                          v_status      , v_error       );
+                    break;
+                
+            default: ok = false;
+                LOG( LEVEL_ERROR )  << "Internal Error : method ("
+                                    << to_string( method ) << ")";
+                break;
+        }
+    }
+
+    OCV_ASSERT( v_status.size() == v_error.size() );
+    
+    if ( ok ){
+        
+        vector<size_t> keep_ix;
+        
+        for( size_t ix = 0 ; ix < v_status.size(); ix++ ){
+            
+            if ( v_status[ ix ] && ( v_error[ ix ] < 12.) ){
+                keep_ix.push_back( ix );
+            }
+        }
+        
+        // prune..
+        prune_vector(src->good_kpts , keep_ix );
+        prune_vector(dst->good_kpts , keep_ix );
+        prune_vector(v_error        , keep_ix );
+        prune_vector(v_status       , keep_ix );
+        
+        LOG( LEVEL_INFO ) << src->good_kpts.size() << " good features..";
     }
     
     return ok;
@@ -114,10 +196,19 @@ bool OpticalFlowFPNode::detect_optical_flow()
 
 // ........................................................... process_one_frame
 
-bool
-OpticalFlowFPNode::process_one_frame()
+bool OpticalFlowFPNode::process_one_frame()
 {
-    bool ok = do_rich_features? detect_rich_features() : detect_optical_flow();
+    bool ok = false;
+    
+    switch( method ){
+        case METHOD_RICH_FEATURES: ok = detect_rich_features(); break;
+        case METHOD_OPTICAL_FLOW : ok = detect_optical_flow (); break;
+        
+        default : ok = false;
+            LOG( LEVEL_ERROR ) << "Internal Error : invalid method ("
+                               << method << ")";
+            break;
+    }
     
     if ( window ){
         base->copyTo( out );

@@ -10,7 +10,7 @@
             <fpn>opticalFlow</fpn>
             <window>"Optical Flow"</window>
             <knn_match>true</knn_match>
-            <do_rich_features>true</do_rich_features>
+            <method>optical-flow</method>
             <dbg>true</dbg>
         </_>
     </v_argv>

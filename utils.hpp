@@ -271,6 +271,20 @@ double mat_area( const Mat &m );
 void convert_keypoints_to_point2f( vector<KeyPoint> &kp , vector<Point2f> &p2f);
 void convert_round_points_2f( vector<Point2f> &points_v );
 
+template <class T>
+void prune_vector( vector<T> &v, vector<size_t> keep_ix )
+{
+    vector<T> _v;
+    for( size_t ix = 0; ix < keep_ix.size() ; ix++ ){
+        _v.push_back( v[ keep_ix[ ix ] ] );
+    }
+    v.swap( _v );
+}
+
+template void prune_vector(vector<Point2f> &v, vector<size_t> keep_ix );
+template void prune_vector(vector<float> &v, vector<size_t> keep_ix );
+template void prune_vector(vector<uchar> &v, vector<size_t> keep_ix );
+
 // ======================================================================== draw
 
 void drawArrows(Mat& draw_mat,

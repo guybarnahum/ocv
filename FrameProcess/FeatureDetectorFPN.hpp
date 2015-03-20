@@ -36,6 +36,7 @@ protected:
     const int    MIN_INLINERS_DEFAULT = 8;
     
     // ................................................................. members
+    const char *detector_name;
     
     // ocv algos
     Ptr<FeatureDetector>     detector;

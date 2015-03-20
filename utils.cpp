@@ -303,6 +303,14 @@ void convert_keypoints_to_point2f( vector<KeyPoint> &kp, vector<Point2f> &p2f )
     }
 }
 
+// ....................................................................... prune
+
+// instanciate template
+void prune_vector(vector<Point2f> &v, vector<size_t> keep_ix );
+void prune_vector(vector<float> &v, vector<size_t> keep_ix );
+
+void prune_vector(vector<uchar> &v, vector<size_t> keep_ix );
+
 // =============================================================================
 //                                                                    draw utils
 // =============================================================================

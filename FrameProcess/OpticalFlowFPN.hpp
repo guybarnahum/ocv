@@ -21,8 +21,25 @@
 class OpticalFlowFPNode : public FeatureDetectorFPNode {
 
 private:
+    
+    typedef enum{
+        
+        METHOD_NONE,
+        
+        // valid methods
+        METHOD_RICH_FEATURES,
+        METHOD_OPTICAL_FLOW_PYR_LK,
 
-    bool do_rich_features;
+        // default
+        METHOD_OPTICAL_FLOW = METHOD_OPTICAL_FLOW_PYR_LK,
+        METHOD_DEFAULT      = METHOD_OPTICAL_FLOW,
+        
+    }method_e;
+    
+    method_e  from_string( const char *str );
+    const char *to_string( method_e    m   );
+
+    method_e method;
 
     vector<uchar> v_status;
     vector<float> v_error;

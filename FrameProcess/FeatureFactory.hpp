@@ -25,6 +25,25 @@
 class FeatureFactory {
 
 private:
+    typedef enum{
+        
+        NONE        = 0 ,
+        FAST_DETECT ,
+        GFTT_DETECT ,
+        MSER_DETECT ,
+        ORB_DETECT  ,
+        KAZE_DETECT ,
+        AKAZE_DETECT,
+        BRISK_DETECT,
+        SIFT_DETECT ,
+        SURF_DETECT ,
+        STAR_DETECT ,
+        FREAK_DETECT,
+        
+    }algo_e;
+    
+    static algo_e to_algo_e( string name );
+    
     static const char *DETECTOR_DEFAULT  ;
     static const char *EXTRACTOR_DEFAULT ;
     static const char *MACTHER_DEFAULT   ;
@@ -34,7 +53,9 @@ public:
 
     static Ptr<FeatureDetector>     makeDetector ( char * &name );
     static Ptr<DescriptorExtractor> makeExtractor( char * &name );
-    static Ptr<DescriptorMatcher>   makeMatecher ( char * &name );
+    static Ptr<DescriptorMatcher>   makeMatcher  ( char * &name ,
+                                             const char * detct );
+    
     static Ptr<Tracker>             makeTracker  ( char * &name );
 };
 

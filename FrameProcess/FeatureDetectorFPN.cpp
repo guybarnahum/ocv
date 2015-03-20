@@ -14,7 +14,7 @@
 
 FeatureDetectorFPNode::FeatureDetectorFPNode( char *name ):FrameProcessNode()
 {
-    bool ok = init( name, nullptr, nullptr );
+    bool ok = init( name, name, nullptr );
     if (!ok){
         print_err();
     }
@@ -38,6 +38,10 @@ bool FeatureDetectorFPNode::init_detector( const char *requested_name )
     bool ok = !detector.empty();
     
     if ( ok ){
+        // we save the actual detector name for use in configuring matcher
+        // matcher has different settings based on detector algo type..
+        detector_name = name;
+        
         // .............................. set name / desc
         string str = "FeatureDetector:"; str += name;
         set_name( str );
@@ -75,7 +79,7 @@ bool FeatureDetectorFPNode::init_extractor( const char *requested_name )
 bool FeatureDetectorFPNode::init_matcher  ( const char *requested_name  )
 {
     char *name = (char *)requested_name;
-    matcher = FeatureFactory::makeMatecher( name );
+    matcher = FeatureFactory::makeMatcher( name, detector_name );
     bool ok = !matcher.empty();
     
     if ( ok ){
@@ -116,6 +120,8 @@ bool FeatureDetectorFPNode::init( const char *dtct_name  ,
                                   const char *match_name ,
                                   const char *trckr_name )
 {
+    detector_name = ""; 
+    
     // init context structs
     src = &ctx1;
     dst = &ctx2;
