@@ -9,8 +9,9 @@
         <_>
             <fpn>opticalFlow</fpn>
             <window>"Optical Flow"</window>
-            <knn_match>true</knn_match>
             <method>optical-flow</method>
+            <camera>data/camera_cfg.xml</camera>
+            <knn_match>true</knn_match>
             <dbg>true</dbg>
         </_>
     </v_argv>

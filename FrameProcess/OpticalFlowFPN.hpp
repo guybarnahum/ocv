@@ -40,19 +40,23 @@ private:
     const char *to_string( method_e    m   );
 
     method_e method;
-
+    
+    string   camera_xml;
+    Mat      K; // camera_mat
+    
     vector<uchar> v_status;
     vector<float> v_error;
     
     bool detect_rich_features();
     bool detect_optical_flow();
-    
+    void prune_keypoints();
+    bool calc();
+
 public:
     
      OpticalFlowFPNode();
     ~OpticalFlowFPNode();
     
-
     // ....................................................... overriden methods
 
     bool setup( argv_t *argv );

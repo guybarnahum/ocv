@@ -10,7 +10,7 @@
             <fpn>ccalib</fpn>
             <square_size>2</square_size>
             <dbg>true</dbg>
-            <out>"./cam_calib.xml"</out>
+            <out>"./camera_cfg.xml"</out>
             <window>"Chess Board Camera Calibration (10x7)"</window>
             <pattern_comment>
                 "Use 10x7.pdf as marker, do not change board size!"

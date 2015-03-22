@@ -240,9 +240,48 @@ void print_err( bool reset_errs )
     
 } // namespace OcvError
 
+
 // =============================================================================
 //                                                  geometry / conversions utils
 // =============================================================================
+
+// =============================================================================
+//                                                                        camera
+// =============================================================================
+
+bool import_camera_mat( string xml, Mat &cam )
+{
+    bool ok = true;
+    FileStorage fs;
+    
+    try{
+        fs.open( xml, FileStorage::READ );
+        ok = fs.isOpened();
+        if (ok){
+            fs["Camera_Matrix"] >> cam;
+        }
+        else{
+            string msg  = "could not open "; msg += xml;
+            set_err( FILE_IO, msg );
+        }
+    }
+    catch( Exception e ){
+        set_err( FILE_IO, e.what() );
+        ok = false;
+    }
+    
+    if ( ok ){
+        cout << "import_camera_mat : " << cam << endl;
+        // Perform some sanity checks on Camera Matrix
+        ok = !cam.empty() && (cam.rows == 3) && (cam.cols == 3);
+        if (!ok){
+            string msg = "invalid camera matrix in "; msg += xml;
+            set_err( INVALID_ARGS, msg );
+        }
+    }
+    
+    return ok;
+}
 
 // ............................................................... obj_transform
 bool gray( const Mat &mat, Mat &gray )
@@ -291,15 +330,6 @@ void convert_round_points_2f( vector<Point2f> &points_v )
     for( size_t ix = 0 ; ix < points_v.size(); ix++ ){
         points_v[ ix ].x = (int)cvRound( points_v[ ix ].x );
         points_v[ ix ].y = (int)cvRound( points_v[ ix ].y );
-    }
-}
-
-void convert_keypoints_to_point2f( vector<KeyPoint> &kp, vector<Point2f> &p2f )
-{
-    p2f.clear();
-    for( size_t ix = 0; ix < kp.size(); ix++ ){
-        const Point2f  p =  Point2f( kp[ ix ].pt.x, kp[ ix ].pt.y );
-        p2f.push_back( p );
     }
 }
 
@@ -372,7 +402,9 @@ void drawArrows(Mat& draw_mat,
     double min_err = 0., max_err = 1.;
     bool has_err = verror.size();
     bool has_use = use.size();
-    Scalar line_color = color;
+    
+    Scalar ca = OCV_RED;
+    Scalar cb = OCV_BLUE;
     
     if ( has_err ){
         minMaxIdx( verror, &min_err, &max_err, 0, 0, use );
@@ -381,15 +413,19 @@ void drawArrows(Mat& draw_mat,
     for (size_t ix = 0; ix < fromPts.size(); ix++)
     {
         if ( has_use && !use[ ix ] ) continue;
-        
+
+        double t = ((double)ix) / ((double)fromPts.size());
+        double s = 1.0 - t;
+        Scalar color = Scalar( t * ca[0] + s * cb[0] ,
+                               t * ca[1] + s * cb[1] ,
+                               t * ca[2] + s * cb[3] );
+
         if ( has_err ){
-            double alpha = 1.0;
-            alpha = intrpmnmx( verror[ ix ], min_err, max_err );
-            alpha = 1.0 - alpha;
+            
+            
+            // alpha = intrpmnmx( verror[ ix ], min_err, max_err );
+            // alpha = 1.0 - alpha;
         
-            line_color = Scalar( alpha * color[0] ,
-                                 alpha * color[1] ,
-                                 alpha * color[2] );
         }
 
         Point p = fromPts[ ix ];
@@ -406,17 +442,17 @@ void drawArrows(Mat& draw_mat,
         q.y = (int) (p.y - size * hypotenuse * sin(angle));
         
         // Now we draw the main line of the arrow.
-        line( draw_mat, p, q, line_color, line_thickness);
+        line( draw_mat, p, q, color, line_thickness);
         
         // Now draw the tips of the arrow. I do some scaling so that the
         // tips look proportional to the main line of the arrow.
         
         p.x = (int) (q.x + 5. * cos(angle + CV_PI / 6));
         p.y = (int) (q.y + 5. * sin(angle + CV_PI / 6));
-        line( draw_mat, p, q, line_color, line_thickness );
+        line( draw_mat, p, q, color, line_thickness );
         
         p.x = (int) (q.x + 5. * cos(angle - CV_PI / 6));
         p.y = (int) (q.y + 5. * sin(angle - CV_PI / 6));
-        line( draw_mat, p, q, line_color, line_thickness );
+        line( draw_mat, p, q, color, line_thickness );
     }
 }

@@ -348,7 +348,7 @@ bool FeatureDetectorFPNode::match_knn()
         else{
             src->query = false; dst->query = true;
             matcher->knnMatch( src->descriptors,
-                              dst->descriptors, knn_matches,2);
+                               dst->descriptors, knn_matches,2);
         }
     }
     catch( Exception e ){
