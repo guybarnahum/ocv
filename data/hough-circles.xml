@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<opencv_storage>
+    <xml_v_argv>"1.0"</xml_v_argv>
+    <v_argv>
+        <_>
+            <fpn>houghCircles</fpn>
+            <window>HoughCircles</window>
+            <dbg>true</dbg>
+            <method>circles</method>
+        </_>
+    </v_argv>
+</opencv_storage>

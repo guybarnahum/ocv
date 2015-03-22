@@ -16,6 +16,7 @@
 #include "CascadeDetectorFPN.hpp"
 #include "CcalibFPN.hpp"
 #include "FindContour.hpp"
+#include "HoughCirclesFPN.hpp"
 #include "ObjectDetectorFPN.hpp"
 #include "OpticalFlowFPN.hpp"
 
@@ -50,6 +51,9 @@ FrameProcessNode *FrameProcessNodeFactory::make( const char* name )
     else
     if ( STR_EQ( name, "opticalFlow"   )  )
         fp = (FrameProcessNode *) new OpticalFlowFPNode();
+    else
+    if ( STR_EQ( name, "houghCircles"   )  )
+        fp = (FrameProcessNode *) new HoughCirclesFPN();
     else
     if ( STR_EQ( name, "nullProcess" )  ){
         fp = new FrameProcessNode();

@@ -52,6 +52,7 @@
 		64D514E01AB7AE0400518E18 /* ObjectDetectorFPN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64D514DE1AB7AE0400518E18 /* ObjectDetectorFPN.cpp */; };
 		64E835261A9FA0D8001C5256 /* FeatureFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64E835241A9FA0D7001C5256 /* FeatureFactory.cpp */; };
 		64E835291AA7C23F001C5256 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64E835281AA7C23F001C5256 /* utils.cpp */; };
+		C141ACCE1ABF51850072F103 /* HoughCirclesFPN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C141ACCD1ABF51850072F103 /* HoughCirclesFPN.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -148,6 +149,9 @@
 		64E835251A9FA0D8001C5256 /* FeatureFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FeatureFactory.hpp; sourceTree = "<group>"; };
 		64E835271A9FA519001C5256 /* ocvstd.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ocvstd.hpp; sourceTree = SOURCE_ROOT; };
 		64E835281AA7C23F001C5256 /* utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utils.cpp; sourceTree = "<group>"; };
+		C141ACCC1ABF51850072F103 /* HoughCirclesFPN.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HoughCirclesFPN.hpp; sourceTree = "<group>"; };
+		C141ACCD1ABF51850072F103 /* HoughCirclesFPN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HoughCirclesFPN.cpp; sourceTree = "<group>"; };
+		C141ACCF1ABF51A50072F103 /* hough-circles.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "hough-circles.xml"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +185,7 @@
 		6426E21C1AAB80C2007F021E /* data */ = {
 			isa = PBXGroup;
 			children = (
+				C141ACCF1ABF51A50072F103 /* hough-circles.xml */,
 				6426E2371AB256A3007F021E /* lbpcascades */,
 				64D514D61AB7670400518E18 /* contour.xml */,
 				6426E2211AAB80C2007F021E /* hough.xml */,
@@ -266,6 +271,8 @@
 		6470A9E41A956576009B4139 /* FrameProcess */ = {
 			isa = PBXGroup;
 			children = (
+				C141ACCC1ABF51850072F103 /* HoughCirclesFPN.hpp */,
+				C141ACCD1ABF51850072F103 /* HoughCirclesFPN.cpp */,
 				64E835251A9FA0D8001C5256 /* FeatureFactory.hpp */,
 				64E835241A9FA0D7001C5256 /* FeatureFactory.cpp */,
 				6470A9E61A956576009B4139 /* FrameProcessNode.hpp */,
@@ -356,6 +363,7 @@
 				64D514DA1AB783FE00518E18 /* OpticalFlowFPN.cpp in Sources */,
 				6470A9FA1A956576009B4139 /* HoughFPNode.cpp in Sources */,
 				6470A9F81A956576009B4139 /* FrameProcessNode.cpp in Sources */,
+				C141ACCE1ABF51850072F103 /* HoughCirclesFPN.cpp in Sources */,
 				64E835291AA7C23F001C5256 /* utils.cpp in Sources */,
 				6470AA011A956576009B4139 /* main.cpp in Sources */,
 				644F534B1AAA98F80035DD91 /* cli.cpp in Sources */,

@@ -43,6 +43,8 @@ set(SOURCE_FILES
     FrameProcess/CascadeDetectorFPN.hpp
     FrameProcess/OpticalFlowFPN.cpp
     FrameProcess/OpticalFlowFPN.hpp
+    FrameProcess/HoughCirclesFPN.cpp
+    FrameProcess/HoughCirclesFPN.hpp
     ocvstd.hpp
     Calibrate.hpp
     Calibrate.cpp
