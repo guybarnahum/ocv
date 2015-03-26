@@ -34,6 +34,7 @@
 		6470AA011A956576009B4139 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470A9F71A956576009B4139 /* main.cpp */; };
 		6470AA041A956601009B4139 /* CannyFPNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470AA021A956601009B4139 /* CannyFPNode.cpp */; };
 		64B0070F1ABDE949008155A2 /* camera_cfg.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 64B0070E1ABDE29D008155A2 /* camera_cfg.xml */; };
+		64B008A61ABE6ABB008155A2 /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64B008A41ABE6ABB008155A2 /* camera.cpp */; };
 		64B8531D1A99505100A49E62 /* FeatureDetectorFPN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64B8531B1A99505100A49E62 /* FeatureDetectorFPN.cpp */; };
 		64B853201A9C312B00A49E62 /* libopencv_features2d.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8531E1A9C312B00A49E62 /* libopencv_features2d.3.0.0.dylib */; };
 		64B853211A9C312C00A49E62 /* libopencv_flann.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8531F1A9C312B00A49E62 /* libopencv_flann.3.0.0.dylib */; };
@@ -123,6 +124,8 @@
 		6470AA031A956601009B4139 /* CannyFPNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CannyFPNode.hpp; sourceTree = "<group>"; };
 		64B0070E1ABDE29D008155A2 /* camera_cfg.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = camera_cfg.xml; sourceTree = "<group>"; };
 		64B008A21ABE6379008155A2 /* excluded-ref-only */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "excluded-ref-only"; sourceTree = "<group>"; };
+		64B008A41ABE6ABB008155A2 /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
+		64B008A51ABE6ABB008155A2 /* camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = camera.hpp; sourceTree = "<group>"; };
 		64B8531B1A99505100A49E62 /* FeatureDetectorFPN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FeatureDetectorFPN.cpp; sourceTree = "<group>"; };
 		64B8531C1A99505100A49E62 /* FeatureDetectorFPN.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FeatureDetectorFPN.hpp; sourceTree = "<group>"; };
 		64B8531E1A9C312B00A49E62 /* libopencv_features2d.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_features2d.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_features2d.3.0.0.dylib; sourceTree = "<group>"; };
@@ -214,6 +217,13 @@
 			path = lbpcascades;
 			sourceTree = "<group>";
 		};
+		6445B8531AC4A6DA0048AADD /* lsd_slam */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = lsd_slam;
+			sourceTree = "<group>";
+		};
 		646498C11A8E748B000C07E1 = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +235,8 @@
 				6426E22D1AAD60E3007F021E /* ratio_io */,
 				6426E22E1AAD60E3007F021E /* chrono_io */,
 				644F53491AAA98F80035DD91 /* cli.cpp */,
+				64B008A41ABE6ABB008155A2 /* camera.cpp */,
+				64B008A51ABE6ABB008155A2 /* camera.hpp */,
 				644F534A1AAA98F80035DD91 /* cli.hpp */,
 				64E835281AA7C23F001C5256 /* utils.cpp */,
 				6426E22C1AAD4CDD007F021E /* utils.hpp */,
@@ -291,6 +303,7 @@
 				64D514DE1AB7AE0400518E18 /* ObjectDetectorFPN.cpp */,
 				64D514D91AB783FE00518E18 /* OpticalFlowFPN.hpp */,
 				64D514D81AB783FE00518E18 /* OpticalFlowFPN.cpp */,
+				6445B8531AC4A6DA0048AADD /* lsd_slam */,
 				64D514D41AB654AB00518E18 /* FindContour.hpp */,
 				64D514D31AB654AB00518E18 /* FindContour.cpp */,
 				6426E2341AB246FB007F021E /* CascadeDetectorFPN.hpp */,
@@ -359,6 +372,7 @@
 				64B8531D1A99505100A49E62 /* FeatureDetectorFPN.cpp in Sources */,
 				64D514D01AB6078000518E18 /* CcalibFPN.cpp in Sources */,
 				64E835261A9FA0D8001C5256 /* FeatureFactory.cpp in Sources */,
+				64B008A61ABE6ABB008155A2 /* camera.cpp in Sources */,
 				6470AA041A956601009B4139 /* CannyFPNode.cpp in Sources */,
 				64D514DA1AB783FE00518E18 /* OpticalFlowFPN.cpp in Sources */,
 				6470A9FA1A956576009B4139 /* HoughFPNode.cpp in Sources */,
@@ -456,11 +470,11 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				EXCLUDED_SOURCE_FILE_NAMES = "$PROJECT_DIR/excluded-ref-only/*";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/ref-only/MasteringOCV_code-master/Chapter2_iPhoneAR/Example_MarkerBasedAR",
+				EXCLUDED_SOURCE_FILE_NAMES = (
+					"$PROJECT_DIR/excluded-ref-only/*",
+					"$PROJECT_DIR/ref-only/*",
 				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = c11;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -478,11 +492,11 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				EXCLUDED_SOURCE_FILE_NAMES = "$PROJECT_DIR/excluded-ref-only/*";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/ref-only/MasteringOCV_code-master/Chapter2_iPhoneAR/Example_MarkerBasedAR",
+				EXCLUDED_SOURCE_FILE_NAMES = (
+					"$PROJECT_DIR/excluded-ref-only/*",
+					"$PROJECT_DIR/ref-only/*",
 				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = c11;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

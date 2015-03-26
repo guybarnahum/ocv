@@ -37,6 +37,8 @@ protected:
     
     // ................................................................. members
     const char *detector_name;
+    const char *extractor_name;
+    const char *matcher_name;
     
     // ocv algos
     Ptr<FeatureDetector>     detector;

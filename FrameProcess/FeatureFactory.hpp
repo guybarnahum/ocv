@@ -27,7 +27,8 @@ class FeatureFactory {
 private:
     typedef enum{
         
-        NONE        = 0 ,
+        DEFAULT_DETECT  = -1,
+        NONE            =  0,
         FAST_DETECT ,
         GFTT_DETECT ,
         MSER_DETECT ,
@@ -53,9 +54,7 @@ public:
 
     static Ptr<FeatureDetector>     makeDetector ( char * &name );
     static Ptr<DescriptorExtractor> makeExtractor( char * &name );
-    static Ptr<DescriptorMatcher>   makeMatcher  ( char * &name ,
-                                             const char * detct );
-    
+    static Ptr<DescriptorMatcher>   makeMatcher  ( char * &name );
     static Ptr<Tracker>             makeTracker  ( char * &name );
 };
 

@@ -48,6 +48,8 @@ private:
     vector<float> v_error;
     
     bool detect_rich_features();
+    bool find_features_to_track( FeatureDetector_ctx *ctx );
+
     bool detect_optical_flow();
     void prune_keypoints();
     bool calc();

@@ -33,16 +33,17 @@ FeatureDetectorFPNode::FeatureDetectorFPNode():FrameProcessNode()
 bool FeatureDetectorFPNode::init_detector( const char *requested_name )
 {
     char *name = (char *)requested_name;
-    detector = FeatureFactory::makeDetector ( name );
+    bool ok    = ( name != nullptr );
     
-    bool ok = !detector.empty();
+    if ( !ok ) return false;
+    
+    detector   = FeatureFactory::makeDetector ( name );
+    ok = !detector.empty();
     
     if ( ok ){
-        // we save the actual detector name for use in configuring matcher
-        // matcher has different settings based on detector algo type..
         detector_name = name;
         
-        // .............................. set name / desc
+        // set name / desc
         string str = "FeatureDetector:"; str += name;
         set_name( str );
 
@@ -50,7 +51,7 @@ bool FeatureDetectorFPNode::init_detector( const char *requested_name )
         set_desc( str );
     }
     else{
-        string msg = "<invalid detector:'"; msg+=(name? name:"?"); msg += "'>";
+        string msg = "<invalid detector:'"; msg+=(name? name:""); msg += "'>";
         set_err( INVALID_ARGS, msg );
     }
     
@@ -60,10 +61,16 @@ bool FeatureDetectorFPNode::init_detector( const char *requested_name )
 bool FeatureDetectorFPNode::init_extractor( const char *requested_name )
 {
     char *name = (char *)requested_name;
+    bool ok    = ( name != nullptr );
+    
+    if ( !ok ) return false;
+    
     extractor  = FeatureFactory::makeExtractor( name );
-    bool ok    = !extractor.empty();
+    ok = !extractor.empty();
     
     if ( ok ){
+        extractor_name = name;
+        
         string desc( get_desc() );
         desc += "<extractor:'"; desc += name? name : "default"; desc += "'>\n";
         set_desc( desc.c_str() );
@@ -79,10 +86,16 @@ bool FeatureDetectorFPNode::init_extractor( const char *requested_name )
 bool FeatureDetectorFPNode::init_matcher  ( const char *requested_name  )
 {
     char *name = (char *)requested_name;
-    matcher = FeatureFactory::makeMatcher( name, detector_name );
-    bool ok = !matcher.empty();
+    bool ok    = ( name != nullptr );
+    
+    if ( !ok ) return false;
+    
+    matcher = FeatureFactory::makeMatcher( name );
+    ok = !matcher.empty();
     
     if ( ok ){
+        matcher_name = name;
+
         string desc( get_desc() );
         desc += "<matcher:'"; desc += name? name : "default"; desc += "'>";
         set_desc( desc.c_str() );
@@ -98,8 +111,12 @@ bool FeatureDetectorFPNode::init_matcher  ( const char *requested_name  )
 bool FeatureDetectorFPNode::init_tracker( const char *requested_name  )
 {
     char *name = (char *)requested_name;
+    bool ok    = ( name != nullptr );
+    
+    if ( !ok ) return false;
+    
     tracker = FeatureFactory::makeTracker( name );
-    bool ok = !tracker.empty();
+    ok = !tracker.empty();
     
     if ( ok ){
         string desc( get_desc() );
@@ -114,13 +131,14 @@ bool FeatureDetectorFPNode::init_tracker( const char *requested_name  )
     return ok;
 }
 
-
 bool FeatureDetectorFPNode::init( const char *dtct_name  ,
                                   const char *xtrct_name ,
                                   const char *match_name ,
                                   const char *trckr_name )
 {
-    detector_name = ""; 
+    detector_name  = nullptr;
+    extractor_name = nullptr;
+    matcher_name   = nullptr;
     
     // init context structs
     src = &ctx1;
@@ -165,7 +183,7 @@ bool FeatureDetectorFPNode::setup( argv_t *argv )
     // algo option
     // if supplied it better be valid! Otherwise we are good with default
     const char *val;
-    ok = ( nullptr != ( val = get_val( argv, "algo" ) ) );
+    ok = ( nullptr != ( val = get_val( argv, "detector" ) ) );
     if ( ok ){
          ok = init_detector( val );
          if (!ok){
@@ -526,8 +544,10 @@ bool FeatureDetectorFPNode::detect()
 bool FeatureDetectorFPNode::process_one_frame()
 {
     // Sanity checks
-    bool ok = !( detector.empty()|| extractor.empty()|| matcher.empty() );
- 
+    bool ok =   ( detector_name  == nullptr ) || !detector.empty () ;
+    ok = ok && (( extractor_name == nullptr ) || !extractor.empty());
+    ok = ok && (( matcher_name   == nullptr ) || !matcher.empty  ());
+    
     if (!ok){
         LOG( LEVEL_ERROR ) << "FeatureDetectorFPNode::internal error";
         // don't call again!

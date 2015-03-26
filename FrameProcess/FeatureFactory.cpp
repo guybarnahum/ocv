@@ -29,6 +29,8 @@ const char *FeatureFactory::TRACKER_DEFAULT   = "MIL";
 
 // ======================================================== class FeatureFactory
 
+// ................................................................... to_algo_e
+
 FeatureFactory::algo_e FeatureFactory::to_algo_e( string name )
 {
     // to lower
@@ -40,6 +42,8 @@ FeatureFactory::algo_e FeatureFactory::to_algo_e( string name )
     if ( name == "sift"  ) return SIFT_DETECT ;
     if ( name == "orb"   ) return ORB_DETECT  ;
 
+    if ( name == "default" ) return DEFAULT_DETECT;
+    
     // rarely if ever used..
     if ( name == "surf"  ) return SURF_DETECT ;
     if ( name == "fast"  ) return FAST_DETECT ;
@@ -55,16 +59,17 @@ FeatureFactory::algo_e FeatureFactory::to_algo_e( string name )
 }
 
 // ................................................................ makeDetector
+
 Ptr<FeatureDetector> FeatureFactory::makeDetector( char * &name )
 {
     Ptr<FeatureDetector> fd;
-    
-    // ................................. default
-    if ((        name == nullptr )||
-        STR_EQ(  name, "default" ) )
-                 name = (char *)FeatureFactory::DETECTOR_DEFAULT;
-    
+
     FeatureFactory::algo_e algo = to_algo_e( string(name) );
+
+    // default
+    if ( algo == DEFAULT_DETECT ){
+         algo = to_algo_e( string(FeatureFactory::DETECTOR_DEFAULT) );
+    }
     
     switch( algo ){
         case FAST_DETECT  : fd = FastFeatureDetector::create(); break;
@@ -82,6 +87,7 @@ Ptr<FeatureDetector> FeatureFactory::makeDetector( char * &name )
         case SIFT_DETECT  : fd = SIFT::create(); break;
         case SURF_DETECT  : fd = SURF::create(400); break;
         
+        // unsupported values:
         default:    LOG( LEVEL_WARNING ) << "Unknown algo_e(" << name << ":"
                                                               << algo << ")";
                     // fall through!
@@ -97,13 +103,13 @@ Ptr<FeatureDetector> FeatureFactory::makeDetector( char * &name )
 }
 
 // ............................................................... makeExtractor
+
 Ptr<DescriptorExtractor> FeatureFactory::makeExtractor( char * &name)
 {
     Ptr<DescriptorExtractor> de;
     
     // ................................. default
-    if ((        name == nullptr )||
-        STR_EQ(  name, "default" ) )
+    if ( STR_EQ(  name, "default" ) )
         name = (char *)FeatureFactory::EXTRACTOR_DEFAULT;
 
     // ................................. make it!
@@ -114,16 +120,14 @@ Ptr<DescriptorExtractor> FeatureFactory::makeExtractor( char * &name)
 }
 
 // ................................................................. makeMatcher
-Ptr<DescriptorMatcher> FeatureFactory::makeMatcher( char * &name,
-                                                    const char * detct )
+
+Ptr<DescriptorMatcher> FeatureFactory::makeMatcher( char * &name )
 {
-    UNUSED( detct );
     Ptr<DescriptorMatcher> dm;
     
     // ................................. default
-    if ((        name == nullptr )||
-        STR_EQ(  name, "default" ) )
-                 name = (char *)FeatureFactory::MACTHER_DEFAULT;
+    if ( STR_EQ(  name, "default" ) )
+                  name = (char *)FeatureFactory::MACTHER_DEFAULT;
     
     dm = DescriptorMatcher::create( name );
     return  dm;
@@ -135,8 +139,7 @@ Ptr<Tracker> FeatureFactory::makeTracker( char *&name)
     Ptr<Tracker> tr = Tracker::create( name );
     
     // ................................. default
-    if ((        name == nullptr )||
-        STR_EQ(  name, "default" ) )
+    if (STR_EQ(  name, "default" ) )
         name = (char *)FeatureFactory::TRACKER_DEFAULT;
     
     // ................................. make it!

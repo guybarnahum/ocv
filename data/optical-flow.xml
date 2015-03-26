@@ -11,6 +11,8 @@
             <window>"Optical Flow"</window>
             <method>optical-flow</method>
             <camera>data/camera_cfg.xml</camera>
+            <detector>sift</detector>
+            <matcher>BruteForce</matcher>
             <knn_match>true</knn_match>
             <dbg>true</dbg>
         </_>
