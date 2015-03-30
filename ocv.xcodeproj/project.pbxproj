@@ -7,18 +7,282 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6426E2241AAB8100007F021E /* 20 USD note.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E21D1AAB80C2007F021E /* 20 USD note.png */; };
-		6426E2251AAB8100007F021E /* black diamond.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E21E1AAB80C2007F021E /* black diamond.png */; };
-		6426E2261AAB8100007F021E /* object-detect.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E21F1AAB80C2007F021E /* object-detect.xml */; };
-		6426E2271AAB8100007F021E /* flor.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2201AAB80C2007F021E /* flor.jpg */; };
-		6426E2281AAB8100007F021E /* hough.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2211AAB80C2007F021E /* hough.xml */; };
-		6426E2291AAB8100007F021E /* iittala_owl.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2221AAB80C2007F021E /* iittala_owl.jpg */; };
-		6426E22A1AAB8100007F021E /* space monkey.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2231AAB80C2007F021E /* space monkey.jpg */; };
 		6426E2301AAFAF34007F021E /* libopencv_tracking.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6426E22F1AAFAF34007F021E /* libopencv_tracking.3.0.0.dylib */; };
 		6426E2321AB131BA007F021E /* libopencv_ml.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6426E2311AB131BA007F021E /* libopencv_ml.3.0.0.dylib */; };
 		6426E2351AB246FB007F021E /* CascadeDetectorFPN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6426E2331AB246FB007F021E /* CascadeDetectorFPN.cpp */; };
-		6426E2401AB25A9F007F021E /* face-detect.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E2361AB255EA007F021E /* face-detect.xml */; };
-		6426E2411AB25AA9007F021E /* lbpcascade_frontalface.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6426E23E1AB2587F007F021E /* lbpcascade_frontalface.xml */; };
+		6445BD181AC5EC1D0048AADD /* libg2o_types_slam3d_addons.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BCFF1AC5EC1D0048AADD /* libg2o_types_slam3d_addons.dylib */; };
+		6445BD191AC5EC1D0048AADD /* libg2o_types_slam3d.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD001AC5EC1D0048AADD /* libg2o_types_slam3d.dylib */; };
+		6445BD1A1AC5EC1D0048AADD /* libg2o_cli.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD011AC5EC1D0048AADD /* libg2o_cli.dylib */; };
+		6445BD1B1AC5EC1D0048AADD /* libg2o_core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD021AC5EC1D0048AADD /* libg2o_core.dylib */; };
+		6445BD1C1AC5EC1D0048AADD /* libg2o_csparse_extension.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD031AC5EC1D0048AADD /* libg2o_csparse_extension.dylib */; };
+		6445BD1D1AC5EC1D0048AADD /* libg2o_ext_csparse.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD041AC5EC1D0048AADD /* libg2o_ext_csparse.dylib */; };
+		6445BD1E1AC5EC1D0048AADD /* libg2o_ext_freeglut_minimal.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD051AC5EC1D0048AADD /* libg2o_ext_freeglut_minimal.dylib */; };
+		6445BD1F1AC5EC1D0048AADD /* libg2o_interface.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD061AC5EC1D0048AADD /* libg2o_interface.dylib */; };
+		6445BD201AC5EC1D0048AADD /* libg2o_opengl_helper.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD071AC5EC1D0048AADD /* libg2o_opengl_helper.dylib */; };
+		6445BD211AC5EC1D0048AADD /* libg2o_parser.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD081AC5EC1D0048AADD /* libg2o_parser.dylib */; };
+		6445BD221AC5EC1D0048AADD /* libg2o_simulator.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD091AC5EC1D0048AADD /* libg2o_simulator.dylib */; };
+		6445BD231AC5EC1D0048AADD /* libg2o_solver_csparse.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD0A1AC5EC1D0048AADD /* libg2o_solver_csparse.dylib */; };
+		6445BD241AC5EC1D0048AADD /* libg2o_solver_dense.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD0B1AC5EC1D0048AADD /* libg2o_solver_dense.dylib */; };
+		6445BD251AC5EC1D0048AADD /* libg2o_solver_eigen.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD0C1AC5EC1D0048AADD /* libg2o_solver_eigen.dylib */; };
+		6445BD261AC5EC1D0048AADD /* libg2o_solver_pcg.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD0D1AC5EC1D0048AADD /* libg2o_solver_pcg.dylib */; };
+		6445BD271AC5EC1D0048AADD /* libg2o_solver_slam2d_linear.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD0E1AC5EC1D0048AADD /* libg2o_solver_slam2d_linear.dylib */; };
+		6445BD281AC5EC1D0048AADD /* libg2o_solver_structure_only.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD0F1AC5EC1D0048AADD /* libg2o_solver_structure_only.dylib */; };
+		6445BD291AC5EC1D0048AADD /* libg2o_stuff.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD101AC5EC1D0048AADD /* libg2o_stuff.dylib */; };
+		6445BD2A1AC5EC1D0048AADD /* libg2o_types_data.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD111AC5EC1D0048AADD /* libg2o_types_data.dylib */; };
+		6445BD2B1AC5EC1D0048AADD /* libg2o_types_icp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD121AC5EC1D0048AADD /* libg2o_types_icp.dylib */; };
+		6445BD2C1AC5EC1D0048AADD /* libg2o_types_sba.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD131AC5EC1D0048AADD /* libg2o_types_sba.dylib */; };
+		6445BD2D1AC5EC1D0048AADD /* libg2o_types_sclam2d.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD141AC5EC1D0048AADD /* libg2o_types_sclam2d.dylib */; };
+		6445BD2E1AC5EC1D0048AADD /* libg2o_types_sim3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD151AC5EC1D0048AADD /* libg2o_types_sim3.dylib */; };
+		6445BD2F1AC5EC1D0048AADD /* libg2o_types_slam2d_addons.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD161AC5EC1D0048AADD /* libg2o_types_slam2d_addons.dylib */; };
+		6445BD301AC5EC1D0048AADD /* libg2o_types_slam2d.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD171AC5EC1D0048AADD /* libg2o_types_slam2d.dylib */; };
+		6445BD6F1AC5EDD90048AADD /* libboost_atomic-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD341AC5EDD70048AADD /* libboost_atomic-mt.dylib */; };
+		6445BD701AC5EDD90048AADD /* libboost_chrono-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD351AC5EDD70048AADD /* libboost_chrono-mt.dylib */; };
+		6445BD711AC5EDD90048AADD /* libboost_chrono.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD361AC5EDD70048AADD /* libboost_chrono.dylib */; };
+		6445BD721AC5EDD90048AADD /* libboost_container-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD371AC5EDD70048AADD /* libboost_container-mt.dylib */; };
+		6445BD731AC5EDD90048AADD /* libboost_container.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD381AC5EDD70048AADD /* libboost_container.dylib */; };
+		6445BD741AC5EDD90048AADD /* libboost_context-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD391AC5EDD70048AADD /* libboost_context-mt.dylib */; };
+		6445BD751AC5EDD90048AADD /* libboost_context.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD3A1AC5EDD70048AADD /* libboost_context.dylib */; };
+		6445BD761AC5EDD90048AADD /* libboost_coroutine-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD3B1AC5EDD80048AADD /* libboost_coroutine-mt.dylib */; };
+		6445BD771AC5EDD90048AADD /* libboost_coroutine.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD3C1AC5EDD80048AADD /* libboost_coroutine.dylib */; };
+		6445BD781AC5EDD90048AADD /* libboost_date_time-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD3D1AC5EDD80048AADD /* libboost_date_time-mt.dylib */; };
+		6445BD791AC5EDD90048AADD /* libboost_date_time.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD3E1AC5EDD80048AADD /* libboost_date_time.dylib */; };
+		6445BD7A1AC5EDD90048AADD /* libboost_filesystem-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD3F1AC5EDD80048AADD /* libboost_filesystem-mt.dylib */; };
+		6445BD7B1AC5EDD90048AADD /* libboost_filesystem.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD401AC5EDD80048AADD /* libboost_filesystem.dylib */; };
+		6445BD7C1AC5EDD90048AADD /* libboost_graph-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD411AC5EDD80048AADD /* libboost_graph-mt.dylib */; };
+		6445BD7D1AC5EDD90048AADD /* libboost_graph.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD421AC5EDD80048AADD /* libboost_graph.dylib */; };
+		6445BD7E1AC5EDD90048AADD /* libboost_iostreams-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD431AC5EDD80048AADD /* libboost_iostreams-mt.dylib */; };
+		6445BD7F1AC5EDD90048AADD /* libboost_iostreams.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD441AC5EDD80048AADD /* libboost_iostreams.dylib */; };
+		6445BD801AC5EDD90048AADD /* libboost_locale-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD451AC5EDD80048AADD /* libboost_locale-mt.dylib */; };
+		6445BD811AC5EDD90048AADD /* libboost_log_setup-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD461AC5EDD80048AADD /* libboost_log_setup-mt.dylib */; };
+		6445BD821AC5EDD90048AADD /* libboost_log_setup.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD471AC5EDD80048AADD /* libboost_log_setup.dylib */; };
+		6445BD831AC5EDD90048AADD /* libboost_log-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD481AC5EDD80048AADD /* libboost_log-mt.dylib */; };
+		6445BD841AC5EDD90048AADD /* libboost_log.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD491AC5EDD80048AADD /* libboost_log.dylib */; };
+		6445BD851AC5EDD90048AADD /* libboost_math_c99-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD4A1AC5EDD80048AADD /* libboost_math_c99-mt.dylib */; };
+		6445BD861AC5EDD90048AADD /* libboost_math_c99.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD4B1AC5EDD80048AADD /* libboost_math_c99.dylib */; };
+		6445BD871AC5EDD90048AADD /* libboost_math_c99f-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD4C1AC5EDD80048AADD /* libboost_math_c99f-mt.dylib */; };
+		6445BD881AC5EDD90048AADD /* libboost_math_c99f.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD4D1AC5EDD80048AADD /* libboost_math_c99f.dylib */; };
+		6445BD891AC5EDD90048AADD /* libboost_math_c99l-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD4E1AC5EDD80048AADD /* libboost_math_c99l-mt.dylib */; };
+		6445BD8A1AC5EDD90048AADD /* libboost_math_c99l.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD4F1AC5EDD80048AADD /* libboost_math_c99l.dylib */; };
+		6445BD8B1AC5EDD90048AADD /* libboost_math_tr1-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD501AC5EDD80048AADD /* libboost_math_tr1-mt.dylib */; };
+		6445BD8C1AC5EDD90048AADD /* libboost_math_tr1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD511AC5EDD80048AADD /* libboost_math_tr1.dylib */; };
+		6445BD8D1AC5EDD90048AADD /* libboost_math_tr1f-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD521AC5EDD80048AADD /* libboost_math_tr1f-mt.dylib */; };
+		6445BD8E1AC5EDD90048AADD /* libboost_math_tr1f.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD531AC5EDD80048AADD /* libboost_math_tr1f.dylib */; };
+		6445BD8F1AC5EDD90048AADD /* libboost_math_tr1l-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD541AC5EDD80048AADD /* libboost_math_tr1l-mt.dylib */; };
+		6445BD901AC5EDD90048AADD /* libboost_math_tr1l.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD551AC5EDD80048AADD /* libboost_math_tr1l.dylib */; };
+		6445BD911AC5EDD90048AADD /* libboost_prg_exec_monitor-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD561AC5EDD80048AADD /* libboost_prg_exec_monitor-mt.dylib */; };
+		6445BD921AC5EDD90048AADD /* libboost_prg_exec_monitor.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD571AC5EDD80048AADD /* libboost_prg_exec_monitor.dylib */; };
+		6445BD931AC5EDD90048AADD /* libboost_program_options-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD581AC5EDD80048AADD /* libboost_program_options-mt.dylib */; };
+		6445BD941AC5EDD90048AADD /* libboost_program_options.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD591AC5EDD80048AADD /* libboost_program_options.dylib */; };
+		6445BD951AC5EDD90048AADD /* libboost_python-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD5A1AC5EDD80048AADD /* libboost_python-mt.dylib */; };
+		6445BD961AC5EDD90048AADD /* libboost_python.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD5B1AC5EDD80048AADD /* libboost_python.dylib */; };
+		6445BD971AC5EDD90048AADD /* libboost_random-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD5C1AC5EDD80048AADD /* libboost_random-mt.dylib */; };
+		6445BD981AC5EDD90048AADD /* libboost_random.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD5D1AC5EDD80048AADD /* libboost_random.dylib */; };
+		6445BD991AC5EDD90048AADD /* libboost_regex-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD5E1AC5EDD80048AADD /* libboost_regex-mt.dylib */; };
+		6445BD9A1AC5EDD90048AADD /* libboost_regex.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD5F1AC5EDD80048AADD /* libboost_regex.dylib */; };
+		6445BD9B1AC5EDD90048AADD /* libboost_serialization-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD601AC5EDD80048AADD /* libboost_serialization-mt.dylib */; };
+		6445BD9C1AC5EDD90048AADD /* libboost_serialization.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD611AC5EDD80048AADD /* libboost_serialization.dylib */; };
+		6445BD9D1AC5EDD90048AADD /* libboost_signals-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD621AC5EDD80048AADD /* libboost_signals-mt.dylib */; };
+		6445BD9E1AC5EDD90048AADD /* libboost_signals.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD631AC5EDD80048AADD /* libboost_signals.dylib */; };
+		6445BD9F1AC5EDD90048AADD /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD641AC5EDD90048AADD /* libboost_system-mt.dylib */; };
+		6445BDA01AC5EDD90048AADD /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD651AC5EDD90048AADD /* libboost_system.dylib */; };
+		6445BDA11AC5EDD90048AADD /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD661AC5EDD90048AADD /* libboost_thread-mt.dylib */; };
+		6445BDA21AC5EDD90048AADD /* libboost_timer-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD671AC5EDD90048AADD /* libboost_timer-mt.dylib */; };
+		6445BDA31AC5EDD90048AADD /* libboost_timer.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD681AC5EDD90048AADD /* libboost_timer.dylib */; };
+		6445BDA41AC5EDD90048AADD /* libboost_unit_test_framework-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD691AC5EDD90048AADD /* libboost_unit_test_framework-mt.dylib */; };
+		6445BDA51AC5EDD90048AADD /* libboost_unit_test_framework.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD6A1AC5EDD90048AADD /* libboost_unit_test_framework.dylib */; };
+		6445BDA61AC5EDD90048AADD /* libboost_wave-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD6B1AC5EDD90048AADD /* libboost_wave-mt.dylib */; };
+		6445BDA71AC5EDD90048AADD /* libboost_wave.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD6C1AC5EDD90048AADD /* libboost_wave.dylib */; };
+		6445BDA81AC5EDD90048AADD /* libboost_wserialization-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD6D1AC5EDD90048AADD /* libboost_wserialization-mt.dylib */; };
+		6445BDA91AC5EDD90048AADD /* libboost_wserialization.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD6E1AC5EDD90048AADD /* libboost_wserialization.dylib */; };
+		6445BDAC1AC5EF320048AADD /* LsdSlamFPN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445BDAA1AC5EF320048AADD /* LsdSlamFPN.cpp */; };
+		6445BDC51AC60D2B0048AADD /* 10x7.pdf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6445BDB01AC60CEA0048AADD /* 10x7.pdf */; };
+		6445BDC61AC60D2B0048AADD /* 20 USD note.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6445BDB11AC60CEA0048AADD /* 20 USD note.png */; };
+		6445BDC71AC60D2B0048AADD /* 6x9.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6445BDB21AC60CEA0048AADD /* 6x9.png */; };
+		6445BDC81AC60D2B0048AADD /* 7x7.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6445BDB31AC60CEA0048AADD /* 7x7.jpg */; };
+		6445BDC91AC60D2B0048AADD /* black diamond.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6445BDB41AC60CEA0048AADD /* black diamond.png */; };
+		6445BDCA1AC60D2B0048AADD /* flor.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6445BDB51AC60CEA0048AADD /* flor.jpg */; };
+		6445BDCB1AC60D2B0048AADD /* iittala_owl.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6445BDB61AC60CEA0048AADD /* iittala_owl.jpg */; };
+		6445BDCC1AC60D2B0048AADD /* space monkey.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6445BDB71AC60CEA0048AADD /* space monkey.jpg */; };
+		6445BDD91AC60D790048AADD /* calibrate-camera.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6445BDBD1AC60CEA0048AADD /* calibrate-camera.xml */; };
+		6445BDDA1AC60D790048AADD /* camera_cfg.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6445BDBE1AC60CEA0048AADD /* camera_cfg.xml */; };
+		6445BDDB1AC60D790048AADD /* contour.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6445BDBF1AC60CEA0048AADD /* contour.xml */; };
+		6445BDDC1AC60D790048AADD /* face-detect.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6445BDC01AC60CEA0048AADD /* face-detect.xml */; };
+		6445BDDD1AC60D790048AADD /* hough-circles.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6445BDC11AC60CEA0048AADD /* hough-circles.xml */; };
+		6445BDDE1AC60D790048AADD /* hough.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6445BDC21AC60CEA0048AADD /* hough.xml */; };
+		6445BDDF1AC60D790048AADD /* object-detect.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6445BDC31AC60CEA0048AADD /* object-detect.xml */; };
+		6445BDE01AC60D790048AADD /* optical-flow.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6445BDC41AC60CEA0048AADD /* optical-flow.xml */; };
+		6445BDE21AC60E030048AADD /* lsd-slam.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6445BDE11AC60D9E0048AADD /* lsd-slam.xml */; };
+		6445BE7F1AC759FD0048AADD /* libg2o_types_slam2d.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD171AC5EC1D0048AADD /* libg2o_types_slam2d.dylib */; };
+		6445BE801AC759FD0048AADD /* libg2o_types_slam3d_addons.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BCFF1AC5EC1D0048AADD /* libg2o_types_slam3d_addons.dylib */; };
+		6445BE811AC759FD0048AADD /* libg2o_cli.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD011AC5EC1D0048AADD /* libg2o_cli.dylib */; };
+		6445BE821AC759FD0048AADD /* libg2o_core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD021AC5EC1D0048AADD /* libg2o_core.dylib */; };
+		6445BE831AC759FD0048AADD /* libg2o_csparse_extension.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD031AC5EC1D0048AADD /* libg2o_csparse_extension.dylib */; };
+		6445BE841AC759FD0048AADD /* libg2o_ext_csparse.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD041AC5EC1D0048AADD /* libg2o_ext_csparse.dylib */; };
+		6445BE851AC759FD0048AADD /* libg2o_ext_freeglut_minimal.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD051AC5EC1D0048AADD /* libg2o_ext_freeglut_minimal.dylib */; };
+		6445BE861AC759FD0048AADD /* libg2o_interface.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD061AC5EC1D0048AADD /* libg2o_interface.dylib */; };
+		6445BE871AC759FD0048AADD /* libg2o_opengl_helper.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD071AC5EC1D0048AADD /* libg2o_opengl_helper.dylib */; };
+		6445BE881AC759FD0048AADD /* libg2o_parser.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD081AC5EC1D0048AADD /* libg2o_parser.dylib */; };
+		6445BE891AC759FD0048AADD /* libg2o_simulator.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD091AC5EC1D0048AADD /* libg2o_simulator.dylib */; };
+		6445BE8A1AC759FD0048AADD /* libg2o_solver_csparse.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD0A1AC5EC1D0048AADD /* libg2o_solver_csparse.dylib */; };
+		6445BE8B1AC759FD0048AADD /* libg2o_solver_dense.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD0B1AC5EC1D0048AADD /* libg2o_solver_dense.dylib */; };
+		6445BE8C1AC759FD0048AADD /* libg2o_solver_eigen.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD0C1AC5EC1D0048AADD /* libg2o_solver_eigen.dylib */; };
+		6445BE8D1AC759FD0048AADD /* libg2o_solver_pcg.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD0D1AC5EC1D0048AADD /* libg2o_solver_pcg.dylib */; };
+		6445BE8E1AC759FD0048AADD /* libg2o_solver_slam2d_linear.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD0E1AC5EC1D0048AADD /* libg2o_solver_slam2d_linear.dylib */; };
+		6445BE8F1AC759FD0048AADD /* libg2o_solver_structure_only.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD0F1AC5EC1D0048AADD /* libg2o_solver_structure_only.dylib */; };
+		6445BE901AC759FD0048AADD /* libg2o_stuff.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD101AC5EC1D0048AADD /* libg2o_stuff.dylib */; };
+		6445BE911AC759FD0048AADD /* libg2o_types_data.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD111AC5EC1D0048AADD /* libg2o_types_data.dylib */; };
+		6445BE921AC759FD0048AADD /* libg2o_types_icp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD121AC5EC1D0048AADD /* libg2o_types_icp.dylib */; };
+		6445BE931AC759FD0048AADD /* libg2o_types_sba.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD131AC5EC1D0048AADD /* libg2o_types_sba.dylib */; };
+		6445BE941AC759FD0048AADD /* libg2o_types_sclam2d.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD141AC5EC1D0048AADD /* libg2o_types_sclam2d.dylib */; };
+		6445BE951AC759FD0048AADD /* libg2o_types_sim3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD151AC5EC1D0048AADD /* libg2o_types_sim3.dylib */; };
+		6445BE961AC759FD0048AADD /* libg2o_types_slam2d_addons.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD161AC5EC1D0048AADD /* libg2o_types_slam2d_addons.dylib */; };
+		6445BE971AC759FD0048AADD /* libg2o_types_slam3d.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD001AC5EC1D0048AADD /* libg2o_types_slam3d.dylib */; };
+		6445BE981AC75A200048AADD /* libopencv_objdetect.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8532A1A9C320500A49E62 /* libopencv_objdetect.3.0.0.dylib */; };
+		6445BE991AC75A200048AADD /* libopencv_calib3d.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B853261A9C31DA00A49E62 /* libopencv_calib3d.3.0.0.dylib */; };
+		6445BE9A1AC75A200048AADD /* libopencv_ccalib.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B853271A9C31DA00A49E62 /* libopencv_ccalib.3.0.0.dylib */; };
+		6445BE9B1AC75A200048AADD /* libopencv_core.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 646498D51A8E75D8000C07E1 /* libopencv_core.3.0.0.dylib */; };
+		6445BE9C1AC75A200048AADD /* libopencv_features2d.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8531E1A9C312B00A49E62 /* libopencv_features2d.3.0.0.dylib */; };
+		6445BE9D1AC75A200048AADD /* libopencv_flann.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8531F1A9C312B00A49E62 /* libopencv_flann.3.0.0.dylib */; };
+		6445BE9E1AC75A200048AADD /* libopencv_highgui.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 646498D71A8E760B000C07E1 /* libopencv_highgui.3.0.0.dylib */; };
+		6445BE9F1AC75A200048AADD /* libopencv_imgcodecs.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 646498DF1A903BB9000C07E1 /* libopencv_imgcodecs.3.0.0.dylib */; };
+		6445BEA01AC75A200048AADD /* libopencv_imgproc.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 646498E01A903BB9000C07E1 /* libopencv_imgproc.3.0.0.dylib */; };
+		6445BEA11AC75A200048AADD /* libopencv_ml.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6426E2311AB131BA007F021E /* libopencv_ml.3.0.0.dylib */; };
+		6445BEA21AC75A200048AADD /* libopencv_optflow.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8532B1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib */; };
+		6445BEA31AC75A200048AADD /* libopencv_tracking.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6426E22F1AAFAF34007F021E /* libopencv_tracking.3.0.0.dylib */; };
+		6445BEA41AC75A200048AADD /* libopencv_video.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 646498D91A8EC2CF000C07E1 /* libopencv_video.3.0.0.dylib */; };
+		6445BEA51AC75A200048AADD /* libopencv_videoio.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 646498DB1A8EC310000C07E1 /* libopencv_videoio.3.0.0.dylib */; };
+		6445BEA61AC75A200048AADD /* libopencv_videostab.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 646498DC1A8EC310000C07E1 /* libopencv_videostab.3.0.0.dylib */; };
+		6445BEA71AC75A200048AADD /* libopencv_xfeatures2d.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B853221A9C316800A49E62 /* libopencv_xfeatures2d.3.0.0.dylib */; };
+		6445BEA81AC75A200048AADD /* libopencv_xobjdetect.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B853241A9C318A00A49E62 /* libopencv_xobjdetect.3.0.0.dylib */; };
+		6445BEB61AC75A210048AADD /* libopencv_xphoto.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BEA91AC75A200048AADD /* libopencv_xphoto.3.0.0.dylib */; };
+		6445BEB71AC75A210048AADD /* libopencv_adas.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BEAA1AC75A210048AADD /* libopencv_adas.3.0.0.dylib */; };
+		6445BEB81AC75A210048AADD /* libopencv_bgsegm.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BEAB1AC75A210048AADD /* libopencv_bgsegm.3.0.0.dylib */; };
+		6445BEB91AC75A210048AADD /* libopencv_bioinspired.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BEAC1AC75A210048AADD /* libopencv_bioinspired.3.0.0.dylib */; };
+		6445BEBA1AC75A210048AADD /* libopencv_latentsvm.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BEAD1AC75A210048AADD /* libopencv_latentsvm.3.0.0.dylib */; };
+		6445BEBB1AC75A210048AADD /* libopencv_line_descriptor.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BEAE1AC75A210048AADD /* libopencv_line_descriptor.3.0.0.dylib */; };
+		6445BEBC1AC75A210048AADD /* libopencv_photo.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BEAF1AC75A210048AADD /* libopencv_photo.3.0.0.dylib */; };
+		6445BEBD1AC75A210048AADD /* libopencv_reg.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BEB01AC75A210048AADD /* libopencv_reg.3.0.0.dylib */; };
+		6445BEBE1AC75A210048AADD /* libopencv_shape.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BEB11AC75A210048AADD /* libopencv_shape.3.0.0.dylib */; };
+		6445BEBF1AC75A210048AADD /* libopencv_stitching.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BEB21AC75A210048AADD /* libopencv_stitching.3.0.0.dylib */; };
+		6445BEC01AC75A210048AADD /* libopencv_superres.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BEB31AC75A210048AADD /* libopencv_superres.3.0.0.dylib */; };
+		6445BEC11AC75A210048AADD /* libopencv_surface_matching.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BEB41AC75A210048AADD /* libopencv_surface_matching.3.0.0.dylib */; };
+		6445BEC21AC75A210048AADD /* libopencv_text.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BEB51AC75A210048AADD /* libopencv_text.3.0.0.dylib */; };
+		6445BEC31AC7A96B0048AADD /* libboost_atomic-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD341AC5EDD70048AADD /* libboost_atomic-mt.dylib */; };
+		6445BEC41AC7A96B0048AADD /* libboost_chrono-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD351AC5EDD70048AADD /* libboost_chrono-mt.dylib */; };
+		6445BEC51AC7A96B0048AADD /* libboost_chrono.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD361AC5EDD70048AADD /* libboost_chrono.dylib */; };
+		6445BEC61AC7A96B0048AADD /* libboost_container-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD371AC5EDD70048AADD /* libboost_container-mt.dylib */; };
+		6445BEC71AC7A96B0048AADD /* libboost_container.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD381AC5EDD70048AADD /* libboost_container.dylib */; };
+		6445BEC81AC7A96B0048AADD /* libboost_context-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD391AC5EDD70048AADD /* libboost_context-mt.dylib */; };
+		6445BEC91AC7A96B0048AADD /* libboost_context.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD3A1AC5EDD70048AADD /* libboost_context.dylib */; };
+		6445BECA1AC7A96B0048AADD /* libboost_coroutine-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD3B1AC5EDD80048AADD /* libboost_coroutine-mt.dylib */; };
+		6445BECB1AC7A96B0048AADD /* libboost_coroutine.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD3C1AC5EDD80048AADD /* libboost_coroutine.dylib */; };
+		6445BECC1AC7A96B0048AADD /* libboost_date_time-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD3D1AC5EDD80048AADD /* libboost_date_time-mt.dylib */; };
+		6445BECD1AC7A96B0048AADD /* libboost_date_time.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD3E1AC5EDD80048AADD /* libboost_date_time.dylib */; };
+		6445BECE1AC7A96B0048AADD /* libboost_filesystem-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD3F1AC5EDD80048AADD /* libboost_filesystem-mt.dylib */; };
+		6445BECF1AC7A96B0048AADD /* libboost_filesystem.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD401AC5EDD80048AADD /* libboost_filesystem.dylib */; };
+		6445BED01AC7A96B0048AADD /* libboost_graph-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD411AC5EDD80048AADD /* libboost_graph-mt.dylib */; };
+		6445BED11AC7A96B0048AADD /* libboost_graph.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD421AC5EDD80048AADD /* libboost_graph.dylib */; };
+		6445BED21AC7A96B0048AADD /* libboost_iostreams-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD431AC5EDD80048AADD /* libboost_iostreams-mt.dylib */; };
+		6445BED31AC7A96B0048AADD /* libboost_iostreams.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD441AC5EDD80048AADD /* libboost_iostreams.dylib */; };
+		6445BED41AC7A96B0048AADD /* libboost_locale-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD451AC5EDD80048AADD /* libboost_locale-mt.dylib */; };
+		6445BED51AC7A96B0048AADD /* libboost_log_setup-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD461AC5EDD80048AADD /* libboost_log_setup-mt.dylib */; };
+		6445BED61AC7A96B0048AADD /* libboost_log_setup.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD471AC5EDD80048AADD /* libboost_log_setup.dylib */; };
+		6445BED71AC7A96B0048AADD /* libboost_log-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD481AC5EDD80048AADD /* libboost_log-mt.dylib */; };
+		6445BED81AC7A96B0048AADD /* libboost_log.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD491AC5EDD80048AADD /* libboost_log.dylib */; };
+		6445BED91AC7A96B0048AADD /* libboost_math_c99-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD4A1AC5EDD80048AADD /* libboost_math_c99-mt.dylib */; };
+		6445BEDA1AC7A96B0048AADD /* libboost_math_c99.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD4B1AC5EDD80048AADD /* libboost_math_c99.dylib */; };
+		6445BEDB1AC7A96B0048AADD /* libboost_math_c99f-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD4C1AC5EDD80048AADD /* libboost_math_c99f-mt.dylib */; };
+		6445BEDC1AC7A96B0048AADD /* libboost_math_c99f.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD4D1AC5EDD80048AADD /* libboost_math_c99f.dylib */; };
+		6445BEDD1AC7A96B0048AADD /* libboost_math_c99l-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD4E1AC5EDD80048AADD /* libboost_math_c99l-mt.dylib */; };
+		6445BEDE1AC7A96B0048AADD /* libboost_math_c99l.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD4F1AC5EDD80048AADD /* libboost_math_c99l.dylib */; };
+		6445BEDF1AC7A96B0048AADD /* libboost_math_tr1-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD501AC5EDD80048AADD /* libboost_math_tr1-mt.dylib */; };
+		6445BEE01AC7A96B0048AADD /* libboost_math_tr1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD511AC5EDD80048AADD /* libboost_math_tr1.dylib */; };
+		6445BEE11AC7A96B0048AADD /* libboost_math_tr1f-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD521AC5EDD80048AADD /* libboost_math_tr1f-mt.dylib */; };
+		6445BEE21AC7A96B0048AADD /* libboost_math_tr1f.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD531AC5EDD80048AADD /* libboost_math_tr1f.dylib */; };
+		6445BEE31AC7A96B0048AADD /* libboost_math_tr1l-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD541AC5EDD80048AADD /* libboost_math_tr1l-mt.dylib */; };
+		6445BEE41AC7A96B0048AADD /* libboost_math_tr1l.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD551AC5EDD80048AADD /* libboost_math_tr1l.dylib */; };
+		6445BEE51AC7A96B0048AADD /* libboost_prg_exec_monitor-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD561AC5EDD80048AADD /* libboost_prg_exec_monitor-mt.dylib */; };
+		6445BEE61AC7A96B0048AADD /* libboost_prg_exec_monitor.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD571AC5EDD80048AADD /* libboost_prg_exec_monitor.dylib */; };
+		6445BEE71AC7A96B0048AADD /* libboost_program_options-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD581AC5EDD80048AADD /* libboost_program_options-mt.dylib */; };
+		6445BEE81AC7A96B0048AADD /* libboost_program_options.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD591AC5EDD80048AADD /* libboost_program_options.dylib */; };
+		6445BEE91AC7A96B0048AADD /* libboost_python-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD5A1AC5EDD80048AADD /* libboost_python-mt.dylib */; };
+		6445BEEA1AC7A96B0048AADD /* libboost_python.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD5B1AC5EDD80048AADD /* libboost_python.dylib */; };
+		6445BEEB1AC7A96B0048AADD /* libboost_random-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD5C1AC5EDD80048AADD /* libboost_random-mt.dylib */; };
+		6445BEEC1AC7A96B0048AADD /* libboost_random.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD5D1AC5EDD80048AADD /* libboost_random.dylib */; };
+		6445BEED1AC7A96B0048AADD /* libboost_regex-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD5E1AC5EDD80048AADD /* libboost_regex-mt.dylib */; };
+		6445BEEE1AC7A96B0048AADD /* libboost_regex.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD5F1AC5EDD80048AADD /* libboost_regex.dylib */; };
+		6445BEEF1AC7A96B0048AADD /* libboost_serialization-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD601AC5EDD80048AADD /* libboost_serialization-mt.dylib */; };
+		6445BEF01AC7A96B0048AADD /* libboost_serialization.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD611AC5EDD80048AADD /* libboost_serialization.dylib */; };
+		6445BEF11AC7A96B0048AADD /* libboost_signals-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD621AC5EDD80048AADD /* libboost_signals-mt.dylib */; };
+		6445BEF21AC7A96B0048AADD /* libboost_signals.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD631AC5EDD80048AADD /* libboost_signals.dylib */; };
+		6445BEF31AC7A96B0048AADD /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD641AC5EDD90048AADD /* libboost_system-mt.dylib */; };
+		6445BEF41AC7A96B0048AADD /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD651AC5EDD90048AADD /* libboost_system.dylib */; };
+		6445BEF51AC7A96B0048AADD /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD661AC5EDD90048AADD /* libboost_thread-mt.dylib */; };
+		6445BEF61AC7A96B0048AADD /* libboost_timer-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD671AC5EDD90048AADD /* libboost_timer-mt.dylib */; };
+		6445BEF71AC7A96B0048AADD /* libboost_timer.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD681AC5EDD90048AADD /* libboost_timer.dylib */; };
+		6445BEF81AC7A96B0048AADD /* libboost_unit_test_framework-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD691AC5EDD90048AADD /* libboost_unit_test_framework-mt.dylib */; };
+		6445BEF91AC7A96B0048AADD /* libboost_unit_test_framework.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD6A1AC5EDD90048AADD /* libboost_unit_test_framework.dylib */; };
+		6445BEFA1AC7A96B0048AADD /* libboost_wave-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD6B1AC5EDD90048AADD /* libboost_wave-mt.dylib */; };
+		6445BEFB1AC7A96B0048AADD /* libboost_wave.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD6C1AC5EDD90048AADD /* libboost_wave.dylib */; };
+		6445BEFC1AC7A96B0048AADD /* libboost_wserialization-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD6D1AC5EDD90048AADD /* libboost_wserialization-mt.dylib */; };
+		6445BEFD1AC7A96B0048AADD /* libboost_wserialization.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BD6E1AC5EDD90048AADD /* libboost_wserialization.dylib */; };
+		6445BEFF1AC7A9F00048AADD /* liblsdslam.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6445BDE91AC756300048AADD /* liblsdslam.dylib */; };
+		6445BF001AC7AA5F0048AADD /* liblsdslam.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6445BDE91AC756300048AADD /* liblsdslam.dylib */; };
+		6445C0311AC7AE070048AADD /* Frame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445BFF31AC7AE070048AADD /* Frame.cpp */; };
+		6445C0321AC7AE070048AADD /* Frame.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445BFF41AC7AE070048AADD /* Frame.h */; };
+		6445C0331AC7AE070048AADD /* FrameMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445BFF51AC7AE070048AADD /* FrameMemory.cpp */; };
+		6445C0341AC7AE070048AADD /* FrameMemory.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445BFF61AC7AE070048AADD /* FrameMemory.h */; };
+		6445C0351AC7AE070048AADD /* FramePoseStruct.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445BFF71AC7AE070048AADD /* FramePoseStruct.cpp */; };
+		6445C0361AC7AE070048AADD /* FramePoseStruct.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445BFF81AC7AE070048AADD /* FramePoseStruct.h */; };
+		6445C0371AC7AE070048AADD /* DepthMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445BFFA1AC7AE070048AADD /* DepthMap.cpp */; };
+		6445C0381AC7AE070048AADD /* DepthMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445BFFB1AC7AE070048AADD /* DepthMap.h */; };
+		6445C0391AC7AE070048AADD /* DepthMapPixelHypothesis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445BFFC1AC7AE070048AADD /* DepthMapPixelHypothesis.cpp */; };
+		6445C03A1AC7AE070048AADD /* DepthMapPixelHypothesis.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445BFFD1AC7AE070048AADD /* DepthMapPixelHypothesis.h */; };
+		6445C03B1AC7AE070048AADD /* FabMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445BFFF1AC7AE070048AADD /* FabMap.cpp */; };
+		6445C03C1AC7AE070048AADD /* FabMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C0001AC7AE070048AADD /* FabMap.h */; };
+		6445C03D1AC7AE070048AADD /* g2oTypeSim3Sophus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445C0011AC7AE070048AADD /* g2oTypeSim3Sophus.cpp */; };
+		6445C03E1AC7AE070048AADD /* g2oTypeSim3Sophus.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C0021AC7AE070048AADD /* g2oTypeSim3Sophus.h */; };
+		6445C03F1AC7AE070048AADD /* KeyFrameGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445C0031AC7AE070048AADD /* KeyFrameGraph.cpp */; };
+		6445C0401AC7AE070048AADD /* KeyFrameGraph.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C0041AC7AE070048AADD /* KeyFrameGraph.h */; };
+		6445C0411AC7AE070048AADD /* TrackableKeyFrameSearch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445C0051AC7AE070048AADD /* TrackableKeyFrameSearch.cpp */; };
+		6445C0421AC7AE070048AADD /* TrackableKeyFrameSearch.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C0061AC7AE070048AADD /* TrackableKeyFrameSearch.h */; };
+		6445C0431AC7AE070048AADD /* ImageDisplay.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C0081AC7AE070048AADD /* ImageDisplay.h */; };
+		6445C0441AC7AE070048AADD /* InputImageStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C0091AC7AE070048AADD /* InputImageStream.h */; };
+		6445C0451AC7AE070048AADD /* NotifyBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C00A1AC7AE070048AADD /* NotifyBuffer.h */; };
+		6445C0461AC7AE070048AADD /* ImageDisplay_OpenCV.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445C00C1AC7AE070048AADD /* ImageDisplay_OpenCV.cpp */; };
+		6445C0471AC7AE070048AADD /* Output3DWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C00D1AC7AE070048AADD /* Output3DWrapper.h */; };
+		6445C0481AC7AE070048AADD /* Timestamp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445C00E1AC7AE070048AADD /* Timestamp.cpp */; };
+		6445C0491AC7AE070048AADD /* Timestamp.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C00F1AC7AE070048AADD /* Timestamp.h */; };
+		6445C04A1AC7AE070048AADD /* TimestampedObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C0101AC7AE070048AADD /* TimestampedObject.h */; };
+		6445C04B1AC7AE070048AADD /* SlamSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445C0111AC7AE070048AADD /* SlamSystem.cpp */; };
+		6445C04C1AC7AE070048AADD /* SlamSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C0121AC7AE070048AADD /* SlamSystem.h */; };
+		6445C04D1AC7AE070048AADD /* rxso3.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6445C0141AC7AE070048AADD /* rxso3.hpp */; };
+		6445C04E1AC7AE070048AADD /* se2.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6445C0151AC7AE070048AADD /* se2.hpp */; };
+		6445C04F1AC7AE070048AADD /* se3.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6445C0161AC7AE070048AADD /* se3.hpp */; };
+		6445C0501AC7AE070048AADD /* sim3.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6445C0171AC7AE070048AADD /* sim3.hpp */; };
+		6445C0511AC7AE070048AADD /* so2.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6445C0181AC7AE070048AADD /* so2.hpp */; };
+		6445C0521AC7AE070048AADD /* so3.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6445C0191AC7AE070048AADD /* so3.hpp */; };
+		6445C0531AC7AE070048AADD /* sophus.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6445C01A1AC7AE070048AADD /* sophus.hpp */; };
+		6445C0541AC7AE070048AADD /* tests.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6445C01B1AC7AE070048AADD /* tests.hpp */; };
+		6445C0551AC7AE070048AADD /* LGSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C01D1AC7AE070048AADD /* LGSX.h */; };
+		6445C0561AC7AE070048AADD /* Relocalizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445C01E1AC7AE070048AADD /* Relocalizer.cpp */; };
+		6445C0571AC7AE070048AADD /* Relocalizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C01F1AC7AE070048AADD /* Relocalizer.h */; };
+		6445C0581AC7AE070048AADD /* SE3Tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445C0201AC7AE070048AADD /* SE3Tracker.cpp */; };
+		6445C0591AC7AE070048AADD /* SE3Tracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C0211AC7AE070048AADD /* SE3Tracker.h */; };
+		6445C05A1AC7AE070048AADD /* Sim3Tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445C0221AC7AE070048AADD /* Sim3Tracker.cpp */; };
+		6445C05B1AC7AE070048AADD /* Sim3Tracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C0231AC7AE070048AADD /* Sim3Tracker.h */; };
+		6445C05C1AC7AE070048AADD /* TrackingReference.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445C0241AC7AE070048AADD /* TrackingReference.cpp */; };
+		6445C05D1AC7AE070048AADD /* TrackingReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C0251AC7AE070048AADD /* TrackingReference.h */; };
+		6445C05E1AC7AE070048AADD /* EigenCoreInclude.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C0271AC7AE070048AADD /* EigenCoreInclude.h */; };
+		6445C05F1AC7AE070048AADD /* globalFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445C0281AC7AE070048AADD /* globalFuncs.cpp */; };
+		6445C0601AC7AE070048AADD /* globalFuncs.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C0291AC7AE070048AADD /* globalFuncs.h */; };
+		6445C0611AC7AE070048AADD /* IndexThreadReduce.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C02A1AC7AE070048AADD /* IndexThreadReduce.h */; };
+		6445C0621AC7AE070048AADD /* settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445C02B1AC7AE070048AADD /* settings.cpp */; };
+		6445C0631AC7AE070048AADD /* settings.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C02C1AC7AE070048AADD /* settings.h */; };
+		6445C0641AC7AE070048AADD /* SophusUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445C02D1AC7AE070048AADD /* SophusUtil.cpp */; };
+		6445C0651AC7AE070048AADD /* SophusUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C02E1AC7AE070048AADD /* SophusUtil.h */; };
+		6445C0661AC7AE070048AADD /* Undistorter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6445C02F1AC7AE070048AADD /* Undistorter.cpp */; };
+		6445C0671AC7AE070048AADD /* Undistorter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6445C0301AC7AE070048AADD /* Undistorter.h */; };
 		644F534B1AAA98F80035DD91 /* cli.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 644F53491AAA98F80035DD91 /* cli.cpp */; };
 		646498D61A8E75D8000C07E1 /* libopencv_core.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 646498D51A8E75D8000C07E1 /* libopencv_core.3.0.0.dylib */; };
 		646498D81A8E760B000C07E1 /* libopencv_highgui.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 646498D71A8E760B000C07E1 /* libopencv_highgui.3.0.0.dylib */; };
@@ -33,7 +297,6 @@
 		6470A9FF1A956576009B4139 /* VideoProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470A9F41A956576009B4139 /* VideoProcess.cpp */; };
 		6470AA011A956576009B4139 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470A9F71A956576009B4139 /* main.cpp */; };
 		6470AA041A956601009B4139 /* CannyFPNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6470AA021A956601009B4139 /* CannyFPNode.cpp */; };
-		64B0070F1ABDE949008155A2 /* camera_cfg.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 64B0070E1ABDE29D008155A2 /* camera_cfg.xml */; };
 		64B008A61ABE6ABB008155A2 /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64B008A41ABE6ABB008155A2 /* camera.cpp */; };
 		64B8531D1A99505100A49E62 /* FeatureDetectorFPN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64B8531B1A99505100A49E62 /* FeatureDetectorFPN.cpp */; };
 		64B853201A9C312B00A49E62 /* libopencv_features2d.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8531E1A9C312B00A49E62 /* libopencv_features2d.3.0.0.dylib */; };
@@ -45,11 +308,8 @@
 		64B8532C1A9C320500A49E62 /* libopencv_objdetect.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8532A1A9C320500A49E62 /* libopencv_objdetect.3.0.0.dylib */; };
 		64B8532D1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8532B1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib */; };
 		64D514D01AB6078000518E18 /* CcalibFPN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64D514CE1AB6078000518E18 /* CcalibFPN.cpp */; };
-		64D514D21AB615F800518E18 /* calibrate-camera.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 64D514D11AB6156000518E18 /* calibrate-camera.xml */; };
 		64D514D51AB654AB00518E18 /* FindContour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64D514D31AB654AB00518E18 /* FindContour.cpp */; };
 		64D514DA1AB783FE00518E18 /* OpticalFlowFPN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64D514D81AB783FE00518E18 /* OpticalFlowFPN.cpp */; };
-		64D514DC1AB7894600518E18 /* optical-flow.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 64D514DB1AB7868500518E18 /* optical-flow.xml */; };
-		64D514DD1AB7894F00518E18 /* contour.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 64D514D61AB7670400518E18 /* contour.xml */; };
 		64D514E01AB7AE0400518E18 /* ObjectDetectorFPN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64D514DE1AB7AE0400518E18 /* ObjectDetectorFPN.cpp */; };
 		64E835261A9FA0D8001C5256 /* FeatureFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64E835241A9FA0D7001C5256 /* FeatureFactory.cpp */; };
 		64E835291AA7C23F001C5256 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64E835281AA7C23F001C5256 /* utils.cpp */; };
@@ -57,60 +317,247 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		6445BDD81AC60D650048AADD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = data/xml;
+			dstSubfolderSpec = 16;
+			files = (
+				6445BDE21AC60E030048AADD /* lsd-slam.xml in CopyFiles */,
+				6445BDD91AC60D790048AADD /* calibrate-camera.xml in CopyFiles */,
+				6445BDDA1AC60D790048AADD /* camera_cfg.xml in CopyFiles */,
+				6445BDDB1AC60D790048AADD /* contour.xml in CopyFiles */,
+				6445BDDC1AC60D790048AADD /* face-detect.xml in CopyFiles */,
+				6445BDDD1AC60D790048AADD /* hough-circles.xml in CopyFiles */,
+				6445BDDE1AC60D790048AADD /* hough.xml in CopyFiles */,
+				6445BDDF1AC60D790048AADD /* object-detect.xml in CopyFiles */,
+				6445BDE01AC60D790048AADD /* optical-flow.xml in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6445BEFE1AC7A9D50048AADD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/local/lib;
+			dstSubfolderSpec = 0;
+			files = (
+				6445BEFF1AC7A9F00048AADD /* liblsdslam.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		646498C81A8E748B000C07E1 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
-			dstPath = data;
+			dstPath = data/images;
 			dstSubfolderSpec = 16;
 			files = (
-				64B0070F1ABDE949008155A2 /* camera_cfg.xml in CopyFiles */,
-				64D514DD1AB7894F00518E18 /* contour.xml in CopyFiles */,
-				64D514DC1AB7894600518E18 /* optical-flow.xml in CopyFiles */,
-				64D514D21AB615F800518E18 /* calibrate-camera.xml in CopyFiles */,
-				6426E2411AB25AA9007F021E /* lbpcascade_frontalface.xml in CopyFiles */,
-				6426E2401AB25A9F007F021E /* face-detect.xml in CopyFiles */,
-				6426E2241AAB8100007F021E /* 20 USD note.png in CopyFiles */,
-				6426E2251AAB8100007F021E /* black diamond.png in CopyFiles */,
-				6426E2261AAB8100007F021E /* object-detect.xml in CopyFiles */,
-				6426E2271AAB8100007F021E /* flor.jpg in CopyFiles */,
-				6426E2281AAB8100007F021E /* hough.xml in CopyFiles */,
-				6426E2291AAB8100007F021E /* iittala_owl.jpg in CopyFiles */,
-				6426E22A1AAB8100007F021E /* space monkey.jpg in CopyFiles */,
+				6445BDC51AC60D2B0048AADD /* 10x7.pdf in CopyFiles */,
+				6445BDC61AC60D2B0048AADD /* 20 USD note.png in CopyFiles */,
+				6445BDC71AC60D2B0048AADD /* 6x9.png in CopyFiles */,
+				6445BDC81AC60D2B0048AADD /* 7x7.jpg in CopyFiles */,
+				6445BDC91AC60D2B0048AADD /* black diamond.png in CopyFiles */,
+				6445BDCA1AC60D2B0048AADD /* flor.jpg in CopyFiles */,
+				6445BDCB1AC60D2B0048AADD /* iittala_owl.jpg in CopyFiles */,
+				6445BDCC1AC60D2B0048AADD /* space monkey.jpg in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		6426E21D1AAB80C2007F021E /* 20 USD note.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "20 USD note.png"; sourceTree = "<group>"; };
-		6426E21E1AAB80C2007F021E /* black diamond.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black diamond.png"; sourceTree = "<group>"; };
-		6426E21F1AAB80C2007F021E /* object-detect.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "object-detect.xml"; sourceTree = "<group>"; };
-		6426E2201AAB80C2007F021E /* flor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = flor.jpg; sourceTree = "<group>"; };
-		6426E2211AAB80C2007F021E /* hough.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = hough.xml; sourceTree = "<group>"; };
-		6426E2221AAB80C2007F021E /* iittala_owl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iittala_owl.jpg; sourceTree = "<group>"; };
-		6426E2231AAB80C2007F021E /* space monkey.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "space monkey.jpg"; sourceTree = "<group>"; };
 		6426E22B1AABE601007F021E /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		6426E22C1AAD4CDD007F021E /* utils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = utils.hpp; sourceTree = "<group>"; };
 		6426E22D1AAD60E3007F021E /* ratio_io */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ratio_io; sourceTree = "<group>"; };
 		6426E22E1AAD60E3007F021E /* chrono_io */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chrono_io; sourceTree = "<group>"; };
-		6426E22F1AAFAF34007F021E /* libopencv_tracking.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_tracking.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_tracking.3.0.0.dylib; sourceTree = "<group>"; };
-		6426E2311AB131BA007F021E /* libopencv_ml.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_ml.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_ml.3.0.0.dylib; sourceTree = "<group>"; };
+		6426E22F1AAFAF34007F021E /* libopencv_tracking.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_tracking.3.0.0.dylib; path = /usr/local/lib/libopencv_tracking.3.0.0.dylib; sourceTree = "<absolute>"; };
+		6426E2311AB131BA007F021E /* libopencv_ml.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_ml.3.0.0.dylib; path = /usr/local/lib/libopencv_ml.3.0.0.dylib; sourceTree = "<absolute>"; };
 		6426E2331AB246FB007F021E /* CascadeDetectorFPN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CascadeDetectorFPN.cpp; sourceTree = "<group>"; };
 		6426E2341AB246FB007F021E /* CascadeDetectorFPN.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CascadeDetectorFPN.hpp; sourceTree = "<group>"; };
-		6426E2361AB255EA007F021E /* face-detect.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "face-detect.xml"; sourceTree = "<group>"; };
-		6426E23D1AB2587F007F021E /* lbpcascade_profileface.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = lbpcascade_profileface.xml; sourceTree = "<group>"; };
-		6426E23E1AB2587F007F021E /* lbpcascade_frontalface.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = lbpcascade_frontalface.xml; sourceTree = "<group>"; };
-		6426E23F1AB2587F007F021E /* lbpcascade_frontalcatface.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = lbpcascade_frontalcatface.xml; sourceTree = "<group>"; };
+		6445BCFF1AC5EC1D0048AADD /* libg2o_types_slam3d_addons.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_types_slam3d_addons.dylib; path = /usr/local/lib/libg2o_types_slam3d_addons.dylib; sourceTree = "<absolute>"; };
+		6445BD001AC5EC1D0048AADD /* libg2o_types_slam3d.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_types_slam3d.dylib; path = /usr/local/lib/libg2o_types_slam3d.dylib; sourceTree = "<absolute>"; };
+		6445BD011AC5EC1D0048AADD /* libg2o_cli.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_cli.dylib; path = /usr/local/lib/libg2o_cli.dylib; sourceTree = "<absolute>"; };
+		6445BD021AC5EC1D0048AADD /* libg2o_core.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_core.dylib; path = /usr/local/lib/libg2o_core.dylib; sourceTree = "<absolute>"; };
+		6445BD031AC5EC1D0048AADD /* libg2o_csparse_extension.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_csparse_extension.dylib; path = /usr/local/lib/libg2o_csparse_extension.dylib; sourceTree = "<absolute>"; };
+		6445BD041AC5EC1D0048AADD /* libg2o_ext_csparse.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_ext_csparse.dylib; path = /usr/local/lib/libg2o_ext_csparse.dylib; sourceTree = "<absolute>"; };
+		6445BD051AC5EC1D0048AADD /* libg2o_ext_freeglut_minimal.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_ext_freeglut_minimal.dylib; path = /usr/local/lib/libg2o_ext_freeglut_minimal.dylib; sourceTree = "<absolute>"; };
+		6445BD061AC5EC1D0048AADD /* libg2o_interface.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_interface.dylib; path = /usr/local/lib/libg2o_interface.dylib; sourceTree = "<absolute>"; };
+		6445BD071AC5EC1D0048AADD /* libg2o_opengl_helper.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_opengl_helper.dylib; path = /usr/local/lib/libg2o_opengl_helper.dylib; sourceTree = "<absolute>"; };
+		6445BD081AC5EC1D0048AADD /* libg2o_parser.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_parser.dylib; path = /usr/local/lib/libg2o_parser.dylib; sourceTree = "<absolute>"; };
+		6445BD091AC5EC1D0048AADD /* libg2o_simulator.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_simulator.dylib; path = /usr/local/lib/libg2o_simulator.dylib; sourceTree = "<absolute>"; };
+		6445BD0A1AC5EC1D0048AADD /* libg2o_solver_csparse.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_solver_csparse.dylib; path = /usr/local/lib/libg2o_solver_csparse.dylib; sourceTree = "<absolute>"; };
+		6445BD0B1AC5EC1D0048AADD /* libg2o_solver_dense.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_solver_dense.dylib; path = /usr/local/lib/libg2o_solver_dense.dylib; sourceTree = "<absolute>"; };
+		6445BD0C1AC5EC1D0048AADD /* libg2o_solver_eigen.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_solver_eigen.dylib; path = /usr/local/lib/libg2o_solver_eigen.dylib; sourceTree = "<absolute>"; };
+		6445BD0D1AC5EC1D0048AADD /* libg2o_solver_pcg.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_solver_pcg.dylib; path = /usr/local/lib/libg2o_solver_pcg.dylib; sourceTree = "<absolute>"; };
+		6445BD0E1AC5EC1D0048AADD /* libg2o_solver_slam2d_linear.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_solver_slam2d_linear.dylib; path = /usr/local/lib/libg2o_solver_slam2d_linear.dylib; sourceTree = "<absolute>"; };
+		6445BD0F1AC5EC1D0048AADD /* libg2o_solver_structure_only.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_solver_structure_only.dylib; path = /usr/local/lib/libg2o_solver_structure_only.dylib; sourceTree = "<absolute>"; };
+		6445BD101AC5EC1D0048AADD /* libg2o_stuff.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_stuff.dylib; path = /usr/local/lib/libg2o_stuff.dylib; sourceTree = "<absolute>"; };
+		6445BD111AC5EC1D0048AADD /* libg2o_types_data.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_types_data.dylib; path = /usr/local/lib/libg2o_types_data.dylib; sourceTree = "<absolute>"; };
+		6445BD121AC5EC1D0048AADD /* libg2o_types_icp.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_types_icp.dylib; path = /usr/local/lib/libg2o_types_icp.dylib; sourceTree = "<absolute>"; };
+		6445BD131AC5EC1D0048AADD /* libg2o_types_sba.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_types_sba.dylib; path = /usr/local/lib/libg2o_types_sba.dylib; sourceTree = "<absolute>"; };
+		6445BD141AC5EC1D0048AADD /* libg2o_types_sclam2d.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_types_sclam2d.dylib; path = /usr/local/lib/libg2o_types_sclam2d.dylib; sourceTree = "<absolute>"; };
+		6445BD151AC5EC1D0048AADD /* libg2o_types_sim3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_types_sim3.dylib; path = /usr/local/lib/libg2o_types_sim3.dylib; sourceTree = "<absolute>"; };
+		6445BD161AC5EC1D0048AADD /* libg2o_types_slam2d_addons.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_types_slam2d_addons.dylib; path = /usr/local/lib/libg2o_types_slam2d_addons.dylib; sourceTree = "<absolute>"; };
+		6445BD171AC5EC1D0048AADD /* libg2o_types_slam2d.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libg2o_types_slam2d.dylib; path = /usr/local/lib/libg2o_types_slam2d.dylib; sourceTree = "<absolute>"; };
+		6445BD341AC5EDD70048AADD /* libboost_atomic-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_atomic-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_atomic-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD351AC5EDD70048AADD /* libboost_chrono-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_chrono-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_chrono-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD361AC5EDD70048AADD /* libboost_chrono.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_chrono.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_chrono.dylib; sourceTree = "<absolute>"; };
+		6445BD371AC5EDD70048AADD /* libboost_container-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_container-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_container-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD381AC5EDD70048AADD /* libboost_container.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_container.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_container.dylib; sourceTree = "<absolute>"; };
+		6445BD391AC5EDD70048AADD /* libboost_context-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_context-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_context-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD3A1AC5EDD70048AADD /* libboost_context.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_context.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_context.dylib; sourceTree = "<absolute>"; };
+		6445BD3B1AC5EDD80048AADD /* libboost_coroutine-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_coroutine-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_coroutine-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD3C1AC5EDD80048AADD /* libboost_coroutine.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_coroutine.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_coroutine.dylib; sourceTree = "<absolute>"; };
+		6445BD3D1AC5EDD80048AADD /* libboost_date_time-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_date_time-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_date_time-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD3E1AC5EDD80048AADD /* libboost_date_time.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_date_time.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_date_time.dylib; sourceTree = "<absolute>"; };
+		6445BD3F1AC5EDD80048AADD /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_filesystem-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD401AC5EDD80048AADD /* libboost_filesystem.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_filesystem.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_filesystem.dylib; sourceTree = "<absolute>"; };
+		6445BD411AC5EDD80048AADD /* libboost_graph-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_graph-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_graph-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD421AC5EDD80048AADD /* libboost_graph.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_graph.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_graph.dylib; sourceTree = "<absolute>"; };
+		6445BD431AC5EDD80048AADD /* libboost_iostreams-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_iostreams-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_iostreams-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD441AC5EDD80048AADD /* libboost_iostreams.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_iostreams.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_iostreams.dylib; sourceTree = "<absolute>"; };
+		6445BD451AC5EDD80048AADD /* libboost_locale-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_locale-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_locale-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD461AC5EDD80048AADD /* libboost_log_setup-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_log_setup-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_log_setup-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD471AC5EDD80048AADD /* libboost_log_setup.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_log_setup.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_log_setup.dylib; sourceTree = "<absolute>"; };
+		6445BD481AC5EDD80048AADD /* libboost_log-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_log-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_log-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD491AC5EDD80048AADD /* libboost_log.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_log.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_log.dylib; sourceTree = "<absolute>"; };
+		6445BD4A1AC5EDD80048AADD /* libboost_math_c99-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_math_c99-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_math_c99-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD4B1AC5EDD80048AADD /* libboost_math_c99.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_math_c99.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_math_c99.dylib; sourceTree = "<absolute>"; };
+		6445BD4C1AC5EDD80048AADD /* libboost_math_c99f-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_math_c99f-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_math_c99f-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD4D1AC5EDD80048AADD /* libboost_math_c99f.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_math_c99f.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_math_c99f.dylib; sourceTree = "<absolute>"; };
+		6445BD4E1AC5EDD80048AADD /* libboost_math_c99l-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_math_c99l-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_math_c99l-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD4F1AC5EDD80048AADD /* libboost_math_c99l.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_math_c99l.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_math_c99l.dylib; sourceTree = "<absolute>"; };
+		6445BD501AC5EDD80048AADD /* libboost_math_tr1-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_math_tr1-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_math_tr1-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD511AC5EDD80048AADD /* libboost_math_tr1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_math_tr1.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_math_tr1.dylib; sourceTree = "<absolute>"; };
+		6445BD521AC5EDD80048AADD /* libboost_math_tr1f-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_math_tr1f-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_math_tr1f-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD531AC5EDD80048AADD /* libboost_math_tr1f.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_math_tr1f.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_math_tr1f.dylib; sourceTree = "<absolute>"; };
+		6445BD541AC5EDD80048AADD /* libboost_math_tr1l-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_math_tr1l-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_math_tr1l-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD551AC5EDD80048AADD /* libboost_math_tr1l.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_math_tr1l.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_math_tr1l.dylib; sourceTree = "<absolute>"; };
+		6445BD561AC5EDD80048AADD /* libboost_prg_exec_monitor-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_prg_exec_monitor-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_prg_exec_monitor-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD571AC5EDD80048AADD /* libboost_prg_exec_monitor.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_prg_exec_monitor.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_prg_exec_monitor.dylib; sourceTree = "<absolute>"; };
+		6445BD581AC5EDD80048AADD /* libboost_program_options-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_program_options-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_program_options-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD591AC5EDD80048AADD /* libboost_program_options.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_program_options.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_program_options.dylib; sourceTree = "<absolute>"; };
+		6445BD5A1AC5EDD80048AADD /* libboost_python-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_python-mt.dylib"; path = "/usr/local/Cellar/boost-python/1.57.0/lib/libboost_python-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD5B1AC5EDD80048AADD /* libboost_python.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_python.dylib; path = "/usr/local/Cellar/boost-python/1.57.0/lib/libboost_python.dylib"; sourceTree = "<absolute>"; };
+		6445BD5C1AC5EDD80048AADD /* libboost_random-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_random-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_random-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD5D1AC5EDD80048AADD /* libboost_random.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_random.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_random.dylib; sourceTree = "<absolute>"; };
+		6445BD5E1AC5EDD80048AADD /* libboost_regex-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_regex-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_regex-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD5F1AC5EDD80048AADD /* libboost_regex.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_regex.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_regex.dylib; sourceTree = "<absolute>"; };
+		6445BD601AC5EDD80048AADD /* libboost_serialization-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_serialization-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_serialization-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD611AC5EDD80048AADD /* libboost_serialization.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_serialization.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_serialization.dylib; sourceTree = "<absolute>"; };
+		6445BD621AC5EDD80048AADD /* libboost_signals-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_signals-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_signals-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD631AC5EDD80048AADD /* libboost_signals.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_signals.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_signals.dylib; sourceTree = "<absolute>"; };
+		6445BD641AC5EDD90048AADD /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_system-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD651AC5EDD90048AADD /* libboost_system.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_system.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_system.dylib; sourceTree = "<absolute>"; };
+		6445BD661AC5EDD90048AADD /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_thread-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD671AC5EDD90048AADD /* libboost_timer-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_timer-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_timer-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD681AC5EDD90048AADD /* libboost_timer.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_timer.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_timer.dylib; sourceTree = "<absolute>"; };
+		6445BD691AC5EDD90048AADD /* libboost_unit_test_framework-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_unit_test_framework-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_unit_test_framework-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD6A1AC5EDD90048AADD /* libboost_unit_test_framework.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_unit_test_framework.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_unit_test_framework.dylib; sourceTree = "<absolute>"; };
+		6445BD6B1AC5EDD90048AADD /* libboost_wave-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_wave-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_wave-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD6C1AC5EDD90048AADD /* libboost_wave.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_wave.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_wave.dylib; sourceTree = "<absolute>"; };
+		6445BD6D1AC5EDD90048AADD /* libboost_wserialization-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_wserialization-mt.dylib"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_wserialization-mt.dylib"; sourceTree = "<absolute>"; };
+		6445BD6E1AC5EDD90048AADD /* libboost_wserialization.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_wserialization.dylib; path = /usr/local/Cellar/boost/1.57.0/lib/libboost_wserialization.dylib; sourceTree = "<absolute>"; };
+		6445BDAA1AC5EF320048AADD /* LsdSlamFPN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LsdSlamFPN.cpp; sourceTree = "<group>"; };
+		6445BDAB1AC5EF320048AADD /* LsdSlamFPN.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LsdSlamFPN.hpp; sourceTree = "<group>"; };
+		6445BDB01AC60CEA0048AADD /* 10x7.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = 10x7.pdf; sourceTree = "<group>"; };
+		6445BDB11AC60CEA0048AADD /* 20 USD note.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "20 USD note.png"; sourceTree = "<group>"; };
+		6445BDB21AC60CEA0048AADD /* 6x9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6x9.png; sourceTree = "<group>"; };
+		6445BDB31AC60CEA0048AADD /* 7x7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 7x7.jpg; sourceTree = "<group>"; };
+		6445BDB41AC60CEA0048AADD /* black diamond.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black diamond.png"; sourceTree = "<group>"; };
+		6445BDB51AC60CEA0048AADD /* flor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = flor.jpg; sourceTree = "<group>"; };
+		6445BDB61AC60CEA0048AADD /* iittala_owl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iittala_owl.jpg; sourceTree = "<group>"; };
+		6445BDB71AC60CEA0048AADD /* space monkey.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "space monkey.jpg"; sourceTree = "<group>"; };
+		6445BDB91AC60CEA0048AADD /* lbpcascade_frontalcatface.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = lbpcascade_frontalcatface.xml; sourceTree = "<group>"; };
+		6445BDBA1AC60CEA0048AADD /* lbpcascade_frontalface.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = lbpcascade_frontalface.xml; sourceTree = "<group>"; };
+		6445BDBB1AC60CEA0048AADD /* lbpcascade_profileface.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = lbpcascade_profileface.xml; sourceTree = "<group>"; };
+		6445BDBD1AC60CEA0048AADD /* calibrate-camera.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "calibrate-camera.xml"; sourceTree = "<group>"; };
+		6445BDBE1AC60CEA0048AADD /* camera_cfg.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = camera_cfg.xml; sourceTree = "<group>"; };
+		6445BDBF1AC60CEA0048AADD /* contour.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = contour.xml; sourceTree = "<group>"; };
+		6445BDC01AC60CEA0048AADD /* face-detect.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "face-detect.xml"; sourceTree = "<group>"; };
+		6445BDC11AC60CEA0048AADD /* hough-circles.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "hough-circles.xml"; sourceTree = "<group>"; };
+		6445BDC21AC60CEA0048AADD /* hough.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = hough.xml; sourceTree = "<group>"; };
+		6445BDC31AC60CEA0048AADD /* object-detect.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "object-detect.xml"; sourceTree = "<group>"; };
+		6445BDC41AC60CEA0048AADD /* optical-flow.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "optical-flow.xml"; sourceTree = "<group>"; };
+		6445BDE11AC60D9E0048AADD /* lsd-slam.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "lsd-slam.xml"; sourceTree = "<group>"; };
+		6445BDE91AC756300048AADD /* liblsdslam.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = liblsdslam.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		6445BEA91AC75A200048AADD /* libopencv_xphoto.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_xphoto.3.0.0.dylib; path = /usr/local/lib/libopencv_xphoto.3.0.0.dylib; sourceTree = "<absolute>"; };
+		6445BEAA1AC75A210048AADD /* libopencv_adas.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_adas.3.0.0.dylib; path = /usr/local/lib/libopencv_adas.3.0.0.dylib; sourceTree = "<absolute>"; };
+		6445BEAB1AC75A210048AADD /* libopencv_bgsegm.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_bgsegm.3.0.0.dylib; path = /usr/local/lib/libopencv_bgsegm.3.0.0.dylib; sourceTree = "<absolute>"; };
+		6445BEAC1AC75A210048AADD /* libopencv_bioinspired.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_bioinspired.3.0.0.dylib; path = /usr/local/lib/libopencv_bioinspired.3.0.0.dylib; sourceTree = "<absolute>"; };
+		6445BEAD1AC75A210048AADD /* libopencv_latentsvm.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_latentsvm.3.0.0.dylib; path = /usr/local/lib/libopencv_latentsvm.3.0.0.dylib; sourceTree = "<absolute>"; };
+		6445BEAE1AC75A210048AADD /* libopencv_line_descriptor.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_line_descriptor.3.0.0.dylib; path = /usr/local/lib/libopencv_line_descriptor.3.0.0.dylib; sourceTree = "<absolute>"; };
+		6445BEAF1AC75A210048AADD /* libopencv_photo.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_photo.3.0.0.dylib; path = /usr/local/lib/libopencv_photo.3.0.0.dylib; sourceTree = "<absolute>"; };
+		6445BEB01AC75A210048AADD /* libopencv_reg.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_reg.3.0.0.dylib; path = /usr/local/lib/libopencv_reg.3.0.0.dylib; sourceTree = "<absolute>"; };
+		6445BEB11AC75A210048AADD /* libopencv_shape.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_shape.3.0.0.dylib; path = /usr/local/lib/libopencv_shape.3.0.0.dylib; sourceTree = "<absolute>"; };
+		6445BEB21AC75A210048AADD /* libopencv_stitching.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_stitching.3.0.0.dylib; path = /usr/local/lib/libopencv_stitching.3.0.0.dylib; sourceTree = "<absolute>"; };
+		6445BEB31AC75A210048AADD /* libopencv_superres.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_superres.3.0.0.dylib; path = /usr/local/lib/libopencv_superres.3.0.0.dylib; sourceTree = "<absolute>"; };
+		6445BEB41AC75A210048AADD /* libopencv_surface_matching.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_surface_matching.3.0.0.dylib; path = /usr/local/lib/libopencv_surface_matching.3.0.0.dylib; sourceTree = "<absolute>"; };
+		6445BEB51AC75A210048AADD /* libopencv_text.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_text.3.0.0.dylib; path = /usr/local/lib/libopencv_text.3.0.0.dylib; sourceTree = "<absolute>"; };
+		6445BFF31AC7AE070048AADD /* Frame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Frame.cpp; sourceTree = "<group>"; };
+		6445BFF41AC7AE070048AADD /* Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Frame.h; sourceTree = "<group>"; };
+		6445BFF51AC7AE070048AADD /* FrameMemory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameMemory.cpp; sourceTree = "<group>"; };
+		6445BFF61AC7AE070048AADD /* FrameMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameMemory.h; sourceTree = "<group>"; };
+		6445BFF71AC7AE070048AADD /* FramePoseStruct.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FramePoseStruct.cpp; sourceTree = "<group>"; };
+		6445BFF81AC7AE070048AADD /* FramePoseStruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FramePoseStruct.h; sourceTree = "<group>"; };
+		6445BFFA1AC7AE070048AADD /* DepthMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DepthMap.cpp; sourceTree = "<group>"; };
+		6445BFFB1AC7AE070048AADD /* DepthMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DepthMap.h; sourceTree = "<group>"; };
+		6445BFFC1AC7AE070048AADD /* DepthMapPixelHypothesis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DepthMapPixelHypothesis.cpp; sourceTree = "<group>"; };
+		6445BFFD1AC7AE070048AADD /* DepthMapPixelHypothesis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DepthMapPixelHypothesis.h; sourceTree = "<group>"; };
+		6445BFFF1AC7AE070048AADD /* FabMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FabMap.cpp; sourceTree = "<group>"; };
+		6445C0001AC7AE070048AADD /* FabMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FabMap.h; sourceTree = "<group>"; };
+		6445C0011AC7AE070048AADD /* g2oTypeSim3Sophus.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = g2oTypeSim3Sophus.cpp; sourceTree = "<group>"; };
+		6445C0021AC7AE070048AADD /* g2oTypeSim3Sophus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = g2oTypeSim3Sophus.h; sourceTree = "<group>"; };
+		6445C0031AC7AE070048AADD /* KeyFrameGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyFrameGraph.cpp; sourceTree = "<group>"; };
+		6445C0041AC7AE070048AADD /* KeyFrameGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyFrameGraph.h; sourceTree = "<group>"; };
+		6445C0051AC7AE070048AADD /* TrackableKeyFrameSearch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrackableKeyFrameSearch.cpp; sourceTree = "<group>"; };
+		6445C0061AC7AE070048AADD /* TrackableKeyFrameSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackableKeyFrameSearch.h; sourceTree = "<group>"; };
+		6445C0081AC7AE070048AADD /* ImageDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDisplay.h; sourceTree = "<group>"; };
+		6445C0091AC7AE070048AADD /* InputImageStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputImageStream.h; sourceTree = "<group>"; };
+		6445C00A1AC7AE070048AADD /* NotifyBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifyBuffer.h; sourceTree = "<group>"; };
+		6445C00C1AC7AE070048AADD /* ImageDisplay_OpenCV.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageDisplay_OpenCV.cpp; sourceTree = "<group>"; };
+		6445C00D1AC7AE070048AADD /* Output3DWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Output3DWrapper.h; sourceTree = "<group>"; };
+		6445C00E1AC7AE070048AADD /* Timestamp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timestamp.cpp; sourceTree = "<group>"; };
+		6445C00F1AC7AE070048AADD /* Timestamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timestamp.h; sourceTree = "<group>"; };
+		6445C0101AC7AE070048AADD /* TimestampedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimestampedObject.h; sourceTree = "<group>"; };
+		6445C0111AC7AE070048AADD /* SlamSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SlamSystem.cpp; sourceTree = "<group>"; };
+		6445C0121AC7AE070048AADD /* SlamSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlamSystem.h; sourceTree = "<group>"; };
+		6445C0141AC7AE070048AADD /* rxso3.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rxso3.hpp; sourceTree = "<group>"; };
+		6445C0151AC7AE070048AADD /* se2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = se2.hpp; sourceTree = "<group>"; };
+		6445C0161AC7AE070048AADD /* se3.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = se3.hpp; sourceTree = "<group>"; };
+		6445C0171AC7AE070048AADD /* sim3.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sim3.hpp; sourceTree = "<group>"; };
+		6445C0181AC7AE070048AADD /* so2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = so2.hpp; sourceTree = "<group>"; };
+		6445C0191AC7AE070048AADD /* so3.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = so3.hpp; sourceTree = "<group>"; };
+		6445C01A1AC7AE070048AADD /* sophus.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sophus.hpp; sourceTree = "<group>"; };
+		6445C01B1AC7AE070048AADD /* tests.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tests.hpp; sourceTree = "<group>"; };
+		6445C01D1AC7AE070048AADD /* LGSX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSX.h; sourceTree = "<group>"; };
+		6445C01E1AC7AE070048AADD /* Relocalizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Relocalizer.cpp; sourceTree = "<group>"; };
+		6445C01F1AC7AE070048AADD /* Relocalizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Relocalizer.h; sourceTree = "<group>"; };
+		6445C0201AC7AE070048AADD /* SE3Tracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SE3Tracker.cpp; sourceTree = "<group>"; };
+		6445C0211AC7AE070048AADD /* SE3Tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SE3Tracker.h; sourceTree = "<group>"; };
+		6445C0221AC7AE070048AADD /* Sim3Tracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sim3Tracker.cpp; sourceTree = "<group>"; };
+		6445C0231AC7AE070048AADD /* Sim3Tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sim3Tracker.h; sourceTree = "<group>"; };
+		6445C0241AC7AE070048AADD /* TrackingReference.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrackingReference.cpp; sourceTree = "<group>"; };
+		6445C0251AC7AE070048AADD /* TrackingReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackingReference.h; sourceTree = "<group>"; };
+		6445C0271AC7AE070048AADD /* EigenCoreInclude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EigenCoreInclude.h; sourceTree = "<group>"; };
+		6445C0281AC7AE070048AADD /* globalFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = globalFuncs.cpp; sourceTree = "<group>"; };
+		6445C0291AC7AE070048AADD /* globalFuncs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = globalFuncs.h; sourceTree = "<group>"; };
+		6445C02A1AC7AE070048AADD /* IndexThreadReduce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexThreadReduce.h; sourceTree = "<group>"; };
+		6445C02B1AC7AE070048AADD /* settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = settings.cpp; sourceTree = "<group>"; };
+		6445C02C1AC7AE070048AADD /* settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settings.h; sourceTree = "<group>"; };
+		6445C02D1AC7AE070048AADD /* SophusUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SophusUtil.cpp; sourceTree = "<group>"; };
+		6445C02E1AC7AE070048AADD /* SophusUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SophusUtil.h; sourceTree = "<group>"; };
+		6445C02F1AC7AE070048AADD /* Undistorter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Undistorter.cpp; sourceTree = "<group>"; };
+		6445C0301AC7AE070048AADD /* Undistorter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Undistorter.h; sourceTree = "<group>"; };
 		644F53491AAA98F80035DD91 /* cli.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cli.cpp; sourceTree = "<group>"; };
 		644F534A1AAA98F80035DD91 /* cli.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cli.hpp; sourceTree = "<group>"; };
 		646498CA1A8E748B000C07E1 /* ocv */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ocv; sourceTree = BUILT_PRODUCTS_DIR; };
-		646498D51A8E75D8000C07E1 /* libopencv_core.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_core.3.0.0.dylib; sourceTree = "<group>"; };
-		646498D71A8E760B000C07E1 /* libopencv_highgui.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_highgui.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_highgui.3.0.0.dylib; sourceTree = "<group>"; };
-		646498D91A8EC2CF000C07E1 /* libopencv_video.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_video.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_video.3.0.0.dylib; sourceTree = "<group>"; };
-		646498DB1A8EC310000C07E1 /* libopencv_videoio.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_videoio.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_videoio.3.0.0.dylib; sourceTree = "<group>"; };
-		646498DC1A8EC310000C07E1 /* libopencv_videostab.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_videostab.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_videostab.3.0.0.dylib; sourceTree = "<group>"; };
-		646498DF1A903BB9000C07E1 /* libopencv_imgcodecs.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgcodecs.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_imgcodecs.3.0.0.dylib; sourceTree = "<group>"; };
-		646498E01A903BB9000C07E1 /* libopencv_imgproc.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_imgproc.3.0.0.dylib; sourceTree = "<group>"; };
+		646498D51A8E75D8000C07E1 /* libopencv_core.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.3.0.0.dylib; path = /usr/local/lib/libopencv_core.3.0.0.dylib; sourceTree = "<absolute>"; };
+		646498D71A8E760B000C07E1 /* libopencv_highgui.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_highgui.3.0.0.dylib; path = /usr/local/lib/libopencv_highgui.3.0.0.dylib; sourceTree = "<absolute>"; };
+		646498D91A8EC2CF000C07E1 /* libopencv_video.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_video.3.0.0.dylib; path = /usr/local/lib/libopencv_video.3.0.0.dylib; sourceTree = "<absolute>"; };
+		646498DB1A8EC310000C07E1 /* libopencv_videoio.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_videoio.3.0.0.dylib; path = /usr/local/lib/libopencv_videoio.3.0.0.dylib; sourceTree = "<absolute>"; };
+		646498DC1A8EC310000C07E1 /* libopencv_videostab.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_videostab.3.0.0.dylib; path = /usr/local/lib/libopencv_videostab.3.0.0.dylib; sourceTree = "<absolute>"; };
+		646498DF1A903BB9000C07E1 /* libopencv_imgcodecs.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgcodecs.3.0.0.dylib; path = /usr/local/lib/libopencv_imgcodecs.3.0.0.dylib; sourceTree = "<absolute>"; };
+		646498E01A903BB9000C07E1 /* libopencv_imgproc.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.3.0.0.dylib; path = /usr/local/lib/libopencv_imgproc.3.0.0.dylib; sourceTree = "<absolute>"; };
 		6470A9E51A956576009B4139 /* FrameProcessNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameProcessNode.cpp; sourceTree = "<group>"; };
 		6470A9E61A956576009B4139 /* FrameProcessNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FrameProcessNode.hpp; sourceTree = "<group>"; };
 		6470A9E71A956576009B4139 /* FrameProcessNodeFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameProcessNodeFactory.cpp; sourceTree = "<group>"; };
@@ -122,30 +569,25 @@
 		6470A9F71A956576009B4139 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		6470AA021A956601009B4139 /* CannyFPNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CannyFPNode.cpp; sourceTree = "<group>"; };
 		6470AA031A956601009B4139 /* CannyFPNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CannyFPNode.hpp; sourceTree = "<group>"; };
-		64B0070E1ABDE29D008155A2 /* camera_cfg.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = camera_cfg.xml; sourceTree = "<group>"; };
 		64B008A21ABE6379008155A2 /* excluded-ref-only */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "excluded-ref-only"; sourceTree = "<group>"; };
 		64B008A41ABE6ABB008155A2 /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
 		64B008A51ABE6ABB008155A2 /* camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = camera.hpp; sourceTree = "<group>"; };
 		64B8531B1A99505100A49E62 /* FeatureDetectorFPN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FeatureDetectorFPN.cpp; sourceTree = "<group>"; };
 		64B8531C1A99505100A49E62 /* FeatureDetectorFPN.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FeatureDetectorFPN.hpp; sourceTree = "<group>"; };
-		64B8531E1A9C312B00A49E62 /* libopencv_features2d.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_features2d.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_features2d.3.0.0.dylib; sourceTree = "<group>"; };
-		64B8531F1A9C312B00A49E62 /* libopencv_flann.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_flann.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_flann.3.0.0.dylib; sourceTree = "<group>"; };
-		64B853221A9C316800A49E62 /* libopencv_xfeatures2d.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_xfeatures2d.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_xfeatures2d.3.0.0.dylib; sourceTree = "<group>"; };
-		64B853241A9C318A00A49E62 /* libopencv_xobjdetect.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_xobjdetect.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_xobjdetect.3.0.0.dylib; sourceTree = "<group>"; };
-		64B853261A9C31DA00A49E62 /* libopencv_calib3d.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_calib3d.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_calib3d.3.0.0.dylib; sourceTree = "<group>"; };
-		64B853271A9C31DA00A49E62 /* libopencv_ccalib.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_ccalib.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_ccalib.3.0.0.dylib; sourceTree = "<group>"; };
-		64B8532A1A9C320500A49E62 /* libopencv_objdetect.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_objdetect.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_objdetect.3.0.0.dylib; sourceTree = "<group>"; };
-		64B8532B1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_optflow.3.0.0.dylib; path = ../../../../../usr/local/lib/libopencv_optflow.3.0.0.dylib; sourceTree = "<group>"; };
+		64B8531E1A9C312B00A49E62 /* libopencv_features2d.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_features2d.3.0.0.dylib; path = /usr/local/lib/libopencv_features2d.3.0.0.dylib; sourceTree = "<absolute>"; };
+		64B8531F1A9C312B00A49E62 /* libopencv_flann.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_flann.3.0.0.dylib; path = /usr/local/lib/libopencv_flann.3.0.0.dylib; sourceTree = "<absolute>"; };
+		64B853221A9C316800A49E62 /* libopencv_xfeatures2d.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_xfeatures2d.3.0.0.dylib; path = /usr/local/lib/libopencv_xfeatures2d.3.0.0.dylib; sourceTree = "<absolute>"; };
+		64B853241A9C318A00A49E62 /* libopencv_xobjdetect.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_xobjdetect.3.0.0.dylib; path = /usr/local/lib/libopencv_xobjdetect.3.0.0.dylib; sourceTree = "<absolute>"; };
+		64B853261A9C31DA00A49E62 /* libopencv_calib3d.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_calib3d.3.0.0.dylib; path = /usr/local/lib/libopencv_calib3d.3.0.0.dylib; sourceTree = "<absolute>"; };
+		64B853271A9C31DA00A49E62 /* libopencv_ccalib.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_ccalib.3.0.0.dylib; path = /usr/local/lib/libopencv_ccalib.3.0.0.dylib; sourceTree = "<absolute>"; };
+		64B8532A1A9C320500A49E62 /* libopencv_objdetect.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_objdetect.3.0.0.dylib; path = /usr/local/lib/libopencv_objdetect.3.0.0.dylib; sourceTree = "<absolute>"; };
+		64B8532B1A9C320500A49E62 /* libopencv_optflow.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_optflow.3.0.0.dylib; path = /usr/local/lib/libopencv_optflow.3.0.0.dylib; sourceTree = "<absolute>"; };
 		64D514CE1AB6078000518E18 /* CcalibFPN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CcalibFPN.cpp; sourceTree = "<group>"; };
 		64D514CF1AB6078000518E18 /* CcalibFPN.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CcalibFPN.hpp; sourceTree = "<group>"; };
-		64D514D11AB6156000518E18 /* calibrate-camera.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "calibrate-camera.xml"; sourceTree = "<group>"; };
 		64D514D31AB654AB00518E18 /* FindContour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FindContour.cpp; sourceTree = "<group>"; };
 		64D514D41AB654AB00518E18 /* FindContour.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FindContour.hpp; sourceTree = "<group>"; };
-		64D514D61AB7670400518E18 /* contour.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = contour.xml; sourceTree = "<group>"; };
-		64D514D71AB7671600518E18 /* 10x7.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = 10x7.pdf; sourceTree = "<group>"; };
 		64D514D81AB783FE00518E18 /* OpticalFlowFPN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpticalFlowFPN.cpp; sourceTree = "<group>"; };
 		64D514D91AB783FE00518E18 /* OpticalFlowFPN.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpticalFlowFPN.hpp; sourceTree = "<group>"; };
-		64D514DB1AB7868500518E18 /* optical-flow.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "optical-flow.xml"; sourceTree = "<group>"; };
 		64D514DE1AB7AE0400518E18 /* ObjectDetectorFPN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectDetectorFPN.cpp; sourceTree = "<group>"; };
 		64D514DF1AB7AE0400518E18 /* ObjectDetectorFPN.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ObjectDetectorFPN.hpp; sourceTree = "<group>"; };
 		64E835241A9FA0D7001C5256 /* FeatureFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FeatureFactory.cpp; sourceTree = "<group>"; };
@@ -154,14 +596,219 @@
 		64E835281AA7C23F001C5256 /* utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utils.cpp; sourceTree = "<group>"; };
 		C141ACCC1ABF51850072F103 /* HoughCirclesFPN.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HoughCirclesFPN.hpp; sourceTree = "<group>"; };
 		C141ACCD1ABF51850072F103 /* HoughCirclesFPN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HoughCirclesFPN.cpp; sourceTree = "<group>"; };
-		C141ACCF1ABF51A50072F103 /* hough-circles.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "hough-circles.xml"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6445BDE61AC756300048AADD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6445BEC31AC7A96B0048AADD /* libboost_atomic-mt.dylib in Frameworks */,
+				6445BEC41AC7A96B0048AADD /* libboost_chrono-mt.dylib in Frameworks */,
+				6445BEC51AC7A96B0048AADD /* libboost_chrono.dylib in Frameworks */,
+				6445BEC61AC7A96B0048AADD /* libboost_container-mt.dylib in Frameworks */,
+				6445BEC71AC7A96B0048AADD /* libboost_container.dylib in Frameworks */,
+				6445BEC81AC7A96B0048AADD /* libboost_context-mt.dylib in Frameworks */,
+				6445BEC91AC7A96B0048AADD /* libboost_context.dylib in Frameworks */,
+				6445BECA1AC7A96B0048AADD /* libboost_coroutine-mt.dylib in Frameworks */,
+				6445BECB1AC7A96B0048AADD /* libboost_coroutine.dylib in Frameworks */,
+				6445BECC1AC7A96B0048AADD /* libboost_date_time-mt.dylib in Frameworks */,
+				6445BECD1AC7A96B0048AADD /* libboost_date_time.dylib in Frameworks */,
+				6445BECE1AC7A96B0048AADD /* libboost_filesystem-mt.dylib in Frameworks */,
+				6445BECF1AC7A96B0048AADD /* libboost_filesystem.dylib in Frameworks */,
+				6445BED01AC7A96B0048AADD /* libboost_graph-mt.dylib in Frameworks */,
+				6445BED11AC7A96B0048AADD /* libboost_graph.dylib in Frameworks */,
+				6445BED21AC7A96B0048AADD /* libboost_iostreams-mt.dylib in Frameworks */,
+				6445BED31AC7A96B0048AADD /* libboost_iostreams.dylib in Frameworks */,
+				6445BED41AC7A96B0048AADD /* libboost_locale-mt.dylib in Frameworks */,
+				6445BED51AC7A96B0048AADD /* libboost_log_setup-mt.dylib in Frameworks */,
+				6445BED61AC7A96B0048AADD /* libboost_log_setup.dylib in Frameworks */,
+				6445BED71AC7A96B0048AADD /* libboost_log-mt.dylib in Frameworks */,
+				6445BED81AC7A96B0048AADD /* libboost_log.dylib in Frameworks */,
+				6445BED91AC7A96B0048AADD /* libboost_math_c99-mt.dylib in Frameworks */,
+				6445BEDA1AC7A96B0048AADD /* libboost_math_c99.dylib in Frameworks */,
+				6445BEDB1AC7A96B0048AADD /* libboost_math_c99f-mt.dylib in Frameworks */,
+				6445BEDC1AC7A96B0048AADD /* libboost_math_c99f.dylib in Frameworks */,
+				6445BEDD1AC7A96B0048AADD /* libboost_math_c99l-mt.dylib in Frameworks */,
+				6445BEDE1AC7A96B0048AADD /* libboost_math_c99l.dylib in Frameworks */,
+				6445BEDF1AC7A96B0048AADD /* libboost_math_tr1-mt.dylib in Frameworks */,
+				6445BEE01AC7A96B0048AADD /* libboost_math_tr1.dylib in Frameworks */,
+				6445BEE11AC7A96B0048AADD /* libboost_math_tr1f-mt.dylib in Frameworks */,
+				6445BEE21AC7A96B0048AADD /* libboost_math_tr1f.dylib in Frameworks */,
+				6445BEE31AC7A96B0048AADD /* libboost_math_tr1l-mt.dylib in Frameworks */,
+				6445BEE41AC7A96B0048AADD /* libboost_math_tr1l.dylib in Frameworks */,
+				6445BEE51AC7A96B0048AADD /* libboost_prg_exec_monitor-mt.dylib in Frameworks */,
+				6445BEE61AC7A96B0048AADD /* libboost_prg_exec_monitor.dylib in Frameworks */,
+				6445BEE71AC7A96B0048AADD /* libboost_program_options-mt.dylib in Frameworks */,
+				6445BEE81AC7A96B0048AADD /* libboost_program_options.dylib in Frameworks */,
+				6445BEE91AC7A96B0048AADD /* libboost_python-mt.dylib in Frameworks */,
+				6445BEEA1AC7A96B0048AADD /* libboost_python.dylib in Frameworks */,
+				6445BEEB1AC7A96B0048AADD /* libboost_random-mt.dylib in Frameworks */,
+				6445BEEC1AC7A96B0048AADD /* libboost_random.dylib in Frameworks */,
+				6445BEED1AC7A96B0048AADD /* libboost_regex-mt.dylib in Frameworks */,
+				6445BEEE1AC7A96B0048AADD /* libboost_regex.dylib in Frameworks */,
+				6445BEEF1AC7A96B0048AADD /* libboost_serialization-mt.dylib in Frameworks */,
+				6445BEF01AC7A96B0048AADD /* libboost_serialization.dylib in Frameworks */,
+				6445BEF11AC7A96B0048AADD /* libboost_signals-mt.dylib in Frameworks */,
+				6445BEF21AC7A96B0048AADD /* libboost_signals.dylib in Frameworks */,
+				6445BEF31AC7A96B0048AADD /* libboost_system-mt.dylib in Frameworks */,
+				6445BEF41AC7A96B0048AADD /* libboost_system.dylib in Frameworks */,
+				6445BEF51AC7A96B0048AADD /* libboost_thread-mt.dylib in Frameworks */,
+				6445BEF61AC7A96B0048AADD /* libboost_timer-mt.dylib in Frameworks */,
+				6445BEF71AC7A96B0048AADD /* libboost_timer.dylib in Frameworks */,
+				6445BEF81AC7A96B0048AADD /* libboost_unit_test_framework-mt.dylib in Frameworks */,
+				6445BEF91AC7A96B0048AADD /* libboost_unit_test_framework.dylib in Frameworks */,
+				6445BEFA1AC7A96B0048AADD /* libboost_wave-mt.dylib in Frameworks */,
+				6445BEFB1AC7A96B0048AADD /* libboost_wave.dylib in Frameworks */,
+				6445BEFC1AC7A96B0048AADD /* libboost_wserialization-mt.dylib in Frameworks */,
+				6445BEFD1AC7A96B0048AADD /* libboost_wserialization.dylib in Frameworks */,
+				6445BEB61AC75A210048AADD /* libopencv_xphoto.3.0.0.dylib in Frameworks */,
+				6445BEB71AC75A210048AADD /* libopencv_adas.3.0.0.dylib in Frameworks */,
+				6445BEB81AC75A210048AADD /* libopencv_bgsegm.3.0.0.dylib in Frameworks */,
+				6445BEB91AC75A210048AADD /* libopencv_bioinspired.3.0.0.dylib in Frameworks */,
+				6445BEBA1AC75A210048AADD /* libopencv_latentsvm.3.0.0.dylib in Frameworks */,
+				6445BEBB1AC75A210048AADD /* libopencv_line_descriptor.3.0.0.dylib in Frameworks */,
+				6445BEBC1AC75A210048AADD /* libopencv_photo.3.0.0.dylib in Frameworks */,
+				6445BEBD1AC75A210048AADD /* libopencv_reg.3.0.0.dylib in Frameworks */,
+				6445BEBE1AC75A210048AADD /* libopencv_shape.3.0.0.dylib in Frameworks */,
+				6445BEBF1AC75A210048AADD /* libopencv_stitching.3.0.0.dylib in Frameworks */,
+				6445BEC01AC75A210048AADD /* libopencv_superres.3.0.0.dylib in Frameworks */,
+				6445BEC11AC75A210048AADD /* libopencv_surface_matching.3.0.0.dylib in Frameworks */,
+				6445BEC21AC75A210048AADD /* libopencv_text.3.0.0.dylib in Frameworks */,
+				6445BE981AC75A200048AADD /* libopencv_objdetect.3.0.0.dylib in Frameworks */,
+				6445BE991AC75A200048AADD /* libopencv_calib3d.3.0.0.dylib in Frameworks */,
+				6445BE9A1AC75A200048AADD /* libopencv_ccalib.3.0.0.dylib in Frameworks */,
+				6445BE9B1AC75A200048AADD /* libopencv_core.3.0.0.dylib in Frameworks */,
+				6445BE9C1AC75A200048AADD /* libopencv_features2d.3.0.0.dylib in Frameworks */,
+				6445BE9D1AC75A200048AADD /* libopencv_flann.3.0.0.dylib in Frameworks */,
+				6445BE9E1AC75A200048AADD /* libopencv_highgui.3.0.0.dylib in Frameworks */,
+				6445BE9F1AC75A200048AADD /* libopencv_imgcodecs.3.0.0.dylib in Frameworks */,
+				6445BEA01AC75A200048AADD /* libopencv_imgproc.3.0.0.dylib in Frameworks */,
+				6445BEA11AC75A200048AADD /* libopencv_ml.3.0.0.dylib in Frameworks */,
+				6445BEA21AC75A200048AADD /* libopencv_optflow.3.0.0.dylib in Frameworks */,
+				6445BEA31AC75A200048AADD /* libopencv_tracking.3.0.0.dylib in Frameworks */,
+				6445BEA41AC75A200048AADD /* libopencv_video.3.0.0.dylib in Frameworks */,
+				6445BEA51AC75A200048AADD /* libopencv_videoio.3.0.0.dylib in Frameworks */,
+				6445BEA61AC75A200048AADD /* libopencv_videostab.3.0.0.dylib in Frameworks */,
+				6445BEA71AC75A200048AADD /* libopencv_xfeatures2d.3.0.0.dylib in Frameworks */,
+				6445BEA81AC75A200048AADD /* libopencv_xobjdetect.3.0.0.dylib in Frameworks */,
+				6445BE7F1AC759FD0048AADD /* libg2o_types_slam2d.dylib in Frameworks */,
+				6445BE801AC759FD0048AADD /* libg2o_types_slam3d_addons.dylib in Frameworks */,
+				6445BE811AC759FD0048AADD /* libg2o_cli.dylib in Frameworks */,
+				6445BE821AC759FD0048AADD /* libg2o_core.dylib in Frameworks */,
+				6445BE831AC759FD0048AADD /* libg2o_csparse_extension.dylib in Frameworks */,
+				6445BE841AC759FD0048AADD /* libg2o_ext_csparse.dylib in Frameworks */,
+				6445BE851AC759FD0048AADD /* libg2o_ext_freeglut_minimal.dylib in Frameworks */,
+				6445BE861AC759FD0048AADD /* libg2o_interface.dylib in Frameworks */,
+				6445BE871AC759FD0048AADD /* libg2o_opengl_helper.dylib in Frameworks */,
+				6445BE881AC759FD0048AADD /* libg2o_parser.dylib in Frameworks */,
+				6445BE891AC759FD0048AADD /* libg2o_simulator.dylib in Frameworks */,
+				6445BE8A1AC759FD0048AADD /* libg2o_solver_csparse.dylib in Frameworks */,
+				6445BE8B1AC759FD0048AADD /* libg2o_solver_dense.dylib in Frameworks */,
+				6445BE8C1AC759FD0048AADD /* libg2o_solver_eigen.dylib in Frameworks */,
+				6445BE8D1AC759FD0048AADD /* libg2o_solver_pcg.dylib in Frameworks */,
+				6445BE8E1AC759FD0048AADD /* libg2o_solver_slam2d_linear.dylib in Frameworks */,
+				6445BE8F1AC759FD0048AADD /* libg2o_solver_structure_only.dylib in Frameworks */,
+				6445BE901AC759FD0048AADD /* libg2o_stuff.dylib in Frameworks */,
+				6445BE911AC759FD0048AADD /* libg2o_types_data.dylib in Frameworks */,
+				6445BE921AC759FD0048AADD /* libg2o_types_icp.dylib in Frameworks */,
+				6445BE931AC759FD0048AADD /* libg2o_types_sba.dylib in Frameworks */,
+				6445BE941AC759FD0048AADD /* libg2o_types_sclam2d.dylib in Frameworks */,
+				6445BE951AC759FD0048AADD /* libg2o_types_sim3.dylib in Frameworks */,
+				6445BE961AC759FD0048AADD /* libg2o_types_slam2d_addons.dylib in Frameworks */,
+				6445BE971AC759FD0048AADD /* libg2o_types_slam3d.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		646498C71A8E748B000C07E1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6445BF001AC7AA5F0048AADD /* liblsdslam.dylib in Frameworks */,
+				6445BD6F1AC5EDD90048AADD /* libboost_atomic-mt.dylib in Frameworks */,
+				6445BD701AC5EDD90048AADD /* libboost_chrono-mt.dylib in Frameworks */,
+				6445BD711AC5EDD90048AADD /* libboost_chrono.dylib in Frameworks */,
+				6445BD721AC5EDD90048AADD /* libboost_container-mt.dylib in Frameworks */,
+				6445BD731AC5EDD90048AADD /* libboost_container.dylib in Frameworks */,
+				6445BD741AC5EDD90048AADD /* libboost_context-mt.dylib in Frameworks */,
+				6445BD751AC5EDD90048AADD /* libboost_context.dylib in Frameworks */,
+				6445BD761AC5EDD90048AADD /* libboost_coroutine-mt.dylib in Frameworks */,
+				6445BD771AC5EDD90048AADD /* libboost_coroutine.dylib in Frameworks */,
+				6445BD781AC5EDD90048AADD /* libboost_date_time-mt.dylib in Frameworks */,
+				6445BD791AC5EDD90048AADD /* libboost_date_time.dylib in Frameworks */,
+				6445BD7A1AC5EDD90048AADD /* libboost_filesystem-mt.dylib in Frameworks */,
+				6445BD7B1AC5EDD90048AADD /* libboost_filesystem.dylib in Frameworks */,
+				6445BD7C1AC5EDD90048AADD /* libboost_graph-mt.dylib in Frameworks */,
+				6445BD7D1AC5EDD90048AADD /* libboost_graph.dylib in Frameworks */,
+				6445BD7E1AC5EDD90048AADD /* libboost_iostreams-mt.dylib in Frameworks */,
+				6445BD7F1AC5EDD90048AADD /* libboost_iostreams.dylib in Frameworks */,
+				6445BD801AC5EDD90048AADD /* libboost_locale-mt.dylib in Frameworks */,
+				6445BD811AC5EDD90048AADD /* libboost_log_setup-mt.dylib in Frameworks */,
+				6445BD821AC5EDD90048AADD /* libboost_log_setup.dylib in Frameworks */,
+				6445BD831AC5EDD90048AADD /* libboost_log-mt.dylib in Frameworks */,
+				6445BD841AC5EDD90048AADD /* libboost_log.dylib in Frameworks */,
+				6445BD851AC5EDD90048AADD /* libboost_math_c99-mt.dylib in Frameworks */,
+				6445BD861AC5EDD90048AADD /* libboost_math_c99.dylib in Frameworks */,
+				6445BD871AC5EDD90048AADD /* libboost_math_c99f-mt.dylib in Frameworks */,
+				6445BD881AC5EDD90048AADD /* libboost_math_c99f.dylib in Frameworks */,
+				6445BD891AC5EDD90048AADD /* libboost_math_c99l-mt.dylib in Frameworks */,
+				6445BD8A1AC5EDD90048AADD /* libboost_math_c99l.dylib in Frameworks */,
+				6445BD8B1AC5EDD90048AADD /* libboost_math_tr1-mt.dylib in Frameworks */,
+				6445BD8C1AC5EDD90048AADD /* libboost_math_tr1.dylib in Frameworks */,
+				6445BD8D1AC5EDD90048AADD /* libboost_math_tr1f-mt.dylib in Frameworks */,
+				6445BD8E1AC5EDD90048AADD /* libboost_math_tr1f.dylib in Frameworks */,
+				6445BD8F1AC5EDD90048AADD /* libboost_math_tr1l-mt.dylib in Frameworks */,
+				6445BD901AC5EDD90048AADD /* libboost_math_tr1l.dylib in Frameworks */,
+				6445BD911AC5EDD90048AADD /* libboost_prg_exec_monitor-mt.dylib in Frameworks */,
+				6445BD921AC5EDD90048AADD /* libboost_prg_exec_monitor.dylib in Frameworks */,
+				6445BD931AC5EDD90048AADD /* libboost_program_options-mt.dylib in Frameworks */,
+				6445BD941AC5EDD90048AADD /* libboost_program_options.dylib in Frameworks */,
+				6445BD951AC5EDD90048AADD /* libboost_python-mt.dylib in Frameworks */,
+				6445BD961AC5EDD90048AADD /* libboost_python.dylib in Frameworks */,
+				6445BD971AC5EDD90048AADD /* libboost_random-mt.dylib in Frameworks */,
+				6445BD981AC5EDD90048AADD /* libboost_random.dylib in Frameworks */,
+				6445BD991AC5EDD90048AADD /* libboost_regex-mt.dylib in Frameworks */,
+				6445BD9A1AC5EDD90048AADD /* libboost_regex.dylib in Frameworks */,
+				6445BD9B1AC5EDD90048AADD /* libboost_serialization-mt.dylib in Frameworks */,
+				6445BD9C1AC5EDD90048AADD /* libboost_serialization.dylib in Frameworks */,
+				6445BD9D1AC5EDD90048AADD /* libboost_signals-mt.dylib in Frameworks */,
+				6445BD9E1AC5EDD90048AADD /* libboost_signals.dylib in Frameworks */,
+				6445BD9F1AC5EDD90048AADD /* libboost_system-mt.dylib in Frameworks */,
+				6445BDA01AC5EDD90048AADD /* libboost_system.dylib in Frameworks */,
+				6445BDA11AC5EDD90048AADD /* libboost_thread-mt.dylib in Frameworks */,
+				6445BDA21AC5EDD90048AADD /* libboost_timer-mt.dylib in Frameworks */,
+				6445BDA31AC5EDD90048AADD /* libboost_timer.dylib in Frameworks */,
+				6445BDA41AC5EDD90048AADD /* libboost_unit_test_framework-mt.dylib in Frameworks */,
+				6445BDA51AC5EDD90048AADD /* libboost_unit_test_framework.dylib in Frameworks */,
+				6445BDA61AC5EDD90048AADD /* libboost_wave-mt.dylib in Frameworks */,
+				6445BDA71AC5EDD90048AADD /* libboost_wave.dylib in Frameworks */,
+				6445BDA81AC5EDD90048AADD /* libboost_wserialization-mt.dylib in Frameworks */,
+				6445BDA91AC5EDD90048AADD /* libboost_wserialization.dylib in Frameworks */,
+				6445BD181AC5EC1D0048AADD /* libg2o_types_slam3d_addons.dylib in Frameworks */,
+				6445BD191AC5EC1D0048AADD /* libg2o_types_slam3d.dylib in Frameworks */,
+				6445BD1A1AC5EC1D0048AADD /* libg2o_cli.dylib in Frameworks */,
+				6445BD1B1AC5EC1D0048AADD /* libg2o_core.dylib in Frameworks */,
+				6445BD1C1AC5EC1D0048AADD /* libg2o_csparse_extension.dylib in Frameworks */,
+				6445BD1D1AC5EC1D0048AADD /* libg2o_ext_csparse.dylib in Frameworks */,
+				6445BD1E1AC5EC1D0048AADD /* libg2o_ext_freeglut_minimal.dylib in Frameworks */,
+				6445BD1F1AC5EC1D0048AADD /* libg2o_interface.dylib in Frameworks */,
+				6445BD201AC5EC1D0048AADD /* libg2o_opengl_helper.dylib in Frameworks */,
+				6445BD211AC5EC1D0048AADD /* libg2o_parser.dylib in Frameworks */,
+				6445BD221AC5EC1D0048AADD /* libg2o_simulator.dylib in Frameworks */,
+				6445BD231AC5EC1D0048AADD /* libg2o_solver_csparse.dylib in Frameworks */,
+				6445BD241AC5EC1D0048AADD /* libg2o_solver_dense.dylib in Frameworks */,
+				6445BD251AC5EC1D0048AADD /* libg2o_solver_eigen.dylib in Frameworks */,
+				6445BD261AC5EC1D0048AADD /* libg2o_solver_pcg.dylib in Frameworks */,
+				6445BD271AC5EC1D0048AADD /* libg2o_solver_slam2d_linear.dylib in Frameworks */,
+				6445BD281AC5EC1D0048AADD /* libg2o_solver_structure_only.dylib in Frameworks */,
+				6445BD291AC5EC1D0048AADD /* libg2o_stuff.dylib in Frameworks */,
+				6445BD2A1AC5EC1D0048AADD /* libg2o_types_data.dylib in Frameworks */,
+				6445BD2B1AC5EC1D0048AADD /* libg2o_types_icp.dylib in Frameworks */,
+				6445BD2C1AC5EC1D0048AADD /* libg2o_types_sba.dylib in Frameworks */,
+				6445BD2D1AC5EC1D0048AADD /* libg2o_types_sclam2d.dylib in Frameworks */,
+				6445BD2E1AC5EC1D0048AADD /* libg2o_types_sim3.dylib in Frameworks */,
+				6445BD2F1AC5EC1D0048AADD /* libg2o_types_slam2d_addons.dylib in Frameworks */,
+				6445BD301AC5EC1D0048AADD /* libg2o_types_slam2d.dylib in Frameworks */,
 				64B853211A9C312C00A49E62 /* libopencv_flann.3.0.0.dylib in Frameworks */,
 				6426E2301AAFAF34007F021E /* libopencv_tracking.3.0.0.dylib in Frameworks */,
 				646498DD1A8EC310000C07E1 /* libopencv_videoio.3.0.0.dylib in Frameworks */,
@@ -185,80 +832,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6426E21C1AAB80C2007F021E /* data */ = {
+		6445BD311AC5EC8A0048AADD /* libopencv_** */ = {
 			isa = PBXGroup;
 			children = (
-				C141ACCF1ABF51A50072F103 /* hough-circles.xml */,
-				6426E2371AB256A3007F021E /* lbpcascades */,
-				64D514D61AB7670400518E18 /* contour.xml */,
-				6426E2211AAB80C2007F021E /* hough.xml */,
-				64D514DB1AB7868500518E18 /* optical-flow.xml */,
-				6426E21F1AAB80C2007F021E /* object-detect.xml */,
-				64D514D11AB6156000518E18 /* calibrate-camera.xml */,
-				64B0070E1ABDE29D008155A2 /* camera_cfg.xml */,
-				6426E2361AB255EA007F021E /* face-detect.xml */,
-				6426E21D1AAB80C2007F021E /* 20 USD note.png */,
-				6426E21E1AAB80C2007F021E /* black diamond.png */,
-				6426E2201AAB80C2007F021E /* flor.jpg */,
-				6426E2221AAB80C2007F021E /* iittala_owl.jpg */,
-				6426E2231AAB80C2007F021E /* space monkey.jpg */,
-				64D514D71AB7671600518E18 /* 10x7.pdf */,
-			);
-			path = data;
-			sourceTree = "<group>";
-		};
-		6426E2371AB256A3007F021E /* lbpcascades */ = {
-			isa = PBXGroup;
-			children = (
-				6426E23D1AB2587F007F021E /* lbpcascade_profileface.xml */,
-				6426E23E1AB2587F007F021E /* lbpcascade_frontalface.xml */,
-				6426E23F1AB2587F007F021E /* lbpcascade_frontalcatface.xml */,
-			);
-			path = lbpcascades;
-			sourceTree = "<group>";
-		};
-		6445B8531AC4A6DA0048AADD /* lsd_slam */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = lsd_slam;
-			sourceTree = "<group>";
-		};
-		646498C11A8E748B000C07E1 = {
-			isa = PBXGroup;
-			children = (
-				64B008A21ABE6379008155A2 /* excluded-ref-only */,
-				6470A9E41A956576009B4139 /* FrameProcess */,
-				6470A9F61A956576009B4139 /* VideoProcess.hpp */,
-				6470A9F41A956576009B4139 /* VideoProcess.cpp */,
-				64E835271A9FA519001C5256 /* ocvstd.hpp */,
-				6426E22D1AAD60E3007F021E /* ratio_io */,
-				6426E22E1AAD60E3007F021E /* chrono_io */,
-				644F53491AAA98F80035DD91 /* cli.cpp */,
-				64B008A41ABE6ABB008155A2 /* camera.cpp */,
-				64B008A51ABE6ABB008155A2 /* camera.hpp */,
-				644F534A1AAA98F80035DD91 /* cli.hpp */,
-				64E835281AA7C23F001C5256 /* utils.cpp */,
-				6426E22C1AAD4CDD007F021E /* utils.hpp */,
-				6426E22B1AABE601007F021E /* README */,
-				6470A9F71A956576009B4139 /* main.cpp */,
-				6426E21C1AAB80C2007F021E /* data */,
-				646498D41A8E757F000C07E1 /* OpenCV Frameworks */,
-				646498CB1A8E748B000C07E1 /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		646498CB1A8E748B000C07E1 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				646498CA1A8E748B000C07E1 /* ocv */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		646498D41A8E757F000C07E1 /* OpenCV Frameworks */ = {
-			isa = PBXGroup;
-			children = (
+				6445BEA91AC75A200048AADD /* libopencv_xphoto.3.0.0.dylib */,
+				6445BEAA1AC75A210048AADD /* libopencv_adas.3.0.0.dylib */,
+				6445BEAB1AC75A210048AADD /* libopencv_bgsegm.3.0.0.dylib */,
+				6445BEAC1AC75A210048AADD /* libopencv_bioinspired.3.0.0.dylib */,
+				6445BEAD1AC75A210048AADD /* libopencv_latentsvm.3.0.0.dylib */,
+				6445BEAE1AC75A210048AADD /* libopencv_line_descriptor.3.0.0.dylib */,
+				6445BEAF1AC75A210048AADD /* libopencv_photo.3.0.0.dylib */,
+				6445BEB01AC75A210048AADD /* libopencv_reg.3.0.0.dylib */,
+				6445BEB11AC75A210048AADD /* libopencv_shape.3.0.0.dylib */,
+				6445BEB21AC75A210048AADD /* libopencv_stitching.3.0.0.dylib */,
+				6445BEB31AC75A210048AADD /* libopencv_superres.3.0.0.dylib */,
+				6445BEB41AC75A210048AADD /* libopencv_surface_matching.3.0.0.dylib */,
+				6445BEB51AC75A210048AADD /* libopencv_text.3.0.0.dylib */,
 				64B8532A1A9C320500A49E62 /* libopencv_objdetect.3.0.0.dylib */,
 				6426E2311AB131BA007F021E /* libopencv_ml.3.0.0.dylib */,
 				6426E22F1AAFAF34007F021E /* libopencv_tracking.3.0.0.dylib */,
@@ -277,12 +866,341 @@
 				646498D71A8E760B000C07E1 /* libopencv_highgui.3.0.0.dylib */,
 				646498D51A8E75D8000C07E1 /* libopencv_core.3.0.0.dylib */,
 			);
-			name = "OpenCV Frameworks";
+			name = "libopencv_**";
+			sourceTree = "<group>";
+		};
+		6445BD321AC5ECB40048AADD /* libg2o_** */ = {
+			isa = PBXGroup;
+			children = (
+				6445BCFF1AC5EC1D0048AADD /* libg2o_types_slam3d_addons.dylib */,
+				6445BD001AC5EC1D0048AADD /* libg2o_types_slam3d.dylib */,
+				6445BD011AC5EC1D0048AADD /* libg2o_cli.dylib */,
+				6445BD021AC5EC1D0048AADD /* libg2o_core.dylib */,
+				6445BD031AC5EC1D0048AADD /* libg2o_csparse_extension.dylib */,
+				6445BD041AC5EC1D0048AADD /* libg2o_ext_csparse.dylib */,
+				6445BD051AC5EC1D0048AADD /* libg2o_ext_freeglut_minimal.dylib */,
+				6445BD061AC5EC1D0048AADD /* libg2o_interface.dylib */,
+				6445BD071AC5EC1D0048AADD /* libg2o_opengl_helper.dylib */,
+				6445BD081AC5EC1D0048AADD /* libg2o_parser.dylib */,
+				6445BD091AC5EC1D0048AADD /* libg2o_simulator.dylib */,
+				6445BD0A1AC5EC1D0048AADD /* libg2o_solver_csparse.dylib */,
+				6445BD0B1AC5EC1D0048AADD /* libg2o_solver_dense.dylib */,
+				6445BD0C1AC5EC1D0048AADD /* libg2o_solver_eigen.dylib */,
+				6445BD0D1AC5EC1D0048AADD /* libg2o_solver_pcg.dylib */,
+				6445BD0E1AC5EC1D0048AADD /* libg2o_solver_slam2d_linear.dylib */,
+				6445BD0F1AC5EC1D0048AADD /* libg2o_solver_structure_only.dylib */,
+				6445BD101AC5EC1D0048AADD /* libg2o_stuff.dylib */,
+				6445BD111AC5EC1D0048AADD /* libg2o_types_data.dylib */,
+				6445BD121AC5EC1D0048AADD /* libg2o_types_icp.dylib */,
+				6445BD131AC5EC1D0048AADD /* libg2o_types_sba.dylib */,
+				6445BD141AC5EC1D0048AADD /* libg2o_types_sclam2d.dylib */,
+				6445BD151AC5EC1D0048AADD /* libg2o_types_sim3.dylib */,
+				6445BD161AC5EC1D0048AADD /* libg2o_types_slam2d_addons.dylib */,
+				6445BD171AC5EC1D0048AADD /* libg2o_types_slam2d.dylib */,
+			);
+			name = "libg2o_**";
+			sourceTree = "<group>";
+		};
+		6445BD331AC5ECEA0048AADD /* libboost_** */ = {
+			isa = PBXGroup;
+			children = (
+				6445BD341AC5EDD70048AADD /* libboost_atomic-mt.dylib */,
+				6445BD351AC5EDD70048AADD /* libboost_chrono-mt.dylib */,
+				6445BD361AC5EDD70048AADD /* libboost_chrono.dylib */,
+				6445BD371AC5EDD70048AADD /* libboost_container-mt.dylib */,
+				6445BD381AC5EDD70048AADD /* libboost_container.dylib */,
+				6445BD391AC5EDD70048AADD /* libboost_context-mt.dylib */,
+				6445BD3A1AC5EDD70048AADD /* libboost_context.dylib */,
+				6445BD3B1AC5EDD80048AADD /* libboost_coroutine-mt.dylib */,
+				6445BD3C1AC5EDD80048AADD /* libboost_coroutine.dylib */,
+				6445BD3D1AC5EDD80048AADD /* libboost_date_time-mt.dylib */,
+				6445BD3E1AC5EDD80048AADD /* libboost_date_time.dylib */,
+				6445BD3F1AC5EDD80048AADD /* libboost_filesystem-mt.dylib */,
+				6445BD401AC5EDD80048AADD /* libboost_filesystem.dylib */,
+				6445BD411AC5EDD80048AADD /* libboost_graph-mt.dylib */,
+				6445BD421AC5EDD80048AADD /* libboost_graph.dylib */,
+				6445BD431AC5EDD80048AADD /* libboost_iostreams-mt.dylib */,
+				6445BD441AC5EDD80048AADD /* libboost_iostreams.dylib */,
+				6445BD451AC5EDD80048AADD /* libboost_locale-mt.dylib */,
+				6445BD461AC5EDD80048AADD /* libboost_log_setup-mt.dylib */,
+				6445BD471AC5EDD80048AADD /* libboost_log_setup.dylib */,
+				6445BD481AC5EDD80048AADD /* libboost_log-mt.dylib */,
+				6445BD491AC5EDD80048AADD /* libboost_log.dylib */,
+				6445BD4A1AC5EDD80048AADD /* libboost_math_c99-mt.dylib */,
+				6445BD4B1AC5EDD80048AADD /* libboost_math_c99.dylib */,
+				6445BD4C1AC5EDD80048AADD /* libboost_math_c99f-mt.dylib */,
+				6445BD4D1AC5EDD80048AADD /* libboost_math_c99f.dylib */,
+				6445BD4E1AC5EDD80048AADD /* libboost_math_c99l-mt.dylib */,
+				6445BD4F1AC5EDD80048AADD /* libboost_math_c99l.dylib */,
+				6445BD501AC5EDD80048AADD /* libboost_math_tr1-mt.dylib */,
+				6445BD511AC5EDD80048AADD /* libboost_math_tr1.dylib */,
+				6445BD521AC5EDD80048AADD /* libboost_math_tr1f-mt.dylib */,
+				6445BD531AC5EDD80048AADD /* libboost_math_tr1f.dylib */,
+				6445BD541AC5EDD80048AADD /* libboost_math_tr1l-mt.dylib */,
+				6445BD551AC5EDD80048AADD /* libboost_math_tr1l.dylib */,
+				6445BD561AC5EDD80048AADD /* libboost_prg_exec_monitor-mt.dylib */,
+				6445BD571AC5EDD80048AADD /* libboost_prg_exec_monitor.dylib */,
+				6445BD581AC5EDD80048AADD /* libboost_program_options-mt.dylib */,
+				6445BD591AC5EDD80048AADD /* libboost_program_options.dylib */,
+				6445BD5A1AC5EDD80048AADD /* libboost_python-mt.dylib */,
+				6445BD5B1AC5EDD80048AADD /* libboost_python.dylib */,
+				6445BD5C1AC5EDD80048AADD /* libboost_random-mt.dylib */,
+				6445BD5D1AC5EDD80048AADD /* libboost_random.dylib */,
+				6445BD5E1AC5EDD80048AADD /* libboost_regex-mt.dylib */,
+				6445BD5F1AC5EDD80048AADD /* libboost_regex.dylib */,
+				6445BD601AC5EDD80048AADD /* libboost_serialization-mt.dylib */,
+				6445BD611AC5EDD80048AADD /* libboost_serialization.dylib */,
+				6445BD621AC5EDD80048AADD /* libboost_signals-mt.dylib */,
+				6445BD631AC5EDD80048AADD /* libboost_signals.dylib */,
+				6445BD641AC5EDD90048AADD /* libboost_system-mt.dylib */,
+				6445BD651AC5EDD90048AADD /* libboost_system.dylib */,
+				6445BD661AC5EDD90048AADD /* libboost_thread-mt.dylib */,
+				6445BD671AC5EDD90048AADD /* libboost_timer-mt.dylib */,
+				6445BD681AC5EDD90048AADD /* libboost_timer.dylib */,
+				6445BD691AC5EDD90048AADD /* libboost_unit_test_framework-mt.dylib */,
+				6445BD6A1AC5EDD90048AADD /* libboost_unit_test_framework.dylib */,
+				6445BD6B1AC5EDD90048AADD /* libboost_wave-mt.dylib */,
+				6445BD6C1AC5EDD90048AADD /* libboost_wave.dylib */,
+				6445BD6D1AC5EDD90048AADD /* libboost_wserialization-mt.dylib */,
+				6445BD6E1AC5EDD90048AADD /* libboost_wserialization.dylib */,
+			);
+			name = "libboost_**";
+			sourceTree = "<group>";
+		};
+		6445BDAE1AC60CEA0048AADD /* data */ = {
+			isa = PBXGroup;
+			children = (
+				6445BDAF1AC60CEA0048AADD /* images */,
+				6445BDB81AC60CEA0048AADD /* lbpcascades */,
+				6445BDBC1AC60CEA0048AADD /* xml */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		6445BDAF1AC60CEA0048AADD /* images */ = {
+			isa = PBXGroup;
+			children = (
+				6445BDB01AC60CEA0048AADD /* 10x7.pdf */,
+				6445BDB11AC60CEA0048AADD /* 20 USD note.png */,
+				6445BDB21AC60CEA0048AADD /* 6x9.png */,
+				6445BDB31AC60CEA0048AADD /* 7x7.jpg */,
+				6445BDB41AC60CEA0048AADD /* black diamond.png */,
+				6445BDB51AC60CEA0048AADD /* flor.jpg */,
+				6445BDB61AC60CEA0048AADD /* iittala_owl.jpg */,
+				6445BDB71AC60CEA0048AADD /* space monkey.jpg */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		6445BDB81AC60CEA0048AADD /* lbpcascades */ = {
+			isa = PBXGroup;
+			children = (
+				6445BDB91AC60CEA0048AADD /* lbpcascade_frontalcatface.xml */,
+				6445BDBA1AC60CEA0048AADD /* lbpcascade_frontalface.xml */,
+				6445BDBB1AC60CEA0048AADD /* lbpcascade_profileface.xml */,
+			);
+			path = lbpcascades;
+			sourceTree = "<group>";
+		};
+		6445BDBC1AC60CEA0048AADD /* xml */ = {
+			isa = PBXGroup;
+			children = (
+				6445BDE11AC60D9E0048AADD /* lsd-slam.xml */,
+				6445BDBD1AC60CEA0048AADD /* calibrate-camera.xml */,
+				6445BDBE1AC60CEA0048AADD /* camera_cfg.xml */,
+				6445BDBF1AC60CEA0048AADD /* contour.xml */,
+				6445BDC01AC60CEA0048AADD /* face-detect.xml */,
+				6445BDC11AC60CEA0048AADD /* hough-circles.xml */,
+				6445BDC21AC60CEA0048AADD /* hough.xml */,
+				6445BDC31AC60CEA0048AADD /* object-detect.xml */,
+				6445BDC41AC60CEA0048AADD /* optical-flow.xml */,
+			);
+			path = xml;
+			sourceTree = "<group>";
+		};
+		6445BFF01AC7AE070048AADD /* slam */ = {
+			isa = PBXGroup;
+			children = (
+				6445BFF11AC7AE070048AADD /* lsdslam */,
+			);
+			path = slam;
+			sourceTree = "<group>";
+		};
+		6445BFF11AC7AE070048AADD /* lsdslam */ = {
+			isa = PBXGroup;
+			children = (
+				6445BFF21AC7AE070048AADD /* DataStructures */,
+				6445BFF91AC7AE070048AADD /* DepthEstimation */,
+				6445BFFE1AC7AE070048AADD /* GlobalMapping */,
+				6445C0071AC7AE070048AADD /* IOWrapper */,
+				6445C0111AC7AE070048AADD /* SlamSystem.cpp */,
+				6445C0121AC7AE070048AADD /* SlamSystem.h */,
+				6445C0131AC7AE070048AADD /* sophus */,
+				6445C01C1AC7AE070048AADD /* Tracking */,
+				6445C0261AC7AE070048AADD /* util */,
+			);
+			path = lsdslam;
+			sourceTree = "<group>";
+		};
+		6445BFF21AC7AE070048AADD /* DataStructures */ = {
+			isa = PBXGroup;
+			children = (
+				6445BFF31AC7AE070048AADD /* Frame.cpp */,
+				6445BFF41AC7AE070048AADD /* Frame.h */,
+				6445BFF51AC7AE070048AADD /* FrameMemory.cpp */,
+				6445BFF61AC7AE070048AADD /* FrameMemory.h */,
+				6445BFF71AC7AE070048AADD /* FramePoseStruct.cpp */,
+				6445BFF81AC7AE070048AADD /* FramePoseStruct.h */,
+			);
+			path = DataStructures;
+			sourceTree = "<group>";
+		};
+		6445BFF91AC7AE070048AADD /* DepthEstimation */ = {
+			isa = PBXGroup;
+			children = (
+				6445BFFA1AC7AE070048AADD /* DepthMap.cpp */,
+				6445BFFB1AC7AE070048AADD /* DepthMap.h */,
+				6445BFFC1AC7AE070048AADD /* DepthMapPixelHypothesis.cpp */,
+				6445BFFD1AC7AE070048AADD /* DepthMapPixelHypothesis.h */,
+			);
+			path = DepthEstimation;
+			sourceTree = "<group>";
+		};
+		6445BFFE1AC7AE070048AADD /* GlobalMapping */ = {
+			isa = PBXGroup;
+			children = (
+				6445BFFF1AC7AE070048AADD /* FabMap.cpp */,
+				6445C0001AC7AE070048AADD /* FabMap.h */,
+				6445C0011AC7AE070048AADD /* g2oTypeSim3Sophus.cpp */,
+				6445C0021AC7AE070048AADD /* g2oTypeSim3Sophus.h */,
+				6445C0031AC7AE070048AADD /* KeyFrameGraph.cpp */,
+				6445C0041AC7AE070048AADD /* KeyFrameGraph.h */,
+				6445C0051AC7AE070048AADD /* TrackableKeyFrameSearch.cpp */,
+				6445C0061AC7AE070048AADD /* TrackableKeyFrameSearch.h */,
+			);
+			path = GlobalMapping;
+			sourceTree = "<group>";
+		};
+		6445C0071AC7AE070048AADD /* IOWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				6445C0081AC7AE070048AADD /* ImageDisplay.h */,
+				6445C0091AC7AE070048AADD /* InputImageStream.h */,
+				6445C00A1AC7AE070048AADD /* NotifyBuffer.h */,
+				6445C00B1AC7AE070048AADD /* OpenCV */,
+				6445C00D1AC7AE070048AADD /* Output3DWrapper.h */,
+				6445C00E1AC7AE070048AADD /* Timestamp.cpp */,
+				6445C00F1AC7AE070048AADD /* Timestamp.h */,
+				6445C0101AC7AE070048AADD /* TimestampedObject.h */,
+			);
+			path = IOWrapper;
+			sourceTree = "<group>";
+		};
+		6445C00B1AC7AE070048AADD /* OpenCV */ = {
+			isa = PBXGroup;
+			children = (
+				6445C00C1AC7AE070048AADD /* ImageDisplay_OpenCV.cpp */,
+			);
+			path = OpenCV;
+			sourceTree = "<group>";
+		};
+		6445C0131AC7AE070048AADD /* sophus */ = {
+			isa = PBXGroup;
+			children = (
+				6445C0141AC7AE070048AADD /* rxso3.hpp */,
+				6445C0151AC7AE070048AADD /* se2.hpp */,
+				6445C0161AC7AE070048AADD /* se3.hpp */,
+				6445C0171AC7AE070048AADD /* sim3.hpp */,
+				6445C0181AC7AE070048AADD /* so2.hpp */,
+				6445C0191AC7AE070048AADD /* so3.hpp */,
+				6445C01A1AC7AE070048AADD /* sophus.hpp */,
+				6445C01B1AC7AE070048AADD /* tests.hpp */,
+			);
+			path = sophus;
+			sourceTree = "<group>";
+		};
+		6445C01C1AC7AE070048AADD /* Tracking */ = {
+			isa = PBXGroup;
+			children = (
+				6445C01D1AC7AE070048AADD /* LGSX.h */,
+				6445C01E1AC7AE070048AADD /* Relocalizer.cpp */,
+				6445C01F1AC7AE070048AADD /* Relocalizer.h */,
+				6445C0201AC7AE070048AADD /* SE3Tracker.cpp */,
+				6445C0211AC7AE070048AADD /* SE3Tracker.h */,
+				6445C0221AC7AE070048AADD /* Sim3Tracker.cpp */,
+				6445C0231AC7AE070048AADD /* Sim3Tracker.h */,
+				6445C0241AC7AE070048AADD /* TrackingReference.cpp */,
+				6445C0251AC7AE070048AADD /* TrackingReference.h */,
+			);
+			path = Tracking;
+			sourceTree = "<group>";
+		};
+		6445C0261AC7AE070048AADD /* util */ = {
+			isa = PBXGroup;
+			children = (
+				6445C0271AC7AE070048AADD /* EigenCoreInclude.h */,
+				6445C0281AC7AE070048AADD /* globalFuncs.cpp */,
+				6445C0291AC7AE070048AADD /* globalFuncs.h */,
+				6445C02A1AC7AE070048AADD /* IndexThreadReduce.h */,
+				6445C02B1AC7AE070048AADD /* settings.cpp */,
+				6445C02C1AC7AE070048AADD /* settings.h */,
+				6445C02D1AC7AE070048AADD /* SophusUtil.cpp */,
+				6445C02E1AC7AE070048AADD /* SophusUtil.h */,
+				6445C02F1AC7AE070048AADD /* Undistorter.cpp */,
+				6445C0301AC7AE070048AADD /* Undistorter.h */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		646498C11A8E748B000C07E1 = {
+			isa = PBXGroup;
+			children = (
+				64B008A21ABE6379008155A2 /* excluded-ref-only */,
+				6445BDAE1AC60CEA0048AADD /* data */,
+				6470A9E41A956576009B4139 /* FrameProcess */,
+				6470A9F61A956576009B4139 /* VideoProcess.hpp */,
+				6470A9F41A956576009B4139 /* VideoProcess.cpp */,
+				64E835271A9FA519001C5256 /* ocvstd.hpp */,
+				6426E22D1AAD60E3007F021E /* ratio_io */,
+				6426E22E1AAD60E3007F021E /* chrono_io */,
+				644F53491AAA98F80035DD91 /* cli.cpp */,
+				64B008A41ABE6ABB008155A2 /* camera.cpp */,
+				64B008A51ABE6ABB008155A2 /* camera.hpp */,
+				644F534A1AAA98F80035DD91 /* cli.hpp */,
+				64E835281AA7C23F001C5256 /* utils.cpp */,
+				6426E22C1AAD4CDD007F021E /* utils.hpp */,
+				6426E22B1AABE601007F021E /* README */,
+				6470A9F71A956576009B4139 /* main.cpp */,
+				646498D41A8E757F000C07E1 /* Open CV, Slam, Boost, g2o, etc.. */,
+				646498CB1A8E748B000C07E1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		646498CB1A8E748B000C07E1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				646498CA1A8E748B000C07E1 /* ocv */,
+				6445BDE91AC756300048AADD /* liblsdslam.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		646498D41A8E757F000C07E1 /* Open CV, Slam, Boost, g2o, etc.. */ = {
+			isa = PBXGroup;
+			children = (
+				6445BFF01AC7AE070048AADD /* slam */,
+				6445BD331AC5ECEA0048AADD /* libboost_** */,
+				6445BD321AC5ECB40048AADD /* libg2o_** */,
+				6445BD311AC5EC8A0048AADD /* libopencv_** */,
+			);
+			name = "Open CV, Slam, Boost, g2o, etc..";
 			sourceTree = "<group>";
 		};
 		6470A9E41A956576009B4139 /* FrameProcess */ = {
 			isa = PBXGroup;
 			children = (
+				6445BDAA1AC5EF320048AADD /* LsdSlamFPN.cpp */,
+				6445BDAB1AC5EF320048AADD /* LsdSlamFPN.hpp */,
 				C141ACCC1ABF51850072F103 /* HoughCirclesFPN.hpp */,
 				C141ACCD1ABF51850072F103 /* HoughCirclesFPN.cpp */,
 				64E835251A9FA0D8001C5256 /* FeatureFactory.hpp */,
@@ -303,7 +1221,6 @@
 				64D514DE1AB7AE0400518E18 /* ObjectDetectorFPN.cpp */,
 				64D514D91AB783FE00518E18 /* OpticalFlowFPN.hpp */,
 				64D514D81AB783FE00518E18 /* OpticalFlowFPN.cpp */,
-				6445B8531AC4A6DA0048AADD /* lsd_slam */,
 				64D514D41AB654AB00518E18 /* FindContour.hpp */,
 				64D514D31AB654AB00518E18 /* FindContour.cpp */,
 				6426E2341AB246FB007F021E /* CascadeDetectorFPN.hpp */,
@@ -314,7 +1231,70 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		6445BDE71AC756300048AADD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6445C0551AC7AE070048AADD /* LGSX.h in Headers */,
+				6445C05E1AC7AE070048AADD /* EigenCoreInclude.h in Headers */,
+				6445C03E1AC7AE070048AADD /* g2oTypeSim3Sophus.h in Headers */,
+				6445C0421AC7AE070048AADD /* TrackableKeyFrameSearch.h in Headers */,
+				6445C0651AC7AE070048AADD /* SophusUtil.h in Headers */,
+				6445C05B1AC7AE070048AADD /* Sim3Tracker.h in Headers */,
+				6445C0541AC7AE070048AADD /* tests.hpp in Headers */,
+				6445C03A1AC7AE070048AADD /* DepthMapPixelHypothesis.h in Headers */,
+				6445C0511AC7AE070048AADD /* so2.hpp in Headers */,
+				6445C0431AC7AE070048AADD /* ImageDisplay.h in Headers */,
+				6445C0631AC7AE070048AADD /* settings.h in Headers */,
+				6445C05D1AC7AE070048AADD /* TrackingReference.h in Headers */,
+				6445C04C1AC7AE070048AADD /* SlamSystem.h in Headers */,
+				6445C0471AC7AE070048AADD /* Output3DWrapper.h in Headers */,
+				6445C0441AC7AE070048AADD /* InputImageStream.h in Headers */,
+				6445C04A1AC7AE070048AADD /* TimestampedObject.h in Headers */,
+				6445C0591AC7AE070048AADD /* SE3Tracker.h in Headers */,
+				6445C04F1AC7AE070048AADD /* se3.hpp in Headers */,
+				6445C03C1AC7AE070048AADD /* FabMap.h in Headers */,
+				6445C0611AC7AE070048AADD /* IndexThreadReduce.h in Headers */,
+				6445C0401AC7AE070048AADD /* KeyFrameGraph.h in Headers */,
+				6445C0321AC7AE070048AADD /* Frame.h in Headers */,
+				6445C0671AC7AE070048AADD /* Undistorter.h in Headers */,
+				6445C0341AC7AE070048AADD /* FrameMemory.h in Headers */,
+				6445C0521AC7AE070048AADD /* so3.hpp in Headers */,
+				6445C04D1AC7AE070048AADD /* rxso3.hpp in Headers */,
+				6445C0361AC7AE070048AADD /* FramePoseStruct.h in Headers */,
+				6445C0531AC7AE070048AADD /* sophus.hpp in Headers */,
+				6445C0381AC7AE070048AADD /* DepthMap.h in Headers */,
+				6445C04E1AC7AE070048AADD /* se2.hpp in Headers */,
+				6445C0451AC7AE070048AADD /* NotifyBuffer.h in Headers */,
+				6445C0501AC7AE070048AADD /* sim3.hpp in Headers */,
+				6445C0601AC7AE070048AADD /* globalFuncs.h in Headers */,
+				6445C0491AC7AE070048AADD /* Timestamp.h in Headers */,
+				6445C0571AC7AE070048AADD /* Relocalizer.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		6445BDE81AC756300048AADD /* lsdslam */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6445BDEA1AC756300048AADD /* Build configuration list for PBXNativeTarget "lsdslam" */;
+			buildPhases = (
+				6445BDE51AC756300048AADD /* Sources */,
+				6445BDE61AC756300048AADD /* Frameworks */,
+				6445BDE71AC756300048AADD /* Headers */,
+				6445BEFE1AC7A9D50048AADD /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = lsdslam;
+			productName = lsdslam;
+			productReference = 6445BDE91AC756300048AADD /* liblsdslam.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
 		646498C91A8E748B000C07E1 /* ocv */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 646498D11A8E748B000C07E1 /* Build configuration list for PBXNativeTarget "ocv" */;
@@ -322,6 +1302,7 @@
 				646498C61A8E748B000C07E1 /* Sources */,
 				646498C71A8E748B000C07E1 /* Frameworks */,
 				646498C81A8E748B000C07E1 /* CopyFiles */,
+				6445BDD81AC60D650048AADD /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -341,6 +1322,9 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = DarwinLabs;
 				TargetAttributes = {
+					6445BDE81AC756300048AADD = {
+						CreatedOnToolsVersion = 6.2;
+					};
 					646498C91A8E748B000C07E1 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
@@ -359,11 +1343,39 @@
 			projectRoot = "";
 			targets = (
 				646498C91A8E748B000C07E1 /* ocv */,
+				6445BDE81AC756300048AADD /* lsdslam */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6445BDE51AC756300048AADD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6445C03F1AC7AE070048AADD /* KeyFrameGraph.cpp in Sources */,
+				6445C0461AC7AE070048AADD /* ImageDisplay_OpenCV.cpp in Sources */,
+				6445C0371AC7AE070048AADD /* DepthMap.cpp in Sources */,
+				6445C0331AC7AE070048AADD /* FrameMemory.cpp in Sources */,
+				6445C0581AC7AE070048AADD /* SE3Tracker.cpp in Sources */,
+				6445C05A1AC7AE070048AADD /* Sim3Tracker.cpp in Sources */,
+				6445C0621AC7AE070048AADD /* settings.cpp in Sources */,
+				6445C0661AC7AE070048AADD /* Undistorter.cpp in Sources */,
+				6445C03D1AC7AE070048AADD /* g2oTypeSim3Sophus.cpp in Sources */,
+				6445C04B1AC7AE070048AADD /* SlamSystem.cpp in Sources */,
+				6445C05C1AC7AE070048AADD /* TrackingReference.cpp in Sources */,
+				6445C0481AC7AE070048AADD /* Timestamp.cpp in Sources */,
+				6445C0641AC7AE070048AADD /* SophusUtil.cpp in Sources */,
+				6445C05F1AC7AE070048AADD /* globalFuncs.cpp in Sources */,
+				6445C03B1AC7AE070048AADD /* FabMap.cpp in Sources */,
+				6445C0411AC7AE070048AADD /* TrackableKeyFrameSearch.cpp in Sources */,
+				6445C0391AC7AE070048AADD /* DepthMapPixelHypothesis.cpp in Sources */,
+				6445C0351AC7AE070048AADD /* FramePoseStruct.cpp in Sources */,
+				6445C0311AC7AE070048AADD /* Frame.cpp in Sources */,
+				6445C0561AC7AE070048AADD /* Relocalizer.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		646498C61A8E748B000C07E1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -382,6 +1394,7 @@
 				6470AA011A956576009B4139 /* main.cpp in Sources */,
 				644F534B1AAA98F80035DD91 /* cli.cpp in Sources */,
 				6426E2351AB246FB007F021E /* CascadeDetectorFPN.cpp in Sources */,
+				6445BDAC1AC5EF320048AADD /* LsdSlamFPN.cpp in Sources */,
 				64D514D51AB654AB00518E18 /* FindContour.cpp in Sources */,
 				64D514E01AB7AE0400518E18 /* ObjectDetectorFPN.cpp in Sources */,
 				6470A9FF1A956576009B4139 /* VideoProcess.cpp in Sources */,
@@ -391,6 +1404,61 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		6445BDEB1AC756300048AADD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LIBRARY = "libc++";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include,
+					/usr/local/include/EXTERNAL/csparse/,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/usr/local/Cellar/boost/1.57.0/lib,
+					"/usr/local/Cellar/boost-python/1.57.0/lib",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "/usr/local/include \"$(SRCROOT)\"/**";
+				WARNING_CFLAGS = "-Wno-shorten-64-to-32";
+			};
+			name = Debug;
+		};
+		6445BDEC1AC756300048AADD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LIBRARY = "libc++";
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include,
+					/usr/local/include/EXTERNAL/csparse/,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/usr/local/Cellar/boost/1.57.0/lib,
+					"/usr/local/Cellar/boost-python/1.57.0/lib",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "/usr/local/include \"$(SRCROOT)\"/**";
+				WARNING_CFLAGS = "-Wno-shorten-64-to-32";
+			};
+			name = Release;
+		};
 		646498CF1A8E748B000C07E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -480,10 +1548,17 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/include,
+					/usr/local/include/EXTERNAL/csparse,
 				);
-				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/usr/local/Cellar/boost/1.57.0/lib,
+					"/usr/local/Cellar/boost-python/1.57.0/lib",
+				);
 				"OTHER_LDFLAGS[arch=*]" = "-v";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)\"/** /usr/local/include";
+				WARNING_CFLAGS = "-Wno-shorten-64-to-32";
 			};
 			name = Debug;
 		};
@@ -502,15 +1577,30 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/include,
+					/usr/local/include/EXTERNAL/csparse,
 				);
-				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/usr/local/Cellar/boost/1.57.0/lib,
+					"/usr/local/Cellar/boost-python/1.57.0/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)\"/** /usr/local/include";
+				WARNING_CFLAGS = "-Wno-shorten-64-to-32";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6445BDEA1AC756300048AADD /* Build configuration list for PBXNativeTarget "lsdslam" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6445BDEB1AC756300048AADD /* Debug */,
+				6445BDEC1AC756300048AADD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		646498C51A8E748B000C07E1 /* Build configuration list for PBXProject "ocv" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

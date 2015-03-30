@@ -12,6 +12,9 @@
 
 #include "HoughFPNode.hpp"
 
+#define HOUGH_NAME "HoughFPNode"
+#define HOUGH_DESC "Identify lines and circles with Hough algorithm"
+
 // ================================================================= HoughFPNode
 
 // ................................................................. constructor

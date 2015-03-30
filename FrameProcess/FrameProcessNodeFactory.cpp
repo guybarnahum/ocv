@@ -19,6 +19,7 @@
 #include "HoughCirclesFPN.hpp"
 #include "ObjectDetectorFPN.hpp"
 #include "OpticalFlowFPN.hpp"
+#include "LsdSlamFPN.hpp"
 
 // ========================================================= FrameProcessFactory
 
@@ -58,6 +59,9 @@ FrameProcessNode *FrameProcessNodeFactory::make( const char* name )
     if ( STR_EQ( name, "nullProcess" )  ){
         fp = new FrameProcessNode();
     }
-    
+    else
+    if ( STR_EQ( name, "lsdSlam" ) ){
+        fp = new LsdSlamFPNode();
+    }
     return fp;
 }
