@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>lsd_slam_core.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>lsdslam.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>ocv.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +22,26 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>6445B8C11AC4B36B0048AADD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6445B9C81AC50ABD0048AADD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6445BB911AC5D8A90048AADD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6445BDE81AC756300048AADD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>646498C91A8E748B000C07E1</key>
 		<dict>
 			<key>primary</key>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<opencv_storage>
+    <xml_v_argv>"1.0"</xml_v_argv>
+    <v_argv>
+        <_>
+            <width>320</width>
+            <height>240</height>
+        </_>
+        <_>
+            <fpn>lsdSlam</fpn>
+            <window>"lsd slam"</window>
+            <camera>data/camera_cfg.xml</camera>
+            <dbg>true</dbg>
+        </_>
+    </v_argv>
+</opencv_storage>

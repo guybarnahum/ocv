@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+
+<project>
+   
+	<name>ORB-SLAM</name>
+
+   <author>
+		<name>Raul Mur-Artal</name>
+		<url>http://webdiis.unizar.es/~raulmur</url>
+	</author>
+        <author>
+		<name>J. M. M. Montiel</name>
+		<url>http://webdiis.unizar.es/~josemari</url>
+	</author>
+        <author>
+		<name>Juan D. Tardos</name>
+		<url>http://webdiis.unizar.es/~jdtardos</url>
+	</author>
+
+   <url>http://webdiis.unizar.es/~raulmur/orbslam</url>
+
+   <briefdescription>
+	 ORB-SLAM is a keyframe and feature-based Monocular SLAM. It operates in real-time in large environments, being able to close loops
+    and perform camera relocalisation from very different viewpoints.
+	</briefdescription>
+
+   <description>
+	ORB-SLAM is a versatile and accurate Monocular SLAM solution able to compute in real-time the camera trajectory 
+	and a sparse 3D reconstruction of the scene in a wide variety of environments, ranging from small hand-held sequences 
+	to a car driven around several city blocks. It is able to close large loops and perform global relocalisation 
+	in real-time and from wide baselines. It includes an automatic and robust initialization from planar and non-planar scenes.
+	A novel survival of the fittest keyframe selection allows to maintain a compact map, while improving the tracking robustness as keyframes
+	are inserted very fast during exploration.
+	</description>
+
+   <requirement>
+	Tested in Ubuntu 12.04
+	</requirement>      
+	<requirement>
+	ROS (tested with Fuerte, Groovy and Hydro), Boost, BLAS, LAPACK and CHOLMOD
+	</requirement>
+
+	<map>Sparse 3D points, keyFrame poses and covisibility graph</map>
+
+	<input>Monochrome/Color Images</input>
+
+	<paper>
+		<title>ORB-SLAM: a Versatile and Accurate Monocular SLAM</title>
+		<authorlist>Raul Mur-Artal, J. M. M. Montiel and Juan D. Tardos</authorlist>
+		<publishedin>IEEE Transactions on Robotics, under review. ArXiv preprint</publishedin>
+		<year>2015</year>
+		<url>http://arxiv.org/abs/1502.00956</url>
+	</paper>
+		
+	<license> 
+ORB-SLAM is released under a GPLv3 license.
+For a closed-source version of ORB-SLAM for commercial purposes, please contact the authors.
+
+ORB-SLAM is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</license>
+
+
+
+</project>

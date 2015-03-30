@@ -16,9 +16,6 @@
 #include "ocvstd.hpp"
 #include "FrameProcessNode.hpp"
 
-#define HOUGH_NAME "HoughFPNode"
-#define HOUGH_DESC "Identify lines and circles with Hough algorithm"
-
 // ======================================================= class HoughLineFPNode
 
 class HoughFPNode : public FrameProcessNode {

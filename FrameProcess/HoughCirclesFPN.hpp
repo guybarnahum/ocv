@@ -1,6 +1,6 @@
 // =============================================================================
 //
-//  FindContour.hpp
+//  HoughCirclesFPN.hpp
 //  ocv
 //
 //  Created by Neta Krakover on 3/15/15.
@@ -13,7 +13,7 @@
 #include "ocvstd.hpp"
 #include "FrameProcessNode.hpp"
 
-// ================================================== class  FindContour
+// ======================================================= class HoughCirclesFPN
 
 class HoughCirclesFPN : public FrameProcessNode {
 
@@ -33,4 +33,4 @@ public:
 
 };
 
-#endif /* defined(__ocv__HoughCirclesFPN__) */
+#endif /* defined(ocv_HoughCirclesFPN_hpp) */

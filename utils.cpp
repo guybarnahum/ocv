@@ -30,14 +30,14 @@ void
 to_key( int key, string &s_key )
 {
     switch( key ){
-        case KEY_ESCAPE : s_key = "<escape>"; break;
-        case KEY_SPACE  : s_key = "<space>" ; break;
-            
+        case KEY_ESCAPE       : s_key = "<escape>"; break;
+        case KEY_SPACE        : s_key = "<space>" ; break;
+       
         default : if ( is_printable( key )){
                     s_key = "'"; s_key += (char)key; s_key += "'";
                   }
                   else{
-                    s_key  = "<"; s_key += key; s_key += ">";
+                    s_key  = "<"; s_key += to_string(key); s_key += ">";
                   }
                   break;
     }
