@@ -9,7 +9,7 @@
         <_>
             <fpn>lsdSlam</fpn>
             <window>"lsd slam"</window>
-            <camera>data/camera_cfg.xml</camera>
+            <camera>data/xml/camera_cfg.xml</camera>
             <dbg>true</dbg>
         </_>
     </v_argv>
